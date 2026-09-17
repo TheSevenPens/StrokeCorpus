@@ -17,6 +17,11 @@ import os
 import glob
 from collections import Counter
 
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from stamp import stamp
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACES = os.path.join(ROOT, "traces")
 OUT = os.path.join(ROOT, "manifest.json")
@@ -213,7 +218,10 @@ def main():
         json.dump(manifest, handle, indent=2)
         handle.write("\n")
 
+    versions = stamp()
+
     print(f"{OUT}: {len(recordings)} recordings")
+    print(f"  assets: " + ", ".join(f"{a} v={v}" for a, v in versions.items()))
     print(f"  by quality: {manifest['totals']['byQuality']}")
     print(f"  wanting re-recording: {manifest['totals']['wantingReRecording']}")
     print(f"  readings: {manifest['totals']['contact']} in contact, "
