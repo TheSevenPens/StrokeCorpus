@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="describedby" href="llms.txt" type="text/plain">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stroke Corpus</title>
 <meta name="description" content="Recordings of a real pen on a real drawing tablet: every reading, including the ones made while the pen was in the air.">
@@ -21,6 +22,14 @@
 </header>
 
 <main class="wrap">
+
+  <noscript>
+    <p class="note">
+      The interactive catalogue and recording views require JavaScript.
+      You can still access the data through the <a href="manifest.json">recording catalogue (JSON)</a>
+      and read the <a href="FORMAT.md">trace format and interpretation</a>.
+    </p>
+  </noscript>
 
   <dl class="totals" id="totals"></dl>
 
@@ -75,6 +84,19 @@
 </main>
 
 <footer class="wrap">
+  <section aria-labelledby="data-docs">
+    <h2 id="data-docs">Data and documentation</h2>
+    <p>
+      <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
+      <a href="FORMAT.md">Trace format and interpretation</a> &middot;
+      <a href="llms.txt">Automated-reader guide</a>
+    </p>
+    <p>
+      To download a recording, read <code>manifest.recordings[].file</code> in the catalogue.
+      It is the full filename, including <code>.json</code>; fetch <code>traces/&lt;file&gt;</code>
+      relative to the catalogue URL, without adding another extension.
+    </p>
+  </section>
   <p>
     One hand, one Wacom Cintiq 24, one backend so far.
     <a href="https://github.com/TheSevenPens/StrokeCorpus">The repository</a> holds the raw

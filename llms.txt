@@ -1,0 +1,44 @@
+# Stroke Corpus
+
+> Real pen recordings, including contact and airborne readings, published as original JSON.
+> Use the catalogue to choose a recording and the format guide to interpret it.
+
+On the Wacom Cintiq 24 / Wintab setup measured here, `at` is a packet counter,
+not an elapsed-time clock. Do not compute physical speed from it or apply a fixed
+correction factor across contact transitions. This is a measured property of this
+setup, not a universal rule for every device or backend.
+
+When present (format versions 5 and 6), `arrived` is the host's monotonic timestamp
+in microseconds for a drained batch. Multiple readings share it: it is not a
+per-packet acquisition time, and adjacent differences can be zero.
+
+The manifest has a `recordings` array and aggregate `totals`. Each entry provides
+`file`, `formatVersion`, `columns`, counts, device details, and quality information.
+Use `file` as the lookup key; `id` preserves the recorder's identifier and may differ.
+Fetch `traces/<file>` relative to the manifest URL. `file` already includes `.json`;
+do not append another extension. JSON is the authoritative recording format.
+
+Reading arrays are indexed by that recording's `columns`. A missing channel is
+unmeasured, not zero. Read position units from `placement` and pressure scale from
+`device.fullScalePressure`; retain the original JSON for the full metadata.
+
+Approach and departure lists can contain readings also stored in `aloft`. Adding
+all list lengths does not count distinct driver packets. Preserve source order
+and list membership; do not silently deduplicate identical rows. Version 1 has
+unsegmented top-level `readings`, not recorded stroke boundaries.
+
+Quality tags describe format capabilities and known limitations: `complete` has
+both clocks and host-aged approach; `hover-suspect` has both clocks but unreliable
+approach capture; `single-clock` lacks host timing; `early` has segmented strokes
+without later channels; `raw` is unsegmented. These tags are not independent
+validation of every measurement. See each entry's `qualityMeans` and `reRecord`.
+
+Recordings are CC BY 4.0: credit Stroke Corpus, TheSevenPens, and indicate changes.
+The site and tooling are MIT licensed.
+
+## Data and documentation
+
+- [Recording catalogue](manifest.json): Choose recordings without downloading traces.
+- [Trace format](FORMAT.md): Columns, units, timing limitations and version history.
+- [Licence and attribution](LICENSE): Full terms for recordings and code.
+- [Contributing](CONTRIBUTING.md): How to contribute original recordings.

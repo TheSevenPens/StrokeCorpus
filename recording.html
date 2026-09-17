@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="describedby" href="llms.txt" type="text/plain">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A recording &mdash; Stroke Corpus</title>
 <link rel="stylesheet" href="corpus.css?v=aed197d4">
@@ -17,6 +18,14 @@
 </header>
 
 <main class="wrap">
+
+  <noscript>
+    <p class="note">
+      The interactive catalogue and recording views require JavaScript.
+      You can still access the data through the <a href="manifest.json">recording catalogue (JSON)</a>
+      and read the <a href="FORMAT.md">trace format and interpretation</a>.
+    </p>
+  </noscript>
 
   <div class="controls">
     <button type="button" id="download">Download the JSON</button>
@@ -66,6 +75,19 @@
 </main>
 
 <footer class="wrap">
+  <section aria-labelledby="data-docs">
+    <h2 id="data-docs">Data and documentation</h2>
+    <p>
+      <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
+      <a href="FORMAT.md">Trace format and interpretation</a> &middot;
+      <a href="llms.txt">Automated-reader guide</a>
+    </p>
+    <p>
+      To download a recording, read <code>manifest.recordings[].file</code> in the catalogue.
+      It is the full filename, including <code>.json</code>; fetch <code>traces/&lt;file&gt;</code>
+      relative to the catalogue URL, without adding another extension.
+    </p>
+  </section>
   <p><a href="index.html">Back to the corpus</a></p>
 </footer>
 

@@ -8,7 +8,7 @@ same thing, and it is left alone here: it is a published identifier belonging to
 that writes these files rather than to this corpus.
 
 Every file declares `formatVersion`, and **a reader must handle every version** — a column
-a file does not carry gives the field's default, because the absence is real. A version-two
+a file does not carry is unmeasured, not zero. A version-two
 recording genuinely has no height, and a reader that invented one would be reporting a
 number nobody measured.
 
@@ -83,12 +83,17 @@ Every reading drained in one batch **shares one `arrived` value**, deliberately.
 genuinely did arrive together — they were sitting in the driver's queue and were handed over
 in one call — so giving each its own stamp would invent a spread the delivery did not have.
 
-## The three lists
+## The reading lists
 
 - **`strokes[].readings`** — the pen was touching. This is the mark.
 - **`strokes[].approach`** — the readings immediately before that contact, made in the air.
   Only trustworthy at `formatVersion` 6; before that they were aged on the packet counter.
+- **`strokes[].departure`** — airborne readings stored after that contact.
 - **`aloft`** — every airborne reading kept, when the recording asked for them.
+
+Approach and departure readings can also appear in `aloft`. These lists are not disjoint:
+adding their lengths does not count distinct driver packets. Preserve source order and
+list membership rather than silently deduplicating identical rows.
 
 A brush is never given an approach reading: a stroke starts where the tip goes down. They
 are here because what the pen did on the way to the paper is real and almost nobody records
@@ -118,5 +123,7 @@ is what you did.
 
 ## Reading one
 
-`corpus.js` in this repository reads every version in about a hundred lines, and is
-the reference. The short version: index `columns` once per file, not once per row.
+`corpus.js` in this repository reads every version for display. Its normalized reading
+objects use zero as a fallback for missing channels; that rendering behavior must not be
+used to infer measured values. For analysis, read the original rows and index `columns`
+once per file, not once per row, preserving which channels are absent.
