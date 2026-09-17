@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stroke Corpus</title>
+<meta name="description" content="Recordings of a real pen on a real drawing tablet: every reading, including the ones made while the pen was in the air.">
+<link rel="stylesheet" href="corpus.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1><a href="index.html">Stroke Corpus</a></h1>
+    <p>
+      Recordings of a real pen on a real drawing tablet &mdash; every reading the driver
+      delivered, including the ones made while the pen was still in the air. Browse a take,
+      look at any stroke in it a reading at a time, and take the data away.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <dl class="totals" id="totals"></dl>
+
+  <div class="controls">
+    <label for="quality">Quality</label>
+    <select id="quality">
+      <option value="">any</option>
+    </select>
+
+    <label for="hover">Hover</label>
+    <select id="hover">
+      <option value="">any</option>
+      <option value="trusted">trustworthy only</option>
+      <option value="some">carries some</option>
+    </select>
+
+    <label for="find">Search</label>
+    <input type="search" id="find" placeholder="name, gesture, device" size="22">
+
+    <button type="button" id="clear">Clear</button>
+  </div>
+
+  <div class="panel" style="padding: 0; overflow: hidden;">
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Take</th>
+            <th>Recorded</th>
+            <th class="n">Str</th>
+            <th class="n">Contact</th>
+            <th class="n">Approach</th>
+            <th class="n">Aloft</th>
+            <th class="n">Sec</th>
+            <th>Carries</th>
+            <th>Quality</th>
+          </tr>
+        </thead>
+        <tbody id="takes"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="note" id="count"></p>
+
+  <section class="panel">
+    <h2>What the quality tags mean</h2>
+    <dl class="facts" id="meanings"></dl>
+    <p class="note">
+      Every take's <em>contact</em> data is sound. What the tags are about is the rest: the
+      channels a take's format carried, and whether its record of the pen in the air can be
+      trusted. The pen's own timestamp is a packet counter that advances a flat 4.166&nbsp;ms
+      per delivered packet and runs at 0.673 of real time, so a take with no host clock
+      cannot date a reading in real time &mdash; and a take whose approach was aged on that
+      counter has an incomplete record of the approach.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p>
+    One hand, one Wacom Cintiq 24, one backend so far.
+    <a href="https://github.com/TheSevenPens/StrokeCorpus">The repository</a> holds the raw
+    JSON, the format, and how to contribute a recording of your own.
+  </p>
+</footer>
+
+<script type="module">
+import { loadManifest } from "./corpus.js";
+
+const say = (n) => n.toLocaleString();
+
+const manifest = await loadManifest();
+const takes = manifest.takes;
+
+document.getElementById("totals").innerHTML = [
+  ["takes", manifest.totals.takes],
+  ["strokes", manifest.totals.strokes],
+  ["readings in contact", manifest.totals.contact],
+  ["approach readings", manifest.totals.approach],
+  ["readings aloft", manifest.totals.aloft],
+].map(([what, many]) => `<div><dt>${what}</dt><dd>${say(many)}</dd></div>`).join("");
+
+// The filter offers the tags the corpus actually has, so it cannot offer an empty one.
+const quality = document.getElementById("quality");
+
+for (const tag of Object.keys(manifest.totals.byQuality).sort()) {
+  quality.insertAdjacentHTML("beforeend",
+    `<option value="${tag}">${tag} (${manifest.totals.byQuality[tag]})</option>`);
+}
+
+const meanings = new Map(takes.map((t) => [t.quality, t.qualityMeans]));
+
+document.getElementById("meanings").innerHTML = [...meanings]
+  .sort()
+  .map(([tag, means]) =>
+    `<dt><span class="tag ${tag}">${tag}</span></dt><dd style="font-family: var(--text)">${means}</dd>`)
+  .join("");
+
+const rows = document.getElementById("takes");
+const count = document.getElementById("count");
+const hover = document.getElementById("hover");
+const find = document.getElementById("find");
+
+function carries(take) {
+  const has = [];
+
+  if (take.counts.strokes) has.push("strokes");
+  if (take.columns.includes("height")) has.push("height");
+  if (take.columns.includes("status")) has.push("status");
+  if (take.columns.includes("arrived")) has.push("host clock");
+
+  return has.join(", ") || "positions and pressure";
+}
+
+function show() {
+  const wantQuality = quality.value;
+  const wantHover = hover.value;
+  const text = find.value.trim().toLowerCase();
+
+  const shown = takes.filter((take) => {
+    if (wantQuality && take.quality !== wantQuality) return false;
+    if (wantHover === "trusted" && take.quality !== "complete") return false;
+    if (wantHover === "some" && take.counts.approach === 0) return false;
+
+    if (text) {
+      const haystack = [take.name, take.gesture, take.device.tablet, take.device.api, take.file]
+        .join(" ").toLowerCase();
+
+      if (!haystack.includes(text)) return false;
+    }
+
+    return true;
+  });
+
+  rows.innerHTML = shown.map((take) => `
+    <tr>
+      <td>
+        <a href="take.html?take=${encodeURIComponent(take.file)}">${take.name}</a>
+        ${take.reRecord.length ? '<br><span class="tag rerecord">wants re-recording</span>' : ""}
+      </td>
+      <td class="num" style="font-size:12.5px">${take.recordedAt.slice(0, 16).replace("T", " ")}</td>
+      <td class="n">${take.counts.strokes || "&mdash;"}</td>
+      <td class="n">${say(take.counts.contact)}</td>
+      <td class="n">${take.counts.approach ? say(take.counts.approach) : "&mdash;"}</td>
+      <td class="n">${take.counts.aloft ? say(take.counts.aloft) : "&mdash;"}</td>
+      <td class="n">${take.seconds.host ?? take.seconds.pen ?? "&mdash;"}</td>
+      <td style="font-size:12.5px;color:var(--quiet)">${carries(take)}</td>
+      <td><span class="tag ${take.quality}">${take.quality}</span></td>
+    </tr>
+  `).join("");
+
+  count.textContent = shown.length === takes.length
+    ? `${takes.length} takes.`
+    : `${shown.length} of ${takes.length} takes.`;
+}
+
+for (const control of [quality, hover, find]) {
+  control.addEventListener("input", show);
+}
+
+document.getElementById("clear").addEventListener("click", () => {
+  quality.value = "";
+  hover.value = "";
+  find.value = "";
+  show();
+});
+
+show();
+</script>
+
+</body>
+</html>

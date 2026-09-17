@@ -1,0 +1,1543 @@
+{
+  "format": "stroke-corpus/manifest",
+  "formatVersion": 1,
+  "takes": [
+    {
+      "file": "approach-confirmed-wacom-cintiq-24-20260917-071628.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260917-071628",
+      "name": "approach confirmed",
+      "recordedAt": "2026-09-17T07:16:28.5470377-07:00",
+      "formatVersion": 6,
+      "formatAdded": "the approach aged on the host clock, which is what makes hover trustworthy",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 8,
+        "contact": 2190,
+        "approach": 314,
+        "departure": 299,
+        "aloft": 3474
+      },
+      "seconds": {
+        "pen": 32.8,
+        "host": 33.241
+      },
+      "counters": {
+        "fromTheDriver": 5664,
+        "delivered": 5664,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "reRecord": [],
+      "bytes": 485117
+    },
+    {
+      "file": "confirm-baseline-wacom-cintiq-24-20260916-175439.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-175439",
+      "name": "confirm baseline",
+      "recordedAt": "2026-09-16T17:54:39.3118912-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 11,
+        "contact": 808,
+        "approach": 52,
+        "departure": 609,
+        "aloft": 832
+      },
+      "seconds": {
+        "pen": 9.292
+      },
+      "counters": {
+        "fromTheDriver": 1640,
+        "delivered": 1640,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "carries 52 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 156485
+    },
+    {
+      "file": "cross-hatching-two-clocks-wacom-cintiq-24-20260916-190754.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-190754",
+      "name": "cross hatching two clocks",
+      "recordedAt": "2026-09-16T19:07:54.0535731-07:00",
+      "formatVersion": 5,
+      "formatAdded": "the host clock, so arrival can be told from the pen's own timestamp",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 42,
+        "contact": 1326,
+        "approach": 629,
+        "departure": 2047,
+        "aloft": 2753
+      },
+      "seconds": {
+        "pen": 24.28,
+        "host": 24.349
+      },
+      "counters": {
+        "fromTheDriver": 4079,
+        "delivered": 4079,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "hover-suspect",
+      "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "reRecord": [
+        "carries 629 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted"
+      ],
+      "bytes": 519621
+    },
+    {
+      "file": "cross-hatching-wacom-cintiq-24-20260916-185343.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-185343",
+      "name": "cross hatching",
+      "recordedAt": "2026-09-16T18:53:43.4986710-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 44,
+        "contact": 1006,
+        "approach": 931,
+        "departure": 1906,
+        "aloft": 2835
+      },
+      "seconds": {
+        "pen": 22.533
+      },
+      "counters": {
+        "fromTheDriver": 3841,
+        "delivered": 3841,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "carries 931 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 449571
+    },
+    {
+      "file": "fast-flick-wacom-cintiq-24-20260916-093335.json",
+      "id": "fast-flick-wacom-cintiq-24-20260916-093335",
+      "name": "fast flick",
+      "recordedAt": "2026-09-16T09:33:35.3285531-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "fast-flick",
+      "intent": "The same diagonal drawn as fast as possible, under half a second, as a contrast with the slow one.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 60,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 0.246
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 4462
+    },
+    {
+      "file": "flick-endings-wacom-cintiq-24-20260916-202216.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-202216",
+      "name": "flick endings",
+      "recordedAt": "2026-09-16T20:22:16.9217542-07:00",
+      "formatVersion": 5,
+      "formatAdded": "the host clock, so arrival can be told from the pen's own timestamp",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 13,
+        "contact": 774,
+        "approach": 311,
+        "departure": 145,
+        "aloft": 1020
+      },
+      "seconds": {
+        "pen": 19.74,
+        "host": 19.789
+      },
+      "counters": {
+        "fromTheDriver": 1794,
+        "delivered": 1794,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "hover-suspect",
+      "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "reRecord": [
+        "carries 311 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted"
+      ],
+      "bytes": 176435
+    },
+    {
+      "file": "flying-start-wacom-cintiq-24-20260916-184523.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-184523",
+      "name": "flying start",
+      "recordedAt": "2026-09-16T18:45:23.6819517-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 1,
+        "contact": 157,
+        "approach": 21,
+        "departure": 0,
+        "aloft": 181
+      },
+      "seconds": {
+        "pen": 0.65
+      },
+      "counters": {
+        "fromTheDriver": 267,
+        "delivered": 268,
+        "outsideTheRegion": 0,
+        "agrees": false
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "carries 21 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 25612
+    },
+    {
+      "file": "four-loops-four-orientations-wacom-cintiq-24-20260916-105846.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-105846",
+      "name": "four loops four orientations",
+      "recordedAt": "2026-09-16T10:58:46.8637356-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 4,
+        "contact": 526,
+        "approach": 48,
+        "departure": 64,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 6.464
+      },
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "carries 48 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 41153
+    },
+    {
+      "file": "four-loops-slower-wacom-cintiq-24-20260916-110500.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-110500",
+      "name": "four loops slower",
+      "recordedAt": "2026-09-16T11:05:00.8028501-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 4,
+        "contact": 856,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 11.33
+      },
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 54738
+    },
+    {
+      "file": "freeform-wacom-cintiq-24-20260916-093544.json",
+      "id": "freeform-wacom-cintiq-24-20260916-093544",
+      "name": "freeform",
+      "recordedAt": "2026-09-16T09:35:44.9006414-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1708,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 7.111
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 97249
+    },
+    {
+      "file": "freeform-wacom-cintiq-24-20260916-093625.json",
+      "id": "freeform-wacom-cintiq-24-20260916-093625",
+      "name": "freeform",
+      "recordedAt": "2026-09-16T09:36:25.3842349-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1468,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 6.112
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 85307
+    },
+    {
+      "file": "freeform-wacom-cintiq-24-20260916-093659.json",
+      "id": "freeform-wacom-cintiq-24-20260916-093659",
+      "name": "freeform",
+      "recordedAt": "2026-09-16T09:36:59.6950541-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1132,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 4.712
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 66764
+    },
+    {
+      "file": "hard-flicks-wacom-cintiq-24-20260916-193538.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-193538",
+      "name": "hard flicks",
+      "recordedAt": "2026-09-16T19:35:38.6609499-07:00",
+      "formatVersion": 5,
+      "formatAdded": "the host clock, so arrival can be told from the pen's own timestamp",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 33,
+        "contact": 384,
+        "approach": 864,
+        "departure": 781,
+        "aloft": 891
+      },
+      "seconds": {
+        "pen": 8.281,
+        "host": 8.291
+      },
+      "counters": {
+        "fromTheDriver": 1275,
+        "delivered": 1275,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "hover-suspect",
+      "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "reRecord": [
+        "carries 864 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted"
+      ],
+      "bytes": 227164
+    },
+    {
+      "file": "height-test-wacom-cintiq-24-20260916-115056.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-115056",
+      "name": "height test",
+      "recordedAt": "2026-09-16T11:50:56.0995170-07:00",
+      "formatVersion": 3,
+      "formatAdded": "height above the tablet",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 1,
+        "contact": 482,
+        "approach": 0,
+        "departure": 59,
+        "aloft": 3058
+      },
+      "seconds": {
+        "pen": 2.004
+      },
+      "counters": null,
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 227277
+    },
+    {
+      "file": "held-still-in-the-air-wacom-cintiq-24-20260916-184327.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-184327",
+      "name": "held still in the air",
+      "recordedAt": "2026-09-16T18:43:27.6710803-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "",
+      "endedBy": "the recording was stopped before anything was drawn",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 0,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 481
+      },
+      "seconds": {},
+      "counters": {
+        "fromTheDriver": 265,
+        "delivered": 265,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 33126
+    },
+    {
+      "file": "hover-and-strokes-wacom-cintiq-24-20260916-114649.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-114649",
+      "name": "hover and strokes",
+      "recordedAt": "2026-09-16T11:46:49.5371625-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 2,
+        "contact": 374,
+        "approach": 0,
+        "departure": 118,
+        "aloft": 2551
+      },
+      "seconds": {
+        "pen": 6.718
+      },
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 181636
+    },
+    {
+      "file": "hovering-only-wacom-cintiq-24-20260916-114508.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-114508",
+      "name": "hovering only",
+      "recordedAt": "2026-09-16T11:45:08.0090952-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "",
+      "endedBy": "the recording was stopped before anything was drawn",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 0,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 703
+      },
+      "seconds": {},
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 41952
+    },
+    {
+      "file": "in-and-out-of-proximity-wacom-cintiq-24-20260916-112319.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-112319",
+      "name": "in and out of proximity",
+      "recordedAt": "2026-09-16T11:23:19.8639296-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 9,
+        "contact": 347,
+        "approach": 62,
+        "departure": 328,
+        "aloft": 735
+      },
+      "seconds": {
+        "pen": 13.572
+      },
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "carries 62 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 90053
+    },
+    {
+      "file": "loop-crossing-fast-wacom-cintiq-24-20260916-102445.json",
+      "id": "freeform-wacom-cintiq-24-20260916-102445",
+      "name": "loop crossing fast",
+      "recordedAt": "2026-09-16T10:24:45.0200413-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 66,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 0.271
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 4681
+    },
+    {
+      "file": "loop-crossing-wacom-cintiq-24-20260916-102217.json",
+      "id": "loop-crossing-wacom-cintiq-24-20260916-102217",
+      "name": "loop crossing",
+      "recordedAt": "2026-09-16T10:22:17.5142791-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "A loop that crosses itself once, drawn to show what a brush engine does where a stroke passes over its own ink. Named by hand after recording.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 444,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 1.845
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 25703
+    },
+    {
+      "file": "low-pressure-line-wacom-cintiq-24-20260916-095949.json",
+      "id": "low-pressure-line-wacom-cintiq-24-20260916-095949",
+      "name": "low pressure line",
+      "recordedAt": "2026-09-16T09:59:49.4230358-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "One line drawn as light as the hand could hold, to show how a pen behaves at the bottom of its pressure range. Named by hand after recording; the recorder offers no preset for it.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 2204,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 9.177
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 120611
+    },
+    {
+      "file": "one-motion-wacom-cintiq-24-20260916-173229.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-173229",
+      "name": "one motion",
+      "recordedAt": "2026-09-16T17:32:29.7269717-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 4,
+        "contact": 554,
+        "approach": 3,
+        "departure": 236,
+        "aloft": 1146
+      },
+      "seconds": {
+        "pen": 8.542
+      },
+      "counters": {
+        "fromTheDriver": 1700,
+        "delivered": 1700,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "carries 3 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 131476
+    },
+    {
+      "file": "packet-counts-wacom-cintiq-24-20260916-122341.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-122341",
+      "name": "packet counts",
+      "recordedAt": "2026-09-16T12:23:41.5727658-07:00",
+      "formatVersion": 3,
+      "formatAdded": "height above the tablet",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 1,
+        "contact": 204,
+        "approach": 0,
+        "departure": 59,
+        "aloft": 868
+      },
+      "seconds": {
+        "pen": 0.846
+      },
+      "counters": {
+        "fromTheDriver": 1072,
+        "delivered": 1072,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 72442
+    },
+    {
+      "file": "pressure-ramp-wacom-cintiq-24-20260916-093434.json",
+      "id": "pressure-ramp-wacom-cintiq-24-20260916-093434",
+      "name": "pressure ramp",
+      "recordedAt": "2026-09-16T09:34:34.0441492-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "pressure-ramp",
+      "intent": "One stroke along a straight line, pressure increasing from the lightest the pen will register to the hardest, to show the usable range.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1254,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 5.22
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 73859
+    },
+    {
+      "file": "rest-then-press-wacom-cintiq-24-20260916-173011.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-173011",
+      "name": "rest then press",
+      "recordedAt": "2026-09-16T17:30:11.8233758-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 4,
+        "contact": 3308,
+        "approach": 0,
+        "departure": 236,
+        "aloft": 4586
+      },
+      "seconds": {
+        "pen": 44.351
+      },
+      "counters": {
+        "fromTheDriver": 7894,
+        "delivered": 7894,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 547048
+    },
+    {
+      "file": "size-ladder-wacom-cintiq-24-20260916-111128.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-111128",
+      "name": "size ladder",
+      "recordedAt": "2026-09-16T11:11:28.6499304-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 4,
+        "contact": 1120,
+        "approach": 0,
+        "departure": 236,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 8.611
+      },
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 84581
+    },
+    {
+      "file": "slow-diagonal-wacom-cintiq-24-20260916-010400.json",
+      "id": "slow-diagonal-wacom-cintiq-24-20260916-010400",
+      "name": "slow diagonal",
+      "recordedAt": "2026-09-16T01:04:00.3226172-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "slow-diagonal",
+      "intent": "One slow diagonal, about four seconds end to end, left to right and downward, drawn as straight as possible.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom Driver 6.1.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1524,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 6.344
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 88217
+    },
+    {
+      "file": "slow-diagonal-wacom-cintiq-24-20260916-093245.json",
+      "id": "slow-diagonal-wacom-cintiq-24-20260916-093245",
+      "name": "slow diagonal",
+      "recordedAt": "2026-09-16T09:32:45.5053896-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "slow-diagonal",
+      "intent": "One slow diagonal, about four seconds end to end, left to right and downward, drawn as straight as possible.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1318,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 5.487
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 77616
+    },
+    {
+      "file": "slow-landings-wacom-cintiq-24-20260916-192949.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-192949",
+      "name": "slow landings",
+      "recordedAt": "2026-09-16T19:29:49.1289889-07:00",
+      "formatVersion": 5,
+      "formatAdded": "the host clock, so arrival can be told from the pen's own timestamp",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 5,
+        "contact": 1988,
+        "approach": 0,
+        "departure": 295,
+        "aloft": 2823
+      },
+      "seconds": {
+        "pen": 27.373,
+        "host": 28.103
+      },
+      "counters": {
+        "fromTheDriver": 4811,
+        "delivered": 4811,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "hover-suspect",
+      "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "reRecord": [],
+      "bytes": 394038
+    },
+    {
+      "file": "slow-sweep-wacom-cintiq-24-20260916-180920.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-180920",
+      "name": "slow sweep",
+      "recordedAt": "2026-09-16T18:09:20.2595771-07:00",
+      "formatVersion": 4,
+      "formatAdded": "the raw status word",
+      "gesture": "multi-stroke",
+      "intent": "",
+      "endedBy": "the recording was stopped before anything was drawn",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 0,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 2303
+      },
+      "seconds": {},
+      "counters": {
+        "fromTheDriver": 2107,
+        "delivered": 2107,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "single-clock",
+      "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "reRecord": [
+        "has no host clock, so arrival cannot be told from the pen's stamp"
+      ],
+      "bytes": 151308
+    },
+    {
+      "file": "speed-ramp-wacom-cintiq-24-20260916-111446.json",
+      "id": "multi-stroke-wacom-cintiq-24-20260916-111446",
+      "name": "speed ramp",
+      "recordedAt": "2026-09-16T11:14:46.5413257-07:00",
+      "formatVersion": 2,
+      "formatAdded": "strokes",
+      "gesture": "multi-stroke",
+      "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 10,
+        "contact": 2328,
+        "approach": 0,
+        "departure": 530,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 26.485
+      },
+      "counters": null,
+      "quality": "early",
+      "qualityMeans": "Strokes, and none of the later channels.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 179367
+    },
+    {
+      "file": "spiral-wacom-cintiq-24-20260916-101711.json",
+      "id": "spiral-wacom-cintiq-24-20260916-101711",
+      "name": "spiral",
+      "recordedAt": "2026-09-16T10:17:11.5498077-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "freeform",
+      "intent": "A spiral, drawn the way a hand actually makes one rather than the way the arithmetic would: the direction of travel sweeps round nearly three times and the wrist does what a wrist can do. Named by hand after recording.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 1308,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 5.445
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 74223
+    },
+    {
+      "file": "tap-wacom-cintiq-24-20260916-093357.json",
+      "id": "tap-wacom-cintiq-24-20260916-093357",
+      "name": "tap",
+      "recordedAt": "2026-09-16T09:33:57.9136152-07:00",
+      "formatVersion": 1,
+      "formatAdded": "readings at the top level, with no stroke segmentation",
+      "gesture": "tap",
+      "intent": "A single tap: press and lift with no movement.",
+      "endedBy": "the pen lifted",
+      "device": {
+        "tablet": "Wacom Cintiq 24",
+        "driver": "Wacom driver 6.4.14-1",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767
+      },
+      "columns": [
+        "at",
+        "x",
+        "y",
+        "pressure",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "counts": {
+        "strokes": 0,
+        "contact": 114,
+        "approach": 0,
+        "departure": 0,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 0.471
+      },
+      "counters": null,
+      "quality": "raw",
+      "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "reRecord": [
+        "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
+      ],
+      "bytes": 7513
+    }
+  ],
+  "totals": {
+    "takes": 33,
+    "strokes": 200,
+    "contact": 31332,
+    "approach": 3235,
+    "aloft": 31240,
+    "byQuality": {
+      "complete": 1,
+      "single-clock": 9,
+      "hover-suspect": 4,
+      "raw": 12,
+      "early": 7
+    },
+    "wantingReRecording": 31,
+    "devices": [
+      "Wacom Cintiq 24"
+    ],
+    "backends": [
+      "WintabDigitizer"
+    ]
+  }
+}
