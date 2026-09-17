@@ -3,7 +3,7 @@
 Recordings of a real pen on a real drawing tablet: every reading the driver delivered,
 including the ones made while the pen was still in the air.
 
-**[Browse it](https://thesevenpens.github.io/StrokeCorpus/)** — every take, every stroke in
+**[Browse it](https://thesevenpens.github.io/StrokeCorpus/)** — every recording, every stroke in
 it, a reading at a time, with the data downloadable.
 
 ## Why this exists
@@ -25,7 +25,7 @@ to see how the pen's lean follows the arm, a stroke held still while the pressur
 
 | | |
 |---|---|
-| takes | 33 |
+| recordings | 33 |
 | strokes | 200 |
 | readings in contact | 31,332 |
 | approach readings | 3,235 |
@@ -33,15 +33,15 @@ to see how the pen's lean follows the arm, a stroke held still while the pressur
 | tablet | Wacom Cintiq 24, driver 6.4.14-1 |
 | backend | Wintab (digitizer), full-scale pressure 32767 |
 
-Each take carries positions, pressure, tilt as a lean and an azimuth, barrel rotation, and —
+Each recording carries positions, pressure, tilt as a lean and an azimuth, barrel rotation, and —
 depending on its format version — height above the tablet, the raw status word, and a second
 clock belonging to the host rather than to the pen.
 
 ## Read the quality tags before you use it
 
-**Every take's contact data is sound.** The tags are about the rest.
+**Every recording's contact data is sound.** The tags are about the rest.
 
-| tag | takes | what it means |
+| tag | recordings | what it means |
 |---|---|---|
 | `complete` | 1 | every channel, both clocks, and the approach measured on the host clock |
 | `hover-suspect` | 4 | both clocks, but the approach was aged on the pen's packet counter, so hover is incomplete |
@@ -50,7 +50,7 @@ clock belonging to the host rather than to the pen.
 | `raw` | 12 | a flat list of readings with no stroke segmentation at all |
 
 Thirty-one of the thirty-three are tagged **wants re-recording**, and the site says why for
-each. That is not a warning about the data that is there; it is a list of takes worth drawing
+each. That is not a warning about the data that is there; it is a list of recordings worth drawing
 again now that the recorder is better.
 
 ## The one thing to know before you compute anything

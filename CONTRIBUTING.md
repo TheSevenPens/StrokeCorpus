@@ -2,7 +2,7 @@
 
 Everything in this corpus is one hand, one Wacom Cintiq 24, one backend. That means nothing
 in it can yet tell a fact about **pens** from a fact about **this pen**. A second device, or
-a second hand, is worth more here than a hundred more takes from the first.
+a second hand, is worth more here than a hundred more recordings from the first.
 
 ## What to send
 
@@ -23,7 +23,7 @@ In rough order:
    hardware through different stacks and do not agree about the pressure range.
 3. **Hover.** Turn on keeping airborne readings. The approach to a landing is the least
    documented part of pen input and the reason this corpus exists.
-4. **A left hand, a different grip, a pushed stroke.** Every take here is one person's
+4. **A left hand, a different grip, a pushed stroke.** Every recording here is one person's
    posture, and the lean measurements especially are suspected of being about that.
 
 ## The gestures worth drawing
@@ -58,7 +58,7 @@ tablet and driver names, and the time you recorded it. It carries nothing you ty
 nothing about your machine beyond that. Read one before you send it if you would like to see
 for yourself — they are plain JSON.
 
-## If a take is not perfect
+## If a recording is not perfect
 
 Send it anyway and say what went wrong. A recording with a fault in it that is *described* is
 worth more than one where the fault is unknown — most of the corpus is tagged as wanting

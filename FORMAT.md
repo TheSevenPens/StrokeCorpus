@@ -1,7 +1,11 @@
 # The trace format
 
-One take is one JSON file. A take is a recording session: the pen arrived, drew some
-strokes, and the recording stopped.
+One recording is one JSON file: the pen arrived, drew some strokes, and the recording
+stopped.
+
+The files say `"format": "stroke-field-guide/take"`. That is the recorder's own name for the
+same thing, and it is left alone here: it is a published identifier belonging to the tool
+that writes these files rather than to this corpus.
 
 Every file declares `formatVersion`, and **a reader must handle every version** — a column
 a file does not carry gives the field's default, because the absence is real. A version-two
@@ -14,7 +18,7 @@ number nobody measured.
   "formatVersion": 6,
   "id": "approach-confirmed-wacom-cintiq-24-20260917-071628",
   "gesture": "multi-stroke",
-  "intent": "A series of strokes recorded as one take, with the pen lifting between them.",
+  "intent": "A series of strokes recorded as one recording, with the pen lifting between them.",
   "recordedAt": "2026-09-17T07:16:28.9136152-07:00",
   "endedBy": "the recording was stopped",
   "device": {
@@ -45,7 +49,7 @@ number nobody measured.
 
 ## Readings are rows, not objects
 
-A reading is an array whose slots are named by `columns`. One take can hold tens of
+A reading is an array whose slots are named by `columns`. One recording can hold tens of
 thousands of them, and an object per reading would be mostly repeated key names.
 
 | column | what it is |
