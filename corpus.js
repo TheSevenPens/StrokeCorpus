@@ -15,7 +15,7 @@ export async function loadManifest() {
 }
 
 export async function loadTake(file) {
-  const response = await fetch(`../traces/${file}`);
+  const response = await fetch(`traces/${file}`);
 
   if (!response.ok) throw new Error(`${file}: ${response.status}`);
 

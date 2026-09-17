@@ -114,5 +114,5 @@ is what you did.
 
 ## Reading one
 
-`docs/corpus.js` in this repository reads every version in about a hundred lines, and is
+`corpus.js` in this repository reads every version in about a hundred lines, and is
 the reference. The short version: index `columns` once per file, not once per row.

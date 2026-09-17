@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Builds docs/manifest.json from traces/.
+Builds manifest.json from traces/.
 
 The folder is the corpus. Nothing here lists the takes by name, because a corpus that
 names its files is one that silently shrinks when somebody renames one -- so every take
@@ -19,7 +19,7 @@ from collections import Counter
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACES = os.path.join(ROOT, "traces")
-OUT = os.path.join(ROOT, "docs", "manifest.json")
+OUT = os.path.join(ROOT, "manifest.json")
 
 # What each format version added. A take carries what its version carried and no more,
 # and the absence is real: a version-two recording genuinely has no height, and a corpus
@@ -208,8 +208,6 @@ def main():
             "backends": sorted({t["device"]["api"] for t in takes if t["device"]["api"]}),
         },
     }
-
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
 
     with open(OUT, "w", encoding="utf-8", newline="\n") as handle:
         json.dump(manifest, handle, indent=2)

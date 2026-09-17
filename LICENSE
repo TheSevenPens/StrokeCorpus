@@ -10,7 +10,7 @@ Attribution: Stroke Corpus, TheSevenPens
              https://github.com/TheSevenPens/StrokeCorpus
 
 
-The site and tooling in docs/ and tools/ are licensed under the MIT
+The site and tooling (the HTML, CSS, JS and tools/) are licensed under the MIT
 License.
 
 MIT License
