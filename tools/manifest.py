@@ -2,8 +2,8 @@
 """
 Builds manifest.json from traces/.
 
-The folder is the corpus. Nothing here lists the takes by name, because a corpus that
-names its files is one that silently shrinks when somebody renames one -- so every take
+The folder is the corpus. Nothing here lists the recordings by name, because a corpus that
+names its files is one that silently shrinks when somebody renames one -- so every recording
 in traces/ appears, and everything said about it is measured from it rather than typed
 beside it.
 
@@ -21,7 +21,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACES = os.path.join(ROOT, "traces")
 OUT = os.path.join(ROOT, "manifest.json")
 
-# What each format version added. A take carries what its version carried and no more,
+# What each format version added. A recording carries what its version carried and no more,
 # and the absence is real: a version-two recording genuinely has no height, and a corpus
 # that filled one in would be publishing a number nobody measured.
 VERSIONS = {
@@ -35,7 +35,7 @@ VERSIONS = {
 
 
 def quality(version, approach):
-    """The tag a take carries, and what it means for somebody using it."""
+    """The tag a recording carries, and what it means for somebody using it."""
     if version >= 6:
         return "complete", "Every channel, both clocks, and the approach measured on the host clock."
     if version == 5:
@@ -57,7 +57,7 @@ def quality(version, approach):
 
 
 def rerecord(version, approach, aloft):
-    """Whether this take is worth drawing again, and why."""
+    """Whether this recording is worth drawing again, and why."""
     reasons = []
 
     if approach > 0 and version < 6:
@@ -77,22 +77,22 @@ def rerecord(version, approach, aloft):
     return reasons
 
 
-def counts(take):
-    strokes = take.get("strokes", [])
-    flat = take.get("readings", [])
+def counts(recording):
+    strokes = recording.get("strokes", [])
+    flat = recording.get("readings", [])
 
     return {
         "strokes": len(strokes),
         "contact": sum(len(s.get("readings", [])) for s in strokes) or len(flat),
         "approach": sum(len(s.get("approach", [])) for s in strokes),
         "departure": sum(len(s.get("departure", [])) for s in strokes),
-        "aloft": len(take.get("aloft", [])),
+        "aloft": len(recording.get("aloft", [])),
     }
 
 
-def reconciles(take):
-    """Whether the session's own counters agree, where the take states them."""
-    said = take.get("whatTheSessionCounted")
+def reconciles(recording):
+    """Whether the session's own counters agree, where the recording states them."""
+    said = recording.get("whatTheSessionCounted")
 
     if not said:
         return None
@@ -109,15 +109,15 @@ def reconciles(take):
     }
 
 
-def span(take):
-    """How long the take ran, on each clock it carries, in seconds."""
-    columns = take.get("columns", [])
+def span(recording):
+    """How long the recording ran, on each clock it carries, in seconds."""
+    columns = recording.get("columns", [])
     rows = []
 
-    for stroke in take.get("strokes", []):
+    for stroke in recording.get("strokes", []):
         rows += stroke.get("readings", [])
 
-    rows += take.get("readings", [])
+    rows += recording.get("readings", [])
 
     if len(rows) < 2:
         return {}
@@ -139,9 +139,9 @@ def span(take):
     return out
 
 
-def name(take, filename):
+def name(recording, filename):
     """
-    What to call a take.
+    What to call a recording.
 
     The recorder's own gesture field says which mode was used -- twenty-one of these say
     "multi-stroke" -- and its intent field is that mode's canned description. Neither
@@ -155,37 +155,37 @@ def name(take, filename):
 
 
 def main():
-    takes = []
+    recordings = []
 
     for path in sorted(glob.glob(os.path.join(TRACES, "*.json"))):
         with open(path, encoding="utf-8") as handle:
-            take = json.load(handle)
+            recording = json.load(handle)
 
-        version = take.get("formatVersion", 0)
-        howMany = counts(take)
+        version = recording.get("formatVersion", 0)
+        howMany = counts(recording)
         tag, meaning = quality(version, howMany["approach"])
-        device = take.get("device", {})
+        device = recording.get("device", {})
 
-        takes.append({
+        recordings.append({
             "file": os.path.basename(path),
-            "id": take.get("id", ""),
-            "name": name(take, path),
-            "recordedAt": take.get("recordedAt", ""),
+            "id": recording.get("id", ""),
+            "name": name(recording, path),
+            "recordedAt": recording.get("recordedAt", ""),
             "formatVersion": version,
             "formatAdded": VERSIONS.get(version, ""),
-            "gesture": take.get("gesture", ""),
-            "intent": take.get("intent", ""),
-            "endedBy": take.get("endedBy", ""),
+            "gesture": recording.get("gesture", ""),
+            "intent": recording.get("intent", ""),
+            "endedBy": recording.get("endedBy", ""),
             "device": {
                 "tablet": device.get("tablet", ""),
                 "driver": device.get("driver", ""),
                 "api": device.get("api", ""),
                 "fullScalePressure": device.get("fullScalePressure", 0),
             },
-            "columns": take.get("columns", []),
+            "columns": recording.get("columns", []),
             "counts": howMany,
-            "seconds": span(take),
-            "counters": reconciles(take),
+            "seconds": span(recording),
+            "counters": reconciles(recording),
             "quality": tag,
             "qualityMeans": meaning,
             "reRecord": rerecord(version, howMany["approach"], howMany["aloft"]),
@@ -195,17 +195,17 @@ def main():
     manifest = {
         "format": "stroke-corpus/manifest",
         "formatVersion": 1,
-        "takes": takes,
+        "recordings": recordings,
         "totals": {
-            "takes": len(takes),
-            "strokes": sum(t["counts"]["strokes"] for t in takes),
-            "contact": sum(t["counts"]["contact"] for t in takes),
-            "approach": sum(t["counts"]["approach"] for t in takes),
-            "aloft": sum(t["counts"]["aloft"] for t in takes),
-            "byQuality": dict(Counter(t["quality"] for t in takes)),
-            "wantingReRecording": sum(1 for t in takes if t["reRecord"]),
-            "devices": sorted({t["device"]["tablet"] for t in takes if t["device"]["tablet"]}),
-            "backends": sorted({t["device"]["api"] for t in takes if t["device"]["api"]}),
+            "recordings": len(recordings),
+            "strokes": sum(t["counts"]["strokes"] for t in recordings),
+            "contact": sum(t["counts"]["contact"] for t in recordings),
+            "approach": sum(t["counts"]["approach"] for t in recordings),
+            "aloft": sum(t["counts"]["aloft"] for t in recordings),
+            "byQuality": dict(Counter(t["quality"] for t in recordings)),
+            "wantingReRecording": sum(1 for t in recordings if t["reRecord"]),
+            "devices": sorted({t["device"]["tablet"] for t in recordings if t["device"]["tablet"]}),
+            "backends": sorted({t["device"]["api"] for t in recordings if t["device"]["api"]}),
         },
     }
 
@@ -213,7 +213,7 @@ def main():
         json.dump(manifest, handle, indent=2)
         handle.write("\n")
 
-    print(f"{OUT}: {len(takes)} takes")
+    print(f"{OUT}: {len(recordings)} recordings")
     print(f"  by quality: {manifest['totals']['byQuality']}")
     print(f"  wanting re-recording: {manifest['totals']['wantingReRecording']}")
     print(f"  readings: {manifest['totals']['contact']} in contact, "

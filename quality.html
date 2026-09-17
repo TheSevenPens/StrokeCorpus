@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quality tags &mdash; Stroke Corpus</title>
+<meta name="description" content="What each quality tag on a recording means, and which recordings are worth drawing again.">
+<link rel="stylesheet" href="corpus.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">Stroke Corpus</a> &rsaquo; quality tags</p>
+    <h1>What the quality tags mean</h1>
+    <p>
+      <strong>Every recording's contact data is sound.</strong> The tags are about the rest:
+      which channels a recording's format carried, and whether its record of the pen in the
+      air can be trusted.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="panel">
+    <h2>The tags</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Tag</th>
+            <th class="n">Recordings</th>
+            <th>What it means</th>
+          </tr>
+        </thead>
+        <tbody id="tags"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Why a single clock is not enough</h2>
+    <p>
+      The pen's own timestamp looks like a clock and is not one. On the hardware here it
+      <strong>advances a flat 4.166&nbsp;ms per delivered packet</strong> whatever the elapsed
+      time, runs at <strong>0.673 of real time</strong>, and resynchronises to real time at
+      every contact transition. It implies a report rate of 240 a second; the real rate,
+      measured against the host's own clock, is <strong>161.6</strong>.
+    </p>
+    <p>
+      So a recording carrying only that timestamp cannot date a reading in real time, and
+      speed computed from it is speed per counter-second. Recordings at format version 5 and
+      above carry a second timestamp taken from the host, and that one is a clock.
+    </p>
+    <p>
+      It also explains the hover tag. The recorder used to decide how old an airborne reading
+      was using the pen's counter, which runs slow &mdash; so readings were discarded that
+      should have been kept, and the approach to a landing came out short. Only format
+      version 6 ages the approach on the host clock.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>Which recordings want drawing again <span class="sub" id="wanted"></span></h2>
+    <p class="note" style="margin-top:0">
+      This is a list of work, not a warning about the data that is here. Each of these was
+      recorded before some part of the recorder was fixed, and each is worth doing again.
+    </p>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Recording</th>
+            <th>Quality</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody id="rerecord"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>What the format versions added</h2>
+    <div class="scroll"><table><tbody id="versions"></tbody></table></div>
+    <p class="note">
+      A recording carries what its version carried and no more. The absence is real: a
+      version-two recording genuinely has no height, and anything that filled one in would be
+      publishing a number nobody measured. <a href="FORMAT.md">The format in full</a>.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p><a href="index.html">Back to the corpus</a></p>
+</footer>
+
+<script type="module">
+import { loadManifest } from "./corpus.js";
+
+const manifest = await loadManifest();
+const recordings = manifest.recordings;
+
+// Read off the corpus rather than typed here, so a tag cannot be described and absent, or
+// present and undescribed.
+const meanings = new Map();
+const counted = manifest.totals.byQuality;
+
+for (const one of recordings) meanings.set(one.quality, one.qualityMeans);
+
+const order = ["complete", "hover-suspect", "single-clock", "early", "raw"];
+const tags = [...meanings.keys()].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+
+document.getElementById("tags").innerHTML = tags.map((tag) => `
+  <tr>
+    <td><span class="tag ${tag}">${tag}</span></td>
+    <td class="n">${counted[tag] ?? 0}</td>
+    <td>${meanings.get(tag)}</td>
+  </tr>
+`).join("");
+
+const wanting = recordings.filter((one) => one.reRecord.length);
+
+document.getElementById("wanted").textContent = `— ${wanting.length} of ${recordings.length}`;
+
+document.getElementById("rerecord").innerHTML = wanting.map((one) => `
+  <tr>
+    <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${one.name}</a></td>
+    <td><span class="tag ${one.quality}">${one.quality}</span></td>
+    <td style="color:var(--quiet)">It ${one.reRecord.join("; and it ")}.</td>
+  </tr>
+`).join("");
+
+// Each version, and what it added, from the recordings that are at it.
+const versions = new Map();
+
+for (const one of recordings) versions.set(one.formatVersion, one.formatAdded);
+
+document.getElementById("versions").innerHTML = [...versions.keys()].sort((a, b) => a - b)
+  .map((v) => `
+    <tr>
+      <td class="n" style="width:4em">${v}</td>
+      <td class="n" style="width:7em">${recordings.filter((o) => o.formatVersion === v).length} here</td>
+      <td>${versions.get(v)}</td>
+    </tr>
+  `).join("");
+</script>
+
+</body>
+</html>

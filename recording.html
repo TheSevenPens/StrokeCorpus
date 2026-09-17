@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>A take &mdash; Stroke Corpus</title>
+<title>A recording &mdash; Stroke Corpus</title>
 <link rel="stylesheet" href="corpus.css">
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <p class="crumb"><a href="index.html">Stroke Corpus</a> &rsaquo; take</p>
+    <p class="crumb"><a href="index.html">Stroke Corpus</a> &rsaquo; recording</p>
     <h1 id="name">&hellip;</h1>
     <p id="blurb"></p>
   </div>
@@ -24,9 +24,14 @@
   </div>
 
   <section class="panel">
-    <h2>What this take is</h2>
+    <h2>Details</h2>
     <dl class="facts" id="facts"></dl>
     <ul class="warnings" id="warnings"></ul>
+  </section>
+
+  <section class="panel">
+    <h2>The gallery <span class="sub">&mdash; click a stroke to open it a reading at a time</span></h2>
+    <div class="gallery" id="gallery"></div>
   </section>
 
   <section class="panel">
@@ -57,10 +62,6 @@
     </div>
   </section>
 
-  <section class="panel">
-    <h2>The gallery <span class="sub">&mdash; click a stroke to open it a reading at a time</span></h2>
-    <div class="gallery" id="gallery"></div>
-  </section>
 
 </main>
 
@@ -69,23 +70,23 @@
 </footer>
 
 <script type="module">
-import { loadManifest, loadTake, strokesOf, describe, gap, drawInk, offer, fmt } from "./corpus.js";
+import { loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt } from "./corpus.js";
 
 const q = new URLSearchParams(location.search);
-const file = q.get("take") || "";
+const file = q.get("recording") || "";
 
 if (!file) location.replace("index.html");
 
 const manifest = await loadManifest();
-const entry = manifest.takes.find((t) => t.file === file);
+const entry = manifest.recordings.find((t) => t.file === file);
 
 if (!entry) {
-  document.getElementById("name").textContent = "No such take";
+  document.getElementById("name").textContent = "No such recording";
   throw new Error(file);
 }
 
-const take = await loadTake(file);
-const strokes = strokesOf(take);
+const recording = await loadRecording(file);
+const strokes = strokesOf(recording);
 const full = entry.device.fullScalePressure || 32767;
 
 document.title = `${entry.name} — Stroke Corpus`;
@@ -98,7 +99,7 @@ document.getElementById("size").textContent =
   `${entry.file} — ${(entry.bytes / 1024).toFixed(0)} KB`;
 
 document.getElementById("download").addEventListener("click", () =>
-  offer(entry.file, JSON.stringify(take, null, 2)));
+  offer(entry.file, JSON.stringify(recording, null, 2)));
 
 const facts = [
   ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
@@ -106,11 +107,11 @@ const facts = [
   ["driver", entry.device.driver],
   ["backend", entry.device.api],
   ["full-scale pressure", entry.device.fullScalePressure],
-  ["format version", `${entry.formatVersion} — added ${entry.formatAdded}`],
+  ["format version", `${entry.formatVersion} — <a href="quality.html">what that carries</a>`],
   ["gesture", entry.gesture || "—"],
-  ["columns", entry.columns.join(", ")],
+  ["columns", entry.columns.join(" ")],
   ["ended by", entry.endedBy || "—"],
-  ["seconds, host clock", entry.seconds.host ?? "— (this format carries no host clock)"],
+  ["seconds, host clock", entry.seconds.host ?? "not in this format"],
   ["seconds, pen clock", entry.seconds.pen ?? "—"],
 ];
 
@@ -131,12 +132,12 @@ document.getElementById("ledger").innerHTML = counters
       <tr><td>dropped for being outside the capture region</td><td class="n">${counters.outsideTheRegion.toLocaleString()}</td></tr>
       <tr><td>readings written to this file</td><td class="n">${(entry.counts.contact + entry.counts.approach + entry.counts.aloft).toLocaleString()}</td></tr>
      </tbody>`
-  : `<tbody><tr><td>This take's format does not record what the session counted.</td></tr></tbody>`;
+  : `<tbody><tr><td>This recording's format does not record what the session counted.</td></tr></tbody>`;
 
 document.getElementById("ledgerNote").textContent = counters
   ? (counters.agrees
       ? "The counters reconcile: every packet the driver handed over was delivered, and none was lost between the driver and this file."
-      : "The counters do NOT reconcile. More readings were delivered than the driver reported handing over, which is the one take in this corpus where that is true.")
+      : "The counters do NOT reconcile. More readings were delivered than the driver reported handing over, which is the one recording in this corpus where that is true.")
   : "";
 
 // ---- every stroke ------------------------------------------------------
@@ -160,7 +161,7 @@ document.getElementById("strokes").innerHTML = strokes.map((stroke, i) => {
   const still = steps.filter((s) => s === 0).length;
 
   return `<tr>
-    <td class="n"><a href="stroke.html?take=${encodeURIComponent(file)}&stroke=${i}">${i + 1}</a></td>
+    <td class="n"><a href="stroke.html?recording=${encodeURIComponent(file)}&stroke=${i}">${i + 1}</a></td>
     <td class="n">${about.readings}</td>
     <td class="n">${fmt(about.length)}</td>
     <td class="n">${fmt(about.widest)}</td>
@@ -177,7 +178,7 @@ document.getElementById("strokes").innerHTML = strokes.map((stroke, i) => {
 const gallery = document.getElementById("gallery");
 
 gallery.innerHTML = strokes.map((stroke, i) => `
-  <a href="stroke.html?take=${encodeURIComponent(file)}&stroke=${i}">
+  <a href="stroke.html?recording=${encodeURIComponent(file)}&stroke=${i}">
     <canvas data-stroke="${i}" width="140" height="100"></canvas>
     <div class="cap">${i + 1} &middot; ${stroke.readings.length} readings</div>
   </a>

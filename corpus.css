@@ -203,9 +203,51 @@ button.on { border-color: var(--accent); color: var(--accent); }
 .panel h2 { margin: 0 0 10px; font-size: 15px; letter-spacing: 0.01em; }
 .panel h2 .sub { font-weight: 400; color: var(--quiet); }
 
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px 22px; margin: 0; }
-.facts dt { font-size: 12px; color: var(--quiet); }
-.facts dd { margin: 0 0 6px; font-family: var(--mono); font-size: 13.5px; word-break: break-word; }
+/*
+  A definition list laid out in pairs.
+
+  Written first as one auto-fit grid with dt and dd as its items, which put a label in one
+  column and its value in the next -- so "recorded" sat above "tablet" and its date sat
+  beside it under "driver". A four-column track pairs them, because dt, dd, dt, dd is
+  exactly one row of it.
+*/
+.facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr);
+  gap: 0 16px;
+  margin: 0;
+  align-items: baseline;
+}
+
+.facts dt {
+  font-size: 12px;
+  color: var(--quiet);
+  padding: 4px 0;
+  border-top: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+.facts dd {
+  margin: 0;
+  padding: 4px 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+/* The first row of each column pair has the panel's heading above it already. */
+.facts dt:first-of-type, .facts dt:first-of-type + dd,
+.facts dt:nth-of-type(2), .facts dt:nth-of-type(2) + dd { border-top: 0; }
+
+@media (max-width: 760px) {
+  .facts { grid-template-columns: max-content minmax(0, 1fr); }
+  .facts dt:nth-of-type(2), .facts dt:nth-of-type(2) + dd { border-top: 1px solid var(--rule); }
+}
+
+/* Prose in a value, rather than a measurement, wants the reading face. */
+.facts dd.says { font-family: var(--text); font-size: 13.5px; }
 
 .note { color: var(--quiet); font-size: 13.5px; margin: 8px 0 0; }
 

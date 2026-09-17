@@ -1,7 +1,7 @@
 {
   "format": "stroke-corpus/manifest",
   "formatVersion": 1,
-  "takes": [
+  "recordings": [
     {
       "file": "approach-confirmed-wacom-cintiq-24-20260917-071628.json",
       "id": "multi-stroke-wacom-cintiq-24-20260917-071628",
@@ -1520,7 +1520,7 @@
     }
   ],
   "totals": {
-    "takes": 33,
+    "recordings": 33,
     "strokes": 200,
     "contact": 31332,
     "approach": 3235,

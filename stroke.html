@@ -12,7 +12,7 @@
   <div class="wrap">
     <p class="crumb">
       <a href="index.html">Stroke Corpus</a> &rsaquo;
-      <a href="#" id="backToTake">take</a> &rsaquo; stroke
+      <a href="#" id="backToTake">recording</a> &rsaquo; stroke
     </p>
     <h1 id="name">&hellip;</h1>
     <p>
@@ -89,20 +89,20 @@
 
 <script type="module">
 import {
-  loadManifest, loadTake, strokesOf, describe, gap,
+  loadManifest, loadRecording, strokesOf, describe, gap,
   drawClosely, drawChannel, fmt,
 } from "./corpus.js";
 
 const q = new URLSearchParams(location.search);
-const file = q.get("take") || "";
+const file = q.get("recording") || "";
 const which = parseInt(q.get("stroke") || "0", 10) || 0;
 
 if (!file) location.replace("index.html");
 
 const manifest = await loadManifest();
-const entry = manifest.takes.find((t) => t.file === file);
-const take = await loadTake(file);
-const strokes = strokesOf(take);
+const entry = manifest.recordings.find((t) => t.file === file);
+const recording = await loadRecording(file);
+const strokes = strokesOf(recording);
 const stroke = strokes[which];
 
 if (!stroke) {
@@ -118,10 +118,10 @@ document.title = `${entry?.name ?? file} stroke ${which + 1} — Stroke Corpus`;
 document.getElementById("name").textContent = `${entry?.name ?? file} — stroke ${which + 1} of ${strokes.length}`;
 
 const back = document.getElementById("backToTake");
-back.href = `take.html?take=${encodeURIComponent(file)}`;
-back.textContent = entry?.name ?? "take";
+back.href = `recording.html?recording=${encodeURIComponent(file)}`;
+back.textContent = entry?.name ?? "recording";
 
-// The table's time column names whichever clock the take carries, because the two are
+// The table's time column names whichever clock the recording carries, because the two are
 // not the same thing: the pen's own stamp is a packet counter and the host's is a clock.
 document.getElementById("clockHead").textContent =
   entry?.columns.includes("arrived") ? "host ms" : "pen ms";
@@ -133,7 +133,7 @@ document.getElementById("closelyNote").textContent =
 // The step into each reading, so the table and the speed channel say the same thing.
 const steps = r.map((p, i) => (i === 0 ? 0 : gap(r[i - 1], p)));
 
-// Speed in px per second, on whichever clock this take carries. The pen's own stamp is a
+// Speed in px per second, on whichever clock this recording carries. The pen's own stamp is a
 // packet counter, so where there is no host clock this is speed per counter-second and the
 // axis is labelled to say so.
 const clock = entry?.columns.includes("arrived") ? "arrived" : "at";

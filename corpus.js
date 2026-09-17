@@ -14,7 +14,7 @@ export async function loadManifest() {
   return response.json();
 }
 
-export async function loadTake(file) {
+export async function loadRecording(file) {
   const response = await fetch(`traces/${file}`);
 
   if (!response.ok) throw new Error(`${file}: ${response.status}`);
@@ -23,8 +23,8 @@ export async function loadTake(file) {
 }
 
 /** Which slot each field sits in, read once per file rather than once per row. */
-export function slots(take) {
-  const named = take.columns || [];
+export function slots(recording) {
+  const named = recording.columns || [];
   const of = (name) => named.indexOf(name);
 
   return {
@@ -59,26 +59,26 @@ export function reading(row, slot) {
 }
 
 /**
- * Every stroke of a take, in the order it was drawn.
+ * Every stroke of a recording, in the order it was drawn.
  *
- * Version one put the readings at the top level with no strokes array, so a take of that
- * vintage is one stroke as far as anything here is concerned. That is what the file says,
+ * Version one put the readings at the top level with no strokes array, so a recording of
+ * that vintage is one stroke as far as anything here is concerned. That is what the file says,
  * not a guess: nothing in it records where contact broke.
  */
-export function strokesOf(take) {
-  const slot = slots(take);
+export function strokesOf(recording) {
+  const slot = slots(recording);
   const out = [];
 
-  if (Array.isArray(take.readings) && take.readings.length) {
+  if (Array.isArray(recording.readings) && recording.readings.length) {
     out.push({
-      readings: take.readings.map((r) => reading(r, slot)),
+      readings: recording.readings.map((r) => reading(r, slot)),
       approach: [],
-      endedBy: take.endedBy || "",
+      endedBy: recording.endedBy || "",
       flat: true,
     });
   }
 
-  for (const stroke of take.strokes || []) {
+  for (const stroke of recording.strokes || []) {
     const rows = (stroke.readings || []).map((r) => reading(r, slot));
 
     if (!rows.length) continue;
@@ -355,14 +355,17 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
 export const fmt = (n) =>
   Math.abs(n) >= 1000 ? Math.round(n).toString() : (Math.round(n * 100) / 100).toString();
 
-/** Reads the query string, which is how a link to one take or one stroke is written. */
+/** Reads the query string, which is how a link to one recording or one stroke is written. */
 export function asked() {
   const q = new URLSearchParams(location.search);
 
-  return { take: q.get("take") || "", stroke: parseInt(q.get("stroke") || "0", 10) || 0 };
+  return {
+    recording: q.get("recording") || "",
+    stroke: parseInt(q.get("stroke") || "0", 10) || 0,
+  };
 }
 
-/** Offers a blob as a download, which is the whole of what "download this take" means. */
+/** Offers a blob as a download, which is the whole of what "download this one" means. */
 export function offer(name, text) {
   const blob = new Blob([text], { type: "application/json" });
   const url = URL.createObjectURL(blob);
