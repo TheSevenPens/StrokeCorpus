@@ -98,54 +98,57 @@
 </footer>
 
 <script type="module">
-import { loadManifest } from "./corpus.js";
+import { loadManifest, run } from "./corpus.js";
 
-const manifest = await loadManifest();
-const recordings = manifest.recordings;
+await run(async () => {
 
-// Read off the corpus rather than typed here, so a tag cannot be described and absent, or
-// present and undescribed.
-const meanings = new Map();
-const counted = manifest.totals.byQuality;
+  const manifest = await loadManifest();
+  const recordings = manifest.recordings;
 
-for (const one of recordings) meanings.set(one.quality, one.qualityMeans);
+  // Read off the corpus rather than typed here, so a tag cannot be described and absent, or
+  // present and undescribed.
+  const meanings = new Map();
+  const counted = manifest.totals.byQuality;
 
-const order = ["complete", "hover-suspect", "single-clock", "early", "raw"];
-const tags = [...meanings.keys()].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  for (const one of recordings) meanings.set(one.quality, one.qualityMeans);
 
-document.getElementById("tags").innerHTML = tags.map((tag) => `
-  <tr>
-    <td><span class="tag ${tag}">${tag}</span></td>
-    <td class="n">${counted[tag] ?? 0}</td>
-    <td>${meanings.get(tag)}</td>
-  </tr>
-`).join("");
+  const order = ["complete", "hover-suspect", "single-clock", "early", "raw"];
+  const tags = [...meanings.keys()].sort((a, b) => order.indexOf(a) - order.indexOf(b));
 
-const wanting = recordings.filter((one) => one.reRecord.length);
-
-document.getElementById("wanted").textContent = `— ${wanting.length} of ${recordings.length}`;
-
-document.getElementById("rerecord").innerHTML = wanting.map((one) => `
-  <tr>
-    <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${one.name}</a></td>
-    <td><span class="tag ${one.quality}">${one.quality}</span></td>
-    <td style="color:var(--quiet)">It ${one.reRecord.join("; and it ")}.</td>
-  </tr>
-`).join("");
-
-// Each version, and what it added, from the recordings that are at it.
-const versions = new Map();
-
-for (const one of recordings) versions.set(one.formatVersion, one.formatAdded);
-
-document.getElementById("versions").innerHTML = [...versions.keys()].sort((a, b) => a - b)
-  .map((v) => `
+  document.getElementById("tags").innerHTML = tags.map((tag) => `
     <tr>
-      <td class="n" style="width:4em">${v}</td>
-      <td class="n" style="width:7em">${recordings.filter((o) => o.formatVersion === v).length} here</td>
-      <td>${versions.get(v)}</td>
+      <td><span class="tag ${tag}">${tag}</span></td>
+      <td class="n">${counted[tag] ?? 0}</td>
+      <td>${meanings.get(tag)}</td>
     </tr>
   `).join("");
+
+  const wanting = recordings.filter((one) => one.reRecord.length);
+
+  document.getElementById("wanted").textContent = `— ${wanting.length} of ${recordings.length}`;
+
+  document.getElementById("rerecord").innerHTML = wanting.map((one) => `
+    <tr>
+      <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${one.name}</a></td>
+      <td><span class="tag ${one.quality}">${one.quality}</span></td>
+      <td style="color:var(--quiet)">It ${one.reRecord.join("; and it ")}.</td>
+    </tr>
+  `).join("");
+
+  // Each version, and what it added, from the recordings that are at it.
+  const versions = new Map();
+
+  for (const one of recordings) versions.set(one.formatVersion, one.formatAdded);
+
+  document.getElementById("versions").innerHTML = [...versions.keys()].sort((a, b) => a - b)
+    .map((v) => `
+      <tr>
+        <td class="n" style="width:4em">${v}</td>
+        <td class="n" style="width:7em">${recordings.filter((o) => o.formatVersion === v).length} here</td>
+        <td>${versions.get(v)}</td>
+      </tr>
+    `).join("");
+});
 </script>
 
 </body>

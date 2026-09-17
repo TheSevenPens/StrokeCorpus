@@ -15,7 +15,7 @@
     <p>
       Recordings of a real pen on a real drawing tablet &mdash; every reading the driver
       delivered, including the ones made while the pen was still in the air. Browse a recording,
-      look at any stroke in it a reading at a time, and recording the data away.
+      look at any stroke in it a reading at a time, and take the data away.
     </p>
   </div>
 </header>
@@ -83,99 +83,102 @@
 </footer>
 
 <script type="module">
-import { loadManifest } from "./corpus.js";
+import { loadManifest, run } from "./corpus.js";
 
-const say = (n) => n.toLocaleString();
+await run(async () => {
 
-const manifest = await loadManifest();
-const recordings = manifest.recordings;
+  const say = (n) => n.toLocaleString();
 
-document.getElementById("totals").innerHTML = [
-  ["recordings", manifest.totals.recordings],
-  ["strokes", manifest.totals.strokes],
-  ["readings in contact", manifest.totals.contact],
-  ["approach readings", manifest.totals.approach],
-  ["readings aloft", manifest.totals.aloft],
-].map(([what, many]) => `<div><dt>${what}</dt><dd>${say(many)}</dd></div>`).join("");
+  const manifest = await loadManifest();
+  const recordings = manifest.recordings;
 
-// The filter offers the tags the corpus actually has, so it cannot offer an empty one.
-const quality = document.getElementById("quality");
+  document.getElementById("totals").innerHTML = [
+    ["recordings", manifest.totals.recordings],
+    ["strokes", manifest.totals.strokes],
+    ["readings in contact", manifest.totals.contact],
+    ["approach readings", manifest.totals.approach],
+    ["readings aloft", manifest.totals.aloft],
+  ].map(([what, many]) => `<div><dt>${what}</dt><dd>${say(many)}</dd></div>`).join("");
 
-for (const tag of Object.keys(manifest.totals.byQuality).sort()) {
-  quality.insertAdjacentHTML("beforeend",
-    `<option value="${tag}">${tag} (${manifest.totals.byQuality[tag]})</option>`);
-}
+  // The filter offers the tags the corpus actually has, so it cannot offer an empty one.
+  const quality = document.getElementById("quality");
 
-const rows = document.getElementById("recordings");
-const count = document.getElementById("count");
-const hover = document.getElementById("hover");
-const find = document.getElementById("find");
+  for (const tag of Object.keys(manifest.totals.byQuality).sort()) {
+    quality.insertAdjacentHTML("beforeend",
+      `<option value="${tag}">${tag} (${manifest.totals.byQuality[tag]})</option>`);
+  }
 
-function carries(recording) {
-  const has = [];
+  const rows = document.getElementById("recordings");
+  const count = document.getElementById("count");
+  const hover = document.getElementById("hover");
+  const find = document.getElementById("find");
 
-  if (recording.counts.strokes) has.push("strokes");
-  if (recording.columns.includes("height")) has.push("height");
-  if (recording.columns.includes("status")) has.push("status");
-  if (recording.columns.includes("arrived")) has.push("host clock");
+  function carries(recording) {
+    const has = [];
 
-  return has.join(", ") || "positions and pressure";
-}
+    if (recording.counts.strokes) has.push("strokes");
+    if (recording.columns.includes("height")) has.push("height");
+    if (recording.columns.includes("status")) has.push("status");
+    if (recording.columns.includes("arrived")) has.push("host clock");
 
-function show() {
-  const wantQuality = quality.value;
-  const wantHover = hover.value;
-  const text = find.value.trim().toLowerCase();
+    return has.join(", ") || "positions and pressure";
+  }
 
-  const shown = recordings.filter((recording) => {
-    if (wantQuality && recording.quality !== wantQuality) return false;
-    if (wantHover === "trusted" && recording.quality !== "complete") return false;
-    if (wantHover === "some" && recording.counts.approach === 0) return false;
+  function show() {
+    const wantQuality = quality.value;
+    const wantHover = hover.value;
+    const text = find.value.trim().toLowerCase();
 
-    if (text) {
-      const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.api, recording.file]
-        .join(" ").toLowerCase();
+    const shown = recordings.filter((recording) => {
+      if (wantQuality && recording.quality !== wantQuality) return false;
+      if (wantHover === "trusted" && recording.quality !== "complete") return false;
+      if (wantHover === "some" && recording.counts.approach === 0) return false;
 
-      if (!haystack.includes(text)) return false;
-    }
+      if (text) {
+        const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.api, recording.file]
+          .join(" ").toLowerCase();
 
-    return true;
+        if (!haystack.includes(text)) return false;
+      }
+
+      return true;
+    });
+
+    rows.innerHTML = shown.map((recording) => `
+      <tr>
+        <td>
+          <a href="recording.html?recording=${encodeURIComponent(recording.file)}">${recording.name}</a>
+          ${recording.reRecord.length ? '<br><span class="tag rerecord">wants re-recording</span>' : ""}
+        </td>
+        <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
+        <td class="n">${recording.counts.strokes || "&mdash;"}</td>
+        <td class="n">${say(recording.counts.contact)}</td>
+        <td class="n">${recording.counts.approach ? say(recording.counts.approach) : "&mdash;"}</td>
+        <td class="n">${recording.counts.aloft ? say(recording.counts.aloft) : "&mdash;"}</td>
+        <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
+        <td style="font-size:12.5px;color:var(--quiet)">${carries(recording)}</td>
+        <td><span class="tag ${recording.quality}">${recording.quality}</span></td>
+      </tr>
+    `).join("");
+
+    count.textContent = shown.length === recordings.length
+      ? `${recordings.length} recordings.`
+      : `${shown.length} of ${recordings.length} recordings.`;
+  }
+
+  for (const control of [quality, hover, find]) {
+    control.addEventListener("input", show);
+  }
+
+  document.getElementById("clear").addEventListener("click", () => {
+    quality.value = "";
+    hover.value = "";
+    find.value = "";
+    show();
   });
 
-  rows.innerHTML = shown.map((recording) => `
-    <tr>
-      <td>
-        <a href="recording.html?recording=${encodeURIComponent(recording.file)}">${recording.name}</a>
-        ${recording.reRecord.length ? '<br><span class="tag rerecord">wants re-recording</span>' : ""}
-      </td>
-      <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
-      <td class="n">${recording.counts.strokes || "&mdash;"}</td>
-      <td class="n">${say(recording.counts.contact)}</td>
-      <td class="n">${recording.counts.approach ? say(recording.counts.approach) : "&mdash;"}</td>
-      <td class="n">${recording.counts.aloft ? say(recording.counts.aloft) : "&mdash;"}</td>
-      <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
-      <td style="font-size:12.5px;color:var(--quiet)">${carries(recording)}</td>
-      <td><span class="tag ${recording.quality}">${recording.quality}</span></td>
-    </tr>
-  `).join("");
-
-  count.textContent = shown.length === recordings.length
-    ? `${recordings.length} recordings.`
-    : `${shown.length} of ${recordings.length} recordings.`;
-}
-
-for (const control of [quality, hover, find]) {
-  control.addEventListener("input", show);
-}
-
-document.getElementById("clear").addEventListener("click", () => {
-  quality.value = "";
-  hover.value = "";
-  find.value = "";
   show();
 });
-
-show();
 </script>
 
 </body>

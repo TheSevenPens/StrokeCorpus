@@ -7,19 +7,70 @@
 */
 
 export async function loadManifest() {
-  const response = await fetch("manifest.json");
+  // Revalidated rather than taken from the cache. The manifest and the pages that read it
+  // are separate files with separate cache lifetimes, so a browser can hold yesterday's
+  // manifest against today's page -- which is how renaming one key in it emptied the front
+  // page for a reader whose browser had the old one.
+  const response = await fetch("manifest.json", { cache: "no-cache" });
 
-  if (!response.ok) throw new Error(`manifest.json: ${response.status}`);
+  if (!response.ok) throw new Error(`manifest.json could not be read (${response.status})`);
 
-  return response.json();
+  const manifest = await response.json();
+
+  // `takes` was this key's name on the first day. Accepted so that a cached manifest is
+  // merely old rather than fatal.
+  const recordings = manifest.recordings ?? manifest.takes;
+
+  if (!Array.isArray(recordings)) {
+    throw new Error("manifest.json has no recordings in it");
+  }
+
+  const totals = manifest.totals ?? {};
+
+  return {
+    ...manifest,
+    recordings,
+    totals: { ...totals, recordings: totals.recordings ?? totals.takes ?? recordings.length },
+  };
 }
 
 export async function loadRecording(file) {
   const response = await fetch(`traces/${file}`);
 
-  if (!response.ok) throw new Error(`${file}: ${response.status}`);
+  if (!response.ok) throw new Error(`${file} could not be read (${response.status})`);
 
   return response.json();
+}
+
+/**
+ * Runs a page, and says so on the page when it cannot.
+ *
+ * Every page here is a module that fetches before it renders, so anything that throws on
+ * the way leaves the static HTML standing and every populated element empty. That is the
+ * worst failure a page can have: it looks like an empty corpus rather than like a broken
+ * one, and it tells the reader nothing to act on.
+ */
+export async function run(work) {
+  try {
+    await work();
+  } catch (bad) {
+    const main = document.querySelector("main") || document.body;
+
+    main.insertAdjacentHTML("afterbegin", `
+      <section class="panel" style="border-color: var(--bad)">
+        <h2 style="color: var(--bad)">This page could not load its data</h2>
+        <p class="note" style="margin-top:0">${String(bad.message || bad)}</p>
+        <p class="note">
+          A reload usually fixes it &mdash; hold shift while reloading, which asks the browser
+          for fresh copies rather than the ones it kept. If it keeps happening,
+          <a href="https://github.com/TheSevenPens/StrokeCorpus/issues">say so here</a> and
+          quote the line above.
+        </p>
+      </section>
+    `);
+
+    throw bad;
+  }
 }
 
 /** Which slot each field sits in, read once per file rather than once per row. */

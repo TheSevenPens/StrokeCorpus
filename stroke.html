@@ -89,189 +89,194 @@
 
 <script type="module">
 import {
+  run,
   loadManifest, loadRecording, strokesOf, describe, gap,
   drawClosely, drawChannel, fmt,
 } from "./corpus.js";
 
-const q = new URLSearchParams(location.search);
-const file = q.get("recording") || "";
-const which = parseInt(q.get("stroke") || "0", 10) || 0;
+await run(async () => {
 
-if (!file) location.replace("index.html");
+  const q = new URLSearchParams(location.search);
+  const file = q.get("recording") || "";
+  const which = parseInt(q.get("stroke") || "0", 10) || 0;
 
-const manifest = await loadManifest();
-const entry = manifest.recordings.find((t) => t.file === file);
-const recording = await loadRecording(file);
-const strokes = strokesOf(recording);
-const stroke = strokes[which];
+  if (!file) location.replace("index.html");
 
-if (!stroke) {
-  document.getElementById("name").textContent = "No such stroke";
-  throw new Error(`${file} #${which}`);
-}
+  const manifest = await loadManifest();
+  const entry = manifest.recordings.find((t) => t.file === file);
+  const recording = await loadRecording(file);
+  const strokes = strokesOf(recording);
+  const stroke = strokes[which];
 
-const full = entry?.device.fullScalePressure || 32767;
-const r = stroke.readings;
-const about = describe(stroke);
-
-document.title = `${entry?.name ?? file} stroke ${which + 1} — Stroke Corpus`;
-document.getElementById("name").textContent = `${entry?.name ?? file} — stroke ${which + 1} of ${strokes.length}`;
-
-const back = document.getElementById("backToTake");
-back.href = `recording.html?recording=${encodeURIComponent(file)}`;
-back.textContent = entry?.name ?? "recording";
-
-// The table's time column names whichever clock the recording carries, because the two are
-// not the same thing: the pen's own stamp is a packet counter and the host's is a clock.
-document.getElementById("clockHead").textContent =
-  entry?.columns.includes("arrived") ? "host ms" : "pen ms";
-
-document.getElementById("closelyNote").textContent =
-  `— ${about.readings} readings over ${fmt(about.length)} px` +
-  (about.approach ? `, and ${about.approach} in the air before it` : "");
-
-// The step into each reading, so the table and the speed channel say the same thing.
-const steps = r.map((p, i) => (i === 0 ? 0 : gap(r[i - 1], p)));
-
-// Speed in px per second, on whichever clock this recording carries. The pen's own stamp is a
-// packet counter, so where there is no host clock this is speed per counter-second and the
-// axis is labelled to say so.
-const clock = entry?.columns.includes("arrived") ? "arrived" : "at";
-const times = r.map((p) => (clock === "arrived" ? p.arrived : p.at));
-const speeds = r.map((p, i) => {
-  if (i === 0) return 0;
-
-  const dt = (times[i] - times[i - 1]) / 1e6;
-
-  return dt > 0 ? steps[i] / dt : 0;
-});
-
-let at = 0;
-let playing = null;
-
-const scrub = document.getElementById("scrub");
-scrub.max = String(r.length - 1);
-
-const closely = document.getElementById("closely");
-const rows = document.getElementById("rows");
-
-rows.innerHTML = r.map((p, i) => `
-  <tr data-at="${i}">
-    <td class="n">${i + 1}</td>
-    <td class="n">${fmt(p.x)}</td>
-    <td class="n">${fmt(p.y)}</td>
-    <td class="n">${p.pressure}</td>
-    <td class="n">${fmt(steps[i])}</td>
-    <td class="n">${((times[i] - times[0]) / 1000).toFixed(1)}</td>
-  </tr>
-`).join("");
-
-rows.addEventListener("click", (e) => {
-  const row = e.target.closest("tr[data-at]");
-
-  if (row) move(parseInt(row.dataset.at, 10));
-});
-
-function paint() {
-  drawClosely(closely, stroke, at, { fullScale: full });
-
-  drawChannel(document.getElementById("pressure"), stroke, (p) => p.pressure, at,
-    { label: "pressure", from: 0, to: full });
-
-  drawChannel(document.getElementById("speed"), stroke, (_, i) => speeds[i] ?? 0, at,
-    { label: clock === "arrived" ? "speed px/s" : "speed px per counter-second" });
-
-  drawChannel(document.getElementById("lean"), stroke, (p) => p.lean, at, { label: "lean deg" });
-}
-
-function move(to) {
-  at = Math.max(0, Math.min(to, r.length - 1));
-  scrub.value = String(at);
-
-  const p = r[at];
-
-  document.getElementById("at").textContent = `${at + 1} / ${r.length}`;
-
-  document.getElementById("here").innerHTML = [
-    ["x", fmt(p.x)],
-    ["y", fmt(p.y)],
-    ["pressure", `${p.pressure} of ${full}`],
-    ["step into it", `${fmt(steps[at])} px`],
-    ["speed", `${fmt(speeds[at])} px/s`],
-    ["lean", `${fmt(p.lean)}°`],
-    ["azimuth", `${fmt(p.azimuth)}°`],
-    ["twist", `${fmt(p.twist)}°`],
-    ["height", entry?.columns.includes("height") ? fmt(p.height) : "not in this format"],
-    ["status", entry?.columns.includes("status") ? p.status : "not in this format"],
-    ["pen clock", `${((p.at - r[0].at) / 1000).toFixed(1)} ms in`],
-    ["host clock", entry?.columns.includes("arrived")
-      ? `${((p.arrived - r[0].arrived) / 1000).toFixed(1)} ms in`
-      : "not in this format"],
-  ].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
-
-  for (const row of rows.querySelectorAll("tr")) row.classList.remove("picked");
-
-  const row = rows.querySelector(`tr[data-at="${at}"]`);
-
-  if (row) {
-    row.classList.add("picked");
-    row.scrollIntoView({ block: "nearest" });
+  if (!stroke) {
+    document.getElementById("name").textContent = "No such stroke";
+    throw new Error(
+      `"${file}" has ${strokes.length} strokes, so there is no stroke ${which + 1} in it.`);
   }
 
-  paint();
-}
+  const full = entry?.device.fullScalePressure || 32767;
+  const r = stroke.readings;
+  const about = describe(stroke);
 
-function play() {
-  if (playing) {
-    clearInterval(playing);
-    playing = null;
-    document.getElementById("play").textContent = "Play";
+  document.title = `${entry?.name ?? file} stroke ${which + 1} — Stroke Corpus`;
+  document.getElementById("name").textContent = `${entry?.name ?? file} — stroke ${which + 1} of ${strokes.length}`;
 
-    return;
+  const back = document.getElementById("backToTake");
+  back.href = `recording.html?recording=${encodeURIComponent(file)}`;
+  back.textContent = entry?.name ?? "recording";
+
+  // The table's time column names whichever clock the recording carries, because the two are
+  // not the same thing: the pen's own stamp is a packet counter and the host's is a clock.
+  document.getElementById("clockHead").textContent =
+    entry?.columns.includes("arrived") ? "host ms" : "pen ms";
+
+  document.getElementById("closelyNote").textContent =
+    `— ${about.readings} readings over ${fmt(about.length)} px` +
+    (about.approach ? `, and ${about.approach} in the air before it` : "");
+
+  // The step into each reading, so the table and the speed channel say the same thing.
+  const steps = r.map((p, i) => (i === 0 ? 0 : gap(r[i - 1], p)));
+
+  // Speed in px per second, on whichever clock this recording carries. The pen's own stamp is a
+  // packet counter, so where there is no host clock this is speed per counter-second and the
+  // axis is labelled to say so.
+  const clock = entry?.columns.includes("arrived") ? "arrived" : "at";
+  const times = r.map((p) => (clock === "arrived" ? p.arrived : p.at));
+  const speeds = r.map((p, i) => {
+    if (i === 0) return 0;
+
+    const dt = (times[i] - times[i - 1]) / 1e6;
+
+    return dt > 0 ? steps[i] / dt : 0;
+  });
+
+  let at = 0;
+  let playing = null;
+
+  const scrub = document.getElementById("scrub");
+  scrub.max = String(r.length - 1);
+
+  const closely = document.getElementById("closely");
+  const rows = document.getElementById("rows");
+
+  rows.innerHTML = r.map((p, i) => `
+    <tr data-at="${i}">
+      <td class="n">${i + 1}</td>
+      <td class="n">${fmt(p.x)}</td>
+      <td class="n">${fmt(p.y)}</td>
+      <td class="n">${p.pressure}</td>
+      <td class="n">${fmt(steps[i])}</td>
+      <td class="n">${((times[i] - times[0]) / 1000).toFixed(1)}</td>
+    </tr>
+  `).join("");
+
+  rows.addEventListener("click", (e) => {
+    const row = e.target.closest("tr[data-at]");
+
+    if (row) move(parseInt(row.dataset.at, 10));
+  });
+
+  function paint() {
+    drawClosely(closely, stroke, at, { fullScale: full });
+
+    drawChannel(document.getElementById("pressure"), stroke, (p) => p.pressure, at,
+      { label: "pressure", from: 0, to: full });
+
+    drawChannel(document.getElementById("speed"), stroke, (_, i) => speeds[i] ?? 0, at,
+      { label: clock === "arrived" ? "speed px/s" : "speed px per counter-second" });
+
+    drawChannel(document.getElementById("lean"), stroke, (p) => p.lean, at, { label: "lean deg" });
   }
 
-  if (at >= r.length - 1) move(0);
+  function move(to) {
+    at = Math.max(0, Math.min(to, r.length - 1));
+    scrub.value = String(at);
 
-  document.getElementById("play").textContent = "Pause";
+    const p = r[at];
 
-  // A fifth of the rate the pen reports at, because the point is to watch what happened
-  // rather than to relive it: at 162 readings a second a stroke is over before it reads.
-  playing = setInterval(() => {
-    if (at >= r.length - 1) return play();
+    document.getElementById("at").textContent = `${at + 1} / ${r.length}`;
 
-    move(at + 1);
-  }, 120);
-}
+    document.getElementById("here").innerHTML = [
+      ["x", fmt(p.x)],
+      ["y", fmt(p.y)],
+      ["pressure", `${p.pressure} of ${full}`],
+      ["step into it", `${fmt(steps[at])} px`],
+      ["speed", `${fmt(speeds[at])} px/s`],
+      ["lean", `${fmt(p.lean)}°`],
+      ["azimuth", `${fmt(p.azimuth)}°`],
+      ["twist", `${fmt(p.twist)}°`],
+      ["height", entry?.columns.includes("height") ? fmt(p.height) : "not in this format"],
+      ["status", entry?.columns.includes("status") ? p.status : "not in this format"],
+      ["pen clock", `${((p.at - r[0].at) / 1000).toFixed(1)} ms in`],
+      ["host clock", entry?.columns.includes("arrived")
+        ? `${((p.arrived - r[0].arrived) / 1000).toFixed(1)} ms in`
+        : "not in this format"],
+    ].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
 
-document.getElementById("start").addEventListener("click", () => move(0));
-document.getElementById("back").addEventListener("click", () => move(at - 1));
-document.getElementById("next").addEventListener("click", () => move(at + 1));
-document.getElementById("end").addEventListener("click", () => move(r.length - 1));
-document.getElementById("play").addEventListener("click", play);
-scrub.addEventListener("input", () => move(parseInt(scrub.value, 10)));
+    for (const row of rows.querySelectorAll("tr")) row.classList.remove("picked");
 
-addEventListener("keydown", (e) => {
-  if (e.target.matches("input, select, textarea")) return;
+    const row = rows.querySelector(`tr[data-at="${at}"]`);
 
-  const keys = {
-    ArrowRight: () => move(at + 1),
-    ArrowLeft: () => move(at - 1),
-    ArrowUp: () => move(at + 10),
-    ArrowDown: () => move(at - 10),
-    Home: () => move(0),
-    End: () => move(r.length - 1),
-    " ": play,
-  };
+    if (row) {
+      row.classList.add("picked");
+      row.scrollIntoView({ block: "nearest" });
+    }
 
-  if (keys[e.key]) {
-    e.preventDefault();
-    keys[e.key]();
+    paint();
   }
+
+  function play() {
+    if (playing) {
+      clearInterval(playing);
+      playing = null;
+      document.getElementById("play").textContent = "Play";
+
+      return;
+    }
+
+    if (at >= r.length - 1) move(0);
+
+    document.getElementById("play").textContent = "Pause";
+
+    // A fifth of the rate the pen reports at, because the point is to watch what happened
+    // rather than to relive it: at 162 readings a second a stroke is over before it reads.
+    playing = setInterval(() => {
+      if (at >= r.length - 1) return play();
+
+      move(at + 1);
+    }, 120);
+  }
+
+  document.getElementById("start").addEventListener("click", () => move(0));
+  document.getElementById("back").addEventListener("click", () => move(at - 1));
+  document.getElementById("next").addEventListener("click", () => move(at + 1));
+  document.getElementById("end").addEventListener("click", () => move(r.length - 1));
+  document.getElementById("play").addEventListener("click", play);
+  scrub.addEventListener("input", () => move(parseInt(scrub.value, 10)));
+
+  addEventListener("keydown", (e) => {
+    if (e.target.matches("input, select, textarea")) return;
+
+    const keys = {
+      ArrowRight: () => move(at + 1),
+      ArrowLeft: () => move(at - 1),
+      ArrowUp: () => move(at + 10),
+      ArrowDown: () => move(at - 10),
+      Home: () => move(0),
+      End: () => move(r.length - 1),
+      " ": play,
+    };
+
+    if (keys[e.key]) {
+      e.preventDefault();
+      keys[e.key]();
+    }
+  });
+
+  addEventListener("resize", paint);
+
+  move(0);
 });
-
-addEventListener("resize", paint);
-
-move(0);
 </script>
 
 </body>

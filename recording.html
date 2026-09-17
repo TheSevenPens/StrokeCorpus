@@ -70,135 +70,138 @@
 </footer>
 
 <script type="module">
-import { loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt } from "./corpus.js";
+import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt } from "./corpus.js";
 
-const q = new URLSearchParams(location.search);
-const file = q.get("recording") || "";
+await run(async () => {
 
-if (!file) location.replace("index.html");
+  const q = new URLSearchParams(location.search);
+  const file = q.get("recording") || "";
 
-const manifest = await loadManifest();
-const entry = manifest.recordings.find((t) => t.file === file);
+  if (!file) location.replace("index.html");
 
-if (!entry) {
-  document.getElementById("name").textContent = "No such recording";
-  throw new Error(file);
-}
+  const manifest = await loadManifest();
+  const entry = manifest.recordings.find((t) => t.file === file);
 
-const recording = await loadRecording(file);
-const strokes = strokesOf(recording);
-const full = entry.device.fullScalePressure || 32767;
-
-document.title = `${entry.name} — Stroke Corpus`;
-document.getElementById("name").textContent = entry.name;
-
-document.getElementById("blurb").innerHTML =
-  `<span class="tag ${entry.quality}">${entry.quality}</span> &nbsp; ${entry.qualityMeans}`;
-
-document.getElementById("size").textContent =
-  `${entry.file} — ${(entry.bytes / 1024).toFixed(0)} KB`;
-
-document.getElementById("download").addEventListener("click", () =>
-  offer(entry.file, JSON.stringify(recording, null, 2)));
-
-const facts = [
-  ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
-  ["tablet", entry.device.tablet],
-  ["driver", entry.device.driver],
-  ["backend", entry.device.api],
-  ["full-scale pressure", entry.device.fullScalePressure],
-  ["format version", `${entry.formatVersion} — <a href="quality.html">what that carries</a>`],
-  ["gesture", entry.gesture || "—"],
-  ["columns", entry.columns.join(" ")],
-  ["ended by", entry.endedBy || "—"],
-  ["seconds, host clock", entry.seconds.host ?? "not in this format"],
-  ["seconds, pen clock", entry.seconds.pen ?? "—"],
-];
-
-document.getElementById("facts").innerHTML = facts
-  .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
-
-document.getElementById("warnings").innerHTML = entry.reRecord
-  .map((why) => `<li>Wants re-recording: it ${why}.</li>`).join("");
-
-// ---- the ledger --------------------------------------------------------
-
-const counters = entry.counters;
-
-document.getElementById("ledger").innerHTML = counters
-  ? `<tbody>
-      <tr><td>packets the driver handed over</td><td class="n">${counters.fromTheDriver.toLocaleString()}</td></tr>
-      <tr><td>points delivered to the recorder</td><td class="n">${counters.delivered.toLocaleString()}</td></tr>
-      <tr><td>dropped for being outside the capture region</td><td class="n">${counters.outsideTheRegion.toLocaleString()}</td></tr>
-      <tr><td>readings written to this file</td><td class="n">${(entry.counts.contact + entry.counts.approach + entry.counts.aloft).toLocaleString()}</td></tr>
-     </tbody>`
-  : `<tbody><tr><td>This recording's format does not record what the session counted.</td></tr></tbody>`;
-
-document.getElementById("ledgerNote").textContent = counters
-  ? (counters.agrees
-      ? "The counters reconcile: every packet the driver handed over was delivered, and none was lost between the driver and this file."
-      : "The counters do NOT reconcile. More readings were delivered than the driver reported handing over, which is the one recording in this corpus where that is true.")
-  : "";
-
-// ---- every stroke ------------------------------------------------------
-
-const median = (xs) => {
-  if (!xs.length) return 0;
-  const sorted = [...xs].sort((a, b) => a - b);
-  return sorted[Math.floor(sorted.length / 2)];
-};
-
-document.getElementById("strokeCount").textContent = `— ${strokes.length}`;
-
-document.getElementById("strokes").innerHTML = strokes.map((stroke, i) => {
-  const about = describe(stroke);
-  const steps = [];
-
-  for (let k = 1; k < stroke.readings.length; k++) {
-    steps.push(gap(stroke.readings[k - 1], stroke.readings[k]));
+  if (!entry) {
+    document.getElementById("name").textContent = "No such recording";
+    throw new Error(`There is no recording called "${file}" in this corpus.`);
   }
 
-  const still = steps.filter((s) => s === 0).length;
+  const recording = await loadRecording(file);
+  const strokes = strokesOf(recording);
+  const full = entry.device.fullScalePressure || 32767;
 
-  return `<tr>
-    <td class="n"><a href="stroke.html?recording=${encodeURIComponent(file)}&stroke=${i}">${i + 1}</a></td>
-    <td class="n">${about.readings}</td>
-    <td class="n">${fmt(about.length)}</td>
-    <td class="n">${fmt(about.widest)}</td>
-    <td class="n">${fmt(median(steps))}</td>
-    <td class="n">${still || "—"}</td>
-    <td class="n">${about.lowest}–${about.highest}</td>
-    <td class="n">${about.approach || "—"}</td>
-    <td style="font-size:12.5px;color:var(--quiet)">${stroke.endedBy || "—"}</td>
-  </tr>`;
-}).join("");
+  document.title = `${entry.name} — Stroke Corpus`;
+  document.getElementById("name").textContent = entry.name;
 
-// ---- the gallery -------------------------------------------------------
+  document.getElementById("blurb").innerHTML =
+    `<span class="tag ${entry.quality}">${entry.quality}</span> &nbsp; ${entry.qualityMeans}`;
 
-const gallery = document.getElementById("gallery");
+  document.getElementById("size").textContent =
+    `${entry.file} — ${(entry.bytes / 1024).toFixed(0)} KB`;
 
-gallery.innerHTML = strokes.map((stroke, i) => `
-  <a href="stroke.html?recording=${encodeURIComponent(file)}&stroke=${i}">
-    <canvas data-stroke="${i}" width="140" height="100"></canvas>
-    <div class="cap">${i + 1} &middot; ${stroke.readings.length} readings</div>
-  </a>
-`).join("");
+  document.getElementById("download").addEventListener("click", () =>
+    offer(entry.file, JSON.stringify(recording, null, 2)));
 
-// Drawn after layout, so each canvas knows the width it was given.
-requestAnimationFrame(() => {
-  for (const canvas of gallery.querySelectorAll("canvas")) {
-    const i = parseInt(canvas.dataset.stroke, 10);
+  const facts = [
+    ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
+    ["tablet", entry.device.tablet],
+    ["driver", entry.device.driver],
+    ["backend", entry.device.api],
+    ["full-scale pressure", entry.device.fullScalePressure],
+    ["format version", `${entry.formatVersion} — <a href="quality.html">what that carries</a>`],
+    ["gesture", entry.gesture || "—"],
+    ["columns", entry.columns.join(" ")],
+    ["ended by", entry.endedBy || "—"],
+    ["seconds, host clock", entry.seconds.host ?? "not in this format"],
+    ["seconds, pen clock", entry.seconds.pen ?? "—"],
+  ];
 
-    drawInk(canvas, strokes[i], { width: canvas.clientWidth || 140, height: 100, fullScale: full });
-  }
-});
+  document.getElementById("facts").innerHTML = facts
+    .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
 
-addEventListener("resize", () => {
-  for (const canvas of gallery.querySelectorAll("canvas")) {
-    const i = parseInt(canvas.dataset.stroke, 10);
+  document.getElementById("warnings").innerHTML = entry.reRecord
+    .map((why) => `<li>Wants re-recording: it ${why}.</li>`).join("");
 
-    drawInk(canvas, strokes[i], { width: canvas.clientWidth || 140, height: 100, fullScale: full });
-  }
+  // ---- the ledger --------------------------------------------------------
+
+  const counters = entry.counters;
+
+  document.getElementById("ledger").innerHTML = counters
+    ? `<tbody>
+        <tr><td>packets the driver handed over</td><td class="n">${counters.fromTheDriver.toLocaleString()}</td></tr>
+        <tr><td>points delivered to the recorder</td><td class="n">${counters.delivered.toLocaleString()}</td></tr>
+        <tr><td>dropped for being outside the capture region</td><td class="n">${counters.outsideTheRegion.toLocaleString()}</td></tr>
+        <tr><td>readings written to this file</td><td class="n">${(entry.counts.contact + entry.counts.approach + entry.counts.aloft).toLocaleString()}</td></tr>
+       </tbody>`
+    : `<tbody><tr><td>This recording's format does not record what the session counted.</td></tr></tbody>`;
+
+  document.getElementById("ledgerNote").textContent = counters
+    ? (counters.agrees
+        ? "The counters reconcile: every packet the driver handed over was delivered, and none was lost between the driver and this file."
+        : "The counters do NOT reconcile. More readings were delivered than the driver reported handing over, which is the one recording in this corpus where that is true.")
+    : "";
+
+  // ---- every stroke ------------------------------------------------------
+
+  const median = (xs) => {
+    if (!xs.length) return 0;
+    const sorted = [...xs].sort((a, b) => a - b);
+    return sorted[Math.floor(sorted.length / 2)];
+  };
+
+  document.getElementById("strokeCount").textContent = `— ${strokes.length}`;
+
+  document.getElementById("strokes").innerHTML = strokes.map((stroke, i) => {
+    const about = describe(stroke);
+    const steps = [];
+
+    for (let k = 1; k < stroke.readings.length; k++) {
+      steps.push(gap(stroke.readings[k - 1], stroke.readings[k]));
+    }
+
+    const still = steps.filter((s) => s === 0).length;
+
+    return `<tr>
+      <td class="n"><a href="stroke.html?recording=${encodeURIComponent(file)}&stroke=${i}">${i + 1}</a></td>
+      <td class="n">${about.readings}</td>
+      <td class="n">${fmt(about.length)}</td>
+      <td class="n">${fmt(about.widest)}</td>
+      <td class="n">${fmt(median(steps))}</td>
+      <td class="n">${still || "—"}</td>
+      <td class="n">${about.lowest}–${about.highest}</td>
+      <td class="n">${about.approach || "—"}</td>
+      <td style="font-size:12.5px;color:var(--quiet)">${stroke.endedBy || "—"}</td>
+    </tr>`;
+  }).join("");
+
+  // ---- the gallery -------------------------------------------------------
+
+  const gallery = document.getElementById("gallery");
+
+  gallery.innerHTML = strokes.map((stroke, i) => `
+    <a href="stroke.html?recording=${encodeURIComponent(file)}&stroke=${i}">
+      <canvas data-stroke="${i}" width="140" height="100"></canvas>
+      <div class="cap">${i + 1} &middot; ${stroke.readings.length} readings</div>
+    </a>
+  `).join("");
+
+  // Drawn after layout, so each canvas knows the width it was given.
+  requestAnimationFrame(() => {
+    for (const canvas of gallery.querySelectorAll("canvas")) {
+      const i = parseInt(canvas.dataset.stroke, 10);
+
+      drawInk(canvas, strokes[i], { width: canvas.clientWidth || 140, height: 100, fullScale: full });
+    }
+  });
+
+  addEventListener("resize", () => {
+    for (const canvas of gallery.querySelectorAll("canvas")) {
+      const i = parseInt(canvas.dataset.stroke, 10);
+
+      drawInk(canvas, strokes[i], { width: canvas.clientWidth || 140, height: 100, fullScale: full });
+    }
+  });
 });
 </script>
 
