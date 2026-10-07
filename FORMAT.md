@@ -47,6 +47,39 @@ number nobody measured.
 }
 ```
 
+## Who, on what, and anything else
+
+The example above is a real version-6 recording. From **version 7** a recording also says who
+made it, what firmware the tablet was running, and anything they wanted to add:
+
+```json
+{
+  "formatVersion": 7,
+  "username": "...",
+  "notes": "...",
+  "device": {
+    "tablet": "Wacom Cintiq 24",
+    "driver": "Wacom driver 6.4.14-1",
+    "firmware": "..."
+  }
+}
+```
+
+| field | where | what it is |
+|---|---|---|
+| `username` | top level | who made the recording, as they chose to write it |
+| `notes` | top level | free text from the person who made it. May contain line breaks |
+| `firmware` | `device` | the tablet's firmware, as typed in |
+
+All three are typed in by the person recording; nothing detects them, so treat them as
+claims rather than measurements, like `tablet` and `driver`.
+
+**Absent and empty mean different things.** A recording before version 7 has none of these
+fields: nobody was asked, so they are unrecorded. In a version-7 recording they are always
+present, and an empty string means the person was asked and wrote nothing. A reader should
+not report an absent `firmware` as "no firmware" or an absent `username` as an anonymous
+user.
+
 ## Readings are rows, not objects
 
 A reading is an array whose slots are named by `columns`. One recording can hold tens of
@@ -116,6 +149,7 @@ wider than the measurement in it.
 | 4 | `status` |
 | 5 | `arrived`, the host clock |
 | 6 | the approach aged on the host clock, which is what makes hover trustworthy |
+| 7 | `username`, `notes` and `device.firmware`. No columns change |
 
 A version-one file has **no `strokes`** and no record of where contact broke. Read its
 top-level `readings` as one run and do not infer strokes from pressure unless you say that
