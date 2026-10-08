@@ -5,7 +5,7 @@
 <link rel="describedby" href="llms.txt" type="text/plain">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A recording &mdash; Stroke Corpus</title>
-<link rel="stylesheet" href="corpus.css?v=c5bf57f2">
+<link rel="stylesheet" href="corpus.css?v=9927495d">
 </head>
 <body>
 
@@ -36,6 +36,13 @@
     <h2>Details</h2>
     <dl class="facts" id="facts"></dl>
     <ul class="warnings" id="warnings"></ul>
+  </section>
+
+  <section class="panel">
+    <h2>How often each channel updates <span class="sub">&mdash; a reading is not a measurement</span></h2>
+    <div class="scroll"><table id="updates"></table></div>
+    <p class="note" id="updatesNote"></p>
+    <div class="scroll"><table id="holds"></table></div>
   </section>
 
   <section class="panel">
@@ -88,11 +95,11 @@
       relative to the catalogue URL, without adding another extension.
     </p>
   </section>
-  <p><a href="index.html">Back to the corpus</a></p>
+  <p><a href="index.html">Back to the corpus</a> &middot; <a href="devices.html">Devices compared</a></p>
 </footer>
 
 <script type="module">
-import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt } from "./corpus.js?v=da2f655d";
+import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt, pressureCadence } from "./corpus.js?v=28e657cd";
 
 await run(async () => {
 
@@ -144,6 +151,51 @@ await run(async () => {
 
   document.getElementById("warnings").innerHTML = entry.reRecord
     .map((why) => `<li>Wants re-recording: it ${why}.</li>`).join("");
+
+  // ---- how often each channel updates ------------------------------------
+
+  // Measured by the manifest from the readings, not written down by the recorder. A driver can hand
+  // over the same value more than once, so "a reading" and "a new measurement" are different
+  // counts, and which channel repeats and how often is a fact about the device and how it was read.
+  const up = entry.updates;
+  const share = (v) => v === null || v === undefined
+    ? `<span style="color:var(--quiet)">not carried</span>`
+    : `<span class="meter" style="width:${Math.round(v * 120)}px"></span> ${(v * 100).toFixed(1)}%`;
+
+  if (!up || !up.pairs) {
+    document.getElementById("updates").innerHTML =
+      `<tbody><tr><td>This recording has no pairs of consecutive in-contact readings to measure.</td></tr></tbody>`;
+  } else {
+    document.getElementById("updates").innerHTML = `
+      <thead><tr><th>Channel</th><th>Readings that carried a new value</th></tr></thead>
+      <tbody>
+        <tr><td>position</td><td>${share(up.changed.position)}</td></tr>
+        <tr><td>pressure</td><td>${share(up.changed.pressure)}</td></tr>
+        <tr><td>tilt</td><td>${share(up.changed.tilt)}</td></tr>
+        <tr><td>height</td><td>${share(up.changed.height)}</td></tr>
+        <tr><td>barrel rotation</td><td>${share(up.changed.twist)}</td></tr>
+        <tr><td>pressure takes a new value</td><td class="num">${pressureCadence(up)}${up.pressurePeriodFit && up.pressurePeriodFit < 1
+          ? ` <span style="color:var(--quiet)">(${(up.pressurePeriodFit * 100).toFixed(1)}% of holds)</span>` : ""}</td></tr>
+        <tr><td>readings per second, host clock</td><td class="num">${up.readingRateHz ?? '<span style="color:var(--quiet)">needs the host clock</span>'}</td></tr>
+        <tr><td>pressure updates per second</td><td class="num">${up.pressureUpdateHz ?? '<span style="color:var(--quiet)">&mdash;</span>'}</td></tr>
+        <tr><td>pressure levels in use</td><td class="num">${up.pressureLevelsAtLeast ? `at least ${up.pressureLevelsAtLeast.toLocaleString()} (smallest step ${up.pressureStep})` : "&mdash;"}</td></tr>
+      </tbody>`;
+
+    document.getElementById("updatesNote").textContent =
+      `Over ${up.pairs.toLocaleString()} pairs of consecutive in-contact readings. ` +
+      (up.changed.pressure !== null && up.changed.position !== null && up.changed.pressure < up.changed.position * 0.8
+        ? "Pressure carries a new value much less often than position does, so some of its readings are repeats of the one before, not measurements of their own."
+        : "A share below 100% means some readings repeated the value before them.");
+
+    const holds = Object.entries(up.pressureHolds).map(([n, c]) => [parseInt(n, 10), c]).slice(0, 8);
+    const most = Math.max(1, ...holds.map(([, c]) => c));
+
+    document.getElementById("holds").innerHTML = holds.length
+      ? `<thead><tr><th>Pressure held for</th><th class="n">Times</th><th></th></tr></thead><tbody>${holds.map(([n, c]) =>
+          `<tr><td>${n} reading${n === 1 ? "" : "s"}</td><td class="n">${c.toLocaleString()}</td>` +
+          `<td><span class="meter" style="width:${Math.round((c / most) * 160)}px"></span></td></tr>`).join("")}</tbody>`
+      : "";
+  }
 
   // ---- the ledger --------------------------------------------------------
 

@@ -5,7 +5,7 @@
 <link rel="describedby" href="llms.txt" type="text/plain">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A stroke &mdash; Stroke Corpus</title>
-<link rel="stylesheet" href="corpus.css?v=c5bf57f2">
+<link rel="stylesheet" href="corpus.css?v=9927495d">
 </head>
 <body>
 
@@ -66,6 +66,12 @@
       <canvas class="channel" id="pressure"></canvas>
       <canvas class="channel" id="speed"></canvas>
       <canvas class="channel" id="lean"></canvas>
+      <p class="note">
+        On the pressure line, a filled dot is a reading that carried a new pressure and a hollow
+        one repeated the reading before it. Where the readings are too close together to tell
+        apart, a tick under the line marks each new value.
+        <a href="devices.html">How often each device updates each channel</a>.
+      </p>
     </section>
 
     <section class="panel reading">
@@ -107,7 +113,7 @@ import {
   run,
   loadManifest, loadRecording, strokesOf, describe, gap,
   drawClosely, drawChannel, fmt,
-} from "./corpus.js?v=da2f655d";
+} from "./corpus.js?v=28e657cd";
 
 await run(async () => {
 
@@ -263,7 +269,7 @@ await run(async () => {
     closely.classList.toggle("zoomed", view.zoom > 1);
 
     drawChannel(document.getElementById("pressure"), stroke, (p) => p.pressure, at,
-      { label: "pressure", from: 0, to: full });
+      { label: "pressure", from: 0, to: full, repeats: true });
 
     drawChannel(document.getElementById("speed"), stroke, (_, i) => speeds[i] ?? 0, at,
       { label: (clock === "arrived" ? "speed px/s" : "speed px per counter-second")

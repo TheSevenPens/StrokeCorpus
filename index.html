@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stroke Corpus</title>
 <meta name="description" content="Recordings of a real pen on a real drawing tablet: every reading, including the ones made while the pen was in the air.">
-<link rel="stylesheet" href="corpus.css?v=c5bf57f2">
+<link rel="stylesheet" href="corpus.css?v=9927495d">
 </head>
 <body>
 
@@ -59,6 +59,7 @@
             <th class="n">Approach</th>
             <th class="n">Aloft</th>
             <th class="n">Sec</th>
+            <th>Pressure changes</th>
             <th>Carries</th>
             <th>Quality</th>
           </tr>
@@ -73,6 +74,7 @@
   <p class="note">
     Every recording's <em>contact</em> data is sound; the tags are about the rest.
     <a href="quality.html">What the quality tags mean</a>.
+    <a href="devices.html">How often each device updates each channel</a>.
   </p>
 
 
@@ -84,6 +86,7 @@
     <p>
       <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
       <a href="FORMAT.md">Trace format and interpretation</a> &middot;
+      <a href="devices.html">Devices compared</a> &middot;
       <a href="llms.txt">Automated-reader guide</a>
     </p>
     <p>
@@ -100,7 +103,7 @@
 </footer>
 
 <script type="module">
-import { loadManifest, run } from "./corpus.js?v=da2f655d";
+import { loadManifest, run, pressureCadence } from "./corpus.js?v=28e657cd";
 
 await run(async () => {
 
@@ -148,7 +151,7 @@ await run(async () => {
 
     const shown = recordings.filter((recording) => {
       if (wantQuality && recording.quality !== wantQuality) return false;
-      if (wantHover === "trusted" && recording.quality !== "complete") return false;
+      if (wantHover === "trusted" && !recording.hoverTrusted) return false;
       if (wantHover === "some" && recording.counts.approach === 0) return false;
 
       if (text) {
@@ -173,6 +176,7 @@ await run(async () => {
         <td class="n">${recording.counts.approach ? say(recording.counts.approach) : "&mdash;"}</td>
         <td class="n">${recording.counts.aloft ? say(recording.counts.aloft) : "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
+        <td style="font-size:12.5px">${pressureCadence(recording.updates)}</td>
         <td style="font-size:12.5px;color:var(--quiet)">${carries(recording)}</td>
         <td><span class="tag ${recording.quality}">${recording.quality}</span></td>
       </tr>

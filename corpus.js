@@ -420,6 +420,46 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
 
   pen.stroke();
 
+  // A reading is not a measurement: a driver can hand over the same value twice, and a channel
+  // that does is a staircase whose treads are repeats. With room to see them, mark which readings
+  // carried a new value (filled) and which repeated the one before (hollow). Without it the
+  // readings are a smear, so only the changes are ticked along the baseline.
+  let repeated = 0;
+
+  if (options.repeats) {
+    const ink = options.colour || styleOf("--ink");
+    const y = (v) => pad + plot - ((v - low) / range) * plot;
+
+    values.forEach((v, i) => {
+      const same = i > 0 && v === values[i - 1];
+
+      if (same) repeated++;
+
+      if (step >= 5) {
+        pen.beginPath();
+        pen.arc(i * step, y(v), 2.6, 0, Math.PI * 2);
+        pen.lineWidth = 1.2;
+        pen.strokeStyle = ink;
+
+        if (same) {
+          pen.fillStyle = styleOf("--card");
+          pen.fill();
+          pen.stroke();
+        } else {
+          pen.fillStyle = ink;
+          pen.fill();
+        }
+      } else if (!same && i > 0) {
+        pen.strokeStyle = ink;
+        pen.lineWidth = 1;
+        pen.beginPath();
+        pen.moveTo(i * step, height - pad);
+        pen.lineTo(i * step, height - pad + 5);
+        pen.stroke();
+      }
+    });
+  }
+
   pen.strokeStyle = styleOf("--accent");
   pen.lineWidth = 1.5;
   pen.beginPath();
@@ -436,6 +476,41 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
     : [seenLow, seenHigh];
 
   pen.fillText(`${options.label || ""} ${fmt(shown[0])} to ${fmt(shown[1])}`, 4, 12);
+
+  if (options.repeats && values.length > 1) {
+    const say = `${repeated} of ${values.length - 1} readings repeat the one before`;
+
+    pen.textAlign = "right";
+    pen.fillText(say, width - 4, 12);
+    pen.textAlign = "left";
+  }
+}
+
+const ORDINALS = { 1: "first", 2: "second", 3: "third" };
+
+/** "second", "17th": how a count of readings is said in a sentence about a cadence. */
+export function ordinal(n) {
+  if (ORDINALS[n]) return ORDINALS[n];
+
+  const tens = n % 100;
+  const suffix = tens >= 11 && tens <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" }[n % 10] || "th");
+
+  return `${n}${suffix}`;
+}
+
+/**
+ * How often a recording's pressure takes a new value, in words.
+ *
+ * Read from what the manifest measured, not from the format version: the cadence is a property
+ * of the device and the way it was read, and two recordings of the same version can differ.
+ * Answers an em dash where the recording had too few holds for there to be a pattern to state.
+ */
+export function pressureCadence(updates) {
+  const period = updates?.pressurePeriod;
+
+  if (!period) return "—";
+
+  return period === 1 ? "every reading" : `every ${ordinal(period)} reading`;
 }
 
 export const fmt = (n) =>
