@@ -44,11 +44,11 @@ VERSIONS = {
 # Every column the format has ever declared, in the order the format lists them.
 KNOWN_COLUMNS = ["at", "arrived", "x", "y", "pressure", "height", "status", "lean", "azimuth", "twist"]
 
-# What a "complete" recording must carry for its tag to be true: both clocks, so the pen's counter
-# can be told from real time, and the two channels that say what the pen was doing above the glass.
-# Lean, azimuth and twist are not on the list: a tablet that cannot sense twist is not a worse
-# recording, so their absence is reported under "channels" and not made a fault.
-COMPLETE_NEEDS = ["at", "arrived", "height", "status"]
+# "Complete" says every channel, so it needs every channel the format has ever declared: both clocks,
+# position and pressure, the height and status words, and the pen's orientation. A recording from a
+# tablet that cannot sense twist is not a worse recording, and the tag it gets says plainly which
+# column it does not carry.
+COMPLETE_NEEDS = KNOWN_COLUMNS
 
 
 def channels(recording):
@@ -87,8 +87,9 @@ def quality(version, columns):
 
         return "partial", (
             "The approach is aged on the host clock, as from format version 6. But this recording "
-            "does not carry " + ", ".join(missing) + ", so some of what the other recordings "
-            "can say about timing or the pen in the air it cannot. What it does carry is sound."
+            "does not carry " + ", ".join(missing) + ", so some of what the recordings that carry "
+            "every channel can say it cannot. Which columns a file carries says what was recorded, "
+            "not that what was recorded is right."
         )
     if version == 5:
         return "hover-suspect", (
@@ -156,11 +157,13 @@ def contact_runs(recording):
     return runs
 
 
-# How many holds there must be before a pattern in their lengths is believed. A few that happen
-# to be even say nothing; hundreds that are all even say something.
+# How many completed holds there must be before a pattern in their lengths is stated. Thirty is a
+# policy for how much support is enough to say anything, not a confidence guarantee.
 MIN_HOLDS = 30
 
-# The share of holds that must be a multiple of N for N to be called the pressure's period.
+# The share of holds that must be a multiple of N for N to be called the pressure's period. Applied
+# to interior holds only (see updates()), so it is a tolerance for rare unexplained anomalies and
+# not something that has to absorb the first hold of every stroke.
 PERIOD_FIT = 0.98
 
 
@@ -168,10 +171,17 @@ def updates(recording, full_scale):
     """How often each channel actually carries a new value, measured from the readings themselves.
 
     **A reading is not a measurement.** The format records every reading the driver handed over,
-    and a driver can hand over the same pressure more than once. On the Cintiq 24 here pressure
-    only ever changes on every second reading -- every hold is two readings long, or four, or six,
-    never one or three -- while position changes on nearly every one. Nothing in the file says
-    so, and nobody looking at a stroke would see it, so it is measured here.
+    and a driver can hand over the same value more than once. A repeated pressure is evidence that
+    pressure was not freshly sampled for that reading, but equal values cannot tell a repeated
+    measurement from two separate acquisitions that quantize to the same number, so what is
+    reported here is a description of the readings, not a claim about the device.
+
+    Holds. A hold is the number of consecutive in-contact readings a pressure lasted, counted when
+    it ends. The first hold of every stretch of contact (a landing) and the last (never closed)
+    are censored: the pen arrived or left part-way through a value, so their length says nothing
+    about the cadence. `pressureHolds` keeps every completed hold, first ones included, because
+    that is what a reader checking the arithmetic will count; the period is inferred from the
+    interior holds alone.
 
     A figure is None where the recording does not carry the column or has too little to say.
     """
@@ -186,12 +196,14 @@ def updates(recording, full_scale):
     pairs = 0
     moved = Counter()
     holds = Counter()
+    interior = Counter()
     levels = set()
     seconds = 0.0
     spanned = 0
 
     for run in runs:
         held = 1
+        boundary = True   # the next hold to close is the first of a stretch of contact
         levels.add(at(run[0], "pressure"))
 
         for i in range(1, len(run)):
@@ -201,6 +213,7 @@ def updates(recording, full_scale):
             # Contact only: a pair with the tip up on either side is a hover, not an update.
             if not (at(before, "pressure") or 0) > 0 or not (at(row, "pressure") or 0) > 0:
                 held = 1
+                boundary = True
                 continue
 
             pairs += 1
@@ -211,6 +224,11 @@ def updates(recording, full_scale):
             if at(row, "pressure") != at(before, "pressure"):
                 moved["pressure"] += 1
                 holds[held] += 1
+
+                if not boundary:
+                    interior[held] += 1
+
+                boundary = False
                 held = 1
             else:
                 held += 1
@@ -224,6 +242,8 @@ def updates(recording, full_scale):
 
         # The host clock is stamped in batches, so two neighbours say little about time and a
         # whole stroke says a good deal: readings over the time between the first and the last.
+        # A pause inside a stroke stays in the denominator, and a stroke that fits in one batch
+        # contributes nothing.
         first, last = at(run[0], "arrived"), at(run[-1], "arrived")
 
         if first is not None and last is not None and last > first:
@@ -236,22 +256,23 @@ def updates(recording, full_scale):
 
         return round(moved[name] / pairs, 4)
 
-    # The period is the largest N for which nearly every hold is a multiple of N: a hold of two,
-    # four or six readings says "pressure changes every second reading", one of which has the same
-    # value twice running. "Nearly" and not "every", because one stray hold in a few hundred --
-    # a glitch, a landing -- would otherwise make a plain greatest common divisor read as 1 and
-    # hide a pattern that is plainly there.
-    total = sum(holds.values())
+    # The period is the largest N for which nearly every interior hold is a multiple of N. It is a
+    # description of the hold lengths: a pattern of that kind can also come from repeated gesture
+    # timing or from quantization, and a real period can be hidden by lost readings.
+    support = sum(interior.values())
     period = None
     fit = None
 
-    if total >= MIN_HOLDS:
+    if support >= MIN_HOLDS:
         for n in range(1, 65):
-            share_fitting = sum(c for length, c in holds.items() if length % n == 0) / total
+            share_fitting = sum(c for length, c in interior.items() if length % n == 0) / support
 
             if share_fitting >= PERIOD_FIT:
                 period, fit = n, round(share_fitting, 4)
 
+    # What was seen of the pressure scale. The number of distinct values is a real lower bound on how
+    # many the device can report; the smallest step between two of them is not a bound on anything,
+    # because a source that only ever produced 100 and 101 has a step of 1 and two levels.
     distinct = sorted(v for v in levels if v)
     step = min((b - a for a, b in zip(distinct, distinct[1:])), default=None)
     rate = round(spanned / seconds, 1) if seconds > 0 else None
@@ -261,17 +282,23 @@ def updates(recording, full_scale):
         "changed": {
             "position": share("position", ["x", "y"]),
             "pressure": share("pressure", ["pressure"]),
-            "tilt": share("tilt", ["lean"]),
+            # A combined measure, so it needs both of the channels it combines.
+            "tilt": share("tilt", ["lean", "azimuth"]),
             "height": share("height", ["height"]),
             "twist": share("twist", ["twist"]),
         },
         "pressureHolds": {str(k): holds[k] for k in sorted(holds)},
+        "pressureHoldsInterior": {str(k): interior[k] for k in sorted(interior)},
         "pressurePeriod": period,
         "pressurePeriodFit": fit,
+        "pressurePeriodSupport": support,
+        "pressureDistinct": len(distinct) if "pressure" in slot else None,
         "pressureStep": step,
-        "pressureLevelsAtLeast": (int(full_scale // step) + 1) if step and full_scale else None,
         "readingRateHz": rate,
-        "pressureUpdateHz": round(rate / period, 1) if rate and period else None,
+        "readingRateSeconds": round(seconds, 2) if rate else None,
+        # What the reading rate and the period imply if pressure really is refreshed on that
+        # period. An inference under that hypothesis, not a measured rate.
+        "pressureUpdateHzIfPeriodic": round(rate / period, 1) if rate and period else None,
     }
 
 
@@ -411,8 +438,8 @@ def main():
             "approach": sum(t["counts"]["approach"] for t in recordings),
             "aloft": sum(t["counts"]["aloft"] for t in recordings),
             "byQuality": dict(Counter(t["quality"] for t in recordings)),
-            # How many readings go by between one pressure update and the next, where the
-            # recording had enough holds to say. 1 is a fresh pressure on every reading.
+            # The period the pressure hold lengths share, where the recording had enough interior
+            # holds to say. A description of the readings; 1 is a fresh pressure on every reading.
             "byPressurePeriod": dict(Counter(
                 str(t["updates"]["pressurePeriod"]) for t in recordings
                 if t["updates"]["pressurePeriod"])),
@@ -431,7 +458,7 @@ def main():
     print(f"{OUT}: {len(recordings)} recordings")
     print(f"  assets: " + ", ".join(f"{a} v={v}" for a, v in versions.items()))
     print(f"  by quality: {manifest['totals']['byQuality']}")
-    print(f"  pressure changes every N readings, by recording: {manifest['totals']['byPressurePeriod']}")
+    print(f"  pressure hold period (inferred), by recording: {manifest['totals']['byPressurePeriod']}")
     print(f"  wanting re-recording: {manifest['totals']['wantingReRecording']}")
     print(f"  readings: {manifest['totals']['contact']} in contact, "
           f"{manifest['totals']['approach']} approach, {manifest['totals']['aloft']} aloft")

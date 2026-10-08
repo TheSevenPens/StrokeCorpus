@@ -72,12 +72,20 @@
           "6": 18,
           "8": 5
         },
+        "pressureHoldsInterior": {
+          "2": 857,
+          "4": 74,
+          "6": 18,
+          "8": 5
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 954,
+        "pressureDistinct": 793,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": 160.2,
-        "pressureUpdateHz": 80.1
+        "readingRateSeconds": 13.62,
+        "pressureUpdateHzIfPeriodic": 80.1
       },
       "counters": {
         "fromTheDriver": 5664,
@@ -160,12 +168,20 @@
           "6": 1,
           "8": 1
         },
+        "pressureHoldsInterior": {
+          "2": 339,
+          "4": 18,
+          "6": 1,
+          "8": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 359,
+        "pressureDistinct": 356,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 1640,
@@ -251,12 +267,19 @@
           "4": 48,
           "6": 6
         },
+        "pressureHoldsInterior": {
+          "2": 467,
+          "4": 47,
+          "6": 5
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 519,
+        "pressureDistinct": 544,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": 161.7,
-        "pressureUpdateHz": 80.8
+        "readingRateSeconds": 7.94,
+        "pressureUpdateHzIfPeriodic": 80.8
       },
       "counters": {
         "fromTheDriver": 4079,
@@ -340,12 +363,19 @@
           "4": 43,
           "6": 1
         },
+        "pressureHoldsInterior": {
+          "2": 326,
+          "4": 43,
+          "6": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 370,
+        "pressureDistinct": 419,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 3841,
@@ -426,12 +456,17 @@
         "pressureHolds": {
           "2": 29
         },
+        "pressureHoldsInterior": {
+          "2": 28
+        },
         "pressurePeriod": null,
         "pressurePeriodFit": null,
+        "pressurePeriodSupport": 28,
+        "pressureDistinct": 29,
         "pressureStep": 20,
-        "pressureLevelsAtLeast": 1639,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -511,12 +546,19 @@
           "4": 18,
           "8": 1
         },
+        "pressureHoldsInterior": {
+          "2": 321,
+          "4": 18,
+          "8": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 340,
+        "pressureDistinct": 350,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": 161.6,
-        "pressureUpdateHz": 80.8
+        "readingRateSeconds": 4.71,
+        "pressureUpdateHzIfPeriodic": 80.8
       },
       "counters": {
         "fromTheDriver": 1794,
@@ -598,12 +640,17 @@
         "pressureHolds": {
           "2": 77
         },
+        "pressureHoldsInterior": {
+          "2": 76
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 76,
+        "pressureDistinct": 78,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 267,
@@ -687,12 +734,20 @@
           "6": 2,
           "8": 2
         },
+        "pressureHoldsInterior": {
+          "2": 185,
+          "4": 28,
+          "6": 2,
+          "8": 2
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 217,
+        "pressureDistinct": 207,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -770,12 +825,19 @@
           "4": 34,
           "6": 3
         },
+        "pressureHoldsInterior": {
+          "2": 343,
+          "4": 34,
+          "6": 3
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 380,
+        "pressureDistinct": 356,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -853,12 +915,20 @@
           "6": 3,
           "10": 2
         },
+        "pressureHoldsInterior": {
+          "2": 583,
+          "4": 125,
+          "6": 3,
+          "10": 2
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 713,
+        "pressureDistinct": 600,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -938,12 +1008,22 @@
           "10": 2,
           "14": 1
         },
+        "pressureHoldsInterior": {
+          "2": 443,
+          "4": 84,
+          "6": 24,
+          "8": 8,
+          "10": 2,
+          "14": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 562,
+        "pressureDistinct": 468,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -1022,12 +1102,21 @@
           "8": 2,
           "10": 1
         },
+        "pressureHoldsInterior": {
+          "2": 402,
+          "4": 52,
+          "6": 15,
+          "8": 2,
+          "10": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 472,
+        "pressureDistinct": 431,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -1106,12 +1195,18 @@
           "2": 93,
           "4": 33
         },
+        "pressureHoldsInterior": {
+          "2": 82,
+          "4": 11
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 93,
+        "pressureDistinct": 158,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": 174.9,
-        "pressureUpdateHz": 87.5
+        "readingRateSeconds": 2.01,
+        "pressureUpdateHzIfPeriodic": 87.5
       },
       "counters": {
         "fromTheDriver": 1275,
@@ -1197,12 +1292,22 @@
           "10": 1,
           "12": 3
         },
+        "pressureHoldsInterior": {
+          "2": 126,
+          "4": 24,
+          "6": 10,
+          "8": 3,
+          "10": 1,
+          "12": 3
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 167,
+        "pressureDistinct": 113,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "single-clock",
@@ -1275,12 +1380,15 @@
           "twist": null
         },
         "pressureHolds": {},
+        "pressureHoldsInterior": {},
         "pressurePeriod": null,
         "pressurePeriodFit": null,
+        "pressurePeriodSupport": 0,
+        "pressureDistinct": 0,
         "pressureStep": null,
-        "pressureLevelsAtLeast": null,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 265,
@@ -1363,12 +1471,20 @@
           "6": 2,
           "8": 2
         },
+        "pressureHoldsInterior": {
+          "2": 153,
+          "4": 8,
+          "6": 2,
+          "8": 2
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 165,
+        "pressureDistinct": 159,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -1439,12 +1555,15 @@
           "twist": null
         },
         "pressureHolds": {},
+        "pressureHoldsInterior": {},
         "pressurePeriod": null,
         "pressurePeriodFit": null,
+        "pressurePeriodSupport": 0,
+        "pressureDistinct": 0,
         "pressureStep": null,
-        "pressureLevelsAtLeast": null,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -1521,12 +1640,18 @@
           "2": 144,
           "4": 10
         },
+        "pressureHoldsInterior": {
+          "2": 136,
+          "4": 10
+        },
         "pressurePeriod": 2,
-        "pressurePeriodFit": 0.9935,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 146,
+        "pressureDistinct": 160,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -1603,12 +1728,18 @@
           "2": 18,
           "4": 7
         },
+        "pressureHoldsInterior": {
+          "2": 17,
+          "4": 7
+        },
         "pressurePeriod": null,
         "pressurePeriodFit": null,
+        "pressurePeriodSupport": 24,
+        "pressureDistinct": 26,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -1684,12 +1815,18 @@
           "2": 205,
           "4": 8
         },
+        "pressureHoldsInterior": {
+          "2": 204,
+          "4": 8
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 212,
+        "pressureDistinct": 205,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -1770,12 +1907,23 @@
           "12": 1,
           "14": 1
         },
+        "pressureHoldsInterior": {
+          "2": 676,
+          "4": 121,
+          "6": 38,
+          "8": 10,
+          "10": 3,
+          "12": 1,
+          "14": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 850,
+        "pressureDistinct": 539,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -1854,12 +2002,19 @@
           "4": 10,
           "6": 4
         },
+        "pressureHoldsInterior": {
+          "2": 237,
+          "4": 10,
+          "6": 4
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 251,
+        "pressureDistinct": 242,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 1700,
@@ -1944,12 +2099,20 @@
           "6": 1,
           "16": 1
         },
+        "pressureHoldsInterior": {
+          "2": 85,
+          "4": 2,
+          "6": 1,
+          "16": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 89,
+        "pressureDistinct": 89,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 1072,
@@ -2034,12 +2197,22 @@
           "10": 1,
           "14": 1
         },
+        "pressureHoldsInterior": {
+          "2": 467,
+          "4": 46,
+          "6": 14,
+          "8": 3,
+          "10": 1,
+          "14": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 532,
+        "pressureDistinct": 497,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -2122,12 +2295,23 @@
           "12": 4,
           "14": 1
         },
+        "pressureHoldsInterior": {
+          "2": 1005,
+          "4": 172,
+          "6": 66,
+          "8": 12,
+          "10": 4,
+          "12": 4,
+          "14": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1264,
+        "pressureDistinct": 779,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 7894,
@@ -2211,12 +2395,21 @@
           "8": 2,
           "10": 1
         },
+        "pressureHoldsInterior": {
+          "2": 449,
+          "4": 30,
+          "6": 10,
+          "8": 2,
+          "10": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 492,
+        "pressureDistinct": 446,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -2296,12 +2489,22 @@
           "10": 4,
           "12": 4
         },
+        "pressureHoldsInterior": {
+          "2": 354,
+          "4": 103,
+          "6": 40,
+          "8": 9,
+          "10": 4,
+          "12": 4
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 514,
+        "pressureDistinct": 324,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -2382,12 +2585,23 @@
           "12": 2,
           "14": 1
         },
+        "pressureHoldsInterior": {
+          "2": 373,
+          "4": 70,
+          "6": 25,
+          "8": 10,
+          "10": 2,
+          "12": 2,
+          "14": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 483,
+        "pressureDistinct": 368,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -2469,12 +2683,21 @@
           "8": 6,
           "10": 1
         },
+        "pressureHoldsInterior": {
+          "2": 610,
+          "4": 117,
+          "6": 37,
+          "8": 6,
+          "10": 1
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 771,
+        "pressureDistinct": 628,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": 160.3,
-        "pressureUpdateHz": 80.2
+        "readingRateSeconds": 12.37,
+        "pressureUpdateHzIfPeriodic": 80.2
       },
       "counters": {
         "fromTheDriver": 4811,
@@ -2550,12 +2773,15 @@
           "twist": null
         },
         "pressureHolds": {},
+        "pressureHoldsInterior": {},
         "pressurePeriod": null,
         "pressurePeriodFit": null,
+        "pressurePeriodSupport": 0,
+        "pressureDistinct": 0,
         "pressureStep": null,
-        "pressureLevelsAtLeast": null,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": {
         "fromTheDriver": 2107,
@@ -2640,12 +2866,22 @@
           "10": 3,
           "12": 2
         },
+        "pressureHoldsInterior": {
+          "2": 841,
+          "4": 97,
+          "6": 22,
+          "8": 4,
+          "10": 3,
+          "12": 2
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 969,
+        "pressureDistinct": 849,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "early",
@@ -2723,12 +2959,20 @@
           "6": 12,
           "8": 6
         },
+        "pressureHoldsInterior": {
+          "2": 460,
+          "4": 66,
+          "6": 12,
+          "8": 6
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 544,
+        "pressureDistinct": 446,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
@@ -2804,12 +3048,18 @@
           "2": 52,
           "4": 2
         },
+        "pressureHoldsInterior": {
+          "2": 51,
+          "4": 2
+        },
         "pressurePeriod": 2,
         "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 53,
+        "pressureDistinct": 54,
         "pressureStep": 4,
-        "pressureLevelsAtLeast": 8192,
         "readingRateHz": null,
-        "pressureUpdateHz": null
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
       },
       "counters": null,
       "quality": "raw",
