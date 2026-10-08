@@ -12,6 +12,7 @@
     "v8-tablet-without-maxx.json": "maxX",
     "v8-desktop-with-a-tablet-field.json": "maxX",
     "v8-without-coordinates.json": "coordinates",
+    "v8-last-seen-in-the-air-is-a-number.json": "lastSeenInTheAir",
     "v8-columns-without-pressure.json": "columns: ",
     "v8-duplicate-column.json": "unique",
     "v8-unknown-column.json": "tilt",

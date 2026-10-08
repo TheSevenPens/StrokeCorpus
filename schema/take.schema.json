@@ -109,7 +109,7 @@
         "approach": { "$ref": "#/$defs/rows" },
         "departure": { "$ref": "#/$defs/rows" },
         "lastSeenInTheAirMs": { "type": "number" },
-        "lastSeenInTheAir": { "type": "number" },
+        "lastSeenInTheAir": { "type": "string", "description": "Written instead of lastSeenInTheAirMs when the pen was not reported in the air at all before the landing; a statement, not a duration." },
         "endedBy": { "type": "string" }
       },
       "additionalProperties": false
