@@ -44,6 +44,7 @@ clock belonging to the host rather than to the pen.
 | tag | recordings | what it means |
 |---|---|---|
 | `complete` | 1 | every channel, both clocks, and the approach measured on the host clock |
+| `partial` | 0 | version 6 or later, but the file does not carry `at`, `arrived`, `height` or `status`, and the tag names which |
 | `hover-suspect` | 4 | both clocks, but the approach was aged on the pen's packet counter, so hover is incomplete |
 | `single-clock` | 9 | height and status, but only the pen's own timestamp |
 | `early` | 7 | strokes, and none of the later channels |
@@ -61,6 +62,19 @@ each contact transition. It implies 240 readings a second; the real rate is **16
 
 Takes at format version 5 and above carry a second timestamp taken from the host's monotonic
 clock. Use that one. [FORMAT.md](FORMAT.md) has the rest.
+
+## A reading is not always a new measurement
+
+The same recordings show a second thing nobody had measured: **pressure takes a new value on
+every second reading**. Position changes on nearly every reading while the pen moves, but a
+pressure the driver reports tends to be reported twice, so there are about half as many
+pressure measurements as readings. A brush that treats every reading as an independent sample
+sees a pressure that is flat half the time and jumps the rest.
+
+This is measured for every recording and shown on its page and on the
+[devices page](https://thesevenpens.github.io/StrokeCorpus/devices.html). It is a property of
+this tablet and this way of reading it, not of the format.
+[FORMAT.md](FORMAT.md#a-reading-is-not-a-measurement) has the method.
 
 ## Contributing a recording
 

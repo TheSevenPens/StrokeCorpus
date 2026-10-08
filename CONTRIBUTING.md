@@ -23,7 +23,11 @@ In rough order:
    hardware through different stacks and do not agree about the pressure range.
 3. **Hover.** Turn on keeping airborne readings. The approach to a landing is the least
    documented part of pen input and the reason this corpus exists.
-4. **A left hand, a different grip, a pushed stroke.** Every recording here is one person's
+4. **The same pen on two firmwares, or at two report rates.** How often pressure takes a new
+   value turns out to depend on the device and how it is read, and a recording pair that
+   differs in only one of those is the cleanest way to say which. A tablet with modified
+   firmware, or with a report-rate setting, is especially useful.
+5. **A left hand, a different grip, a pushed stroke.** Every recording here is one person's
    posture, and the lean measurements especially are suspected of being about that.
 
 ## The gestures worth drawing
@@ -36,6 +40,7 @@ You do not have to do all of these. Any one is useful.
 | a slow diagonal | about four seconds end to end, for what a pen does when the hand barely moves |
 | a fast flick | under half a second, for the widest steps between readings |
 | a pressure ramp | one straight line, lightest to heaviest |
+| a press and release in place | the pen held still while pressure rises and falls over two or three seconds, which is where how often pressure updates shows most plainly, because position is not moving |
 | a light line | as light as you can hold and still register, where pens are least well behaved |
 | cross-hatching | many short strokes with lifts between them, which is where hover data comes from |
 | a loop that crosses itself | for what happens where a stroke overlaps its own ink |
@@ -43,8 +48,9 @@ You do not have to do all of these. Any one is useful.
 
 ## Say what you drew
 
-Put it in the pull request: **which tablet, which driver version, which backend, and what you
-were doing with your hand.** The file records the device itself, but nothing in it can record
+Put it in the pull request: **which tablet, which firmware, which driver version, which
+backend, the report-rate setting if it has one, which pen, and what you were doing with your
+hand.** The file records the device itself, but nothing in it can record
 that you were drawing left-handed, or standing, or that the pen has a worn nib.
 
 ## What happens to it

@@ -27,8 +27,15 @@ all list lengths does not count distinct driver packets. Preserve source order
 and list membership; do not silently deduplicate identical rows. Version 1 has
 unsegmented top-level `readings`, not recorded stroke boundaries.
 
+A reading is not necessarily a new measurement: a driver can hand over the same value
+more than once. Each entry's `updates` says how often each channel actually carried a new
+value, measured from the readings, and `channels` lists which columns the file carries.
+On the Cintiq 24 / Wintab setup measured here pressure takes a new value on every second
+reading; that is a property of the setup, not of the format. See FORMAT.md.
+
 Quality tags describe format capabilities and known limitations: `complete` has
-both clocks and host-aged approach; `hover-suspect` has both clocks but unreliable
+both clocks and host-aged approach; `partial` is version 6 or later but lacks one of
+`at`, `arrived`, `height` or `status`; `hover-suspect` has both clocks but unreliable
 approach capture; `single-clock` lacks host timing; `early` has segmented strokes
 without later channels; `raw` is unsegmented. These tags are not independent
 validation of every measurement. See each entry's `qualityMeans` and `reRecord`.

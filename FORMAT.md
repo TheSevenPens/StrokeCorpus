@@ -116,6 +116,35 @@ Every reading drained in one batch **shares one `arrived` value**, deliberately.
 genuinely did arrive together — they were sitting in the driver's queue and were handed over
 in one call — so giving each its own stamp would invent a spread the delivery did not have.
 
+## A reading is not a measurement
+
+Every reading a driver handed over is kept, and a driver can hand over the same value more
+than once. Two consecutive readings with the same pressure are not necessarily two
+measurements that happened to agree: they may be one measurement reported twice. A reader
+should not treat each reading as an independent sample of the pen, and should check how often
+a channel actually changes before computing a rate of change from it.
+
+How often a channel carries a new value belongs to the device and the way it was read; it is
+**not a rule of the format**. The catalogue measures it for every recording, in `updates`:
+
+| field | what it is |
+|---|---|
+| `changed` | the share of consecutive in-contact readings, within a stroke, whose position, pressure, tilt, height or twist differs from the reading before. `null` where the file does not carry the column |
+| `pressureHolds` | how many readings each pressure value lasted, counted when it ends. A run still going when the stroke ends is not counted |
+| `pressurePeriod`, `pressurePeriodFit` | the largest N that at least 98% of the holds are a multiple of, and the share that are. `null` with fewer than 30 holds, where there is no pattern to state |
+| `readingRateHz`, `pressureUpdateHz` | readings per second over whole strokes on the host clock, and that divided by the period. `null` without the host clock |
+| `pressureStep`, `pressureLevelsAtLeast` | the smallest difference between two distinct pressures seen, and the number of levels that implies, as a floor |
+
+A hold of four readings in a recording whose period is two is two updates that happened to
+carry the same value.
+
+On the Wacom Cintiq 24 and Wintab setup measured here, pressure takes a new value on every
+second reading. Every recording with enough holds to say has a period of two, while position
+changes on nearly every reading while the pen is moving. At the measured 161.6 readings a second
+that is about 80 pressure updates a second. That is a measured property of this setup. The same
+pen read through another driver, backend or firmware may differ, and telling those apart is
+what recordings from more than one of them are for.
+
 ## The reading lists
 
 - **`strokes[].readings`** — the pen was touching. This is the mark.
