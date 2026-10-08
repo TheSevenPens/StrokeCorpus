@@ -1,0 +1,62 @@
+{
+  "format": "stroke-field-guide/take",
+  "formatVersion": 1,
+  "id": "example-v1",
+  "gesture": "freeform",
+  "intent": "A synthetic recording for testing the schema.",
+  "recordedAt": "2026-01-01T00:00:00.0000000+00:00",
+  "endedBy": "synthetic",
+  "columns": [
+    "at",
+    "x",
+    "y",
+    "pressure",
+    "lean",
+    "azimuth",
+    "twist"
+  ],
+  "device": {
+    "tablet": "Example tablet",
+    "driver": "Example driver 1.0",
+    "api": "Example",
+    "fullScalePressure": 8191,
+    "conventions": "Synthetic."
+  },
+  "placement": {
+    "units": "desktop physical pixels, as reported by the session",
+    "note": "synthetic",
+    "scaleX": 1,
+    "scaleY": 1,
+    "originX": 0,
+    "originY": 0
+  },
+  "readings": [
+    [
+      4166,
+      101.0,
+      202.0,
+      1000,
+      20.0,
+      90.0,
+      0.0
+    ],
+    [
+      8332,
+      102.0,
+      204.0,
+      1000,
+      20.0,
+      90.0,
+      0.0
+    ],
+    [
+      12498,
+      103.0,
+      206.0,
+      1000,
+      20.0,
+      90.0,
+      0.0
+    ]
+  ]
+}

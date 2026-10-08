@@ -1,0 +1,74 @@
+{
+  "format": "stroke-field-guide/take",
+  "formatVersion": 8,
+  "id": "example-v8",
+  "gesture": "freeform",
+  "intent": "A synthetic recording for testing the schema.",
+  "recordedAt": "2026-01-01T00:00:00.0000000+00:00",
+  "endedBy": "synthetic",
+  "columns": [
+    "arrived",
+    "x",
+    "y",
+    "pressure",
+    "tilt"
+  ],
+  "device": {
+    "tablet": "Example tablet",
+    "driver": "Example driver 1.0",
+    "api": "Example",
+    "fullScalePressure": 8191,
+    "conventions": "Synthetic.",
+    "firmware": ""
+  },
+  "strokeCount": 1,
+  "strokes": [
+    {
+      "readingCount": 3,
+      "readings": [
+        [
+          6000,
+          101.0,
+          202.0,
+          1000,
+          0
+        ],
+        [
+          12000,
+          102.0,
+          204.0,
+          1000,
+          0
+        ],
+        [
+          18000,
+          103.0,
+          206.0,
+          1000,
+          0
+        ]
+      ],
+      "approach": [
+        [
+          0,
+          100.0,
+          200.0,
+          0,
+          0
+        ]
+      ],
+      "endedBy": "synthetic"
+    }
+  ],
+  "clocks": "synthetic",
+  "username": "schema-examples",
+  "notes": "Synthetic. Written to test the schema; it is not a recording of a pen and is not part of the corpus.",
+  "coordinates": {
+    "space": "tablet",
+    "units": "digitizer counts",
+    "maxX": 62500,
+    "maxY": 39062,
+    "widthMm": 224.0,
+    "heightMm": 126.0
+  }
+}
