@@ -106,7 +106,7 @@
 </footer>
 
 <script type="module">
-import { loadManifest, run, pressureCadence } from "./corpus.js?v=28e657cd";
+import { loadManifest, run, pressureCadence, esc } from "./corpus.js?v=2aeaca47";
 
 await run(async () => {
 
@@ -184,14 +184,14 @@ await run(async () => {
   const firmwareSays = (firmware) =>
     firmware === null || firmware === undefined
       ? `<span style="color:var(--quiet)">not recorded</span>`
-      : (firmware === "" ? `<span style="color:var(--quiet)">left blank</span>` : firmware);
+      : (firmware === "" ? `<span style="color:var(--quiet)">left blank</span>` : esc(firmware));
 
   document.getElementById("groupCount").textContent = `— ${groups.size}`;
 
   document.getElementById("devices").innerHTML = [...groups.values()].map((group) => `
     <tr>
-      <td>${group.tablet || "&mdash;"}</td>
-      <td>${group.api || "&mdash;"}</td>
+      <td>${esc(group.tablet) || "&mdash;"}</td>
+      <td>${esc(group.api) || "&mdash;"}</td>
       <td>${firmwareSays(group.firmware)}</td>
       <td class="n">${group.recordings.length}</td>
       <td class="n">${rate(group, "readingRateHz")}</td>

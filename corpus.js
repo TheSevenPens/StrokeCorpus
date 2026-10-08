@@ -486,6 +486,19 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
   }
 }
 
+/**
+ * Text made safe to put into markup.
+ *
+ * Recordings are contributed by other people and some of what they say is typed in -- the
+ * tablet, the backend, the firmware -- so a page that builds markup from the catalogue must not
+ * let one of those strings become markup.
+ */
+export function esc(text) {
+  const entity = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+
+  return String(text ?? "").replace(/[&<>"']/g, (c) => entity[c]);
+}
+
 const ORDINALS = { 1: "first", 2: "second", 3: "third" };
 
 /** "second", "17th": how a count of readings is said in a sentence about a cadence. */
