@@ -99,7 +99,7 @@
 </footer>
 
 <script type="module">
-import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt, pressureCadence } from "./corpus.js?v=2aeaca47";
+import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt, pressureCadence, esc } from "./corpus.js?v=eefabca9";
 
 await run(async () => {
 
@@ -134,14 +134,14 @@ await run(async () => {
 
   const facts = [
     ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
-    ["tablet", entry.device.tablet],
-    ["driver", entry.device.driver],
-    ["backend", entry.device.api],
+    ["tablet", esc(entry.device.tablet)],
+    ["driver", esc(entry.device.driver)],
+    ["backend", esc(entry.device.api)],
     ["full-scale pressure", entry.device.fullScalePressure],
     ["format version", `${entry.formatVersion} — <a href="quality.html">what that carries</a>`],
-    ["gesture", entry.gesture || "—"],
-    ["columns", entry.columns.join(" ")],
-    ["ended by", entry.endedBy || "—"],
+    ["gesture", esc(entry.gesture) || "—"],
+    ["columns", esc(entry.columns.join(" "))],
+    ["ended by", esc(entry.endedBy) || "—"],
     ["seconds, host clock", entry.seconds.host ?? "not in this format"],
     ["seconds, pen clock", entry.seconds.pen ?? "—"],
   ];
@@ -158,14 +158,21 @@ await run(async () => {
   // over the same value more than once, so "a reading" and "a new measurement" are different
   // counts, and which channel repeats and how often is a fact about the device and how it was read.
   const up = entry.updates;
+  const quiet = (text) => `<span style="color:var(--quiet)">${text}</span>`;
   const share = (v) => v === null || v === undefined
-    ? `<span style="color:var(--quiet)">not carried</span>`
+    ? quiet("not carried")
     : `<span class="meter" style="width:${Math.round(v * 120)}px"></span> ${(v * 100).toFixed(1)}%`;
 
   if (!up || !up.pairs) {
     document.getElementById("updates").innerHTML =
       `<tbody><tr><td>This recording has no pairs of consecutive in-contact readings to measure.</td></tr></tbody>`;
   } else {
+    // What the holds say, and how much there is to say it with: the pattern and the share of
+    // interior holds that fit it, or the reason there is none.
+    const pattern = up.pressurePeriod
+      ? `${pressureCadence(up)} ${quiet(`(${(up.pressurePeriodFit * 100).toFixed(1)}% of ${up.pressurePeriodSupport} interior holds)`)}`
+      : quiet(`none stated (${up.pressurePeriodSupport ?? 0} interior holds; 30 are needed)`);
+
     document.getElementById("updates").innerHTML = `
       <thead><tr><th>Channel</th><th>Readings that carried a new value</th></tr></thead>
       <tbody>
@@ -174,26 +181,34 @@ await run(async () => {
         <tr><td>tilt</td><td>${share(up.changed.tilt)}</td></tr>
         <tr><td>height</td><td>${share(up.changed.height)}</td></tr>
         <tr><td>barrel rotation</td><td>${share(up.changed.twist)}</td></tr>
-        <tr><td>pressure takes a new value</td><td class="num">${pressureCadence(up)}${up.pressurePeriodFit && up.pressurePeriodFit < 1
-          ? ` <span style="color:var(--quiet)">(${(up.pressurePeriodFit * 100).toFixed(1)}% of holds)</span>` : ""}</td></tr>
-        <tr><td>readings per second, host clock</td><td class="num">${up.readingRateHz ?? '<span style="color:var(--quiet)">needs the host clock</span>'}</td></tr>
-        <tr><td>pressure updates per second</td><td class="num">${up.pressureUpdateHz ?? '<span style="color:var(--quiet)">&mdash;</span>'}</td></tr>
-        <tr><td>pressure levels in use</td><td class="num">${up.pressureLevelsAtLeast ? `at least ${up.pressureLevelsAtLeast.toLocaleString()} (smallest step ${up.pressureStep})` : "&mdash;"}</td></tr>
+        <tr><td>pressure refreshes (inferred from holds)</td><td class="num">${pattern}</td></tr>
+        <tr><td>readings per second, host clock</td><td class="num">${up.readingRateHz === null || up.readingRateHz === undefined
+          ? quiet("needs the host clock") : `${up.readingRateHz} ${quiet(`over ${up.readingRateSeconds} s of strokes`)}`}</td></tr>
+        <tr><td>pressure updates per second, if periodic</td><td class="num">${up.pressureUpdateHzIfPeriodic ?? quiet("&mdash;")}</td></tr>
+        <tr><td>distinct pressure values seen</td><td class="num">${up.pressureDistinct === null || up.pressureDistinct === undefined
+          ? quiet("&mdash;") : `${up.pressureDistinct.toLocaleString()} ${quiet(`(smallest step between two: ${up.pressureStep ?? "&mdash;"})`)}`}</td></tr>
       </tbody>`;
 
     document.getElementById("updatesNote").textContent =
       `Over ${up.pairs.toLocaleString()} pairs of consecutive in-contact readings. ` +
       (up.changed.pressure !== null && up.changed.position !== null && up.changed.pressure < up.changed.position * 0.8
-        ? "Pressure carries a new value much less often than position does, so some of its readings are repeats of the one before, not measurements of their own."
+        ? "Pressure carries a new value much less often than position does, so some of its readings repeat the one before. " +
+          "These readings cannot say whether a repeat is one measurement reported twice or two measurements that agreed."
         : "A share below 100% means some readings repeated the value before them.");
 
-    const holds = Object.entries(up.pressureHolds).map(([n, c]) => [parseInt(n, 10), c]).slice(0, 8);
-    const most = Math.max(1, ...holds.map(([, c]) => c));
+    // Every completed hold, so the arithmetic can be checked. The first hold of each stroke starts at
+    // the landing and may be shorter than the value lasted, so the period is inferred without it.
+    const lengths = Object.keys(up.pressureHolds).map((n) => parseInt(n, 10)).sort((a, b) => a - b);
+    const most = Math.max(1, ...lengths.map((n) => up.pressureHolds[String(n)]));
 
-    document.getElementById("holds").innerHTML = holds.length
-      ? `<thead><tr><th>Pressure held for</th><th class="n">Times</th><th></th></tr></thead><tbody>${holds.map(([n, c]) =>
-          `<tr><td>${n} reading${n === 1 ? "" : "s"}</td><td class="n">${c.toLocaleString()}</td>` +
-          `<td><span class="meter" style="width:${Math.round((c / most) * 160)}px"></span></td></tr>`).join("")}</tbody>`
+    document.getElementById("holds").innerHTML = lengths.length
+      ? `<thead><tr><th>Pressure held for</th><th class="n">Times</th><th class="n">Not the first of a stroke</th><th></th></tr></thead><tbody>${lengths.map((n) => {
+          const c = up.pressureHolds[String(n)];
+
+          return `<tr><td>${n} reading${n === 1 ? "" : "s"}</td><td class="n">${c.toLocaleString()}</td>` +
+            `<td class="n">${(up.pressureHoldsInterior?.[String(n)] ?? 0).toLocaleString()}</td>` +
+            `<td><span class="meter" style="width:${Math.round((c / most) * 160)}px"></span></td></tr>`;
+        }).join("")}</tbody>`
       : "";
   }
 
@@ -245,7 +260,7 @@ await run(async () => {
       <td class="n">${still || "—"}</td>
       <td class="n">${about.lowest}–${about.highest}</td>
       <td class="n">${about.approach || "—"}</td>
-      <td style="font-size:12.5px;color:var(--quiet)">${stroke.endedBy || "—"}</td>
+      <td style="font-size:12.5px;color:var(--quiet)">${esc(stroke.endedBy) || "—"}</td>
     </tr>`;
   }).join("");
 

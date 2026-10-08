@@ -120,7 +120,7 @@
 </footer>
 
 <script type="module">
-import { loadManifest, run } from "./corpus.js?v=2aeaca47";
+import { loadManifest, run, esc } from "./corpus.js?v=eefabca9";
 
 await run(async () => {
 
@@ -151,7 +151,7 @@ await run(async () => {
 
   document.getElementById("rerecord").innerHTML = wanting.map((one) => `
     <tr>
-      <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${one.name}</a></td>
+      <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${esc(one.name)}</a></td>
       <td><span class="tag ${one.quality}">${one.quality}</span></td>
       <td style="color:var(--quiet)">It ${one.reRecord.join("; and it ")}.</td>
     </tr>

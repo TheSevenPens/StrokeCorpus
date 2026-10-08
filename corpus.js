@@ -499,6 +499,22 @@ export function esc(text) {
   return String(text ?? "").replace(/[&<>"']/g, (c) => entity[c]);
 }
 
+/**
+ * A channel the recording did not measure, said so rather than drawn as a flat line of zeros.
+ *
+ * `reading()` zero-fills a column a file does not carry, which is right for drawing a position and
+ * wrong for anything that claims something about a channel's values.
+ */
+export function drawAbsent(canvas, label, options = {}) {
+  const width = options.width || canvas.clientWidth || 600;
+  const height = options.height || 74;
+  const pen = fit(canvas, width, height);
+
+  pen.fillStyle = styleOf("--quiet");
+  pen.font = "11px " + styleOf("--mono").split(",")[0].replace(/"/g, "");
+  pen.fillText(`${label}: not measured in this recording`, 4, 12);
+}
+
 const ORDINALS = { 1: "first", 2: "second", 3: "third" };
 
 /** "second", "17th": how a count of readings is said in a sentence about a cadence. */

@@ -47,9 +47,10 @@
             <th class="n">Readings / s</th>
             <th class="n">Position</th>
             <th class="n">Pressure</th>
-            <th>Pressure takes a new value</th>
-            <th class="n">Pressure updates / s</th>
-            <th class="n">Pressure levels</th>
+            <th>Pressure hold pattern</th>
+            <th class="n">Pressure updates / s, if periodic</th>
+            <th class="n">Pressure values seen</th>
+            <th class="n">Smallest step</th>
           </tr>
         </thead>
         <tbody id="devices"></tbody>
@@ -57,32 +58,39 @@
     </div>
     <p class="note">
       <strong>Position</strong> and <strong>Pressure</strong> are the share of consecutive
-      in-contact readings that differed from the one before. <strong>Readings / s</strong> is
-      measured on the host clock over whole strokes, so it is only given for recordings that
-      carry one. A dash means the recordings did not carry the column, or had too few pressure
-      changes for a pattern to be stated.
+      in-contact readings that differed from the one before, pooled across the group's recordings
+      in proportion to how many readings each has. <strong>Readings / s</strong> is the median of
+      the recordings that carry the host clock, each measured over whole strokes; it is an
+      aggregate estimate, and short strokes can bias it. <strong>Pressure values seen</strong> is
+      the most distinct values any one recording of the group contained: a floor on what the
+      device can report, not the range it has. A dash means the recordings did not carry the
+      column, or had too few completed holds for a pattern to be stated.
+    </p>
+    <p class="note">
+      Rows are grouped by tablet, backend and firmware as recorded. Driver versions are not a
+      grouping: recordings made on different driver versions of the same tablet and backend are
+      pooled here, so a difference between two rows is not by itself attributable to the driver.
     </p>
   </section>
 
   <section class="panel">
-    <h2>Why it matters</h2>
+    <h2>What the hold pattern is, and is not</h2>
     <p>
-      A brush engine that treats every reading as an independent sample of the pen is wrong
-      about a device that repeats a value. Pressure that changes on every second reading is
-      half as many measurements as the reading rate suggests, and anything that differentiates
-      it &mdash; how quickly pressure is rising, say &mdash; sees a number that is zero half the
-      time and double the rest.
+      A hold is how many readings in a row carried the same pressure. Where nearly all completed
+      holds are a multiple of two, pressure is behaving as if it were refreshed every second
+      reading, and a hold of four is then two refreshes that agreed. That is a description of the
+      readings and an inference about the device: equal values cannot tell one measurement
+      reported twice from two measurements that quantized to the same number.
     </p>
     <p>
-      The pattern is not necessarily the pen. It is in the readings as this recording path
-      delivered them, so it can come from the tablet, its firmware, the driver or the way the
-      driver was read. The corpus can say <em>that</em> it is there and how often; telling those
-      apart needs the same pen recorded through more than one of them, which is what
-      <a href="CONTRIBUTING.md">a second device or backend</a> is for.
+      It also cannot say where the pattern comes from. It is in the readings as this recording
+      path delivered them, so it could come from the tablet, its firmware, the driver or the way
+      the driver was read. Telling those apart needs the same pen recorded through more than one
+      of them, which is what <a href="CONTRIBUTING.md">a second device or backend</a> is for.
     </p>
     <p class="note">
-      Each recording's own page shows the same measurements, with the length of every hold.
-      The method is in <a href="FORMAT.md#a-reading-is-not-a-measurement">FORMAT.md</a>.
+      Each recording's own page shows the same measurements with the length of every hold. The
+      method is in <a href="FORMAT.md#a-reading-is-not-a-measurement">FORMAT.md</a>.
     </p>
   </section>
 
@@ -106,7 +114,7 @@
 </footer>
 
 <script type="module">
-import { loadManifest, run, pressureCadence, esc } from "./corpus.js?v=2aeaca47";
+import { loadManifest, run, pressureCadence, esc } from "./corpus.js?v=eefabca9";
 
 await run(async () => {
 
@@ -125,13 +133,19 @@ await run(async () => {
     groups.get(key).recordings.push(recording);
   }
 
+  // The conventional median: the mean of the two middle values when there is an even number.
   const median = (xs) => {
     if (!xs.length) return null;
 
     const sorted = [...xs].sort((a, b) => a - b);
+    const mid = sorted.length >> 1;
 
-    return sorted[Math.floor(sorted.length / 2)];
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
   };
+
+  // A catalogue that predates these measurements has no `updates` at all, and reads as unmeasured
+  // rather than as an error.
+  const measured = (group) => group.recordings.map((r) => r.updates).filter(Boolean);
 
   // The share of consecutive readings that changed, over every pair in the group's recordings that
   // carried the column. Pairs are the weight, so one long recording is not outvoted by three taps.
@@ -139,8 +153,8 @@ await run(async () => {
     let moved = 0;
     let pairs = 0;
 
-    for (const { updates } of group.recordings) {
-      const v = updates.changed[channel];
+    for (const updates of measured(group)) {
+      const v = updates.changed?.[channel];
 
       if (v === null || v === undefined) continue;
 
@@ -151,12 +165,12 @@ await run(async () => {
     return pairs ? `${((moved / pairs) * 100).toFixed(0)}%` : "&mdash;";
   };
 
-  // What the group's recordings say pressure does, in words: the one cadence they share, or all of
-  // them where they disagree, which is itself worth seeing.
-  const cadence = (group) => {
+  // What the group's recordings say about the pressure's holds, in words, with how many recordings
+  // say it out of how many there are: the one pattern they share, or all of them where they differ.
+  const pattern = (group) => {
     const said = new Map();
 
-    for (const { updates } of group.recordings) {
+    for (const updates of measured(group)) {
       if (!updates.pressurePeriod) continue;
 
       said.set(updates.pressurePeriod, (said.get(updates.pressurePeriod) ?? 0) + 1);
@@ -165,20 +179,27 @@ await run(async () => {
     if (!said.size) return "&mdash;";
 
     return [...said.entries()].sort((a, b) => b[1] - a[1])
-      .map(([period, many]) => `${pressureCadence({ pressurePeriod: period })}${said.size > 1 ? ` (${many})` : ""}`)
+      .map(([period, many]) =>
+        `${pressureCadence({ pressurePeriod: period })} <span style="color:var(--quiet)">(${many} of ${group.recordings.length})</span>`)
       .join(", ");
   };
 
-  const rate = (group, field) => {
-    const m = median(group.recordings.map((r) => r.updates[field]).filter((v) => v !== null && v !== undefined));
+  const median1 = (group, field) => {
+    const m = median(measured(group).map((u) => u[field]).filter((v) => v !== null && v !== undefined));
 
     return m === null ? "&mdash;" : m.toFixed(1);
   };
 
-  const levels = (group) => {
-    const m = median(group.recordings.map((r) => r.updates.pressureLevelsAtLeast).filter(Boolean));
+  const most = (group, field) => {
+    const values = measured(group).map((u) => u[field]).filter((v) => v !== null && v !== undefined);
 
-    return m === null ? "&mdash;" : m.toLocaleString();
+    return values.length ? Math.max(...values).toLocaleString() : "&mdash;";
+  };
+
+  const least = (group, field) => {
+    const values = measured(group).map((u) => u[field]).filter((v) => v !== null && v !== undefined);
+
+    return values.length ? Math.min(...values).toLocaleString() : "&mdash;";
   };
 
   const firmwareSays = (firmware) =>
@@ -194,12 +215,13 @@ await run(async () => {
       <td>${esc(group.api) || "&mdash;"}</td>
       <td>${firmwareSays(group.firmware)}</td>
       <td class="n">${group.recordings.length}</td>
-      <td class="n">${rate(group, "readingRateHz")}</td>
+      <td class="n">${median1(group, "readingRateHz")}</td>
       <td class="n">${share(group, "position")}</td>
       <td class="n">${share(group, "pressure")}</td>
-      <td>${cadence(group)}</td>
-      <td class="n">${rate(group, "pressureUpdateHz")}</td>
-      <td class="n">${levels(group)}</td>
+      <td>${pattern(group)}</td>
+      <td class="n">${median1(group, "pressureUpdateHzIfPeriodic")}</td>
+      <td class="n">${most(group, "pressureDistinct")}</td>
+      <td class="n">${least(group, "pressureStep")}</td>
     </tr>
   `).join("");
 });

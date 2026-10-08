@@ -68,8 +68,9 @@
       <canvas class="channel" id="lean"></canvas>
       <p class="note">
         On the pressure line, a filled dot is a reading that carried a new pressure and a hollow
-        one repeated the reading before it. Where the readings are too close together to tell
-        apart, a tick under the line marks each new value.
+        one repeated the reading before it; the first reading is the starting value. Where the
+        readings are too close together to tell apart, a tick under the line marks each new
+        value.
         <a href="devices.html">How often each device updates each channel</a>.
       </p>
     </section>
@@ -112,8 +113,8 @@
 import {
   run,
   loadManifest, loadRecording, strokesOf, describe, gap,
-  drawClosely, drawChannel, fmt,
-} from "./corpus.js?v=2aeaca47";
+  drawClosely, drawChannel, drawAbsent, fmt,
+} from "./corpus.js?v=eefabca9";
 
 await run(async () => {
 
@@ -268,8 +269,14 @@ await run(async () => {
     zoomAt.textContent = `×${view.zoom < 10 ? view.zoom.toFixed(1) : Math.round(view.zoom)}`;
     closely.classList.toggle("zoomed", view.zoom > 1);
 
-    drawChannel(document.getElementById("pressure"), stroke, (p) => p.pressure, at,
-      { label: "pressure", from: 0, to: full, repeats: true });
+    // A recording with no pressure column would draw as a flat line of zeros, and the repeat marks
+    // would then claim every reading repeated the one before. Say it was not measured instead.
+    if (recording.columns.includes("pressure")) {
+      drawChannel(document.getElementById("pressure"), stroke, (p) => p.pressure, at,
+        { label: "pressure", from: 0, to: full, repeats: true });
+    } else {
+      drawAbsent(document.getElementById("pressure"), "pressure");
+    }
 
     drawChannel(document.getElementById("speed"), stroke, (_, i) => speeds[i] ?? 0, at,
       { label: (clock === "arrived" ? "speed px/s" : "speed px per counter-second")
