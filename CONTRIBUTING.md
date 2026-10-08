@@ -23,10 +23,10 @@ In rough order:
    hardware through different stacks and do not agree about the pressure range.
 3. **Hover.** Turn on keeping airborne readings. The approach to a landing is the least
    documented part of pen input and the reason this corpus exists.
-4. **The same pen on two firmwares, or at two report rates.** How often pressure takes a new
-   value turns out to depend on the device and how it is read, and a recording pair that
-   differs in only one of those is the cleanest way to say which. A tablet with modified
-   firmware, or with a report-rate setting, is especially useful.
+4. **The same pen on two firmwares, or at two report rates.** How long a pressure value lasts
+   may depend on the tablet, its firmware, the driver or how the driver was read, and a
+   recording pair that differs in only one of those is the cleanest way to find out which. A
+   tablet with modified firmware, or with a report-rate setting, is especially useful.
 5. **A left hand, a different grip, a pushed stroke.** Every recording here is one person's
    posture, and the lean measurements especially are suspected of being about that.
 
