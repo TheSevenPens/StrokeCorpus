@@ -38,7 +38,18 @@ VERSIONS = {
     5: "the host clock, so arrival can be told from the pen's own timestamp",
     6: "the approach aged on the host clock, which is what makes hover trustworthy",
     7: "who made it, the tablet's firmware and free-text notes",
+    8: "what x and y are: desktop positions, or the device's own counts before any mapping",
 }
+
+# Where the manifest says what shape it has. A stable address, so a reader can find the schema
+# from the catalogue without being told where it lives.
+MANIFEST_SCHEMA = "https://thesevenpens.github.io/StrokeCorpus/schema/manifest.schema.json"
+
+
+def coordinate_space(recording):
+    """What x and y are. Before format version 8 a recording did not say, and they were desktop
+    positions, so an absent `coordinates` is desktop and not unknown."""
+    return (recording.get("coordinates") or {}).get("space", "desktop")
 
 
 # Every column the format has ever declared, in the order the format lists them.
@@ -415,6 +426,7 @@ def main():
                 "firmware": device.get("firmware"),
             },
             "columns": columns,
+            "coordinateSpace": coordinate_space(recording),
             "channels": channels(recording),
             "counts": howMany,
             "seconds": span(recording),
@@ -428,6 +440,7 @@ def main():
         })
 
     manifest = {
+        "$schema": MANIFEST_SCHEMA,
         "format": "stroke-corpus/manifest",
         "formatVersion": 1,
         "recordings": recordings,

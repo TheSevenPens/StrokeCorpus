@@ -1,0 +1,26 @@
+{
+  "about": "Each file in invalid/ must fail validation, and the failure must mention the word given here. Each breaks exactly one rule.",
+  "invalid": {
+    "v2-with-a-height-column.json": "columns: ",
+    "v1-with-strokes.json": "strokes",
+    "v7-without-firmware.json": "firmware",
+    "v6-with-firmware.json": "firmware",
+    "v7-without-username.json": "username",
+    "v6-with-coordinates.json": "coordinates",
+    "v8-tablet-with-placement.json": "placement",
+    "v8-desktop-without-placement.json": "placement",
+    "v8-tablet-without-maxx.json": "maxX",
+    "v8-desktop-with-a-tablet-field.json": "maxX",
+    "v8-without-coordinates.json": "coordinates",
+    "v8-columns-without-pressure.json": "columns: ",
+    "v8-duplicate-column.json": "unique",
+    "v8-unknown-column.json": "tilt",
+    "v8-unknown-space.json": "space",
+    "version-9-does-not-exist.json": "formatVersion",
+    "v5-without-the-arrived-column.json": "columns: ",
+    "v8-row-shorter-than-columns.json": "slots",
+    "v8-null-outside-arrived.json": "null",
+    "v8-strokecount-disagrees.json": "strokeCount",
+    "v8-readingcount-disagrees.json": "readingCount"
+  }
+}

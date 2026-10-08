@@ -64,7 +64,7 @@
           <tr>
             <th class="n">#</th>
             <th class="n">Readings</th>
-            <th class="n">Length px</th>
+            <th class="n" id="lengthHead">Length px</th>
             <th class="n">Widest step</th>
             <th class="n">Median step</th>
             <th class="n">Still</th>
@@ -119,6 +119,11 @@ await run(async () => {
   const recording = await loadRecording(file);
   const strokes = strokesOf(recording);
   const full = entry.device.fullScalePressure || 32767;
+  // What a length or a speed is measured in. Desktop positions are pixels; a tablet recording's are the
+  // device's own counts, before any mapping, and calling those pixels would be inventing a screen.
+  const unit = entry?.coordinateSpace === "tablet" ? "counts" : "px";
+
+  document.getElementById("lengthHead").textContent = `Length ${unit}`;
 
   document.title = `${entry.name} — Stroke Corpus`;
   document.getElementById("name").textContent = entry.name;
@@ -142,7 +147,7 @@ await run(async () => {
     ["gesture", esc(entry.gesture) || "—"],
     ["columns", esc(entry.columns.join(" "))],
     ["ended by", esc(entry.endedBy) || "—"],
-    ["seconds, host clock", entry.seconds.host ?? "not in this format"],
+    ["seconds, host clock", entry.seconds.host ?? "not in this recording"],
     ["seconds, pen clock", entry.seconds.pen ?? "—"],
   ];
 

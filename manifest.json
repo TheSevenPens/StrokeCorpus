@@ -1,4 +1,5 @@
 {
+  "$schema": "https://thesevenpens.github.io/StrokeCorpus/schema/manifest.schema.json",
   "format": "stroke-corpus/manifest",
   "formatVersion": 1,
   "recordings": [
@@ -31,6 +32,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -127,6 +129,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -227,6 +230,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -323,6 +327,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -418,6 +423,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -506,6 +512,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -602,6 +609,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -693,6 +701,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -785,6 +794,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -874,6 +884,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -965,6 +976,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1060,6 +1072,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1156,6 +1169,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1249,6 +1263,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1346,6 +1361,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1430,6 +1446,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1521,6 +1538,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1600,6 +1618,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1689,6 +1708,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1776,6 +1796,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1863,6 +1884,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -1962,6 +1984,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2058,6 +2081,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2154,6 +2178,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2251,6 +2276,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2353,6 +2379,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2446,6 +2473,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2541,6 +2569,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2641,6 +2670,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2739,6 +2769,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2823,6 +2854,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -2918,6 +2950,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",
@@ -3009,6 +3042,7 @@
         "azimuth",
         "twist"
       ],
+      "coordinateSpace": "desktop",
       "channels": {
         "measured": [
           "at",

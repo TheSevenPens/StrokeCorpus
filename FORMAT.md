@@ -80,6 +80,53 @@ present, and an empty string means the person was asked and wrote nothing. A rea
 not report an absent `firmware` as "no firmware" or an absent `username` as an anonymous
 user.
 
+## What `x` and `y` are
+
+Before version 8 a recording did not say, and `x` and `y` were positions on the desktop in the
+units `placement` describes. From **version 8** a recording says so, in `coordinates`:
+
+```json
+{
+  "formatVersion": 8,
+  "coordinates": {
+    "space": "tablet",
+    "units": "digitizer counts",
+    "maxX": 62500,
+    "maxY": 39062,
+    "widthMm": 224.0,
+    "heightMm": 126.0
+  }
+}
+```
+
+| `space` | `x` and `y` are | `coordinates` also carries | `placement` |
+|---|---|---|---|
+| `desktop` | positions on the desktop, in the units `placement` describes: what every earlier version means | `units` | required |
+| `tablet` | the device's own digitizer counts, as it reported them, before any mapping to a display | `units`, `maxX`, `maxY`, `widthMm`, `heightMm` | absent |
+
+- **Why a tablet space exists.** A position on the desktop has the driver's mapping, the display
+  layout and the scaling mixed into it, so the same hand on the same tablet gives different
+  numbers under different settings, and the file records where the monitors were. A count does
+  not. It is also the only thing a tool that reads the device itself, rather than the operating
+  system, can honestly say.
+- **No pixels.** There is no screen in a tablet recording, so a length or a speed is in counts.
+  `maxX` and `maxY` are the largest count the digitizer reports on each axis and `widthMm` and
+  `heightMm` the physical size of its area, so a count is `x * widthMm / maxX` millimetres along
+  that axis, and speeds from different devices can be compared in millimetres a second.
+- **The axes are the device's.** The origin and the direction of each axis are whatever the
+  device reports and are not normalized. Do not assume the origin is at the top left.
+- **Absent and empty mean different things.** A recording before version 8 has no `coordinates`,
+  and a reader must treat that as `desktop`, not as unknown. In a version-8 recording it is
+  always present.
+- **`placement`.** It describes where a desktop recording was made, so a desktop recording keeps
+  it and a tablet recording has none: there is no desktop to place.
+
+Version 8 also changes what `columns` may be. Until now every version declared one fixed list,
+because every recorder measured every channel. A recording from a tool that cannot measure one,
+such as one that reads the device directly and so has no pen timestamp or status word, carries
+only the columns it did measure, and must still carry `x`, `y` and `pressure`. A column the file
+does not declare is unmeasured, not zero, as it always was.
+
 ## Readings are rows, not objects
 
 A reading is an array whose slots are named by `columns`. One recording can hold tens of
@@ -89,7 +136,7 @@ thousands of them, and an object per reading would be mostly repeated key names.
 |---|---|
 | `at` | the pen's own timestamp, microseconds. **Not a clock** — see below |
 | `arrived` | the host's monotonic clock, microseconds, stamped when the batch was drained |
-| `x`, `y` | desktop position, in the units `placement` describes |
+| `x`, `y` | a position: on the desktop, in the units `placement` describes, or from version 8 whatever `coordinates` says |
 | `pressure` | a raw count. Meaningless without `device.fullScalePressure` |
 | `height` | Wintab's `pkZ`, height above the tablet. 0 to about 401 on the device measured here |
 | `status` | the raw status word from the driver, unmasked |
@@ -177,6 +224,31 @@ distinct pressure values seen across the corpus is `floor(raw * 32767 / 8191)`. 
 reports **8192 levels**, which matches its published specification. The 15-bit field is
 wider than the measurement in it.
 
+## Checking a recording
+
+`schema/take.schema.json` is the machine-readable definition: one JSON Schema for a recording in
+any of the eight versions. It is not one schema with everything optional. Each version declares
+exactly the columns and fields it carries, so a version-two file with a height column, a
+version-seven file with no firmware, and a version-eight tablet recording with a `placement` are
+all errors and not curiosities. `schema/manifest.schema.json` does the same for `manifest.json`.
+
+Some of what makes a recording well formed relates one part of it to another, which a JSON Schema
+cannot say: a reading has as many slots as the file declares columns, only `arrived` may be
+null, and the stroke and reading counts a file states are the counts it has. `tools/validate.py`
+checks those as well, checks the manifest against the folder, and checks the schema against the
+examples in `schema/examples/`, where every file in `invalid/` breaks exactly one rule and must be
+rejected for that rule. A schema that accepted everything would pass the recordings, so that last
+check is what shows it still rejects what it is meant to.
+
+```
+pip install jsonschema
+python tools/validate.py                     # everything
+python tools/validate.py traces/yours.json   # one recording
+```
+
+The examples are synthetic and live outside `traces/` on purpose: they are for testing the
+schema, they are not evidence about a pen, and nothing counts them.
+
 ## Version history
 
 | version | added |
@@ -188,6 +260,7 @@ wider than the measurement in it.
 | 5 | `arrived`, the host clock |
 | 6 | the approach aged on the host clock, which is what makes hover trustworthy |
 | 7 | `username`, `notes` and `device.firmware`. No columns change |
+| 8 | `coordinates`, which says what `x` and `y` are. A recording may carry only the columns it measured |
 
 A version-one file has **no `strokes`** and no record of where contact broke. Read its
 top-level `readings` as one run and do not infer strokes from pressure unless you say that

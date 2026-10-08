@@ -1,0 +1,31 @@
+name: Validate
+
+# Every recording against the schema, the manifest against its schema and the folder, and the schema
+# against its own examples. See tools/validate.py for what each of those means. It reads the
+# recordings and never changes one.
+#
+# It deliberately does not rebuild manifest.json and compare: the manifest's "bytes" field is the size
+# of the file as it sat on the machine that built it, which depends on that machine's line endings.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the validator
+        run: pip install "jsonschema>=4.20"
+
+      - name: Validate recordings, manifest and schema examples
+        run: python tools/validate.py
