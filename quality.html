@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Quality tags &mdash; Stroke Corpus</title>
 <meta name="description" content="What each quality tag on a recording means, and which recordings are worth drawing again.">
-<link rel="stylesheet" href="corpus.css?v=c5bf57f2">
+<link rel="stylesheet" href="corpus.css?v=9927495d">
 </head>
 <body>
 
@@ -116,11 +116,11 @@
       relative to the catalogue URL, without adding another extension.
     </p>
   </section>
-  <p><a href="index.html">Back to the corpus</a></p>
+  <p><a href="index.html">Back to the corpus</a> &middot; <a href="devices.html">Devices compared</a></p>
 </footer>
 
 <script type="module">
-import { loadManifest, run } from "./corpus.js?v=da2f655d";
+import { loadManifest, run, esc } from "./corpus.js?v=eefabca9";
 
 await run(async () => {
 
@@ -134,7 +134,7 @@ await run(async () => {
 
   for (const one of recordings) meanings.set(one.quality, one.qualityMeans);
 
-  const order = ["complete", "hover-suspect", "single-clock", "early", "raw"];
+  const order = ["complete", "partial", "hover-suspect", "single-clock", "early", "raw"];
   const tags = [...meanings.keys()].sort((a, b) => order.indexOf(a) - order.indexOf(b));
 
   document.getElementById("tags").innerHTML = tags.map((tag) => `
@@ -151,7 +151,7 @@ await run(async () => {
 
   document.getElementById("rerecord").innerHTML = wanting.map((one) => `
     <tr>
-      <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${one.name}</a></td>
+      <td><a href="recording.html?recording=${encodeURIComponent(one.file)}">${esc(one.name)}</a></td>
       <td><span class="tag ${one.quality}">${one.quality}</span></td>
       <td style="color:var(--quiet)">It ${one.reRecord.join("; and it ")}.</td>
     </tr>

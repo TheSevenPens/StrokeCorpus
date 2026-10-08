@@ -129,9 +129,19 @@ main { padding-block: 24px 60px; }
 
 .tag.complete { color: var(--good); }
 .tag.hover-suspect { color: var(--warn); }
-.tag.single-clock, .tag.early { color: var(--quiet); }
+.tag.single-clock, .tag.early, .tag.partial { color: var(--quiet); }
 .tag.raw { color: var(--faint); }
 .tag.rerecord { color: var(--bad); }
+
+/* A share of something, drawn as a bar beside the number that says it. */
+.meter {
+  display: inline-block;
+  height: 8px;
+  min-width: 1px;
+  border-radius: 2px;
+  background: var(--accent);
+  vertical-align: middle;
+}
 
 /* ---- tables ----------------------------------------------------------- */
 

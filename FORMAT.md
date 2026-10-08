@@ -116,6 +116,44 @@ Every reading drained in one batch **shares one `arrived` value**, deliberately.
 genuinely did arrive together — they were sitting in the driver's queue and were handed over
 in one call — so giving each its own stamp would invent a spread the delivery did not have.
 
+## A reading is not a measurement
+
+Every reading a driver handed over is kept, and a driver can hand over the same value more
+than once. Two consecutive readings with the same pressure may be one measurement reported
+twice, or two measurements that happened to agree, and the readings alone cannot say which.
+A reader should not treat each reading as an independent sample of the pen, and should check
+how often a channel actually changes before computing a rate of change from it.
+
+How often a channel carries a new value belongs to the device and to the way it was read; it is
+**not a rule of the format**. The catalogue describes it for every recording, in `updates`:
+
+| field | what it is |
+|---|---|
+| `changed` | the share of consecutive in-contact readings, within a stroke, whose position, pressure, tilt, height or twist differs from the reading before. `null` where the file does not carry the column that measure needs (tilt needs both `lean` and `azimuth`) |
+| `pressureHolds` | how many readings each pressure value lasted, counted when it ends, over every completed hold. A run still going when the stroke ends is not counted |
+| `pressureHoldsInterior` | the same without the first hold of each stretch of contact. A landing can begin part-way through a value, so that hold may be shorter than the value lasted |
+| `pressurePeriod`, `pressurePeriodFit`, `pressurePeriodSupport` | the largest N that at least 98% of the interior holds are a multiple of, the share that are, and how many interior holds there were. `null` below 30 interior holds, where there is too little to state a pattern |
+| `readingRateHz`, `readingRateSeconds` | readings per second over whole strokes on the host clock, and the seconds of strokes it was measured over. `null` without the host clock |
+| `pressureUpdateHzIfPeriodic` | `readingRateHz` divided by `pressurePeriod`: the pressure refresh rate **if** pressure is refreshed on that period. An inference, not a measurement |
+| `pressureDistinct`, `pressureStep` | how many distinct non-zero pressures were seen, which is a floor on how many the device can report, and the smallest difference between two of them. The step is a fact about the readings and is not a bound on the resolution |
+
+The period is a description of the hold lengths. Repeated gesture timing or quantization can
+produce lengths that share a divisor with no device period behind them, and lost readings can
+hide a real one. A hold of four readings in a recording whose period is two is compatible with
+two refreshes that agreed, and does not show that two acquisitions happened. The reading rate is
+an aggregate over whole strokes: a pause inside a stroke stays in the denominator, a stroke that
+fits in one drained batch contributes nothing, and batching at the ends of short strokes can bias
+it.
+
+On the Wacom Cintiq 24 and Wintab setup measured here, completed holds are almost always an even
+number of readings long, in every recording with enough of them to say. That is consistent with
+pressure being refreshed every second delivered reading, which at the measured 161.6 readings a
+second would be about 80 refreshes a second, while position changes on nearly every reading while
+the pen is moving. The recordings do not establish the underlying acquisition rate, and they do
+not say which part of the path from pen to file produces the pattern: the tablet, its firmware,
+the driver, or the way the driver was read. That is a measured property of this setup and not a
+rule of the format.
+
 ## The reading lists
 
 - **`strokes[].readings`** — the pen was touching. This is the mark.

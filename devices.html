@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="describedby" href="llms.txt" type="text/plain">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Devices compared &mdash; Stroke Corpus</title>
+<meta name="description" content="How often each tablet, backend and firmware in the corpus delivers a new value for each channel, measured from its recordings.">
+<link rel="stylesheet" href="corpus.css?v=9927495d">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">Stroke Corpus</a> &rsaquo; devices</p>
+    <h1>Devices compared</h1>
+    <p>
+      <strong>A reading is not a measurement.</strong> The corpus keeps every reading a driver
+      handed over, and a driver can hand over the same value more than once. This page says,
+      for each device the corpus has recordings of, how often each channel actually carried a
+      new value.
+    </p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <noscript>
+    <p class="note">
+      The interactive catalogue and recording views require JavaScript.
+      You can still access the data through the <a href="manifest.json">recording catalogue (JSON)</a>
+      &mdash; each recording's <code>updates</code> object holds these measurements &mdash;
+      and read the <a href="FORMAT.md">trace format and interpretation</a>.
+    </p>
+  </noscript>
+
+  <section class="panel">
+    <h2>How often a channel carries a new value <span class="sub" id="groupCount"></span></h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Tablet</th>
+            <th>Backend</th>
+            <th>Firmware</th>
+            <th class="n">Recordings</th>
+            <th class="n">Readings / s</th>
+            <th class="n">Position</th>
+            <th class="n">Pressure</th>
+            <th>Pressure hold pattern</th>
+            <th class="n">Pressure updates / s, if periodic</th>
+            <th class="n">Pressure values seen</th>
+            <th class="n">Smallest step</th>
+          </tr>
+        </thead>
+        <tbody id="devices"></tbody>
+      </table>
+    </div>
+    <p class="note">
+      <strong>Position</strong> and <strong>Pressure</strong> are the share of consecutive
+      in-contact readings that differed from the one before, pooled across the group's recordings
+      in proportion to how many readings each has. <strong>Readings / s</strong> is the median of
+      the recordings that carry the host clock, each measured over whole strokes; it is an
+      aggregate estimate, and short strokes can bias it. <strong>Pressure values seen</strong> is
+      the most distinct values any one recording of the group contained: a floor on what the
+      device can report, not the range it has. A dash means the recordings did not carry the
+      column, or had too few completed holds for a pattern to be stated.
+    </p>
+    <p class="note">
+      Rows are grouped by tablet, backend and firmware as recorded. Driver versions are not a
+      grouping: recordings made on different driver versions of the same tablet and backend are
+      pooled here, so a difference between two rows is not by itself attributable to the driver.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>What the hold pattern is, and is not</h2>
+    <p>
+      A hold is how many readings in a row carried the same pressure. Where nearly all completed
+      holds are a multiple of two, pressure is behaving as if it were refreshed every second
+      reading, and a hold of four is then two refreshes that agreed. That is a description of the
+      readings and an inference about the device: equal values cannot tell one measurement
+      reported twice from two measurements that quantized to the same number.
+    </p>
+    <p>
+      It also cannot say where the pattern comes from. It is in the readings as this recording
+      path delivered them, so it could come from the tablet, its firmware, the driver or the way
+      the driver was read. Telling those apart needs the same pen recorded through more than one
+      of them, which is what <a href="CONTRIBUTING.md">a second device or backend</a> is for.
+    </p>
+    <p class="note">
+      Each recording's own page shows the same measurements with the length of every hold. The
+      method is in <a href="FORMAT.md#a-reading-is-not-a-measurement">FORMAT.md</a>.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <section aria-labelledby="data-docs">
+    <h2 id="data-docs">Data and documentation</h2>
+    <p>
+      <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
+      <a href="FORMAT.md">Trace format and interpretation</a> &middot;
+      <a href="llms.txt">Automated-reader guide</a>
+    </p>
+    <p>
+      To download a recording, read <code>manifest.recordings[].file</code> in the catalogue.
+      It is the full filename, including <code>.json</code>; fetch <code>traces/&lt;file&gt;</code>
+      relative to the catalogue URL, without adding another extension.
+    </p>
+  </section>
+  <p><a href="index.html">Back to the corpus</a></p>
+</footer>
+
+<script type="module">
+import { loadManifest, run, pressureCadence, esc } from "./corpus.js?v=eefabca9";
+
+await run(async () => {
+
+  const manifest = await loadManifest();
+
+  // A device here is a tablet read through one backend on one firmware. The same tablet through
+  // two backends is two rows, because the point is what each one delivers.
+  const groups = new Map();
+
+  for (const recording of manifest.recordings) {
+    const { tablet, api, firmware } = recording.device;
+    const key = [tablet, api, firmware === null || firmware === undefined ? "\u0000" : firmware].join("\u0001");
+
+    if (!groups.has(key)) groups.set(key, { tablet, api, firmware, recordings: [] });
+
+    groups.get(key).recordings.push(recording);
+  }
+
+  // The conventional median: the mean of the two middle values when there is an even number.
+  const median = (xs) => {
+    if (!xs.length) return null;
+
+    const sorted = [...xs].sort((a, b) => a - b);
+    const mid = sorted.length >> 1;
+
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  };
+
+  // A catalogue that predates these measurements has no `updates` at all, and reads as unmeasured
+  // rather than as an error.
+  const measured = (group) => group.recordings.map((r) => r.updates).filter(Boolean);
+
+  // The share of consecutive readings that changed, over every pair in the group's recordings that
+  // carried the column. Pairs are the weight, so one long recording is not outvoted by three taps.
+  const share = (group, channel) => {
+    let moved = 0;
+    let pairs = 0;
+
+    for (const updates of measured(group)) {
+      const v = updates.changed?.[channel];
+
+      if (v === null || v === undefined) continue;
+
+      moved += v * updates.pairs;
+      pairs += updates.pairs;
+    }
+
+    return pairs ? `${((moved / pairs) * 100).toFixed(0)}%` : "&mdash;";
+  };
+
+  // What the group's recordings say about the pressure's holds, in words, with how many recordings
+  // say it out of how many there are: the one pattern they share, or all of them where they differ.
+  const pattern = (group) => {
+    const said = new Map();
+
+    for (const updates of measured(group)) {
+      if (!updates.pressurePeriod) continue;
+
+      said.set(updates.pressurePeriod, (said.get(updates.pressurePeriod) ?? 0) + 1);
+    }
+
+    if (!said.size) return "&mdash;";
+
+    return [...said.entries()].sort((a, b) => b[1] - a[1])
+      .map(([period, many]) =>
+        `${pressureCadence({ pressurePeriod: period })} <span style="color:var(--quiet)">(${many} of ${group.recordings.length})</span>`)
+      .join(", ");
+  };
+
+  const median1 = (group, field) => {
+    const m = median(measured(group).map((u) => u[field]).filter((v) => v !== null && v !== undefined));
+
+    return m === null ? "&mdash;" : m.toFixed(1);
+  };
+
+  const most = (group, field) => {
+    const values = measured(group).map((u) => u[field]).filter((v) => v !== null && v !== undefined);
+
+    return values.length ? Math.max(...values).toLocaleString() : "&mdash;";
+  };
+
+  const least = (group, field) => {
+    const values = measured(group).map((u) => u[field]).filter((v) => v !== null && v !== undefined);
+
+    return values.length ? Math.min(...values).toLocaleString() : "&mdash;";
+  };
+
+  const firmwareSays = (firmware) =>
+    firmware === null || firmware === undefined
+      ? `<span style="color:var(--quiet)">not recorded</span>`
+      : (firmware === "" ? `<span style="color:var(--quiet)">left blank</span>` : esc(firmware));
+
+  document.getElementById("groupCount").textContent = `— ${groups.size}`;
+
+  document.getElementById("devices").innerHTML = [...groups.values()].map((group) => `
+    <tr>
+      <td>${esc(group.tablet) || "&mdash;"}</td>
+      <td>${esc(group.api) || "&mdash;"}</td>
+      <td>${firmwareSays(group.firmware)}</td>
+      <td class="n">${group.recordings.length}</td>
+      <td class="n">${median1(group, "readingRateHz")}</td>
+      <td class="n">${share(group, "position")}</td>
+      <td class="n">${share(group, "pressure")}</td>
+      <td>${pattern(group)}</td>
+      <td class="n">${median1(group, "pressureUpdateHzIfPeriodic")}</td>
+      <td class="n">${most(group, "pressureDistinct")}</td>
+      <td class="n">${least(group, "pressureStep")}</td>
+    </tr>
+  `).join("");
+});
+</script>
+
+</body>
+</html>

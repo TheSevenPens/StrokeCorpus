@@ -16,7 +16,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -30,6 +31,21 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
       "counts": {
         "strokes": 8,
         "contact": 2190,
@@ -41,6 +57,36 @@
         "pen": 32.8,
         "host": 33.241
       },
+      "updates": {
+        "pairs": 2182,
+        "changed": {
+          "position": 0.8318,
+          "pressure": 0.4409,
+          "tilt": 0.1256,
+          "height": 0.0,
+          "twist": 0.2191
+        },
+        "pressureHolds": {
+          "2": 865,
+          "4": 74,
+          "6": 18,
+          "8": 5
+        },
+        "pressureHoldsInterior": {
+          "2": 857,
+          "4": 74,
+          "6": 18,
+          "8": 5
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 954,
+        "pressureDistinct": 793,
+        "pressureStep": 4,
+        "readingRateHz": 160.2,
+        "readingRateSeconds": 13.62,
+        "pressureUpdateHzIfPeriodic": 80.1
+      },
       "counters": {
         "fromTheDriver": 5664,
         "delivered": 5664,
@@ -49,6 +95,7 @@
       },
       "quality": "complete",
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
       "reRecord": [],
       "bytes": 485117
     },
@@ -66,7 +113,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -79,6 +127,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 11,
         "contact": 808,
@@ -89,6 +153,36 @@
       "seconds": {
         "pen": 9.292
       },
+      "updates": {
+        "pairs": 797,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.4642,
+          "tilt": 0.2246,
+          "height": 0.0,
+          "twist": 0.3363
+        },
+        "pressureHolds": {
+          "2": 350,
+          "4": 18,
+          "6": 1,
+          "8": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 339,
+          "4": 18,
+          "6": 1,
+          "8": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 359,
+        "pressureDistinct": 356,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 1640,
         "delivered": 1640,
@@ -97,6 +191,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 52 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
         "has no host clock, so arrival cannot be told from the pen's stamp"
@@ -117,7 +212,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -131,6 +227,21 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
       "counts": {
         "strokes": 42,
         "contact": 1326,
@@ -142,6 +253,34 @@
         "pen": 24.28,
         "host": 24.349
       },
+      "updates": {
+        "pairs": 1284,
+        "changed": {
+          "position": 0.986,
+          "pressure": 0.4369,
+          "tilt": 0.2072,
+          "height": 0.0,
+          "twist": 0.4229
+        },
+        "pressureHolds": {
+          "2": 507,
+          "4": 48,
+          "6": 6
+        },
+        "pressureHoldsInterior": {
+          "2": 467,
+          "4": 47,
+          "6": 5
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 519,
+        "pressureDistinct": 544,
+        "pressureStep": 4,
+        "readingRateHz": 161.7,
+        "readingRateSeconds": 7.94,
+        "pressureUpdateHzIfPeriodic": 80.8
+      },
       "counters": {
         "fromTheDriver": 4079,
         "delivered": 4079,
@@ -150,6 +289,7 @@
       },
       "quality": "hover-suspect",
       "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 629 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted"
       ],
@@ -169,7 +309,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -182,6 +323,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 44,
         "contact": 1006,
@@ -192,6 +349,34 @@
       "seconds": {
         "pen": 22.533
       },
+      "updates": {
+        "pairs": 962,
+        "changed": {
+          "position": 0.9875,
+          "pressure": 0.4304,
+          "tilt": 0.1549,
+          "height": 0.0,
+          "twist": 0.3139
+        },
+        "pressureHolds": {
+          "2": 370,
+          "4": 43,
+          "6": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 326,
+          "4": 43,
+          "6": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 370,
+        "pressureDistinct": 419,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 3841,
         "delivered": 3841,
@@ -200,6 +385,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 931 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
         "has no host clock, so arrival cannot be told from the pen's stamp"
@@ -220,7 +406,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -231,6 +418,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 60,
@@ -241,9 +444,34 @@
       "seconds": {
         "pen": 0.246
       },
+      "updates": {
+        "pairs": 59,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.4915,
+          "tilt": 0.4576,
+          "height": null,
+          "twist": 0.4576
+        },
+        "pressureHolds": {
+          "2": 29
+        },
+        "pressureHoldsInterior": {
+          "2": 28
+        },
+        "pressurePeriod": null,
+        "pressurePeriodFit": null,
+        "pressurePeriodSupport": 28,
+        "pressureDistinct": 29,
+        "pressureStep": 20,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -263,7 +491,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -277,6 +506,21 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
       "counts": {
         "strokes": 13,
         "contact": 774,
@@ -288,6 +532,34 @@
         "pen": 19.74,
         "host": 19.789
       },
+      "updates": {
+        "pairs": 761,
+        "changed": {
+          "position": 0.9067,
+          "pressure": 0.4639,
+          "tilt": 0.3101,
+          "height": 0.0,
+          "twist": 0.3403
+        },
+        "pressureHolds": {
+          "2": 334,
+          "4": 18,
+          "8": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 321,
+          "4": 18,
+          "8": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 340,
+        "pressureDistinct": 350,
+        "pressureStep": 4,
+        "readingRateHz": 161.6,
+        "readingRateSeconds": 4.71,
+        "pressureUpdateHzIfPeriodic": 80.8
+      },
       "counters": {
         "fromTheDriver": 1794,
         "delivered": 1794,
@@ -296,6 +568,7 @@
       },
       "quality": "hover-suspect",
       "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 311 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted"
       ],
@@ -315,7 +588,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -328,6 +602,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 1,
         "contact": 157,
@@ -338,6 +628,30 @@
       "seconds": {
         "pen": 0.65
       },
+      "updates": {
+        "pairs": 156,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.4936,
+          "tilt": 0.109,
+          "height": 0.0,
+          "twist": 0.1795
+        },
+        "pressureHolds": {
+          "2": 77
+        },
+        "pressureHoldsInterior": {
+          "2": 76
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 76,
+        "pressureDistinct": 78,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 267,
         "delivered": 268,
@@ -346,6 +660,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 21 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
         "has no host clock, so arrival cannot be told from the pen's stamp"
@@ -366,7 +681,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -377,6 +693,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 4,
         "contact": 526,
@@ -387,9 +719,40 @@
       "seconds": {
         "pen": 6.464
       },
+      "updates": {
+        "pairs": 522,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.4234,
+          "tilt": 0.3582,
+          "height": null,
+          "twist": 0.3851
+        },
+        "pressureHolds": {
+          "2": 189,
+          "4": 28,
+          "6": 2,
+          "8": 2
+        },
+        "pressureHoldsInterior": {
+          "2": 185,
+          "4": 28,
+          "6": 2,
+          "8": 2
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 217,
+        "pressureDistinct": 207,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 48 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
@@ -410,7 +773,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -421,6 +785,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 4,
         "contact": 856,
@@ -431,9 +811,38 @@
       "seconds": {
         "pen": 11.33
       },
+      "updates": {
+        "pairs": 852,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.4507,
+          "tilt": 0.2324,
+          "height": null,
+          "twist": 0.3509
+        },
+        "pressureHolds": {
+          "2": 347,
+          "4": 34,
+          "6": 3
+        },
+        "pressureHoldsInterior": {
+          "2": 343,
+          "4": 34,
+          "6": 3
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 380,
+        "pressureDistinct": 356,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -453,7 +862,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -464,6 +874,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1708,
@@ -474,9 +900,40 @@
       "seconds": {
         "pen": 7.111
       },
+      "updates": {
+        "pairs": 1707,
+        "changed": {
+          "position": 0.9988,
+          "pressure": 0.4183,
+          "tilt": 0.133,
+          "height": null,
+          "twist": 0.6309
+        },
+        "pressureHolds": {
+          "2": 584,
+          "4": 125,
+          "6": 3,
+          "10": 2
+        },
+        "pressureHoldsInterior": {
+          "2": 583,
+          "4": 125,
+          "6": 3,
+          "10": 2
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 713,
+        "pressureDistinct": 600,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -496,7 +953,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -507,6 +965,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1468,
@@ -517,9 +991,44 @@
       "seconds": {
         "pen": 6.112
       },
+      "updates": {
+        "pairs": 1467,
+        "changed": {
+          "position": 0.9966,
+          "pressure": 0.3838,
+          "tilt": 0.1459,
+          "height": null,
+          "twist": 0.2215
+        },
+        "pressureHolds": {
+          "2": 444,
+          "4": 84,
+          "6": 24,
+          "8": 8,
+          "10": 2,
+          "14": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 443,
+          "4": 84,
+          "6": 24,
+          "8": 8,
+          "10": 2,
+          "14": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 562,
+        "pressureDistinct": 468,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -539,7 +1048,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -550,6 +1060,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1132,
@@ -560,9 +1086,42 @@
       "seconds": {
         "pen": 4.712
       },
+      "updates": {
+        "pairs": 1131,
+        "changed": {
+          "position": 0.9514,
+          "pressure": 0.4182,
+          "tilt": 0.1353,
+          "height": null,
+          "twist": 0.2025
+        },
+        "pressureHolds": {
+          "2": 403,
+          "4": 52,
+          "6": 15,
+          "8": 2,
+          "10": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 402,
+          "4": 52,
+          "6": 15,
+          "8": 2,
+          "10": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 472,
+        "pressureDistinct": 431,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -582,7 +1141,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -596,6 +1156,21 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
       "counts": {
         "strokes": 33,
         "contact": 384,
@@ -607,6 +1182,32 @@
         "pen": 8.281,
         "host": 8.291
       },
+      "updates": {
+        "pairs": 351,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.359,
+          "tilt": 0.6695,
+          "height": 0.0,
+          "twist": 0.7236
+        },
+        "pressureHolds": {
+          "2": 93,
+          "4": 33
+        },
+        "pressureHoldsInterior": {
+          "2": 82,
+          "4": 11
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 93,
+        "pressureDistinct": 158,
+        "pressureStep": 4,
+        "readingRateHz": 174.9,
+        "readingRateSeconds": 2.01,
+        "pressureUpdateHzIfPeriodic": 87.5
+      },
       "counters": {
         "fromTheDriver": 1275,
         "delivered": 1275,
@@ -615,6 +1216,7 @@
       },
       "quality": "hover-suspect",
       "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 864 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted"
       ],
@@ -634,7 +1236,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -646,6 +1249,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 1,
         "contact": 482,
@@ -656,9 +1275,44 @@
       "seconds": {
         "pen": 2.004
       },
+      "updates": {
+        "pairs": 481,
+        "changed": {
+          "position": 0.3035,
+          "pressure": 0.3493,
+          "tilt": 0.0312,
+          "height": 0.0,
+          "twist": 0.1206
+        },
+        "pressureHolds": {
+          "2": 127,
+          "4": 24,
+          "6": 10,
+          "8": 3,
+          "10": 1,
+          "12": 3
+        },
+        "pressureHoldsInterior": {
+          "2": 126,
+          "4": 24,
+          "6": 10,
+          "8": 3,
+          "10": 1,
+          "12": 3
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 167,
+        "pressureDistinct": 113,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "has no host clock, so arrival cannot be told from the pen's stamp"
       ],
@@ -678,7 +1332,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -691,6 +1346,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 0,
@@ -699,6 +1370,26 @@
         "aloft": 481
       },
       "seconds": {},
+      "updates": {
+        "pairs": 0,
+        "changed": {
+          "position": null,
+          "pressure": null,
+          "tilt": null,
+          "height": null,
+          "twist": null
+        },
+        "pressureHolds": {},
+        "pressureHoldsInterior": {},
+        "pressurePeriod": null,
+        "pressurePeriodFit": null,
+        "pressurePeriodSupport": 0,
+        "pressureDistinct": 0,
+        "pressureStep": null,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 265,
         "delivered": 265,
@@ -707,6 +1398,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "has no host clock, so arrival cannot be told from the pen's stamp"
       ],
@@ -726,7 +1418,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -737,6 +1430,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 2,
         "contact": 374,
@@ -747,9 +1456,40 @@
       "seconds": {
         "pen": 6.718
       },
+      "updates": {
+        "pairs": 372,
+        "changed": {
+          "position": 0.25,
+          "pressure": 0.4489,
+          "tilt": 0.0457,
+          "height": null,
+          "twist": 0.1263
+        },
+        "pressureHolds": {
+          "2": 155,
+          "4": 8,
+          "6": 2,
+          "8": 2
+        },
+        "pressureHoldsInterior": {
+          "2": 153,
+          "4": 8,
+          "6": 2,
+          "8": 2
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 165,
+        "pressureDistinct": 159,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -769,7 +1509,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -780,6 +1521,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 0,
@@ -788,9 +1545,30 @@
         "aloft": 703
       },
       "seconds": {},
+      "updates": {
+        "pairs": 0,
+        "changed": {
+          "position": null,
+          "pressure": null,
+          "tilt": null,
+          "height": null,
+          "twist": null
+        },
+        "pressureHolds": {},
+        "pressureHoldsInterior": {},
+        "pressurePeriod": null,
+        "pressurePeriodFit": null,
+        "pressurePeriodSupport": 0,
+        "pressureDistinct": 0,
+        "pressureStep": null,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -810,7 +1588,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -821,6 +1600,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 9,
         "contact": 347,
@@ -831,9 +1626,37 @@
       "seconds": {
         "pen": 13.572
       },
+      "updates": {
+        "pairs": 338,
+        "changed": {
+          "position": 0.9941,
+          "pressure": 0.4586,
+          "tilt": 0.1036,
+          "height": null,
+          "twist": 0.3166
+        },
+        "pressureHolds": {
+          "1": 1,
+          "2": 144,
+          "4": 10
+        },
+        "pressureHoldsInterior": {
+          "2": 136,
+          "4": 10
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 146,
+        "pressureDistinct": 160,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 62 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
@@ -854,7 +1677,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -865,6 +1689,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 66,
@@ -875,9 +1715,36 @@
       "seconds": {
         "pen": 0.271
       },
+      "updates": {
+        "pairs": 65,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.3846,
+          "tilt": 0.8462,
+          "height": null,
+          "twist": 0.7385
+        },
+        "pressureHolds": {
+          "2": 18,
+          "4": 7
+        },
+        "pressureHoldsInterior": {
+          "2": 17,
+          "4": 7
+        },
+        "pressurePeriod": null,
+        "pressurePeriodFit": null,
+        "pressurePeriodSupport": 24,
+        "pressureDistinct": 26,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -897,7 +1764,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -908,6 +1776,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 444,
@@ -918,9 +1802,36 @@
       "seconds": {
         "pen": 1.845
       },
+      "updates": {
+        "pairs": 443,
+        "changed": {
+          "position": 0.9797,
+          "pressure": 0.4808,
+          "tilt": 0.3341,
+          "height": null,
+          "twist": 0.2754
+        },
+        "pressureHolds": {
+          "2": 205,
+          "4": 8
+        },
+        "pressureHoldsInterior": {
+          "2": 204,
+          "4": 8
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 212,
+        "pressureDistinct": 205,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -940,7 +1851,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -951,6 +1863,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 2204,
@@ -961,9 +1889,46 @@
       "seconds": {
         "pen": 9.177
       },
+      "updates": {
+        "pairs": 2203,
+        "changed": {
+          "position": 0.9691,
+          "pressure": 0.3863,
+          "tilt": 0.1135,
+          "height": null,
+          "twist": 0.1825
+        },
+        "pressureHolds": {
+          "2": 677,
+          "4": 121,
+          "6": 38,
+          "8": 10,
+          "10": 3,
+          "12": 1,
+          "14": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 676,
+          "4": 121,
+          "6": 38,
+          "8": 10,
+          "10": 3,
+          "12": 1,
+          "14": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 850,
+        "pressureDistinct": 539,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -983,7 +1948,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -996,6 +1962,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 4,
         "contact": 554,
@@ -1006,6 +1988,34 @@
       "seconds": {
         "pen": 8.542
       },
+      "updates": {
+        "pairs": 550,
+        "changed": {
+          "position": 0.9018,
+          "pressure": 0.4636,
+          "tilt": 0.0909,
+          "height": 0.0,
+          "twist": 0.3127
+        },
+        "pressureHolds": {
+          "2": 241,
+          "4": 10,
+          "6": 4
+        },
+        "pressureHoldsInterior": {
+          "2": 237,
+          "4": 10,
+          "6": 4
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 251,
+        "pressureDistinct": 242,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 1700,
         "delivered": 1700,
@@ -1014,6 +2024,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "carries 3 approach readings captured before the hover fix, so its most interesting data is the part that cannot be trusted",
         "has no host clock, so arrival cannot be told from the pen's stamp"
@@ -1034,7 +2045,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1046,6 +2058,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 1,
         "contact": 204,
@@ -1056,6 +2084,36 @@
       "seconds": {
         "pen": 0.846
       },
+      "updates": {
+        "pairs": 203,
+        "changed": {
+          "position": 0.8424,
+          "pressure": 0.4433,
+          "tilt": 0.1133,
+          "height": 0.0,
+          "twist": 0.2512
+        },
+        "pressureHolds": {
+          "2": 86,
+          "4": 2,
+          "6": 1,
+          "16": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 85,
+          "4": 2,
+          "6": 1,
+          "16": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 89,
+        "pressureDistinct": 89,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 1072,
         "delivered": 1072,
@@ -1064,6 +2122,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "has no host clock, so arrival cannot be told from the pen's stamp"
       ],
@@ -1083,7 +2142,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1094,6 +2154,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1254,
@@ -1104,9 +2180,44 @@
       "seconds": {
         "pen": 5.22
       },
+      "updates": {
+        "pairs": 1253,
+        "changed": {
+          "position": 0.9689,
+          "pressure": 0.4254,
+          "tilt": 0.1237,
+          "height": null,
+          "twist": 0.2211
+        },
+        "pressureHolds": {
+          "2": 468,
+          "4": 46,
+          "6": 14,
+          "8": 3,
+          "10": 1,
+          "14": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 467,
+          "4": 46,
+          "6": 14,
+          "8": 3,
+          "10": 1,
+          "14": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 532,
+        "pressureDistinct": 497,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1126,7 +2237,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1139,6 +2251,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 4,
         "contact": 3308,
@@ -1149,6 +2277,42 @@
       "seconds": {
         "pen": 44.351
       },
+      "updates": {
+        "pairs": 3304,
+        "changed": {
+          "position": 0.1798,
+          "pressure": 0.3838,
+          "tilt": 0.076,
+          "height": 0.0,
+          "twist": 0.1565
+        },
+        "pressureHolds": {
+          "2": 1009,
+          "4": 172,
+          "6": 66,
+          "8": 12,
+          "10": 4,
+          "12": 4,
+          "14": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 1005,
+          "4": 172,
+          "6": 66,
+          "8": 12,
+          "10": 4,
+          "12": 4,
+          "14": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1264,
+        "pressureDistinct": 779,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 7894,
         "delivered": 7894,
@@ -1157,6 +2321,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "has no host clock, so arrival cannot be told from the pen's stamp"
       ],
@@ -1176,7 +2341,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1187,6 +2353,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 4,
         "contact": 1120,
@@ -1197,9 +2379,42 @@
       "seconds": {
         "pen": 8.611
       },
+      "updates": {
+        "pairs": 1116,
+        "changed": {
+          "position": 1.0,
+          "pressure": 0.4444,
+          "tilt": 0.1927,
+          "height": null,
+          "twist": 0.2832
+        },
+        "pressureHolds": {
+          "2": 453,
+          "4": 30,
+          "6": 10,
+          "8": 2,
+          "10": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 449,
+          "4": 30,
+          "6": 10,
+          "8": 2,
+          "10": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 492,
+        "pressureDistinct": 446,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1219,7 +2434,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom Driver 6.1.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1230,6 +2446,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1524,
@@ -1240,9 +2472,44 @@
       "seconds": {
         "pen": 6.344
       },
+      "updates": {
+        "pairs": 1523,
+        "changed": {
+          "position": 0.9941,
+          "pressure": 0.3381,
+          "tilt": 0.1655,
+          "height": null,
+          "twist": 0.264
+        },
+        "pressureHolds": {
+          "2": 355,
+          "4": 103,
+          "6": 40,
+          "8": 9,
+          "10": 4,
+          "12": 4
+        },
+        "pressureHoldsInterior": {
+          "2": 354,
+          "4": 103,
+          "6": 40,
+          "8": 9,
+          "10": 4,
+          "12": 4
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 514,
+        "pressureDistinct": 324,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1262,7 +2529,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1273,6 +2541,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1318,
@@ -1283,9 +2567,46 @@
       "seconds": {
         "pen": 5.487
       },
+      "updates": {
+        "pairs": 1317,
+        "changed": {
+          "position": 0.9757,
+          "pressure": 0.3675,
+          "tilt": 0.1162,
+          "height": null,
+          "twist": 0.2976
+        },
+        "pressureHolds": {
+          "2": 374,
+          "4": 70,
+          "6": 25,
+          "8": 10,
+          "10": 2,
+          "12": 2,
+          "14": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 373,
+          "4": 70,
+          "6": 25,
+          "8": 10,
+          "10": 2,
+          "12": 2,
+          "14": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 483,
+        "pressureDistinct": 368,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1305,7 +2626,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1319,6 +2641,21 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
       "counts": {
         "strokes": 5,
         "contact": 1988,
@@ -1330,6 +2667,38 @@
         "pen": 27.373,
         "host": 28.103
       },
+      "updates": {
+        "pairs": 1983,
+        "changed": {
+          "position": 0.6611,
+          "pressure": 0.3913,
+          "tilt": 0.0862,
+          "height": 0.0,
+          "twist": 0.1846
+        },
+        "pressureHolds": {
+          "2": 615,
+          "4": 117,
+          "6": 37,
+          "8": 6,
+          "10": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 610,
+          "4": 117,
+          "6": 37,
+          "8": 6,
+          "10": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 771,
+        "pressureDistinct": 628,
+        "pressureStep": 4,
+        "readingRateHz": 160.3,
+        "readingRateSeconds": 12.37,
+        "pressureUpdateHzIfPeriodic": 80.2
+      },
       "counters": {
         "fromTheDriver": 4811,
         "delivered": 4811,
@@ -1338,6 +2707,7 @@
       },
       "quality": "hover-suspect",
       "qualityMeans": "Both clocks, but the approach was aged on the pen's packet counter, which runs at 0.673 of real time. Hover here is incomplete; the contact data is sound.",
+      "hoverTrusted": false,
       "reRecord": [],
       "bytes": 394038
     },
@@ -1355,7 +2725,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1368,6 +2739,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 0,
@@ -1376,6 +2763,26 @@
         "aloft": 2303
       },
       "seconds": {},
+      "updates": {
+        "pairs": 0,
+        "changed": {
+          "position": null,
+          "pressure": null,
+          "tilt": null,
+          "height": null,
+          "twist": null
+        },
+        "pressureHolds": {},
+        "pressureHoldsInterior": {},
+        "pressurePeriod": null,
+        "pressurePeriodFit": null,
+        "pressurePeriodSupport": 0,
+        "pressureDistinct": 0,
+        "pressureStep": null,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": {
         "fromTheDriver": 2107,
         "delivered": 2107,
@@ -1384,6 +2791,7 @@
       },
       "quality": "single-clock",
       "qualityMeans": "Height and status, but only the pen's own timestamp -- and that is a packet counter rather than a clock, so nothing here dates a reading in real time.",
+      "hoverTrusted": false,
       "reRecord": [
         "has no host clock, so arrival cannot be told from the pen's stamp"
       ],
@@ -1403,7 +2811,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1414,6 +2823,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 10,
         "contact": 2328,
@@ -1424,9 +2849,44 @@
       "seconds": {
         "pen": 26.485
       },
+      "updates": {
+        "pairs": 2318,
+        "changed": {
+          "position": 0.9711,
+          "pressure": 0.4223,
+          "tilt": 0.2498,
+          "height": null,
+          "twist": 0.4586
+        },
+        "pressureHolds": {
+          "2": 851,
+          "4": 97,
+          "6": 22,
+          "8": 4,
+          "10": 3,
+          "12": 2
+        },
+        "pressureHoldsInterior": {
+          "2": 841,
+          "4": 97,
+          "6": 22,
+          "8": 4,
+          "10": 3,
+          "12": 2
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 969,
+        "pressureDistinct": 849,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "early",
       "qualityMeans": "Strokes, and none of the later channels.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1446,7 +2906,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1457,6 +2918,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 1308,
@@ -1467,9 +2944,40 @@
       "seconds": {
         "pen": 5.445
       },
+      "updates": {
+        "pairs": 1307,
+        "changed": {
+          "position": 0.9885,
+          "pressure": 0.417,
+          "tilt": 0.3497,
+          "height": null,
+          "twist": 0.3994
+        },
+        "pressureHolds": {
+          "2": 461,
+          "4": 66,
+          "6": 12,
+          "8": 6
+        },
+        "pressureHoldsInterior": {
+          "2": 460,
+          "4": 66,
+          "6": 12,
+          "8": 6
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 544,
+        "pressureDistinct": 446,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1489,7 +2997,8 @@
         "tablet": "Wacom Cintiq 24",
         "driver": "Wacom driver 6.4.14-1",
         "api": "WintabDigitizer",
-        "fullScalePressure": 32767
+        "fullScalePressure": 32767,
+        "firmware": null
       },
       "columns": [
         "at",
@@ -1500,6 +3009,22 @@
         "azimuth",
         "twist"
       ],
+      "channels": {
+        "measured": [
+          "at",
+          "x",
+          "y",
+          "pressure",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": [
+          "arrived",
+          "height",
+          "status"
+        ]
+      },
       "counts": {
         "strokes": 0,
         "contact": 114,
@@ -1510,9 +3035,36 @@
       "seconds": {
         "pen": 0.471
       },
+      "updates": {
+        "pairs": 113,
+        "changed": {
+          "position": 0.1416,
+          "pressure": 0.4779,
+          "tilt": 0.2389,
+          "height": null,
+          "twist": 0.177
+        },
+        "pressureHolds": {
+          "2": 52,
+          "4": 2
+        },
+        "pressureHoldsInterior": {
+          "2": 51,
+          "4": 2
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 53,
+        "pressureDistinct": 54,
+        "pressureStep": 4,
+        "readingRateHz": null,
+        "readingRateSeconds": null,
+        "pressureUpdateHzIfPeriodic": null
+      },
       "counters": null,
       "quality": "raw",
       "qualityMeans": "The earliest format: a flat list of readings with no stroke segmentation, no height, no status, no host clock and no approach.",
+      "hoverTrusted": false,
       "reRecord": [
         "predates height, status and the host clock, so it cannot answer anything about timing or about what the pen was doing above the glass"
       ],
@@ -1531,6 +3083,9 @@
       "hover-suspect": 4,
       "raw": 12,
       "early": 7
+    },
+    "byPressurePeriod": {
+      "2": 28
     },
     "wantingReRecording": 31,
     "devices": [

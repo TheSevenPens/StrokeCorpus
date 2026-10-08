@@ -27,8 +27,15 @@ all list lengths does not count distinct driver packets. Preserve source order
 and list membership; do not silently deduplicate identical rows. Version 1 has
 unsegmented top-level `readings`, not recorded stroke boundaries.
 
+A reading is not necessarily a new measurement: a driver can hand over the same value
+more than once. Each entry's `updates` describes how often each channel carried a new value,
+and `channels` lists which columns the file carries. The pressure-hold period is a description
+of the readings, not a finding about the device. See FORMAT.md for what it does and does not
+establish.
+
 Quality tags describe format capabilities and known limitations: `complete` has
-both clocks and host-aged approach; `hover-suspect` has both clocks but unreliable
+both clocks and host-aged approach; `partial` is version 6 or later but does not carry every
+column; `hover-suspect` has both clocks but unreliable
 approach capture; `single-clock` lacks host timing; `early` has segmented strokes
 without later channels; `raw` is unsegmented. These tags are not independent
 validation of every measurement. See each entry's `qualityMeans` and `reRecord`.
