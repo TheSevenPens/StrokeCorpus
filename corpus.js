@@ -352,6 +352,11 @@ export function drawClosely(canvas, stroke, at, options = {}) {
  *
  * @param pick  what to read off each reading
  * @param at    which reading the playhead is on
+ * @param options.minSpan  the least the vertical axis may cover, in the channel's own units.
+ *   A channel that fits itself to its data turns a quantised value into a dramatic one: lean
+ *   is reported in whole degrees, so a stroke that only ever read 37 and 38 filled the whole
+ *   height with a single degree. A smaller range is centred in this span instead. Ignored
+ *   where `from` and `to` fix the axis.
  */
 export function drawChannel(canvas, stroke, pick, at, options = {}) {
   const width = options.width || canvas.clientWidth || 600;
@@ -362,8 +367,20 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
 
   if (!values.length) return;
 
-  const low = options.from !== undefined ? options.from : Math.min(...values);
-  const high = options.to !== undefined ? options.to : Math.max(...values);
+  const seenLow = Math.min(...values);
+  const seenHigh = Math.max(...values);
+
+  let low = options.from !== undefined ? options.from : seenLow;
+  let high = options.to !== undefined ? options.to : seenHigh;
+
+  if (options.minSpan && options.from === undefined && options.to === undefined
+      && high - low < options.minSpan) {
+    const middle = (low + high) / 2;
+
+    low = middle - options.minSpan / 2;
+    high = middle + options.minSpan / 2;
+  }
+
   const range = Math.max(1e-9, high - low);
 
   const pad = 8;
@@ -400,7 +417,13 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
 
   pen.fillStyle = styleOf("--quiet");
   pen.font = "11px " + styleOf("--mono").split(",")[0].replace(/"/g, "");
-  pen.fillText(`${options.label || ""} ${fmt(low)} to ${fmt(high)}`, 4, 12);
+  // What the data covered, not the axis: where the axis was widened, saying "34 to 42" for a
+  // channel that only ever read 37 and 38 would claim a range nobody measured.
+  const shown = options.from !== undefined || options.to !== undefined
+    ? [low, high]
+    : [seenLow, seenHigh];
+
+  pen.fillText(`${options.label || ""} ${fmt(shown[0])} to ${fmt(shown[1])}`, 4, 12);
 }
 
 export const fmt = (n) =>

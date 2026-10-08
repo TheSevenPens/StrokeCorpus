@@ -10,21 +10,16 @@
 <body>
 
 <header class="top">
-  <div class="wrap">
+  <div class="wrap wide">
     <p class="crumb">
       <a href="index.html">Stroke Corpus</a> &rsaquo;
       <a href="#" id="backToTake">recording</a> &rsaquo; stroke
     </p>
     <h1 id="name">&hellip;</h1>
-    <p>
-      The readings, not the ink. Each dot is one thing the tablet reported, sized by its
-      pressure; the thread joins them in order; hollow dots are the approach, made while the
-      pen was still in the air. Everything on this page sits on one playhead.
-    </p>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap wide">
 
   <noscript>
     <p class="note">
@@ -36,40 +31,38 @@
 
   <div class="analyser">
 
-    <div>
-      <section class="panel">
-        <h2>Closely <span class="sub" id="closelyNote"></span></h2>
-        <canvas class="closely" id="closely"></canvas>
+    <section class="panel stroke">
+      <h2>Stroke <span class="sub" id="closelyNote"></span></h2>
+      <canvas class="closely" id="closely"></canvas>
 
-        <div class="transport">
-          <button type="button" id="start" title="First reading">&#124;&lsaquo;</button>
-          <button type="button" id="back" title="Back one reading">&lsaquo;</button>
-          <button type="button" id="play">Play</button>
-          <button type="button" id="next" title="On one reading">&rsaquo;</button>
-          <button type="button" id="end" title="Last reading">&rsaquo;&#124;</button>
-          <input type="range" id="scrub" min="0" value="0" step="1">
-          <span class="at" id="at"></span>
-        </div>
+      <div class="transport">
+        <button type="button" id="start" title="First reading">&#124;&lsaquo;</button>
+        <button type="button" id="back" title="Back one reading">&lsaquo;</button>
+        <button type="button" id="play">Play</button>
+        <button type="button" id="next" title="On one reading">&rsaquo;</button>
+        <button type="button" id="end" title="Last reading">&rsaquo;&#124;</button>
+        <input type="range" id="scrub" min="0" value="0" step="1">
+        <span class="at" id="at"></span>
+      </div>
 
-        <p class="note">Arrow keys step, space plays, Home and End jump.</p>
-      </section>
+      <p class="note">Arrow keys step, space plays, Home and End jump.</p>
+    </section>
 
-      <section class="panel">
-        <h2>Across the stroke</h2>
-        <canvas class="channel" id="pressure"></canvas>
-        <canvas class="channel" id="speed"></canvas>
-        <canvas class="channel" id="lean"></canvas>
-      </section>
-    </div>
+    <section class="panel across">
+      <h2>Across the stroke</h2>
+      <canvas class="channel" id="pressure"></canvas>
+      <canvas class="channel" id="speed"></canvas>
+      <canvas class="channel" id="lean"></canvas>
+    </section>
 
-    <div>
-      <section class="panel">
-        <h2>This reading</h2>
-        <dl class="facts" id="here"></dl>
-      </section>
+    <section class="panel reading">
+      <h2>Current reading</h2>
+      <dl class="facts" id="here"></dl>
+    </section>
 
-      <section class="panel" style="padding-bottom: 6px;">
-        <h2>Every reading</h2>
+    <section class="panel every">
+      <div class="inside">
+        <h2>All readings</h2>
         <div class="rows scroll">
           <table>
             <thead>
@@ -85,27 +78,14 @@
             <tbody id="rows"></tbody>
           </table>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
 
   </div>
 
 </main>
 
-<footer class="wrap">
-  <section aria-labelledby="data-docs">
-    <h2 id="data-docs">Data and documentation</h2>
-    <p>
-      <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
-      <a href="FORMAT.md">Trace format and interpretation</a> &middot;
-      <a href="llms.txt">Automated-reader guide</a>
-    </p>
-    <p>
-      To download a recording, read <code>manifest.recordings[].file</code> in the catalogue.
-      It is the full filename, including <code>.json</code>; fetch <code>traces/&lt;file&gt;</code>
-      relative to the catalogue URL, without adding another extension.
-    </p>
-  </section>
+<footer class="wrap wide">
   <p><a href="index.html">Back to the corpus</a></p>
 </footer>
 
@@ -164,12 +144,28 @@ await run(async () => {
   // axis is labelled to say so.
   const clock = entry?.columns.includes("arrived") ? "arrived" : "at";
   const times = r.map((p) => (clock === "arrived" ? p.arrived : p.at));
-  const speeds = r.map((p, i) => {
-    if (i === 0) return 0;
+  //
+  // Averaged over a window rather than taken between neighbouring readings. Readings that came
+  // off the driver in one batch share one host stamp, so between neighbours the time is either
+  // zero (speed reads as zero) or a whole batch interval for a single step (speed reads as
+  // several times too high), and the trace alternates between the two. The distance and the
+  // time across a window both span whole batches, so the ratio is the speed.
+  const WINDOW_US = 100_000;
 
-    const dt = (times[i] - times[i - 1]) / 1e6;
+  // path[i] is the distance travelled from the first reading to reading i, so the distance
+  // across any window is a subtraction.
+  const path = steps.reduce((sum, step, i) => (sum.push((sum[i - 1] ?? 0) + step), sum), []);
 
-    return dt > 0 ? steps[i] / dt : 0;
+  const speeds = r.map((_, i) => {
+    let lo = i;
+    let hi = i;
+
+    while (lo > 0 && times[i] - times[lo] < WINDOW_US / 2) lo--;
+    while (hi < r.length - 1 && times[hi] - times[i] < WINDOW_US / 2) hi++;
+
+    const dt = (times[hi] - times[lo]) / 1e6;
+
+    return dt > 0 ? (path[hi] - path[lo]) / dt : 0;
   });
 
   let at = 0;
@@ -205,9 +201,11 @@ await run(async () => {
       { label: "pressure", from: 0, to: full });
 
     drawChannel(document.getElementById("speed"), stroke, (_, i) => speeds[i] ?? 0, at,
-      { label: clock === "arrived" ? "speed px/s" : "speed px per counter-second" });
+      { label: (clock === "arrived" ? "speed px/s" : "speed px per counter-second")
+        + `, ${WINDOW_US / 1000} ms average` });
 
-    drawChannel(document.getElementById("lean"), stroke, (p) => p.lean, at, { label: "lean deg" });
+    drawChannel(document.getElementById("lean"), stroke, (p) => p.lean, at,
+      { label: "lean deg", minSpan: 10 });
   }
 
   function move(to) {
@@ -223,7 +221,7 @@ await run(async () => {
       ["y", fmt(p.y)],
       ["pressure", `${p.pressure} of ${full}`],
       ["step into it", `${fmt(steps[at])} px`],
-      ["speed", `${fmt(speeds[at])} px/s`],
+      ["avg speed", `${fmt(speeds[at])} px/s`],
       ["lean", `${fmt(p.lean)}°`],
       ["azimuth", `${fmt(p.azimuth)}°`],
       ["twist", `${fmt(p.twist)}°`],
@@ -241,7 +239,18 @@ await run(async () => {
 
     if (row) {
       row.classList.add("picked");
-      row.scrollIntoView({ block: "nearest" });
+
+      // Scrolls the list and nothing else. scrollIntoView walks every scrollable ancestor,
+      // the page included, so stepping through a stroke dragged the whole page down to the
+      // table's row.
+      const list = rows.closest(".rows");
+      const top = row.offsetTop - rows.offsetTop;
+      const head = list.querySelector("thead").offsetHeight;
+
+      if (top < list.scrollTop + head) list.scrollTop = top - head;
+      else if (top + row.offsetHeight > list.scrollTop + list.clientHeight) {
+        list.scrollTop = top + row.offsetHeight - list.clientHeight;
+      }
     }
 
     paint();
