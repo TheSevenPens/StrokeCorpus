@@ -370,6 +370,15 @@ canvas.closely, canvas.channel { display: block; width: 100%; height: auto; back
 .rows th { font-size: 11px; }
 .rows td { padding: 3px 8px; }
 
+/* The stroke picture can be zoomed: a hand to say it can be dragged once it has been. */
+canvas.closely.zoomed { cursor: grab; touch-action: none; }
+canvas.closely.zoomed.dragging { cursor: grabbing; }
+
+.transport.zoombar { margin: 8px 0 0; }
+.zoombar button { min-width: 2.2em; }
+.zoombar .at { min-width: 3.2em; }
+.zoombar .follow { margin-left: auto; font-size: 13px; color: var(--quiet); white-space: nowrap; }
+
 .transport { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
 .transport input[type="range"] { flex: 1 1 200px; min-width: 140px; accent-color: var(--accent); }
 .transport .at { font-family: var(--mono); font-size: 13px; color: var(--quiet); white-space: nowrap; }

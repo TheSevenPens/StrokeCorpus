@@ -35,6 +35,16 @@
       <h2>Stroke <span class="sub" id="closelyNote"></span></h2>
       <canvas class="closely" id="closely"></canvas>
 
+      <div class="transport zoombar">
+        <button type="button" id="zoomOut" title="Zoom out (-)">&minus;</button>
+        <button type="button" id="zoomIn" title="Zoom in (+)">+</button>
+        <button type="button" id="zoomFit" title="Fit the whole stroke (0, or double-click)">Fit</button>
+        <span class="at" id="zoomAt">&times;1</span>
+        <label class="follow" title="Re-centre on the current reading each time it changes while zoomed in. Panning or zooming holds until then.">
+          <input type="checkbox" id="follow" checked> Follow current reading
+        </label>
+      </div>
+
       <div class="transport">
         <button type="button" id="start" title="First reading">&#124;&lsaquo;</button>
         <button type="button" id="back" title="Back one reading">&lsaquo;</button>
@@ -45,7 +55,10 @@
         <span class="at" id="at"></span>
       </div>
 
-      <p class="note">Arrow keys step, space plays, Home and End jump.</p>
+      <p class="note">
+        Arrow keys step, space plays, Home and End jump. Scroll to zoom, drag to pan,
+        double-click to fit.
+      </p>
     </section>
 
     <section class="panel across">
@@ -194,8 +207,60 @@ await run(async () => {
     if (row) move(parseInt(row.dataset.at, 10));
   });
 
-  function paint() {
-    drawClosely(closely, stroke, at, { fullScale: full });
+  // Where the stroke picture is looking. `zoom` is a multiple of the fit scale; `cx` and `cy`
+  // are the stroke coordinates at the middle of the canvas, null while the whole stroke fits.
+  const view = { zoom: 1, cx: null, cy: null };
+  const MOST = 400;
+
+  // What the last paint measured, which is what turns a cursor position into a stroke position.
+  let geo = null;
+
+  const zoomAt = document.getElementById("zoomAt");
+  const follow = document.getElementById("follow");
+
+  function setView(zoom, cx, cy) {
+    view.zoom = Math.max(1, Math.min(MOST, zoom));
+
+    if (view.zoom === 1) {
+      view.cx = null;
+      view.cy = null;
+    } else {
+      // Kept inside the stroke's own bounds, so it cannot be dragged out of sight.
+      view.cx = Math.max(geo.box.left, Math.min(geo.box.right, cx));
+      view.cy = Math.max(geo.box.top, Math.min(geo.box.bottom, cy));
+    }
+
+    paint();
+  }
+
+  // Changes the zoom while holding the stroke point under (mx, my) where it is, as a map does,
+  // or the middle of the canvas where there is no cursor.
+  function zoomTo(zoom, mx = geo?.width / 2, my = geo?.height / 2) {
+    if (!geo) return;
+
+    const now = geo.base * view.zoom;
+    const next = geo.base * Math.max(1, Math.min(MOST, zoom));
+
+    const x = geo.cx + (mx - geo.width / 2) / now;
+    const y = geo.cy + (my - geo.height / 2) / now;
+
+    setView(zoom, x - (mx - geo.width / 2) / next, y - (my - geo.height / 2) / next);
+  }
+
+  // `recentre` is true only when the playhead has moved (or following was just switched on).
+  // Panning and zooming repaint without it, so looking somewhere else holds until the next
+  // reading, and then the view comes back to it. Re-centring on every paint made the picture
+  // impossible to drag while following, and made a wheel zoom ignore the cursor.
+  function paint(recentre = false) {
+    if (recentre && follow.checked && view.zoom > 1 && geo) {
+      view.cx = r[at].x;
+      view.cy = r[at].y;
+    }
+
+    geo = drawClosely(closely, stroke, at, { fullScale: full, view });
+
+    zoomAt.textContent = `×${view.zoom < 10 ? view.zoom.toFixed(1) : Math.round(view.zoom)}`;
+    closely.classList.toggle("zoomed", view.zoom > 1);
 
     drawChannel(document.getElementById("pressure"), stroke, (p) => p.pressure, at,
       { label: "pressure", from: 0, to: full });
@@ -220,6 +285,7 @@ await run(async () => {
       ["x", fmt(p.x)],
       ["y", fmt(p.y)],
       ["pressure", `${p.pressure} of ${full}`],
+      ["pressure %", `${(p.pressure / full * 100).toFixed(2)}%`],
       ["step into it", `${fmt(steps[at])} px`],
       ["avg speed", `${fmt(speeds[at])} px/s`],
       ["lean", `${fmt(p.lean)}°`],
@@ -244,7 +310,7 @@ await run(async () => {
       // the page included, so stepping through a stroke dragged the whole page down to the
       // table's row.
       const list = rows.closest(".rows");
-      const top = row.offsetTop - rows.offsetTop;
+      const top = row.offsetTop;
       const head = list.querySelector("thead").offsetHeight;
 
       if (top < list.scrollTop + head) list.scrollTop = top - head;
@@ -253,7 +319,7 @@ await run(async () => {
       }
     }
 
-    paint();
+    paint(true);
   }
 
   function play() {
@@ -285,6 +351,52 @@ await run(async () => {
   document.getElementById("play").addEventListener("click", play);
   scrub.addEventListener("input", () => move(parseInt(scrub.value, 10)));
 
+  document.getElementById("zoomIn").addEventListener("click", () => zoomTo(view.zoom * 1.6));
+  document.getElementById("zoomOut").addEventListener("click", () => zoomTo(view.zoom / 1.6));
+  document.getElementById("zoomFit").addEventListener("click", () => setView(1));
+  follow.addEventListener("change", () => paint(true));
+
+  // Scrolling over the picture zooms it, about the cursor. Registered by hand because a wheel
+  // listener added the usual way is passive, and a passive one cannot stop the page scrolling.
+  closely.addEventListener("wheel", (e) => {
+    e.preventDefault();
+
+    const box = closely.getBoundingClientRect();
+    const lines = e.deltaMode === 1 ? 16 : 1;
+
+    zoomTo(view.zoom * Math.exp(-e.deltaY * lines * 0.0015), e.clientX - box.left, e.clientY - box.top);
+  }, { passive: false });
+
+  closely.addEventListener("dblclick", () => setView(1));
+
+  let dragging = null;
+
+  closely.addEventListener("pointerdown", (e) => {
+    if (view.zoom === 1 || e.button !== 0) return;
+
+    dragging = { x: e.clientX, y: e.clientY };
+    closely.setPointerCapture(e.pointerId);
+    closely.classList.add("dragging");
+  });
+
+  closely.addEventListener("pointermove", (e) => {
+    if (!dragging || !geo) return;
+
+    const scale = geo.base * view.zoom;
+
+    setView(view.zoom, geo.cx - (e.clientX - dragging.x) / scale, geo.cy - (e.clientY - dragging.y) / scale);
+
+    dragging = { x: e.clientX, y: e.clientY };
+  });
+
+  const drop = () => {
+    dragging = null;
+    closely.classList.remove("dragging");
+  };
+
+  closely.addEventListener("pointerup", drop);
+  closely.addEventListener("pointercancel", drop);
+
   addEventListener("keydown", (e) => {
     if (e.target.matches("input, select, textarea")) return;
 
@@ -296,6 +408,10 @@ await run(async () => {
       Home: () => move(0),
       End: () => move(r.length - 1),
       " ": play,
+      "+": () => zoomTo(view.zoom * 1.6),
+      "=": () => zoomTo(view.zoom * 1.6),
+      "-": () => zoomTo(view.zoom / 1.6),
+      "0": () => setView(1),
     };
 
     if (keys[e.key]) {
@@ -304,7 +420,7 @@ await run(async () => {
     }
   });
 
-  addEventListener("resize", paint);
+  addEventListener("resize", () => paint());
 
   move(0);
 });
