@@ -56,8 +56,8 @@
       </div>
 
       <p class="note">
-        Arrow keys step, space plays, Home and End jump. Scroll to zoom, drag to pan,
-        double-click to fit.
+        Arrow keys step (up and down: shift for ten), space plays, Home and End jump.
+        Scroll to zoom, drag to pan, double-click to fit.
       </p>
     </section>
 
@@ -282,6 +282,7 @@ await run(async () => {
     document.getElementById("at").textContent = `${at + 1} / ${r.length}`;
 
     document.getElementById("here").innerHTML = [
+      ["reading", `${at + 1} of ${r.length}`],
       ["x", fmt(p.x)],
       ["y", fmt(p.y)],
       ["pressure", `${p.pressure} of ${full}`],
@@ -403,8 +404,9 @@ await run(async () => {
     const keys = {
       ArrowRight: () => move(at + 1),
       ArrowLeft: () => move(at - 1),
-      ArrowUp: () => move(at + 10),
-      ArrowDown: () => move(at - 10),
+      // Up is the previous reading and down the next, as in a list; shift takes ten at a time.
+      ArrowUp: () => move(at - (e.shiftKey ? 10 : 1)),
+      ArrowDown: () => move(at + (e.shiftKey ? 10 : 1)),
       Home: () => move(0),
       End: () => move(r.length - 1),
       " ": play,
