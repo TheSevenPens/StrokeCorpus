@@ -266,6 +266,13 @@ export function drawInk(canvas, stroke, options = {}) {
  * the reading at the playhead ringed. Drawing the ink hides the thing worth looking at:
  * where the readings actually fell, how far apart they are, and how much of the mark is
  * being interpolated rather than reported.
+ *
+ * @param options.view  where to look: `zoom` is a multiple of the fit-to-canvas scale, and `cx`
+ *   and `cy` are the stroke coordinates at the middle of the canvas. Left out, the whole stroke
+ *   fits. Dot sizes stay the same on screen however far in the view is, so zooming spreads the
+ *   readings out rather than inflating them.
+ * @returns what a caller needs to turn a zoom into a view: the fit scale, the centre, the
+ *   canvas size and the stroke's bounds, so the zoom can be held on the point under a cursor.
  */
 export function drawClosely(canvas, stroke, at, options = {}) {
   const width = options.width || canvas.clientWidth || 600;
@@ -274,21 +281,24 @@ export function drawClosely(canvas, stroke, at, options = {}) {
 
   const all = [...stroke.approach, ...stroke.readings];
 
-  if (!all.length) return;
+  if (!all.length) return null;
 
   const box = boundsOf(all);
   const pad = 18;
 
   // One scale for both axes, so a stroke is the shape it was drawn and not that shape
   // stretched to fill a box.
-  const scale = Math.min(
+  const base = Math.min(
     (width - pad * 2) / Math.max(1e-6, box.right - box.left),
     (height - pad * 2) / Math.max(1e-6, box.bottom - box.top)
   );
 
-  const offX = (width - (box.right - box.left) * scale) / 2;
-  const offY = (height - (box.bottom - box.top) * scale) / 2;
-  const place = (p) => [offX + (p.x - box.left) * scale, offY + (p.y - box.top) * scale];
+  const view = options.view || {};
+  const scale = base * (view.zoom || 1);
+  const cx = view.cx ?? (box.left + box.right) / 2;
+  const cy = view.cy ?? (box.top + box.bottom) / 2;
+
+  const place = (p) => [width / 2 + (p.x - cx) * scale, height / 2 + (p.y - cy) * scale];
 
   const ink = styleOf("--ink");
   const quiet = styleOf("--faint");
@@ -345,6 +355,8 @@ export function drawClosely(canvas, stroke, at, options = {}) {
     pen.arc(x, y, 8, 0, Math.PI * 2);
     pen.stroke();
   }
+
+  return { base, width, height, box, cx, cy };
 }
 
 /**
@@ -352,6 +364,11 @@ export function drawClosely(canvas, stroke, at, options = {}) {
  *
  * @param pick  what to read off each reading
  * @param at    which reading the playhead is on
+ * @param options.minSpan  the least the vertical axis may cover, in the channel's own units.
+ *   A channel that fits itself to its data turns a quantised value into a dramatic one: lean
+ *   is reported in whole degrees, so a stroke that only ever read 37 and 38 filled the whole
+ *   height with a single degree. A smaller range is centred in this span instead. Ignored
+ *   where `from` and `to` fix the axis.
  */
 export function drawChannel(canvas, stroke, pick, at, options = {}) {
   const width = options.width || canvas.clientWidth || 600;
@@ -362,8 +379,20 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
 
   if (!values.length) return;
 
-  const low = options.from !== undefined ? options.from : Math.min(...values);
-  const high = options.to !== undefined ? options.to : Math.max(...values);
+  const seenLow = Math.min(...values);
+  const seenHigh = Math.max(...values);
+
+  let low = options.from !== undefined ? options.from : seenLow;
+  let high = options.to !== undefined ? options.to : seenHigh;
+
+  if (options.minSpan && options.from === undefined && options.to === undefined
+      && high - low < options.minSpan) {
+    const middle = (low + high) / 2;
+
+    low = middle - options.minSpan / 2;
+    high = middle + options.minSpan / 2;
+  }
+
   const range = Math.max(1e-9, high - low);
 
   const pad = 8;
@@ -400,7 +429,13 @@ export function drawChannel(canvas, stroke, pick, at, options = {}) {
 
   pen.fillStyle = styleOf("--quiet");
   pen.font = "11px " + styleOf("--mono").split(",")[0].replace(/"/g, "");
-  pen.fillText(`${options.label || ""} ${fmt(low)} to ${fmt(high)}`, 4, 12);
+  // What the data covered, not the axis: where the axis was widened, saying "34 to 42" for a
+  // channel that only ever read 37 and 38 would claim a range nobody measured.
+  const shown = options.from !== undefined || options.to !== undefined
+    ? [low, high]
+    : [seenLow, seenHigh];
+
+  pen.fillText(`${options.label || ""} ${fmt(shown[0])} to ${fmt(shown[1])}`, 4, 12);
 }
 
 export const fmt = (n) =>
