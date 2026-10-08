@@ -99,9 +99,27 @@ units `placement` describes. From **version 8** a recording says so, in `coordin
 }
 ```
 
+A desktop recording from a Wintab backend, which can ask the driver how big the tablet is:
+
+```json
+{
+  "formatVersion": 8,
+  "coordinates": {
+    "space": "desktop",
+    "units": "desktop physical pixels, as reported by the session",
+    "widthMm": 349,
+    "heightMm": 195,
+    "mappedWidthMm": 349,
+    "mappedHeightMm": 195,
+    "mmPerPixelX": 0.090885,
+    "mmPerPixelY": 0.060185
+  }
+}
+```
+
 | `space` | `x` and `y` are | `coordinates` also carries | `placement` |
 |---|---|---|---|
-| `desktop` | positions on the desktop, in the units `placement` describes: what every earlier version means | `units` | required |
+| `desktop` | positions on the desktop, in the units `placement` describes: what every earlier version means | `units`, and optionally `widthMm`, `heightMm`, `mappedWidthMm`, `mappedHeightMm`, `mmPerPixelX`, `mmPerPixelY` | required |
 | `tablet` | the device's own digitizer counts, as it reported them, before any mapping to a display | `units`, `maxX`, `maxY`, `widthMm`, `heightMm` | absent |
 
 - **Why a tablet space exists.** A position on the desktop has the driver's mapping, the display
@@ -113,6 +131,32 @@ units `placement` describes. From **version 8** a recording says so, in `coordin
   `maxX` and `maxY` are the largest count the digitizer reports on each axis and `widthMm` and
   `heightMm` the physical size of its area, so a count is `x * widthMm / maxX` millimetres along
   that axis, and speeds from different devices can be compared in millimetres a second.
+- **How far is that in millimetres, in either space.** A reader that wants a distance or a speed
+  from a recording of either kind needs one number per axis, and gets it like this:
+
+  | `space` | millimetres for one unit of `x` | and of `y` |
+  |---|---|---|
+  | `tablet` | `widthMm / maxX` | `heightMm / maxY` |
+  | `desktop`, with `mmPerPixelX` and `mmPerPixelY` | `mmPerPixelX` | `mmPerPixelY` |
+  | `desktop`, without them | unknown | unknown |
+
+  Scale each component by its own axis and then combine them:
+  `sqrt((dx * mmX)^2 + (dy * mmY)^2)`. **Do not scale a length in pixels by one figure.** A
+  tablet mapped across a desktop of another shape is stretched: a 349 x 195 mm surface mapped
+  across 3840 x 3240 pixels is 0.091 mm a pixel across and 0.060 mm a pixel down.
+- **Desktop recordings may say how big the tablet is.** In both spaces `widthMm` and `heightMm`
+  mean the same thing: the whole active area of the tablet. A desktop recording made through a
+  backend that can ask the driver also carries the part of that area the driver had mapped to the
+  desktop (`mappedWidthMm`, `mappedHeightMm`, the whole of it unless the user chose a partial or
+  proportion-forced mapping) and the scale (`mmPerPixelX`, `mmPerPixelY`: the mapped size over
+  the desktop pixels it lands on). They go in pairs, and the mapped size and the scale need
+  `widthMm`. **Absent means the backend could not say**, which includes every recording made
+  before this was added; it does not mean a tablet of no size. Wintab states it through the
+  unit and resolution of its X and Y axes. The pointer backends are not asked yet.
+- **Where the size comes from differs, and is not recorded.** A tablet recording takes it from
+  the driver's specification for that tablet; a Wintab desktop recording asks the driver at the
+  time. Both are what the driver says, not something measured with a ruler, and a driver that
+  places the pen wrongly on the desktop has its distances wrong by the same factor.
 - **The axes are the device's.** The origin and the direction of each axis are whatever the
   device reports and are not normalized. Do not assume the origin is at the top left.
 - **Absent and empty mean different things.** A recording before version 8 has no `coordinates`,

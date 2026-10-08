@@ -326,7 +326,21 @@
           "required": ["space", "units"],
           "properties": {
             "space": { "const": "desktop" },
-            "units": { "type": "string", "minLength": 1 }
+            "units": { "type": "string", "minLength": 1 },
+            "widthMm": { "type": "number", "exclusiveMinimum": 0, "description": "The whole active area of the tablet, horizontally. Means what it means in tablet space." },
+            "heightMm": { "type": "number", "exclusiveMinimum": 0 },
+            "mappedWidthMm": { "type": "number", "exclusiveMinimum": 0, "description": "The part of the active area the driver mapped to the desktop." },
+            "mappedHeightMm": { "type": "number", "exclusiveMinimum": 0 },
+            "mmPerPixelX": { "type": "number", "exclusiveMinimum": 0, "description": "Millimetres on the tablet for one unit of x. Per axis, because a mapping can stretch the tablet onto a desktop of another shape." },
+            "mmPerPixelY": { "type": "number", "exclusiveMinimum": 0 }
+          },
+          "dependentRequired": {
+            "widthMm": ["heightMm"],
+            "heightMm": ["widthMm"],
+            "mappedWidthMm": ["mappedHeightMm", "widthMm"],
+            "mappedHeightMm": ["mappedWidthMm"],
+            "mmPerPixelX": ["mmPerPixelY", "widthMm"],
+            "mmPerPixelY": ["mmPerPixelX"]
           },
           "additionalProperties": false
         },
