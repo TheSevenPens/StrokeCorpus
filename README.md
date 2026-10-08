@@ -85,6 +85,8 @@ More hands, more tablets, and more backends are exactly what this needs — ever
 one person on one device, so nothing in it can yet distinguish a fact about *pens* from a
 fact about *this pen*.
 
+The format is defined in [FORMAT.md](FORMAT.md) and, machine-readably, in
+[`schema/take.schema.json`](schema/take.schema.json); a pull request is checked against it.
 See [CONTRIBUTING.md](CONTRIBUTING.md). Short version: record with the
 [Stroke Recorder](https://github.com/TheSevenPens/StrokeRecorder), open a pull request with
 the JSON file, and say what you drew and on what.

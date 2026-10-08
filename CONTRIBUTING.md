@@ -9,6 +9,10 @@ a second hand, is worth more here than a hundred more recordings from the first.
 Record with the [Stroke Recorder](https://github.com/TheSevenPens/StrokeRecorder), then open
 a pull request adding your `.json` files to `traces/`.
 
+Before you send it, check that it is well formed. `pip install jsonschema`, then
+`python tools/validate.py traces/your-file.json`. A pull request runs the same check, so this only
+saves a round trip.
+
 Please **do not edit the file**. The recorder writes what the driver said; a hand-corrected
 trace is no longer evidence, and the counters in it stop reconciling.
 

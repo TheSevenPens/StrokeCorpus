@@ -137,6 +137,9 @@ await run(async () => {
   }
 
   const full = entry?.device.fullScalePressure || 32767;
+  // What a length or a speed is measured in. Desktop positions are pixels; a tablet recording's are the
+  // device's own counts, before any mapping, and calling those pixels would be inventing a screen.
+  const unit = entry?.coordinateSpace === "tablet" ? "counts" : "px";
   const r = stroke.readings;
   const about = describe(stroke);
 
@@ -153,7 +156,7 @@ await run(async () => {
     entry?.columns.includes("arrived") ? "host ms" : "pen ms";
 
   document.getElementById("closelyNote").textContent =
-    `— ${about.readings} readings over ${fmt(about.length)} px` +
+    `— ${about.readings} readings over ${fmt(about.length)} ${unit}` +
     (about.approach ? `, and ${about.approach} in the air before it` : "");
 
   // The step into each reading, so the table and the speed channel say the same thing.
@@ -279,7 +282,7 @@ await run(async () => {
     }
 
     drawChannel(document.getElementById("speed"), stroke, (_, i) => speeds[i] ?? 0, at,
-      { label: (clock === "arrived" ? "speed px/s" : "speed px per counter-second")
+      { label: (clock === "arrived" ? `speed ${unit}/s` : `speed ${unit} per counter-second`)
         + `, ${WINDOW_US / 1000} ms average` });
 
     drawChannel(document.getElementById("lean"), stroke, (p) => p.lean, at,
@@ -300,17 +303,17 @@ await run(async () => {
       ["y", fmt(p.y)],
       ["pressure", `${p.pressure} of ${full}`],
       ["pressure %", `${(p.pressure / full * 100).toFixed(2)}%`],
-      ["step into it", `${fmt(steps[at])} px`],
-      ["avg speed", `${fmt(speeds[at])} px/s`],
+      ["step into it", `${fmt(steps[at])} ${unit}`],
+      ["avg speed", `${fmt(speeds[at])} ${unit}/s`],
       ["lean", `${fmt(p.lean)}°`],
       ["azimuth", `${fmt(p.azimuth)}°`],
       ["twist", `${fmt(p.twist)}°`],
-      ["height", entry?.columns.includes("height") ? fmt(p.height) : "not in this format"],
-      ["status", entry?.columns.includes("status") ? p.status : "not in this format"],
+      ["height", entry?.columns.includes("height") ? fmt(p.height) : "not in this recording"],
+      ["status", entry?.columns.includes("status") ? p.status : "not in this recording"],
       ["pen clock", `${((p.at - r[0].at) / 1000).toFixed(1)} ms in`],
       ["host clock", entry?.columns.includes("arrived")
         ? `${((p.arrived - r[0].arrived) / 1000).toFixed(1)} ms in`
-        : "not in this format"],
+        : "not in this recording"],
     ].map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
 
     for (const row of rows.querySelectorAll("tr")) row.classList.remove("picked");

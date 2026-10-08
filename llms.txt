@@ -18,6 +18,11 @@ Use `file` as the lookup key; `id` preserves the recorder's identifier and may d
 Fetch `traces/<file>` relative to the manifest URL. `file` already includes `.json`;
 do not append another extension. JSON is the authoritative recording format.
 
+The format is defined machine-readably by `schema/take.schema.json` (every version, with
+per-version constraints) and the catalogue by `schema/manifest.schema.json`. From format
+version 8, `coordinates` says whether `x` and `y` are desktop positions or the device's own
+digitizer counts; before version 8 they are desktop positions.
+
 Reading arrays are indexed by that recording's `columns`. A missing channel is
 unmeasured, not zero. Read position units from `placement` and pressure scale from
 `device.fullScalePressure`; retain the original JSON for the full metadata.
