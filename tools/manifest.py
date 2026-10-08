@@ -36,6 +36,7 @@ VERSIONS = {
     4: "the raw status word",
     5: "the host clock, so arrival can be told from the pen's own timestamp",
     6: "the approach aged on the host clock, which is what makes hover trustworthy",
+    7: "who made it, the tablet's firmware and free-text notes",
 }
 
 
