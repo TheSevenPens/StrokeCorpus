@@ -217,6 +217,46 @@ A brush is never given an approach reading: a stroke starts where the tip goes d
 are here because what the pen did on the way to the paper is real and almost nobody records
 it.
 
+### What approach and departure hold
+
+Both lists are **windows of a quarter second on the host clock** (`arrived`), before the landing
+and after the last contact reading, and both are **filtered**: a hovering reading is kept only
+if the pen's position differs from the last one kept, or it carries a lean or an azimuth. A pen
+resting in range repeats its position at every report, and keeping all of that would make the
+pauses larger than the drawing. So an approach is the pen's *movement* through the air, not every
+report it made, and **an empty approach does not mean the pen was not reported.** Both recorders
+that write this format do this.
+
+One consequence: the first hovering reading after a lift is not that stroke's departure (the
+stroke is still being drawn when it arrives), though it can be in the next stroke's approach, and
+a departure reading can also be the next stroke's approach. See the note on `aloft` above about
+the lists overlapping.
+
+### Per-stroke fields
+
+| field | meaning |
+|---|---|
+| `readings` | the contact readings, one array per reading, in the file's `columns`. Required |
+| `readingCount` | how many readings that is. A check, not data: the validator rejects a file where it disagrees with `readings` |
+| `endedBy` | why the stroke ended, in words, for example `the pen lifted` or `the recording was stopped mid-stroke`. Free text, not a closed list |
+| `lastSeenInTheAirMs` | how long before this stroke landed the pen was last reported in the air, in milliseconds on the host clock. Present when it was reported in the air at all |
+| `lastSeenInTheAir` | written **instead of** `lastSeenInTheAirMs`, as the string `"the pen was not reported in the air at all"`, when no airborne reading came before the landing. A statement, not a number |
+
+`lastSeenInTheAirMs` exists to answer one question about an empty `approach`: was the pen out of
+range, or did the recorder fail to keep what it was given? A large value with an empty approach
+means the pen was gone and there was nothing to keep. A small one is the thing to look at.
+
+**How it is measured depends on the recorder, and the file does not say which.** StrokeRecorder
+measures it from the last hovering reading *that moved*, because that is the only buffer it keeps.
+A pen held still in range before it landed therefore reports the time since it last moved, which
+overstates the gap: hover at 0 ms, the same hover again at 1000 ms and contact at 1001 ms is
+written as 1001 ms, not 1 (TheSevenPens/StrokeRecorder#9). OpenTabletArtist measures it from the
+last airborne reading of any kind. Read a large `lastSeenInTheAirMs` as an upper bound unless you
+know the pen was moving, and do not assume a recording has the exact figure unless it came from
+OpenTabletArtist's Record mode (its `device.api` is `OpenTabletDriver DeviceReport`). Neither
+recorder's value is a measurement of the hardware's silence: it is the interval between reports as
+they reached the application.
+
 ## Pressure is 13 bits in a 15-bit field
 
 On the device measured here, `fullScalePressure` reports 32767, and every one of the 5,251
