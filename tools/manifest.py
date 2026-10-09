@@ -400,10 +400,32 @@ def name(recording, filename):
     return stem.replace("-", " ")
 
 
+def set_aside():
+    """
+    The recordings that stay in traces/ but are left out of the catalogue.
+
+    Kept in set-aside.json, with why. Setting one aside is not deleting it: the file is untouched, is
+    still checked against the schema, and comes back the moment it is removed from that list.
+    """
+    path = os.path.join(ROOT, "set-aside.json")
+
+    if not os.path.exists(path):
+        return set()
+
+    with open(path, encoding="utf-8") as handle:
+        listed = json.load(handle)
+
+    return {name for group in listed.get("groups", []) for name in group.get("files", [])}
+
+
 def main():
     recordings = []
+    aside = set_aside()
 
     for path in sorted(glob.glob(os.path.join(TRACES, "*.json"))):
+        if os.path.basename(path) in aside:
+            continue
+
         with open(path, encoding="utf-8") as handle:
             recording = json.load(handle)
 

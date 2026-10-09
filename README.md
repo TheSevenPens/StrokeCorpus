@@ -17,20 +17,23 @@ There is very little real stylus data published, and almost none of it includes 
 The pen spends a good part of its life above the glass, the driver reports it the whole time,
 and what it does on the way down is a real and almost entirely undocumented signal.
 
-What is here is one hand, one tablet, one backend, recorded deliberately: a tap, a spiral, a
-pressure ramp, cross-hatching, flicks that reverse inside a single step, loops at four sizes
-to see how the pen's lean follows the arm, a stroke held still while the pressure rises.
+What is listed here is one hand, one tablet, one backend, recorded deliberately: strokes that
+rise smoothly from low to high pressure, low-pressure strokes, staccato strokes, quick taps,
+circles, loops, zigzags, and pairs of strokes drawn in opposite directions.
+
+An earlier set of 33 recordings, from a Wacom Cintiq 24, is kept in `traces/` and still validated
+but is **set aside**: it is not in the catalogue or on the website. See [Set aside](#set-aside).
 
 ## What is in it
 
 | | |
 |---|---|
-| recordings | 33 |
-| strokes | 200 |
-| readings in contact | 31,332 |
-| approach readings | 3,235 |
-| readings aloft | 31,240 |
-| tablet | Wacom Cintiq 24, driver 6.4.14-1 |
+| recordings | 9 |
+| strokes | 80 |
+| readings in contact | 23,192 |
+| approach readings | 4,398 |
+| readings aloft | 0 |
+| tablet | Wacom Intuos Pro Large (2025), driver 6.4.15-1 |
 | backend | Wintab (digitizer), full-scale pressure 32767 |
 
 Each recording carries positions, pressure, tilt as a lean and an azimuth, barrel rotation, and —
@@ -43,16 +46,25 @@ clock belonging to the host rather than to the pen.
 
 | tag | recordings | what it means |
 |---|---|---|
-| `complete` | 1 | every channel, both clocks, and the approach measured on the host clock |
+| `complete` | 9 | every channel, both clocks, and the approach measured on the host clock |
 | `partial` | 0 | version 6 or later, but the file does not carry every column, and the tag names which it lacks |
-| `hover-suspect` | 4 | both clocks, but the approach was aged on the pen's packet counter, so hover is incomplete |
-| `single-clock` | 9 | height and status, but only the pen's own timestamp |
-| `early` | 7 | strokes, and none of the later channels |
-| `raw` | 12 | a flat list of readings with no stroke segmentation at all |
+| `hover-suspect` | 0 | both clocks, but the approach was aged on the pen's packet counter, so hover is incomplete |
+| `single-clock` | 0 | height and status, but only the pen's own timestamp |
+| `early` | 0 | strokes, and none of the later channels |
+| `raw` | 0 | a flat list of readings with no stroke segmentation at all |
 
-Thirty-one of the thirty-three are tagged **wants re-recording**, and the site says why for
-each. That is not a warning about the data that is there; it is a list of recordings worth drawing
-again now that the recorder is better.
+None of the nine is tagged **wants re-recording**. (Thirty-one of the 33 set-aside recordings
+were, and the tag is a list of recordings worth drawing again, not a warning about the data that
+is there.)
+
+## Set aside
+
+[`set-aside.json`](set-aside.json) lists recordings that stay in `traces/` as original evidence
+and are still validated, but are left out of `manifest.json` and so out of the website. It holds
+the 33 earlier recordings from a Wacom Cintiq 24, in format versions 1 to 6, with the reason and
+the date. Nothing is deleted: removing a recording from that file and running
+`python tools/manifest.py` lists it again. `tools/validate.py` fails if an entry names a file that
+is not in `traces/`, so the list cannot go stale without somebody noticing.
 
 ## The one thing to know before you compute anything
 

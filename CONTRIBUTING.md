@@ -1,6 +1,7 @@
 # Contributing a recording
 
-Everything in this corpus is one hand, one Wacom Cintiq 24, one backend. That means nothing
+Everything listed in this corpus is one hand, one Wacom Intuos Pro Large, one backend. (An earlier
+set from a Wacom Cintiq 24 is kept but set aside; see [set-aside.json](set-aside.json).) That means nothing
 in it can yet tell a fact about **pens** from a fact about **this pen**. A second device, or
 a second hand, is worth more here than a hundred more recordings from the first.
 
@@ -23,7 +24,7 @@ already here fails its check.
 
 In rough order:
 
-1. **A tablet that is not a Wacom Cintiq 24.** Anything — a Huion, an XP-Pen, an iPad through
+1. **A tablet that is not a Wacom Intuos Pro Large or Cintiq 24.** Anything — a Huion, an XP-Pen, an iPad through
    a Windows bridge, a Surface pen, a screenless tablet. Different drivers report different
    things and disagree in ways nobody has written down.
 2. **A backend that is not Wintab.** WM_POINTER and the plain framework pointer see the same

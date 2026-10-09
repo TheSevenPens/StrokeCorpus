@@ -2,6 +2,7 @@
   "format": "stroke-field-guide/take",
   "formatVersion": 8,
   "id": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
+  "name": "Four pairs, west and east",
   "gesture": "multi-stroke",
   "intent": "4 pairs of strokes. Each pair has the pen pointing the west. One of the pair is moving west. One of the pair is moving east.",
   "username": "",

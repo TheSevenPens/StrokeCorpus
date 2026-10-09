@@ -194,6 +194,43 @@ def check_recordings(paths):
     return good == len(paths)
 
 
+def set_aside():
+    """
+    The recordings set-aside.json leaves out of the catalogue, and what is wrong with the list.
+
+    A mistake here is quiet in both directions -- a misspelt name hides nothing, a stale one hides
+    something that was meant to come back -- so every entry has to name a recording that is in
+    traces/, once, with a reason.
+    """
+    path = os.path.join(ROOT, "set-aside.json")
+
+    if not os.path.exists(path):
+        return set(), []
+
+    listed = load(path)
+    problems = []
+    seen = set()
+
+    if not isinstance(listed.get("groups"), list):
+        return set(), ["set-aside.json: 'groups' must be a list"]
+
+    present = {os.path.basename(each) for each in glob.glob(os.path.join(TRACES, "*.json"))}
+
+    for number, group in enumerate(listed["groups"], start=1):
+        if not (isinstance(group.get("reason"), str) and group["reason"].strip()):
+            problems.append(f"set-aside.json: group {number} has no reason")
+
+        for name in group.get("files", []):
+            if name not in present:
+                problems.append(f"set-aside.json: {name} is not in traces/")
+            elif name in seen:
+                problems.append(f"set-aside.json: {name} is listed twice")
+
+            seen.add(name)
+
+    return seen & present, problems
+
+
 def check_manifest():
     check, schema = validator("manifest.schema.json")
     manifest = load(os.path.join(ROOT, "manifest.json"))
@@ -204,16 +241,23 @@ def check_manifest():
 
     listed = {entry.get("file") for entry in manifest.get("recordings", []) if isinstance(entry, dict)}
     present = {os.path.basename(path) for path in glob.glob(os.path.join(TRACES, "*.json"))}
+    aside, aside_problems = set_aside()
 
-    for name in sorted(present - listed):
+    problems.extend(aside_problems)
+
+    for name in sorted(present - aside - listed):
         problems.append(f"{name} is in traces/ and not in the manifest; run tools/manifest.py")
 
     for name in sorted(listed - present):
         problems.append(f"{name} is in the manifest and not in traces/; run tools/manifest.py")
 
+    for name in sorted(listed & aside):
+        problems.append(f"{name} is set aside in set-aside.json and is also in the manifest; run tools/manifest.py")
+
     ok = report("manifest.json", problems)
 
-    print(f"manifest: {'valid' if ok else 'not valid'}, {len(listed)} recordings listed")
+    print(f"manifest: {'valid' if ok else 'not valid'}, {len(listed)} recordings listed"
+          + (f", {len(aside)} set aside" if aside else ""))
 
     return ok
 
