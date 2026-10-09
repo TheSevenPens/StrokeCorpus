@@ -403,3 +403,37 @@ footer {
 }
 
 footer a { color: var(--quiet); }
+
+/* The menu that appears when a reading is right-clicked on the stroke page. */
+.ctxmenu {
+  position: fixed;
+  z-index: 50;
+  min-width: 13rem;
+  padding: 4px;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.ctxmenu[hidden] { display: none; }
+
+.ctxmenu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ctxmenu button:hover,
+.ctxmenu button:focus-visible { background: var(--accent-soft); outline: none; }
+
+.ctxmenu button:disabled { color: var(--quiet); background: transparent; cursor: default; }

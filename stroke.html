@@ -5,7 +5,7 @@
 <link rel="describedby" href="llms.txt" type="text/plain">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A stroke &mdash; Stroke Corpus</title>
-<link rel="stylesheet" href="corpus.css?v=27eb0d51">
+<link rel="stylesheet" href="corpus.css?v=6e4e267c">
 </head>
 <body>
 
@@ -58,7 +58,7 @@
       <p class="note">
         Arrow keys step (up and down: shift for ten), space plays, Home and End jump.
         Scroll to zoom about the cursor, + and &minus; to zoom on the current reading, drag to pan,
-        double-click to fit.
+        double-click to fit. Right-click a reading to make it the current one.
         Blue dots are readings made with the pen in the air before it touched down.
       </p>
     </section>
@@ -413,6 +413,96 @@ await run(async () => {
   }, { passive: false });
 
   closely.addEventListener("dblclick", () => setView(1));
+
+  // Right-clicking near a reading offers to make it the current one. Only when a reading is close
+  // enough to have been meant: anywhere else the browser's own menu appears as it always did.
+  const REACH = 16;   // how near, in screen pixels, a right-click has to be
+
+  const menu = document.createElement("div");
+  const item = document.createElement("button");
+  let offered = -1;
+
+  menu.className = "ctxmenu";
+  menu.setAttribute("role", "menu");
+  menu.hidden = true;
+  item.type = "button";
+  item.setAttribute("role", "menuitem");
+  menu.appendChild(item);
+  document.body.appendChild(menu);
+
+  function closeMenu() {
+    menu.hidden = true;
+    offered = -1;
+  }
+
+  // The reading nearest (mx, my) on the canvas, or -1 when none is within reach. Positions are
+  // worked out the way the picture places them, from what the last paint measured.
+  function nearest(mx, my) {
+    if (!geo) return -1;
+
+    const scale = geo.base * view.zoom;
+    let best = -1;
+    let within = REACH * REACH;
+
+    r.forEach((p, i) => {
+      const dx = geo.width / 2 + (p.x - geo.cx) * scale - mx;
+      const dy = geo.height / 2 + (p.y - geo.cy) * scale - my;
+      const d = dx * dx + dy * dy;
+
+      if (d <= within) {
+        best = i;
+        within = d;
+      }
+    });
+
+    return best;
+  }
+
+  closely.addEventListener("contextmenu", (e) => {
+    const box = closely.getBoundingClientRect();
+    const i = nearest(e.clientX - box.left, e.clientY - box.top);
+
+    if (i < 0) {
+      closeMenu();
+
+      return;
+    }
+
+    e.preventDefault();
+
+    offered = i;
+    item.disabled = i === at;
+    item.textContent = i === at
+      ? `Reading ${i + 1} is the current reading`
+      : `Set reading ${i + 1} as the current reading`;
+
+    menu.hidden = false;
+    menu.style.left = `${Math.max(8, Math.min(e.clientX, innerWidth - menu.offsetWidth - 8))}px`;
+    menu.style.top = `${Math.max(8, Math.min(e.clientY, innerHeight - menu.offsetHeight - 8))}px`;
+
+    if (!item.disabled) item.focus();
+  });
+
+  item.addEventListener("click", () => {
+    const chosen = offered;
+
+    closeMenu();
+
+    if (chosen >= 0) move(chosen);
+  });
+
+  // Keys pressed in the menu are the menu's. Without this Space would play the stroke and the arrow
+  // keys would step it, instead of choosing the item the menu is offering.
+  menu.addEventListener("keydown", (e) => {
+    e.stopPropagation();
+
+    if (e.key === "Escape") closeMenu();
+  });
+
+  addEventListener("pointerdown", (e) => { if (!menu.hidden && !menu.contains(e.target)) closeMenu(); }, true);
+  addEventListener("scroll", closeMenu, true);
+  addEventListener("resize", closeMenu);
+  addEventListener("blur", closeMenu);
 
   let dragging = null;
 
