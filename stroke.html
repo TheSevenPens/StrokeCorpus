@@ -114,9 +114,9 @@
 <script type="module">
 import {
   run,
-  loadManifest, loadRecording, strokesOf, describe, gap,
+  loadManifest, loadRecording, strokesOf, describe, gap, millimetresPerUnit, gapMm,
   drawClosely, drawChannel, drawAbsent, fmt,
-} from "./corpus.js?v=4e397b84";
+} from "./corpus.js?v=f7807b7a";
 
 await run(async () => {
 
@@ -181,7 +181,15 @@ await run(async () => {
   // across any window is a subtraction.
   const path = steps.reduce((sum, step, i) => (sum.push((sum[i - 1] ?? 0) + step), sum), []);
 
-  const speeds = r.map((_, i) => {
+  // The same, in millimetres, when the recording says how big the tablet is: how far the pen has gone
+  // since it touched, which is where a stroke's readings begin. The air before it is not counted.
+  const scale = millimetresPerUnit(recording);
+  const pathMm = scale
+    ? r.reduce((sum, p, i) => (sum.push(i === 0 ? 0 : sum[i - 1] + gapMm(r[i - 1], p, scale)), sum), [])
+    : null;
+
+  // The speed at each reading from a running total of distance: pixels, or millimetres when there is one.
+  const speedFrom = (total) => r.map((_, i) => {
     let lo = i;
     let hi = i;
 
@@ -190,8 +198,11 @@ await run(async () => {
 
     const dt = (times[hi] - times[lo]) / 1e6;
 
-    return dt > 0 ? (path[hi] - path[lo]) / dt : 0;
+    return dt > 0 ? (total[hi] - total[lo]) / dt : 0;
   });
+
+  const speeds = speedFrom(path);
+  const speedsMm = pathMm ? speedFrom(pathMm) : null;
 
   let at = 0;
   let playing = null;
@@ -332,7 +343,13 @@ await run(async () => {
       ["pressure", `${p.pressure} of ${full}`],
       ["pressure %", `${(p.pressure / full * 100).toFixed(2)}%`],
       ["step into it", `${fmt(steps[at])} ${unit}`],
+      ["distance so far", pathMm
+        ? `${fmt(pathMm[at])} mm of ${fmt(pathMm[r.length - 1])} mm`
+        : "not known &mdash; this recording does not say how big the tablet is"],
       ["avg speed", `${fmt(speeds[at])} ${unit}/s`],
+      ["avg speed, physical", speedsMm
+        ? `${fmt(speedsMm[at])} ${clock === "arrived" ? "mm/s" : "mm per counter-second"}`
+        : "not known &mdash; this recording does not say how big the tablet is"],
       ["lean", `${fmt(p.lean)}°`],
       ["azimuth", `${fmt(p.azimuth)}°`],
       ["twist", `${fmt(p.twist)}°`],

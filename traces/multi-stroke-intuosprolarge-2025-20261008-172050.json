@@ -23,8 +23,8 @@
   },
   "device": {
     "tablet": "IntuosProLarge_2025",
-    "driver": "6.4.15-1",
-    "firmware": "",
+    "driver": "WACOM_6.4.15-1",
+    "firmware": "WACOM",
     "pen": "ACP-700",
     "api": "WintabDigitizer",
     "fullScalePressure": 32767,

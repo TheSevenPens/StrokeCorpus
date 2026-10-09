@@ -16,9 +16,9 @@ saves a round trip.
 
 Please **do not edit the file**. The recorder writes what the driver said; a hand-corrected
 trace is no longer evidence, and the counters in it stop reconciling. The only things that can be
-added or changed later are the recording's `name`, its `device.pen` and its `device.driver`, labels and
-not measurements (see [FORMAT.md](FORMAT.md#a-name), [FORMAT.md](FORMAT.md#the-pen) and
-[FORMAT.md](FORMAT.md#the-driver)); a pull request that changes anything else in a recording that is
+added or changed later are the recording's `name`, its `device.pen`, `device.driver` and `device.firmware`,
+labels and not measurements (see [FORMAT.md](FORMAT.md#a-name), [FORMAT.md](FORMAT.md#the-pen),
+[FORMAT.md](FORMAT.md#the-driver) and [FORMAT.md](FORMAT.md#the-firmware)); a pull request that changes anything else in a recording that is
 already here fails its check.
 
 ## What is most wanted
@@ -63,8 +63,8 @@ hand.** The file records the device itself, and the recorder's Save step has a P
 goes in the file; say it here too if the recording was made before that box existed. Nothing in the
 file can record that you were drawing left-handed, or standing, or that the pen has a worn nib.
 
-If the recording's pen or driver box was left empty, it can be added to the file afterwards (one
-`device.pen` or `device.driver` line).
+If the recording's pen, driver or firmware box was left empty, it can be added to the file afterwards (one
+`device.pen`, `device.driver` or `device.firmware` line).
 
 ## What happens to it
 

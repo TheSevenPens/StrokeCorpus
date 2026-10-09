@@ -86,7 +86,7 @@
 </footer>
 
 <script type="module">
-import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt, pressureCadence, esc } from "./corpus.js?v=4e397b84";
+import { run, loadManifest, loadRecording, strokesOf, describe, gap, millimetresPerUnit, gapMm, drawInk, offer, fmt, pressureCadence, esc } from "./corpus.js?v=f7807b7a";
 
 await run(async () => {
 
@@ -156,6 +156,31 @@ await run(async () => {
     return pen !== null ? `${pen.toFixed(1)} <span class="sub">&mdash; in contact, pen clock</span>` : "&mdash;";
   }
 
+  // How far the pen travelled while it was touching, in millimetres, when the recording says how big
+  // the tablet's area is: FORMAT.md's rule for millimetres in either space. One figure per axis, because
+  // a tablet mapped across a desktop of another shape is stretched, and each step is scaled by its own
+  // axes before the two are combined, never a length in pixels by one figure. The air between strokes
+  // and the approach and departure are not counted. A recording that does not say gets no guess.
+  function penDownDistance() {
+    const scale = millimetresPerUnit(recording);
+
+    if (scale === null) {
+      return `<span style="color:var(--quiet)">not known &mdash; this recording does not say how big the tablet is</span>`;
+    }
+
+    let mm = 0;
+
+    for (const stroke of strokes) {
+      const rows = stroke.readings;
+
+      for (let i = 1; i < rows.length; i++) mm += gapMm(rows[i - 1], rows[i], scale);
+    }
+
+    const metres = mm >= 1000 ? ` (${(mm / 1000).toFixed(2)} m)` : "";
+
+    return `${mm.toLocaleString(undefined, { maximumFractionDigits: 0 })} mm${metres} <span class="sub">&mdash; over ${strokes.length} stroke${strokes.length === 1 ? "" : "s"}, worked out from the tablet's size</span>`;
+  }
+
   const facts = [
     ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
     ["tablet", esc(entry.device.tablet)],
@@ -170,6 +195,7 @@ await run(async () => {
     ["seconds, host clock", entry.seconds.host ?? "not in this recording"],
     ["seconds, pen clock", entry.seconds.pen ?? "—"],
     ["reports per second", reportRate()],
+    ["distance travelled, pen down", penDownDistance()],
   ];
 
   document.getElementById("facts").innerHTML = facts
