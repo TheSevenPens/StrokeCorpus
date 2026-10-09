@@ -1,5 +1,5 @@
 {
-  "about": "Facts about a recording that its contributor told the catalogue and that the recording itself leaves empty. The trace files are not touched: they stay as the recorder wrote them. Each fact is shown in the catalogue marked as supplied, and only where the file's own value is empty. Nothing here changes a recording; remove an entry and run tools/manifest.py to take it back out.",
+  "about": "Facts about a recording that its contributor told the catalogue and that the recording itself leaves empty (today, the driver version and the pen). The trace files are not touched: they stay as the recorder wrote them. Each fact is shown in the catalogue marked as supplied, and only where the file's own value is empty. Nothing here changes a recording; remove an entry and run tools/manifest.py to take it back out.",
   "groups": [
     {
       "on": "2026-10-09",
@@ -17,6 +17,22 @@
         "multi-stroke-intuosprolarge-2025-20261008-172712.json",
         "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
         "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json"
+      ]
+    },
+    {
+      "on": "2026-10-09",
+      "reason": "The contributor said the pen for these nine was an ACP-700, and the Pen box in the recorder was left empty for them. The readings agree: all nine report about 240 times a second and carry non-zero twist on every reading, where the two recordings with a pen entered (ACP-500, KP-504E) report about 303 and 202 times a second and carry no twist.",
+      "pen": "ACP-700",
+      "files": [
+        "multi-stroke-intuosprolarge-2025-20261008-171943.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172050.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172205.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172252.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172415.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172455.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172536.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172621.json",
+        "multi-stroke-intuosprolarge-2025-20261008-172712.json"
       ]
     }
   ]

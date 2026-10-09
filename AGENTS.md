@@ -10,7 +10,7 @@ These instructions apply throughout this repository.
   be added to a recording or changed after the fact, as a single line and nothing else, and it
   does not make a recording `editedAfterRecording`. `tools/check_names_only.py` enforces this on
   every pull request.
-- A fact the contributor told us that a recording leaves empty (today, only the driver version) goes in
+- A fact the contributor told us that a recording leaves empty (today, the driver version and the pen) goes in
   `supplied.json`, with why, and never into the trace. The catalogue shows it marked as supplied and
   only where the file's own value is empty. `tools/validate.py` checks the list.
 - To take a recording out of the catalogue and the website, **set it aside** in `set-aside.json`.

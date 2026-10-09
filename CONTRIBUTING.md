@@ -62,9 +62,9 @@ hand.** The file records the device itself, and the recorder's Save step has a P
 goes in the file; say it here too if the recording was made before that box existed. Nothing in the
 file can record that you were drawing left-handed, or standing, or that the pen has a worn nib.
 
-If the recording's driver box was left empty, say the driver version here as well. The recording is
-not edited for it; it is recorded in [supplied.json](supplied.json), and the catalogue shows it marked
-as supplied.
+If the recording's driver or pen box was left empty, say the driver version or the pen here as well. The
+recording is not edited for it; it is recorded in [supplied.json](supplied.json), and the catalogue shows
+it marked as supplied.
 
 ## What happens to it
 

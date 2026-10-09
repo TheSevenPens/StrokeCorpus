@@ -418,9 +418,9 @@ def set_aside():
     return {name for group in listed.get("groups", []) for name in group.get("files", [])}
 
 
-def supplied_drivers():
+def supplied(key):
     """
-    The driver version a contributor told the catalogue for a recording whose file leaves it empty.
+    What a contributor told the catalogue (the "driver" or the "pen") for a recording whose file leaves it empty.
 
     Kept in supplied.json, with why. It is shown marked as supplied and is never written into a trace,
     which stays as the recorder wrote it.
@@ -433,14 +433,15 @@ def supplied_drivers():
     with open(path, encoding="utf-8") as handle:
         listed = json.load(handle)
 
-    return {name: group["driver"] for group in listed.get("groups", []) if group.get("driver")
+    return {name: group[key] for group in listed.get("groups", []) if group.get(key)
             for name in group.get("files", [])}
 
 
 def main():
     recordings = []
     aside = set_aside()
-    supplied = supplied_drivers()
+    supplied_driver = supplied("driver")
+    supplied_pen = supplied("pen")
 
     for path in sorted(glob.glob(os.path.join(TRACES, "*.json"))):
         if os.path.basename(path) in aside:
@@ -471,7 +472,7 @@ def main():
                 "driver": device.get("driver", ""),
                 # What the contributor told the catalogue, where the file leaves the driver empty.
                 # Null where nobody did. See supplied.json.
-                "driverSupplied": supplied.get(os.path.basename(path)),
+                "driverSupplied": supplied_driver.get(os.path.basename(path)),
                 "api": device.get("api", ""),
                 "fullScalePressure": full_scale,
                 # Absent before format version 7, and empty when the person was asked and wrote
@@ -479,6 +480,9 @@ def main():
                 "firmware": device.get("firmware"),
                 # Optional in any version and absent when nobody said, which is null here.
                 "pen": device.get("pen"),
+                # What the contributor told the catalogue, where the file does not name the pen.
+                # Null where nobody did. See supplied.json.
+                "penSupplied": supplied_pen.get(os.path.basename(path)),
             },
             "columns": columns,
             "coordinateSpace": coordinate_space(recording),
