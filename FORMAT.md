@@ -99,13 +99,25 @@ it:
   is every recording made before the recorder asked. A reader should not report an absent `pen` as
   "no pen".
 - **It is a claim, like `tablet` and `driver`.** Nothing detects it. The readings can hint at what
-  a pen can do, such as whether it reports a `twist`, but they cannot name the pen, and on the
-  setups measured here a non-zero twist did not separate two pens.
-- **Unlike the name, it is part of the evidence.** It is not covered by the exception that lets a
-  recording's `name` be added afterwards, so it cannot be added to a recording that is already
-  here. `tools/check_names_only.py` fails a pull request that tries.
+  a pen can do, such as whether it reports a `twist` or how many reports a second it makes, and in
+  this corpus those separated the pens, but they cannot name one.
+- **Like the name, it may be added or changed after a recording was made.** It is a label the person
+  typed, not a measurement, so saying which pen a recording was made with later does not make it
+  `editedAfterRecording`. Only the `device.pen` line may change; anything else is still an edit, and
+  `tools/check_names_only.py` fails a pull request that makes one.
 - **StrokeRecorder writes it** from the Save step, remembers the last one between launches, and
   the catalogue and each recording's page show it.
+
+## The driver
+
+**`device.driver`** is the driver version, as the person who made the recording typed it, and it is
+a claim like the tablet's name: nothing detects it. The recorder's Save step asks for it, and an
+empty string means it was left blank.
+
+Like [the name](#a-name) and [the pen](#the-pen), it is a label and not a measurement, so it may be
+filled in or corrected after a recording was made without making the recording
+`editedAfterRecording`. Only the `device.driver` line may change; anything else is still an edit, and
+`tools/check_names_only.py` fails a pull request that makes one.
 
 ## A name
 
@@ -124,11 +136,12 @@ A recording may carry a top-level **`name`**: what the person who made it calls 
   field existed.
 - **The catalogue shows it.** `manifest.json`'s `name` is this when the recording has one, and is the
   name every page displays.
-- **It is the one thing that may be added or changed after a recording was made.** Everything else
-  in a recording is original evidence and is never rewritten. A name is a label and not a
-  measurement, so giving a recording one, or changing it, does not make the recording
-  `editedAfterRecording`. A change to anything but the `name` line is still an edit, and
-  `tools/check_names_only.py` fails a pull request that makes one.
+- **With [the pen](#the-pen) and [the driver](#the-driver), it is the only thing that may be added
+  or changed after a recording was made.** Everything else in a recording is original evidence and is
+  never rewritten. A name is a label and not a measurement, so giving a recording one, or changing it,
+  does not make the recording `editedAfterRecording`. A change to anything but the `name`,
+  `device.pen` and `device.driver` lines is still an edit, and `tools/check_names_only.py` fails a
+  pull request that makes one.
 - **StrokeRecorder writes it** from the Save step, where it is typed in like the tablet and driver
   names. Treat it as a claim, like those.
 

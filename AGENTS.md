@@ -6,10 +6,10 @@ These instructions apply throughout this repository.
 
 - Treat `traces/*.json` as original evidence. Do not hand-correct, normalize or
   rewrite recordings. See [CONTRIBUTING.md](CONTRIBUTING.md) for new contributions.
-  **The one exception is a recording's top-level `name`**, a label and not a measurement: it may
-  be added to a recording or changed after the fact, as a single line and nothing else, and it
-  does not make a recording `editedAfterRecording`. `tools/check_names_only.py` enforces this on
-  every pull request.
+  **The exceptions are a recording's top-level `name` and its `device.pen` and `device.driver`**,
+  labels a person typed and not measurements: each may be added to a recording or changed after the
+  fact, as a single line and nothing else, and none makes a recording `editedAfterRecording`.
+  `tools/check_names_only.py` enforces this on every pull request.
 - To take a recording out of the catalogue and the website, **set it aside** in `set-aside.json`.
   Do not delete it: `tools/check_names_only.py` fails a pull request that removes a recording.
 - Read [FORMAT.md](FORMAT.md) before changing a reader. Preserve source columns,

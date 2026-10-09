@@ -34,7 +34,7 @@ jobs:
         run: python tools/validate.py
 
       # Recordings are original evidence. A pull request may add recordings, and may name or rename
-      # one, but may not change anything else in one that is already here.
-      - name: No recording changed except by name
+      # one, or say which pen and driver it was made with, but may not change anything else in one that is already here.
+      - name: No recording changed except by name, pen or driver
         if: github.event_name == 'pull_request'
         run: python tools/check_names_only.py "origin/${{ github.base_ref }}"
