@@ -1957,6 +1957,912 @@
       "bytes": 120611
     },
     {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:19:43.2856744-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Strokes that vary from low to high pressure smoothly",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 5,
+        "contact": 4360,
+        "approach": 292,
+        "departure": 299,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 22.328,
+        "host": 22.333
+      },
+      "updates": {
+        "pairs": 4355,
+        "changed": {
+          "position": 0.9885,
+          "pressure": 0.3927,
+          "tilt": 0.2041,
+          "height": 0.0,
+          "twist": 0.2354
+        },
+        "pressureHolds": {
+          "2": 1622,
+          "4": 69,
+          "6": 14,
+          "10": 2,
+          "110": 1,
+          "226": 1,
+          "390": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 1617,
+          "4": 69,
+          "6": 14,
+          "10": 2,
+          "110": 1,
+          "226": 1,
+          "390": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1705,
+        "pressureDistinct": 1513,
+        "pressureStep": 4,
+        "readingRateHz": 240.1,
+        "readingRateSeconds": 18.14,
+        "pressureUpdateHzIfPeriodic": 120.0
+      },
+      "counters": {
+        "fromTheDriver": 5689,
+        "delivered": 5689,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 385406
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:20:50.1872202-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Strokes at low pressure",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 12,
+        "contact": 4806,
+        "approach": 538,
+        "departure": 506,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 27.014,
+        "host": 27.024
+      },
+      "updates": {
+        "pairs": 4794,
+        "changed": {
+          "position": 0.9764,
+          "pressure": 0.4032,
+          "tilt": 0.1717,
+          "height": 0.0,
+          "twist": 0.2509
+        },
+        "pressureHolds": {
+          "2": 1575,
+          "4": 281,
+          "6": 61,
+          "8": 12,
+          "10": 3,
+          "12": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 1564,
+          "4": 280,
+          "6": 61,
+          "8": 12,
+          "10": 3,
+          "12": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1921,
+        "pressureDistinct": 999,
+        "pressureStep": 4,
+        "readingRateHz": 240.1,
+        "readingRateSeconds": 19.97,
+        "pressureUpdateHzIfPeriodic": 120.0
+      },
+      "counters": {
+        "fromTheDriver": 6940,
+        "delivered": 6940,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 447790
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:22:05.0638304-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Sudden staccato strokes",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 25,
+        "contact": 432,
+        "approach": 1472,
+        "departure": 1404,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 10.235,
+        "host": 10.23
+      },
+      "updates": {
+        "pairs": 407,
+        "changed": {
+          "position": 0.9705,
+          "pressure": 0.4103,
+          "tilt": 0.6388,
+          "height": 0.0,
+          "twist": 0.3464
+        },
+        "pressureHolds": {
+          "2": 143,
+          "4": 24
+        },
+        "pressureHoldsInterior": {
+          "2": 118,
+          "4": 24
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 142,
+        "pressureDistinct": 183,
+        "pressureStep": 4,
+        "readingRateHz": 245.0,
+        "readingRateSeconds": 1.66,
+        "pressureUpdateHzIfPeriodic": 122.5
+      },
+      "counters": {
+        "fromTheDriver": 2719,
+        "delivered": 2719,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 253744
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:22:52.0131948-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Quick taps",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 14,
+        "contact": 146,
+        "approach": 735,
+        "departure": 678,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 3.369,
+        "host": 3.367
+      },
+      "updates": {
+        "pairs": 132,
+        "changed": {
+          "position": 0.1061,
+          "pressure": 0.3409,
+          "tilt": 0.2197,
+          "height": 0.0,
+          "twist": 0.2652
+        },
+        "pressureHolds": {
+          "2": 31,
+          "4": 14
+        },
+        "pressureHoldsInterior": {
+          "2": 29,
+          "4": 2
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 31,
+        "pressureDistinct": 59,
+        "pressureStep": 12,
+        "readingRateHz": 247.7,
+        "readingRateSeconds": 0.53,
+        "pressureUpdateHzIfPeriodic": 123.8
+      },
+      "counters": {
+        "fromTheDriver": 976,
+        "delivered": 976,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 118882
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:24:15.8143842-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Three circles",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 3,
+        "contact": 2408,
+        "approach": 174,
+        "departure": 141,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 11.706,
+        "host": 11.718
+      },
+      "updates": {
+        "pairs": 2405,
+        "changed": {
+          "position": 0.9688,
+          "pressure": 0.4162,
+          "tilt": 0.215,
+          "height": 0.0,
+          "twist": 0.2328
+        },
+        "pressureHolds": {
+          "2": 857,
+          "4": 105,
+          "6": 27,
+          "8": 9,
+          "10": 2,
+          "14": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 854,
+          "4": 105,
+          "6": 27,
+          "8": 9,
+          "10": 2,
+          "14": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 998,
+        "pressureDistinct": 823,
+        "pressureStep": 4,
+        "readingRateHz": 239.5,
+        "readingRateSeconds": 10.04,
+        "pressureUpdateHzIfPeriodic": 119.8
+      },
+      "counters": {
+        "fromTheDriver": 3179,
+        "delivered": 3179,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 210146
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:24:55.9867899-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Four loops",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 4,
+        "contact": 1562,
+        "approach": 231,
+        "departure": 213,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 9.018,
+        "host": 9.027
+      },
+      "updates": {
+        "pairs": 1558,
+        "changed": {
+          "position": 0.9615,
+          "pressure": 0.4313,
+          "tilt": 0.2003,
+          "height": 0.0006,
+          "twist": 0.2407
+        },
+        "pressureHolds": {
+          "2": 592,
+          "4": 62,
+          "6": 13,
+          "8": 4,
+          "12": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 588,
+          "4": 62,
+          "6": 13,
+          "8": 4,
+          "12": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 668,
+        "pressureDistinct": 537,
+        "pressureStep": 4,
+        "readingRateHz": 239.1,
+        "readingRateSeconds": 6.51,
+        "pressureUpdateHzIfPeriodic": 119.5
+      },
+      "counters": {
+        "fromTheDriver": 2419,
+        "delivered": 2419,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 155008
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:25:36.3084042-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Four back and forth zigzags",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 4,
+        "contact": 1632,
+        "approach": 239,
+        "departure": 229,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 8.826,
+        "host": 8.844
+      },
+      "updates": {
+        "pairs": 1628,
+        "changed": {
+          "position": 0.9183,
+          "pressure": 0.4312,
+          "tilt": 0.3188,
+          "height": 0.0006,
+          "twist": 0.312
+        },
+        "pressureHolds": {
+          "2": 614,
+          "4": 70,
+          "6": 15,
+          "8": 2,
+          "10": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 610,
+          "4": 70,
+          "6": 15,
+          "8": 2,
+          "10": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 698,
+        "pressureDistinct": 567,
+        "pressureStep": 4,
+        "readingRateHz": 240.2,
+        "readingRateSeconds": 6.78,
+        "pressureUpdateHzIfPeriodic": 120.1
+      },
+      "counters": {
+        "fromTheDriver": 2397,
+        "delivered": 2397,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 161917
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:26:21.6413288-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "four linear strokes going from low to high pressure",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 5,
+        "contact": 3558,
+        "approach": 248,
+        "departure": 213,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 19.427,
+        "host": 19.426
+      },
+      "updates": {
+        "pairs": 3553,
+        "changed": {
+          "position": 0.9809,
+          "pressure": 0.2741,
+          "tilt": 0.1872,
+          "height": 0.0,
+          "twist": 0.2243
+        },
+        "pressureHolds": {
+          "2": 930,
+          "4": 26,
+          "6": 12,
+          "8": 1,
+          "10": 1,
+          "274": 1,
+          "370": 1,
+          "416": 1,
+          "434": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 926,
+          "4": 25,
+          "6": 12,
+          "8": 1,
+          "10": 1,
+          "274": 1,
+          "370": 1,
+          "416": 1,
+          "434": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 969,
+        "pressureDistinct": 911,
+        "pressureStep": 4,
+        "readingRateHz": 239.8,
+        "readingRateSeconds": 14.81,
+        "pressureUpdateHzIfPeriodic": 119.9
+      },
+      "counters": {
+        "fromTheDriver": 5171,
+        "delivered": 5171,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 310390
+    },
+    {
+      "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
+      "id": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
+      "name": "multi stroke",
+      "recordedAt": "2026-10-08T17:27:12.6187188-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "4 pairs of strokes. Each pair has the pen pointing the west. One of the pair is moving west. One of the pair is moving east.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": ""
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 8,
+        "contact": 4288,
+        "approach": 469,
+        "departure": 434,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 23.483,
+        "host": 23.487
+      },
+      "updates": {
+        "pairs": 4280,
+        "changed": {
+          "position": 0.9696,
+          "pressure": 0.3993,
+          "tilt": 0.2124,
+          "height": 0.0,
+          "twist": 0.2666
+        },
+        "pressureHolds": {
+          "2": 1381,
+          "4": 248,
+          "6": 66,
+          "8": 10,
+          "10": 3,
+          "12": 1
+        },
+        "pressureHoldsInterior": {
+          "2": 1373,
+          "4": 248,
+          "6": 66,
+          "8": 10,
+          "10": 3,
+          "12": 1
+        },
+        "pressurePeriod": 2,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1701,
+        "pressureDistinct": 1127,
+        "pressureStep": 4,
+        "readingRateHz": 239.7,
+        "readingRateSeconds": 17.85,
+        "pressureUpdateHzIfPeriodic": 119.8
+      },
+      "counters": {
+        "fromTheDriver": 6028,
+        "delivered": 6028,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 401600
+    },
+    {
       "file": "one-motion-wacom-cintiq-24-20260916-173229.json",
       "id": "multi-stroke-wacom-cintiq-24-20260916-173229",
       "name": "one motion",
@@ -3106,23 +4012,24 @@
     }
   ],
   "totals": {
-    "recordings": 33,
-    "strokes": 200,
-    "contact": 31332,
-    "approach": 3235,
+    "recordings": 42,
+    "strokes": 280,
+    "contact": 54524,
+    "approach": 7633,
     "aloft": 31240,
     "byQuality": {
-      "complete": 1,
+      "complete": 10,
       "single-clock": 9,
       "hover-suspect": 4,
       "raw": 12,
       "early": 7
     },
     "byPressurePeriod": {
-      "2": 28
+      "2": 37
     },
     "wantingReRecording": 31,
     "devices": [
+      "IntuosProLarge_2025",
       "Wacom Cintiq 24"
     ],
     "backends": [
