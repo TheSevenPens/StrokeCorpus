@@ -52,7 +52,7 @@
       <table>
         <thead>
           <tr>
-            <th>Recording</th>
+            <th>Name</th>
             <th>Recorded</th>
             <th class="n">Str</th>
             <th class="n">Sec</th>
@@ -137,15 +137,15 @@ await run(async () => {
 
     rows.innerHTML = shown.map((recording) => `
       <tr>
-        <td>
-          <a href="recording.html?recording=${encodeURIComponent(recording.file)}">${esc(recording.name)}</a>
-          ${recording.reRecord.length ? '<br><span class="tag rerecord">wants re-recording</span>' : ""}
-        </td>
+        <td><a href="recording.html?recording=${encodeURIComponent(recording.file)}">${esc(recording.name)}</a></td>
         <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
         <td class="n">${recording.counts.strokes || "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.intent ? esc(recording.intent) : "&mdash;"}</td>
-        <td><span class="tag ${recording.quality}">${recording.quality}</span></td>
+        <td>
+          <span class="tag ${recording.quality}">${recording.quality}</span>
+          ${recording.reRecord.length ? '<br><span class="tag rerecord">wants re-recording</span>' : ""}
+        </td>
       </tr>
     `).join("");
 
