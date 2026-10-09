@@ -319,9 +319,17 @@ button.on { border-color: var(--accent); color: var(--accent); }
 .analyser > .across { grid-area: across; }
 .analyser > .reading { grid-area: reading; }
 
+/*
+  Seventy percent of the row the stroke sets, not all of it, so it is 30% shorter than it was when
+  it filled the row. A percentage height on a grid item is taken from its grid area, which includes
+  the panel's 18px bottom margin, so the margin comes off first: 70% of the area itself would be
+  3% too tall. This follows the stroke panel as it resizes. The table scrolls inside, and the floor
+  keeps a short stroke from squashing it to nothing.
+*/
 .analyser > .every {
   grid-area: every;
-  align-self: stretch;
+  align-self: start;
+  height: calc((100% - 18px) * 0.7);
   position: relative;
   padding: 0;
   min-height: 240px;
@@ -363,9 +371,9 @@ button.on { border-color: var(--accent); color: var(--accent); }
       "across every";
   }
 
-  .analyser > .every { align-self: start; position: static; padding: 16px 18px 6px; min-height: 0; }
+  .analyser > .every { align-self: start; height: auto; position: static; padding: 16px 18px 6px; min-height: 0; }
   .every .inside { position: static; display: block; padding: 0; }
-  .every .rows { flex: none; max-height: 460px; }
+  .every .rows { flex: none; max-height: 305px; }
 }
 
 @media (max-width: 900px) {
@@ -377,7 +385,7 @@ button.on { border-color: var(--accent); color: var(--accent); }
 
 canvas.closely, canvas.channel { display: block; width: 100%; height: auto; background: transparent; }
 
-.rows { max-height: 460px; overflow: auto; }
+.rows { max-height: 305px; overflow: auto; }
 .rows table { font-size: 12.5px; }
 .rows th { font-size: 11px; }
 .rows td { padding: 3px 8px; }
