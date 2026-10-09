@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Checks that no recording was changed except by giving it a name.
+Checks that no recording was changed except by giving it a name or saying which pen it was made with.
 
-Recordings are original evidence and are never rewritten (AGENTS.md, CONTRIBUTING.md). The one
-exception is a recording's top-level `name`, which is a label rather than a measurement and may be
-added or changed after the fact. This is what keeps that exception from becoming a loophole: it
-compares every recording in traces/ with the copy in a base revision, and fails if anything other
-than that one line differs.
+Recordings are original evidence and are never rewritten (AGENTS.md, CONTRIBUTING.md). The exceptions
+are two labels, which are what a person typed about a recording rather than anything measured, and
+which may be added or changed after the fact: the top-level `name`, and `device.pen`. This is what
+keeps those exceptions from becoming a loophole: it compares every recording in traces/ with the copy
+in a base revision, and fails if anything other than those two lines differs.
 
     python tools/check_names_only.py origin/main
 
@@ -16,7 +16,7 @@ removing one is a change to the evidence too.
 
 The comparison is on lines, not on parsed JSON, on purpose. Parsed JSON would accept a file that had
 been reformatted, or had a number rewritten as another spelling of the same value, and "the same
-data" is a weaker claim than "the same file apart from the name".
+data" is a weaker claim than "the same file apart from those two lines".
 """
 
 import glob
@@ -32,6 +32,10 @@ TRACES = os.path.join(ROOT, "traces")
 # Nothing nested is called "name", and a name is a single line, so this and only this is the name.
 NAME_LINE = re.compile(r'^  "name": ')
 
+# And the properties of "device" at four. The pen is one string on one line, and nothing else at
+# that depth is called "pen".
+PEN_LINE = re.compile(r'^    "pen": ')
+
 
 def git(*args):
     return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=True).stdout
@@ -44,8 +48,8 @@ def in_base(base):
     return sorted(os.path.basename(line) for line in listing.splitlines() if line.endswith(".json"))
 
 
-def without_name(text):
-    return [line for line in text.splitlines() if not NAME_LINE.match(line)]
+def without_labels(text):
+    return [line for line in text.splitlines() if not (NAME_LINE.match(line) or PEN_LINE.match(line))]
 
 
 def first_difference(before, after):
@@ -64,7 +68,7 @@ def main(argv):
 
     base = argv[0]
     problems = []
-    named = 0
+    labelled = 0
 
     for file in in_base(base):
         path = os.path.join(TRACES, file)
@@ -82,16 +86,16 @@ def main(argv):
         if old.splitlines() == new.splitlines():
             continue
 
-        before, after = without_name(old), without_name(new)
+        before, after = without_labels(old), without_labels(new)
 
         if before == after:
-            named += 1
+            labelled += 1
 
             continue
 
         line, was, now = first_difference(before, after)
         problems.append(
-            f"{file}: changed by more than its name (first difference near line {line}"
+            f"{file}: changed by more than its name or pen (first difference near line {line}"
             + (f": {was.strip()[:70]!r} became {now.strip()[:70]!r}" if was is not None else ": a different length")
             + ")."
         )
@@ -100,11 +104,11 @@ def main(argv):
         print("FAIL", problem)
 
     if problems:
-        print(f"{len(problems)} recording(s) changed in a way only a name may be.")
+        print(f"{len(problems)} recording(s) changed in a way only a name or a pen may be.")
 
         return 1
 
-    print(f"recordings against {base}: none changed except by name ({named} named or renamed).")
+    print(f"recordings against {base}: none changed except by name or pen ({labelled} named, renamed or given a pen).")
 
     return 0
 

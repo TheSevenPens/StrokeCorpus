@@ -25,6 +25,7 @@
     "tablet": "IntuosProLarge_2025",
     "driver": "",
     "firmware": "",
+    "pen": "ACP-700",
     "api": "WintabDigitizer",
     "fullScalePressure": 32767,
     "conventions": "PenConventions { RawUnits = TabletNative, Buttons = WintabEvent, Cursor = DeviceAssigned, Timestamp = DeviceTicks }"

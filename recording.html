@@ -130,9 +130,7 @@ await run(async () => {
     ["driver", entry.device.driver ? esc(entry.device.driver)
       : entry.device.driverSupplied ? `${esc(entry.device.driverSupplied)} <span class="sub">&mdash; supplied by the contributor; this recording leaves it empty</span>`
       : "not recorded"],
-    ["pen", entry.device.pen ? esc(entry.device.pen)
-      : entry.device.penSupplied ? `${esc(entry.device.penSupplied)} <span class="sub">&mdash; supplied by the contributor; this recording does not name the pen</span>`
-      : "not recorded"],
+    ["pen", entry.device.pen ? esc(entry.device.pen) : "not recorded"],
     ["backend", esc(entry.device.api)],
     ["full-scale pressure", entry.device.fullScalePressure],
     ["format version", `${entry.formatVersion} — <a href="quality.html">what that carries</a>`],

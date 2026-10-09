@@ -49,8 +49,7 @@
             "api": { "type": "string" },
             "fullScalePressure": { "$ref": "#/$defs/count" },
             "firmware": { "type": ["string", "null"], "description": "Null before format version 7, where nobody was asked. An empty string means the person was asked and wrote nothing." },
-            "pen": { "type": ["string", "null"], "description": "The pen, as typed in by the person who made the recording. Null where the recording does not say; it is never an empty string." },
-            "penSupplied": { "type": ["string", "null"], "description": "The pen the contributor told the catalogue (from supplied.json), for a recording whose file does not name one. Null where nobody did. It is not in the recording, which is as the recorder wrote it." }
+            "pen": { "type": ["string", "null"], "description": "The pen, as typed in by the person who made the recording. Null where the recording does not say; it is never an empty string." }
           },
           "additionalProperties": false
         },

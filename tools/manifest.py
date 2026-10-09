@@ -441,7 +441,6 @@ def main():
     recordings = []
     aside = set_aside()
     supplied_driver = supplied("driver")
-    supplied_pen = supplied("pen")
 
     for path in sorted(glob.glob(os.path.join(TRACES, "*.json"))):
         if os.path.basename(path) in aside:
@@ -480,9 +479,6 @@ def main():
                 "firmware": device.get("firmware"),
                 # Optional in any version and absent when nobody said, which is null here.
                 "pen": device.get("pen"),
-                # What the contributor told the catalogue, where the file does not name the pen.
-                # Null where nobody did. See supplied.json.
-                "penSupplied": supplied_pen.get(os.path.basename(path)),
             },
             "columns": columns,
             "coordinateSpace": coordinate_space(recording),

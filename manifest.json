@@ -20,8 +20,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -108,7 +107,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385443
+      "bytes": 385466
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
@@ -127,8 +126,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -213,7 +211,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447825
+      "bytes": 447848
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
@@ -232,8 +230,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -310,7 +307,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253775
+      "bytes": 253798
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
@@ -329,8 +326,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -407,7 +403,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118907
+      "bytes": 118930
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
@@ -426,8 +422,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -512,7 +507,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210174
+      "bytes": 210197
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
@@ -531,8 +526,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -615,7 +609,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155033
+      "bytes": 155056
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
@@ -634,8 +628,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -718,7 +711,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161944
+      "bytes": 161967
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
@@ -737,8 +730,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -829,7 +821,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310431
+      "bytes": 310454
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
@@ -848,8 +840,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": null,
-        "penSupplied": "ACP-700"
+        "pen": "ACP-700"
       },
       "columns": [
         "at",
@@ -934,7 +925,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401640
+      "bytes": 401663
     },
     {
       "file": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
@@ -953,8 +944,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": "ACP-500",
-        "penSupplied": null
+        "pen": "ACP-500"
       },
       "columns": [
         "at",
@@ -1060,8 +1050,7 @@
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
-        "pen": "KP-504E",
-        "penSupplied": null
+        "pen": "KP-504E"
       },
       "columns": [
         "at",

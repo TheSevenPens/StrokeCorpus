@@ -236,7 +236,7 @@ def supplied():
     What supplied.json says about recordings, and what is wrong with the list.
 
     Same discipline as set-aside.json: every entry has to name a recording in traces/, once, with a
-    reason and something to supply (a driver or a pen), because a misspelt name would quietly supply nothing.
+    reason and a driver to supply, because a misspelt name would quietly supply nothing.
     """
     path = os.path.join(ROOT, "supplied.json")
 
@@ -256,26 +256,16 @@ def supplied():
         if not (isinstance(group.get("reason"), str) and group["reason"].strip()):
             problems.append(f"supplied.json: group {number} has no reason")
 
-        said = [group.get(key) for key in ("driver", "pen")]
-
-        if not any(isinstance(each, str) and each.strip() for each in said):
-            problems.append(f"supplied.json: group {number} supplies neither a driver nor a pen")
-
-        if any(each is not None and not (isinstance(each, str) and each.strip()) for each in said):
-            problems.append(f"supplied.json: group {number} has an empty driver or pen")
+        if not (isinstance(group.get("driver"), str) and group["driver"].strip()):
+            problems.append(f"supplied.json: group {number} has no driver")
 
         for name in group.get("files", []):
             if name not in present:
                 problems.append(f"supplied.json: {name} is not in traces/")
+            elif name in seen:
+                problems.append(f"supplied.json: {name} is listed twice")
 
-            # A recording may appear in two groups, one for the driver and one for the pen, but not
-            # be given two answers to the same question.
-            for key in ("driver", "pen"):
-                if group.get(key):
-                    if (name, key) in seen:
-                        problems.append(f"supplied.json: {name} is given a {key} twice")
-
-                    seen.add((name, key))
+            seen.add(name)
 
     return problems
 

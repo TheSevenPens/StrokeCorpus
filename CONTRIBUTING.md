@@ -15,10 +15,10 @@ Before you send it, check that it is well formed. `pip install jsonschema`, then
 saves a round trip.
 
 Please **do not edit the file**. The recorder writes what the driver said; a hand-corrected
-trace is no longer evidence, and the counters in it stop reconciling. The one thing that can be
-added or changed later is the recording's `name`, a label and not a measurement (see
-[FORMAT.md](FORMAT.md#a-name)); a pull request that changes anything else in a recording that is
-already here fails its check.
+trace is no longer evidence, and the counters in it stop reconciling. The only things that can be
+added or changed later are the recording's `name` and its `device.pen`, labels and not measurements
+(see [FORMAT.md](FORMAT.md#a-name) and [FORMAT.md](FORMAT.md#the-pen)); a pull request that changes
+anything else in a recording that is already here fails its check.
 
 ## What is most wanted
 
@@ -62,9 +62,9 @@ hand.** The file records the device itself, and the recorder's Save step has a P
 goes in the file; say it here too if the recording was made before that box existed. Nothing in the
 file can record that you were drawing left-handed, or standing, or that the pen has a worn nib.
 
-If the recording's driver or pen box was left empty, say the driver version or the pen here as well. The
-recording is not edited for it; it is recorded in [supplied.json](supplied.json), and the catalogue shows
-it marked as supplied.
+If the recording's pen box was left empty, the pen can be added to the file afterwards (one `device.pen`
+line). If its driver box was left empty, say the driver version here; the recording is not edited for it,
+it is recorded in [supplied.json](supplied.json), and the catalogue shows it marked as supplied.
 
 ## What happens to it
 
