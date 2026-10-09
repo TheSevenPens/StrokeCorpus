@@ -231,45 +231,6 @@ def set_aside():
     return seen & present, problems
 
 
-def supplied():
-    """
-    What supplied.json says about recordings, and what is wrong with the list.
-
-    Same discipline as set-aside.json: every entry has to name a recording in traces/, once, with a
-    reason and a driver to supply, because a misspelt name would quietly supply nothing.
-    """
-    path = os.path.join(ROOT, "supplied.json")
-
-    if not os.path.exists(path):
-        return []
-
-    listed = load(path)
-    problems = []
-    seen = set()
-
-    if not isinstance(listed.get("groups"), list):
-        return ["supplied.json: 'groups' must be a list"]
-
-    present = {os.path.basename(each) for each in glob.glob(os.path.join(TRACES, "*.json"))}
-
-    for number, group in enumerate(listed["groups"], start=1):
-        if not (isinstance(group.get("reason"), str) and group["reason"].strip()):
-            problems.append(f"supplied.json: group {number} has no reason")
-
-        if not (isinstance(group.get("driver"), str) and group["driver"].strip()):
-            problems.append(f"supplied.json: group {number} has no driver")
-
-        for name in group.get("files", []):
-            if name not in present:
-                problems.append(f"supplied.json: {name} is not in traces/")
-            elif name in seen:
-                problems.append(f"supplied.json: {name} is listed twice")
-
-            seen.add(name)
-
-    return problems
-
-
 def check_manifest():
     check, schema = validator("manifest.schema.json")
     manifest = load(os.path.join(ROOT, "manifest.json"))
@@ -283,7 +244,6 @@ def check_manifest():
     aside, aside_problems = set_aside()
 
     problems.extend(aside_problems)
-    problems.extend(supplied())
 
     for name in sorted(present - aside - listed):
         problems.append(f"{name} is in traces/ and not in the manifest; run tools/manifest.py")

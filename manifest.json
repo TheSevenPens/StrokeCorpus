@@ -15,8 +15,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -107,7 +106,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385466
+      "bytes": 385474
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
@@ -121,8 +120,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -211,7 +209,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447848
+      "bytes": 447856
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
@@ -225,8 +223,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -307,7 +304,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253798
+      "bytes": 253806
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
@@ -321,8 +318,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -403,7 +399,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118930
+      "bytes": 118938
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
@@ -417,8 +413,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -507,7 +502,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210197
+      "bytes": 210205
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
@@ -521,8 +516,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -609,7 +603,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155056
+      "bytes": 155064
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
@@ -623,8 +617,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -711,7 +704,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161967
+      "bytes": 161975
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
@@ -725,8 +718,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -821,7 +813,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310454
+      "bytes": 310462
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
@@ -835,8 +827,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -925,7 +916,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401663
+      "bytes": 401671
     },
     {
       "file": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
@@ -939,8 +930,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -1031,7 +1021,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 371447
+      "bytes": 371455
     },
     {
       "file": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
@@ -1045,8 +1035,7 @@
       "endedBy": "the recording was stopped",
       "device": {
         "tablet": "IntuosProLarge_2025",
-        "driver": "",
-        "driverSupplied": "6.4.15-1",
+        "driver": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -1141,7 +1130,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 209759
+      "bytes": 209767
     }
   ],
   "totals": {

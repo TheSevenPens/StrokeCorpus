@@ -45,7 +45,6 @@
           "properties": {
             "tablet": { "type": "string" },
             "driver": { "type": "string" },
-            "driverSupplied": { "type": ["string", "null"], "description": "The driver version the contributor told the catalogue (from supplied.json), for a recording whose file leaves the driver empty. Null where nobody did. It is not in the recording, which is as the recorder wrote it." },
             "api": { "type": "string" },
             "fullScalePressure": { "$ref": "#/$defs/count" },
             "firmware": { "type": ["string", "null"], "description": "Null before format version 7, where nobody was asked. An empty string means the person was asked and wrote nothing." },
