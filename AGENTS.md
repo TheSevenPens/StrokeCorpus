@@ -10,6 +10,8 @@ These instructions apply throughout this repository.
   be added to a recording or changed after the fact, as a single line and nothing else, and it
   does not make a recording `editedAfterRecording`. `tools/check_names_only.py` enforces this on
   every pull request.
+- To take a recording out of the catalogue and the website, **set it aside** in `set-aside.json`.
+  Do not delete it: `tools/check_names_only.py` fails a pull request that removes a recording.
 - Read [FORMAT.md](FORMAT.md) before changing a reader. Preserve source columns,
   values, list membership and order. Missing channels are unmeasured, not zero.
   `corpus.js` currently zero-fills absent slots for display; do not copy that

@@ -1,0 +1,44 @@
+{
+  "about": "Recordings that stay in traces/ as evidence and are still validated, but are not listed in manifest.json and so are not shown on the website. Setting one aside is reversible: remove it from this file and run tools/manifest.py. Nothing here deletes a recording.",
+  "groups": [
+    {
+      "on": "2026-10-08",
+      "reason": "The earlier set of 33 recordings, made on a Wacom Cintiq 24 on 16 and 17 September 2026, was set aside so the catalogue lists only the recordings made on and after 2026-10-08. The files are unchanged.",
+      "files": [
+        "approach-confirmed-wacom-cintiq-24-20260917-071628.json",
+        "confirm-baseline-wacom-cintiq-24-20260916-175439.json",
+        "cross-hatching-two-clocks-wacom-cintiq-24-20260916-190754.json",
+        "cross-hatching-wacom-cintiq-24-20260916-185343.json",
+        "fast-flick-wacom-cintiq-24-20260916-093335.json",
+        "flick-endings-wacom-cintiq-24-20260916-202216.json",
+        "flying-start-wacom-cintiq-24-20260916-184523.json",
+        "four-loops-four-orientations-wacom-cintiq-24-20260916-105846.json",
+        "four-loops-slower-wacom-cintiq-24-20260916-110500.json",
+        "freeform-wacom-cintiq-24-20260916-093544.json",
+        "freeform-wacom-cintiq-24-20260916-093625.json",
+        "freeform-wacom-cintiq-24-20260916-093659.json",
+        "hard-flicks-wacom-cintiq-24-20260916-193538.json",
+        "height-test-wacom-cintiq-24-20260916-115056.json",
+        "held-still-in-the-air-wacom-cintiq-24-20260916-184327.json",
+        "hover-and-strokes-wacom-cintiq-24-20260916-114649.json",
+        "hovering-only-wacom-cintiq-24-20260916-114508.json",
+        "in-and-out-of-proximity-wacom-cintiq-24-20260916-112319.json",
+        "loop-crossing-fast-wacom-cintiq-24-20260916-102445.json",
+        "loop-crossing-wacom-cintiq-24-20260916-102217.json",
+        "low-pressure-line-wacom-cintiq-24-20260916-095949.json",
+        "one-motion-wacom-cintiq-24-20260916-173229.json",
+        "packet-counts-wacom-cintiq-24-20260916-122341.json",
+        "pressure-ramp-wacom-cintiq-24-20260916-093434.json",
+        "rest-then-press-wacom-cintiq-24-20260916-173011.json",
+        "size-ladder-wacom-cintiq-24-20260916-111128.json",
+        "slow-diagonal-wacom-cintiq-24-20260916-010400.json",
+        "slow-diagonal-wacom-cintiq-24-20260916-093245.json",
+        "slow-landings-wacom-cintiq-24-20260916-192949.json",
+        "slow-sweep-wacom-cintiq-24-20260916-180920.json",
+        "speed-ramp-wacom-cintiq-24-20260916-111446.json",
+        "spiral-wacom-cintiq-24-20260916-101711.json",
+        "tap-wacom-cintiq-24-20260916-093357.json"
+      ]
+    }
+  ]
+}

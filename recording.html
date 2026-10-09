@@ -99,8 +99,8 @@ await run(async () => {
   const entry = manifest.recordings.find((t) => t.file === file);
 
   if (!entry) {
-    document.getElementById("name").textContent = "No such recording";
-    throw new Error(`There is no recording called "${file}" in this corpus.`);
+    document.getElementById("name").textContent = "Not in the catalogue";
+    throw new Error(`"${file}" is not in the catalogue. It may be set aside (see set-aside.json) or not exist.`);
   }
 
   const recording = await loadRecording(file);
