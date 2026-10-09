@@ -57,6 +57,7 @@
             <th class="n">Str</th>
             <th class="n">Sec</th>
             <th>Intent</th>
+            <th>Device</th>
             <th>Quality</th>
           </tr>
         </thead>
@@ -91,6 +92,14 @@ import { loadManifest, run, esc } from "./corpus.js?v=4e397b84";
 await run(async () => {
 
   const say = (n) => n.toLocaleString();
+
+  // The tablet, then whichever of pen and firmware the recording says. Neither is guessed, and an
+  // empty one is left out and not shown as a blank.
+  const deviceOf = (device) => {
+    const known = [device.pen && `pen ${device.pen}`, device.firmware && `firmware ${device.firmware}`].filter(Boolean);
+
+    return esc(device.tablet) + (known.length ? `<br>${esc(known.join(" · "))}` : "");
+  };
 
   const manifest = await loadManifest();
   const recordings = manifest.recordings;
@@ -127,7 +136,7 @@ await run(async () => {
       if (wantHover === "some" && recording.counts.approach === 0) return false;
 
       if (text) {
-        const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.api, recording.file]
+        const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.api, recording.file]
           .join(" ").toLowerCase();
 
         if (!haystack.includes(text)) return false;
@@ -143,6 +152,7 @@ await run(async () => {
         <td class="n">${recording.counts.strokes || "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.intent ? esc(recording.intent) : "&mdash;"}</td>
+        <td style="font-size:12.5px">${deviceOf(recording.device)}</td>
         <td>
           <span class="tag ${recording.quality}">${recording.quality}</span>
           ${recording.reRecord.length ? '<br><span class="tag rerecord">wants re-recording</span>' : ""}
