@@ -14,7 +14,10 @@ Before you send it, check that it is well formed. `pip install jsonschema`, then
 saves a round trip.
 
 Please **do not edit the file**. The recorder writes what the driver said; a hand-corrected
-trace is no longer evidence, and the counters in it stop reconciling.
+trace is no longer evidence, and the counters in it stop reconciling. The one thing that can be
+added or changed later is the recording's `name`, a label and not a measurement (see
+[FORMAT.md](FORMAT.md#a-name)); a pull request that changes anything else in a recording that is
+already here fails its check.
 
 ## What is most wanted
 

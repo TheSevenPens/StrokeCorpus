@@ -364,7 +364,8 @@ def span(recording):
 
 def name(recording, filename):
     """
-    What to call a recording.
+    What to call a recording: the name the recording carries, if it has one, and otherwise one
+    worked out from its file name.
 
     The recorder's own gesture field says which mode was used -- twenty-one of these say
     "multi-stroke" -- and its intent field is that mode's canned description. Neither
@@ -375,6 +376,13 @@ def name(recording, filename):
     again: from the tablet's own name where the file carries one, from the old "-wacom-" marker
     where it does not, and failing both just the timestamp.
     """
+    # A name somebody chose beats one worked out from a file name. Only a non-empty string counts: the
+    # schema requires that, and a recording that carries something else is still named by its file.
+    chosen = recording.get("name")
+
+    if isinstance(chosen, str) and chosen.strip():
+        return chosen.strip()
+
     stem = os.path.splitext(os.path.basename(filename))[0]
     tablet = recording.get("device", {}).get("tablet", "")
     slug = re.sub(r"[^a-z0-9]+", "-", tablet.lower()).strip("-")

@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The whole history, so a pull request can be compared with the branch it targets.
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -29,3 +32,9 @@ jobs:
 
       - name: Validate recordings, manifest and schema examples
         run: python tools/validate.py
+
+      # Recordings are original evidence. A pull request may add recordings, and may name or rename
+      # one, but may not change anything else in one that is already here.
+      - name: No recording changed except by name
+        if: github.event_name == 'pull_request'
+        run: python tools/check_names_only.py "origin/${{ github.base_ref }}"
