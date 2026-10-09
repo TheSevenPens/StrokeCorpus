@@ -56,6 +56,7 @@
             <th>Device</th>
             <th>Firmware</th>
             <th>Pen</th>
+            <th>Driver</th>
             <th>Recorded</th>
             <th class="n">Str</th>
             <th class="n">Sec</th>
@@ -68,6 +69,11 @@
   </div>
 
   <p class="note" id="count"></p>
+
+  <p class="note">
+    A driver version marked * was supplied by the contributor. The recording itself leaves it
+    empty, and is as the recorder wrote it.
+  </p>
 
   <p class="note">
     Every recording's <em>contact</em> data is sound; the tags are about the rest.
@@ -93,6 +99,13 @@ import { loadManifest, run, esc } from "./corpus.js?v=4e397b84";
 await run(async () => {
 
   const say = (n) => n.toLocaleString();
+
+  // The driver the file records, else the one the contributor told the catalogue, marked as told.
+  const driverOf = (device) => device.driver
+    ? esc(device.driver)
+    : device.driverSupplied
+      ? `${esc(device.driverSupplied)} <abbr title="Supplied by the contributor. The recording itself leaves the driver empty.">*</abbr>`
+      : "&mdash;";
 
   const manifest = await loadManifest();
   const recordings = manifest.recordings;
@@ -129,7 +142,7 @@ await run(async () => {
       if (wantHover === "some" && recording.counts.approach === 0) return false;
 
       if (text) {
-        const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.api, recording.file]
+        const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.driver, recording.device.driverSupplied, recording.device.api, recording.file]
           .join(" ").toLowerCase();
 
         if (!haystack.includes(text)) return false;
@@ -144,6 +157,7 @@ await run(async () => {
         <td style="font-size:12.5px">${esc(recording.device.tablet)}</td>
         <td style="font-size:12.5px">${recording.device.firmware ? esc(recording.device.firmware) : "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.device.pen ? esc(recording.device.pen) : "&mdash;"}</td>
+        <td style="font-size:12.5px">${driverOf(recording.device)}</td>
         <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
         <td class="n">${recording.counts.strokes || "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>

@@ -127,7 +127,9 @@ await run(async () => {
   const facts = [
     ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
     ["tablet", esc(entry.device.tablet)],
-    ["driver", esc(entry.device.driver)],
+    ["driver", entry.device.driver ? esc(entry.device.driver)
+      : entry.device.driverSupplied ? `${esc(entry.device.driverSupplied)} <span class="sub">&mdash; supplied by the contributor; this recording leaves it empty</span>`
+      : "not recorded"],
     ["pen", entry.device.pen ? esc(entry.device.pen) : "not recorded"],
     ["backend", esc(entry.device.api)],
     ["full-scale pressure", entry.device.fullScalePressure],

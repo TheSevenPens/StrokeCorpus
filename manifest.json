@@ -16,6 +16,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -121,6 +122,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -224,6 +226,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -319,6 +322,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -414,6 +418,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -517,6 +522,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -618,6 +624,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -719,6 +726,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -828,6 +836,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -931,6 +940,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",
@@ -1036,6 +1046,7 @@
       "device": {
         "tablet": "IntuosProLarge_2025",
         "driver": "",
+        "driverSupplied": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "",

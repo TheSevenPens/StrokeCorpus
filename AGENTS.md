@@ -10,6 +10,9 @@ These instructions apply throughout this repository.
   be added to a recording or changed after the fact, as a single line and nothing else, and it
   does not make a recording `editedAfterRecording`. `tools/check_names_only.py` enforces this on
   every pull request.
+- A fact the contributor told us that a recording leaves empty (today, only the driver version) goes in
+  `supplied.json`, with why, and never into the trace. The catalogue shows it marked as supplied and
+  only where the file's own value is empty. `tools/validate.py` checks the list.
 - To take a recording out of the catalogue and the website, **set it aside** in `set-aside.json`.
   Do not delete it: `tools/check_names_only.py` fails a pull request that removes a recording.
 - Read [FORMAT.md](FORMAT.md) before changing a reader. Preserve source columns,

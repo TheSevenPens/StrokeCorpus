@@ -418,9 +418,29 @@ def set_aside():
     return {name for group in listed.get("groups", []) for name in group.get("files", [])}
 
 
+def supplied_drivers():
+    """
+    The driver version a contributor told the catalogue for a recording whose file leaves it empty.
+
+    Kept in supplied.json, with why. It is shown marked as supplied and is never written into a trace,
+    which stays as the recorder wrote it.
+    """
+    path = os.path.join(ROOT, "supplied.json")
+
+    if not os.path.exists(path):
+        return {}
+
+    with open(path, encoding="utf-8") as handle:
+        listed = json.load(handle)
+
+    return {name: group["driver"] for group in listed.get("groups", []) if group.get("driver")
+            for name in group.get("files", [])}
+
+
 def main():
     recordings = []
     aside = set_aside()
+    supplied = supplied_drivers()
 
     for path in sorted(glob.glob(os.path.join(TRACES, "*.json"))):
         if os.path.basename(path) in aside:
@@ -449,6 +469,9 @@ def main():
             "device": {
                 "tablet": device.get("tablet", ""),
                 "driver": device.get("driver", ""),
+                # What the contributor told the catalogue, where the file leaves the driver empty.
+                # Null where nobody did. See supplied.json.
+                "driverSupplied": supplied.get(os.path.basename(path)),
                 "api": device.get("api", ""),
                 "fullScalePressure": full_scale,
                 # Absent before format version 7, and empty when the person was asked and wrote
