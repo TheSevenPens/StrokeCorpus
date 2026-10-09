@@ -18,6 +18,7 @@
   --good: #2f6b46;
   --warn: #8a6d1f;
   --bad: #9b3b32;
+  --hover: #1b66d6;
 
   --mono: "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
   --text: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -36,6 +37,7 @@
     --good: #6fbf8e;
     --warn: #d4ab4a;
     --bad: #e08078;
+    --hover: #6aa9ff;
   }
 }
 
