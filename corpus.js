@@ -262,7 +262,7 @@ export function drawInk(canvas, stroke, options = {}) {
 /**
  * A stroke as readings rather than as ink.
  *
- * A dot per reading sized by its pressure, a thread between them, the approach hollow, and
+ * A dot per reading sized by its pressure, a thread between them, the approach in blue, and
  * the reading at the playhead ringed. Drawing the ink hides the thing worth looking at:
  * where the readings actually fell, how far apart they are, and how much of the mark is
  * being interpolated rather than reported.
@@ -305,17 +305,18 @@ export function drawClosely(canvas, stroke, at, options = {}) {
   const accent = styleOf("--accent");
   const full = options.fullScale || 32767;
 
-  // The approach, hollow, because the pen was not touching: it is real data and it is not
-  // part of the mark.
-  pen.strokeStyle = quiet;
-  pen.lineWidth = 1;
+  // The approach, in blue, because the pen was not touching: it is real data and it is not
+  // part of the mark. It used to be small grey rings, which disappear against the thread and
+  // the contact dots until the view is zoomed in; a solid blue dot, a little larger than the
+  // faintest contact one, is readable at the fit-to-canvas size.
+  pen.fillStyle = styleOf("--hover");
 
   for (const p of stroke.approach) {
     const [x, y] = place(p);
 
     pen.beginPath();
-    pen.arc(x, y, 2, 0, Math.PI * 2);
-    pen.stroke();
+    pen.arc(x, y, 3, 0, Math.PI * 2);
+    pen.fill();
   }
 
   // The thread, so the order is visible.
