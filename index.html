@@ -55,12 +55,8 @@
             <th>Recording</th>
             <th>Recorded</th>
             <th class="n">Str</th>
-            <th class="n">Contact</th>
-            <th class="n">Approach</th>
-            <th class="n">Aloft</th>
             <th class="n">Sec</th>
-            <th>Pressure refreshes</th>
-            <th>Carries</th>
+            <th>Intent</th>
             <th>Quality</th>
           </tr>
         </thead>
@@ -89,7 +85,7 @@
 </footer>
 
 <script type="module">
-import { loadManifest, run, pressureCadence, esc } from "./corpus.js?v=eefabca9";
+import { loadManifest, run, esc } from "./corpus.js?v=eefabca9";
 
 await run(async () => {
 
@@ -119,17 +115,6 @@ await run(async () => {
   const hover = document.getElementById("hover");
   const find = document.getElementById("find");
 
-  function carries(recording) {
-    const has = [];
-
-    if (recording.counts.strokes) has.push("strokes");
-    if (recording.columns.includes("height")) has.push("height");
-    if (recording.columns.includes("status")) has.push("status");
-    if (recording.columns.includes("arrived")) has.push("host clock");
-
-    return has.join(", ") || "positions and pressure";
-  }
-
   function show() {
     const wantQuality = quality.value;
     const wantHover = hover.value;
@@ -158,12 +143,8 @@ await run(async () => {
         </td>
         <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
         <td class="n">${recording.counts.strokes || "&mdash;"}</td>
-        <td class="n">${say(recording.counts.contact)}</td>
-        <td class="n">${recording.counts.approach ? say(recording.counts.approach) : "&mdash;"}</td>
-        <td class="n">${recording.counts.aloft ? say(recording.counts.aloft) : "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
-        <td style="font-size:12.5px">${pressureCadence(recording.updates)}</td>
-        <td style="font-size:12.5px;color:var(--quiet)">${carries(recording)}</td>
+        <td style="font-size:12.5px">${recording.intent ? esc(recording.intent) : "&mdash;"}</td>
         <td><span class="tag ${recording.quality}">${recording.quality}</span></td>
       </tr>
     `).join("");
