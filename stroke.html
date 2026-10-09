@@ -114,9 +114,9 @@
 <script type="module">
 import {
   run,
-  loadManifest, loadRecording, strokesOf, describe, gap,
+  loadManifest, loadRecording, strokesOf, describe, gap, millimetresPerUnit, gapMm,
   drawClosely, drawChannel, drawAbsent, fmt,
-} from "./corpus.js?v=4e397b84";
+} from "./corpus.js?v=f7807b7a";
 
 await run(async () => {
 
@@ -180,6 +180,13 @@ await run(async () => {
   // path[i] is the distance travelled from the first reading to reading i, so the distance
   // across any window is a subtraction.
   const path = steps.reduce((sum, step, i) => (sum.push((sum[i - 1] ?? 0) + step), sum), []);
+
+  // The same, in millimetres, when the recording says how big the tablet is: how far the pen has gone
+  // since it touched, which is where a stroke's readings begin. The air before it is not counted.
+  const scale = millimetresPerUnit(recording);
+  const pathMm = scale
+    ? r.reduce((sum, p, i) => (sum.push(i === 0 ? 0 : sum[i - 1] + gapMm(r[i - 1], p, scale)), sum), [])
+    : null;
 
   const speeds = r.map((_, i) => {
     let lo = i;
@@ -332,6 +339,9 @@ await run(async () => {
       ["pressure", `${p.pressure} of ${full}`],
       ["pressure %", `${(p.pressure / full * 100).toFixed(2)}%`],
       ["step into it", `${fmt(steps[at])} ${unit}`],
+      ["distance so far", pathMm
+        ? `${fmt(pathMm[at])} mm of ${fmt(pathMm[r.length - 1])} mm`
+        : "not known &mdash; this recording does not say how big the tablet is"],
       ["avg speed", `${fmt(speeds[at])} ${unit}/s`],
       ["lean", `${fmt(p.lean)}°`],
       ["azimuth", `${fmt(p.azimuth)}°`],

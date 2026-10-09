@@ -161,6 +161,29 @@ export function boundsOf(readings) {
 /** The distance between two readings. */
 export const gap = (a, b) => Math.hypot(b.x - a.x, b.y - a.y);
 
+/**
+ * How many millimetres one unit of x and of y is, or null where the recording does not say how big the
+ * tablet is. FORMAT.md's rule, for either space: a tablet recording's counts are scaled by the area over
+ * the largest count on each axis, and a desktop recording's pixels by the scale it states. One figure per
+ * axis, because a tablet mapped across a desktop of another shape is stretched.
+ */
+export function millimetresPerUnit(recording) {
+  const where = recording.coordinates;
+
+  if (where?.space === "tablet") {
+    return where.maxX > 0 && where.maxY > 0 && where.widthMm > 0 && where.heightMm > 0
+      ? { x: where.widthMm / where.maxX, y: where.heightMm / where.maxY }
+      : null;
+  }
+
+  return where?.mmPerPixelX > 0 && where?.mmPerPixelY > 0
+    ? { x: where.mmPerPixelX, y: where.mmPerPixelY }
+    : null;
+}
+
+/** The distance between two readings in millimetres: each axis by its own scale, then combined. */
+export const gapMm = (a, b, mm) => Math.hypot((b.x - a.x) * mm.x, (b.y - a.y) * mm.y);
+
 /** What a stroke is, in the terms a caption wants. */
 export function describe(stroke) {
   const r = stroke.readings;

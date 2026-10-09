@@ -86,7 +86,7 @@
 </footer>
 
 <script type="module">
-import { run, loadManifest, loadRecording, strokesOf, describe, gap, drawInk, offer, fmt, pressureCadence, esc } from "./corpus.js?v=4e397b84";
+import { run, loadManifest, loadRecording, strokesOf, describe, gap, millimetresPerUnit, gapMm, drawInk, offer, fmt, pressureCadence, esc } from "./corpus.js?v=f7807b7a";
 
 await run(async () => {
 
@@ -162,21 +162,9 @@ await run(async () => {
   // axes before the two are combined, never a length in pixels by one figure. The air between strokes
   // and the approach and departure are not counted. A recording that does not say gets no guess.
   function penDownDistance() {
-    const where = recording.coordinates;
-    let across = null;
-    let down = null;
+    const scale = millimetresPerUnit(recording);
 
-    if (where?.space === "tablet") {
-      if (where.maxX > 0 && where.maxY > 0 && where.widthMm > 0 && where.heightMm > 0) {
-        across = where.widthMm / where.maxX;
-        down = where.heightMm / where.maxY;
-      }
-    } else if (where?.mmPerPixelX > 0 && where?.mmPerPixelY > 0) {
-      across = where.mmPerPixelX;
-      down = where.mmPerPixelY;
-    }
-
-    if (across === null) {
+    if (scale === null) {
       return `<span style="color:var(--quiet)">not known &mdash; this recording does not say how big the tablet is</span>`;
     }
 
@@ -185,9 +173,7 @@ await run(async () => {
     for (const stroke of strokes) {
       const rows = stroke.readings;
 
-      for (let i = 1; i < rows.length; i++) {
-        mm += Math.hypot((rows[i].x - rows[i - 1].x) * across, (rows[i].y - rows[i - 1].y) * down);
-      }
+      for (let i = 1; i < rows.length; i++) mm += gapMm(rows[i - 1], rows[i], scale);
     }
 
     const metres = mm >= 1000 ? ` (${(mm / 1000).toFixed(2)} m)` : "";
