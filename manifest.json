@@ -1026,7 +1026,7 @@
     {
       "file": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
       "id": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
-      "name": "Smooth pressure changeressure smoothly",
+      "name": "Smooth pressure change",
       "recordedAt": "2026-10-08T21:06:45.9354922-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -1130,7 +1130,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 212767
+      "bytes": 209759
     }
   ],
   "totals": {

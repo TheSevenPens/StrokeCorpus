@@ -2,7 +2,7 @@
   "format": "stroke-field-guide/take",
   "formatVersion": 8,
   "id": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
-  "name": "Smooth pressure changeressure smoothly",
+  "name": "Smooth pressure change",
   "gesture": "multi-stroke",
   "intent": "Strokes that vary from low to high pressure smoothly",
   "username": "",
