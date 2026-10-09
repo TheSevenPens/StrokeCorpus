@@ -2,6 +2,7 @@
   "format": "stroke-field-guide/take",
   "formatVersion": 8,
   "id": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
+  "name": "Four linear pressure ramps",
   "gesture": "multi-stroke",
   "intent": "four linear strokes going from low to high pressure",
   "username": "",

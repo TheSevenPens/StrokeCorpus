@@ -6,7 +6,7 @@
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
-      "name": "multi stroke",
+      "name": "Smooth pressure change",
       "recordedAt": "2026-10-08T17:19:43.2856744-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -105,12 +105,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385406
+      "bytes": 385443
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
-      "name": "multi stroke",
+      "name": "Low pressure strokes",
       "recordedAt": "2026-10-08T17:20:50.1872202-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -207,12 +207,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447790
+      "bytes": 447825
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
-      "name": "multi stroke",
+      "name": "Staccato strokes",
       "recordedAt": "2026-10-08T17:22:05.0638304-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -301,12 +301,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253744
+      "bytes": 253775
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
-      "name": "multi stroke",
+      "name": "Quick taps",
       "recordedAt": "2026-10-08T17:22:52.0131948-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -395,12 +395,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118882
+      "bytes": 118907
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
-      "name": "multi stroke",
+      "name": "Three circles",
       "recordedAt": "2026-10-08T17:24:15.8143842-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -497,12 +497,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210146
+      "bytes": 210174
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
-      "name": "multi stroke",
+      "name": "Four loops",
       "recordedAt": "2026-10-08T17:24:55.9867899-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -597,12 +597,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155008
+      "bytes": 155033
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
-      "name": "multi stroke",
+      "name": "Four zigzags",
       "recordedAt": "2026-10-08T17:25:36.3084042-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -697,12 +697,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161917
+      "bytes": 161944
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
-      "name": "multi stroke",
+      "name": "Four linear pressure ramps",
       "recordedAt": "2026-10-08T17:26:21.6413288-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -805,12 +805,12 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310390
+      "bytes": 310431
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
-      "name": "multi stroke",
+      "name": "Four pairs, west and east",
       "recordedAt": "2026-10-08T17:27:12.6187188-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -907,7 +907,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401600
+      "bytes": 401640
     }
   ],
   "totals": {
