@@ -7,6 +7,14 @@
 <title>Stroke Corpus</title>
 <meta name="description" content="Recordings of a real pen on a real drawing tablet: every reading, including the ones made while the pen was in the air.">
 <link rel="stylesheet" href="corpus.css?v=ecc2c150">
+<style>
+  /* A column that can be sorted is a button that looks like its heading. */
+  th button.sort { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit;
+                   background: none; border: 0; padding: 0; cursor: pointer; }
+  th button.sort:hover, th button.sort:focus-visible { text-decoration: underline; }
+  th[aria-sort="ascending"] button.sort::after { content: " \25B2"; font-size: 0.8em; }
+  th[aria-sort="descending"] button.sort::after { content: " \25BC"; font-size: 0.8em; }
+</style>
 </head>
 <body>
 
@@ -55,10 +63,10 @@
             <th>Name</th>
             <th>Device</th>
             <th>Firmware</th>
-            <th>Pen</th>
+            <th data-sort="pen"><button type="button" class="sort">Pen</button></th>
             <th>Driver</th>
-            <th>Recorded</th>
-            <th class="n">Str</th>
+            <th data-sort="recorded"><button type="button" class="sort">Recorded</button></th>
+            <th class="n" data-sort="strokes"><button type="button" class="sort">Str</button></th>
             <th class="n">Sec</th>
             <th>Quality</th>
           </tr>
@@ -119,12 +127,40 @@ await run(async () => {
   const hover = document.getElementById("hover");
   const find = document.getElementById("find");
 
+  // The list is in the order it was recorded until a heading says otherwise. A recording with no pen
+  // sorts after every one that has one, whichever way the pen column is turned.
+  const byColumn = {
+    recorded: (recording) => recording.recordedAt,
+    strokes: (recording) => recording.counts.strokes,
+    pen: (recording) => (recording.device.pen ?? "").toLowerCase() || null,
+  };
+
+  let sortBy = "recorded";
+  let sortDown = false;
+
+  function arrange(shown) {
+    const key = byColumn[sortBy];
+    const sign = sortDown ? -1 : 1;
+
+    return [...shown].sort((a, b) => {
+      const [left, right] = [key(a), key(b)];
+
+      if (left === null || right === null) {
+        if (left !== right) return left === null ? 1 : -1;
+      } else if (left !== right) {
+        return (left < right ? -1 : 1) * sign;
+      }
+
+      return a.recordedAt < b.recordedAt ? -1 : a.recordedAt > b.recordedAt ? 1 : 0;
+    });
+  }
+
   function show() {
     const wantQuality = quality.value;
     const wantHover = hover.value;
     const text = find.value.trim().toLowerCase();
 
-    const shown = recordings.filter((recording) => {
+    const shown = arrange(recordings.filter((recording) => {
       if (wantQuality && recording.quality !== wantQuality) return false;
       if (wantHover === "trusted" && !(recording.hoverTrusted ?? recording.quality === "complete")) return false;
       if (wantHover === "some" && recording.counts.approach === 0) return false;
@@ -137,7 +173,11 @@ await run(async () => {
       }
 
       return true;
-    });
+    }));
+
+    for (const heading of document.querySelectorAll("th[data-sort]")) {
+      heading.setAttribute("aria-sort", heading.dataset.sort === sortBy ? (sortDown ? "descending" : "ascending") : "none");
+    }
 
     rows.innerHTML = shown.map((recording) => `
       <tr>
@@ -163,6 +203,14 @@ await run(async () => {
 
   for (const control of [quality, hover, find]) {
     control.addEventListener("input", show);
+  }
+
+  for (const heading of document.querySelectorAll("th[data-sort]")) {
+    heading.querySelector("button").addEventListener("click", () => {
+      sortDown = heading.dataset.sort === sortBy ? !sortDown : false;
+      sortBy = heading.dataset.sort;
+      show();
+    });
   }
 
   document.getElementById("clear").addEventListener("click", () => {

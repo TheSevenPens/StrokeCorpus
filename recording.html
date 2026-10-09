@@ -124,6 +124,38 @@ await run(async () => {
   document.getElementById("download").addEventListener("click", () =>
     offer(entry.file, JSON.stringify(recording, null, 2)));
 
+  // How many readings a second the pen reported while it was touching, worked out from the readings and
+  // not written down by the recorder: the gaps between the readings of each stroke, over the time those
+  // strokes took, so the time the pen spent in the air between strokes does not count against it. The
+  // host's clock is the one that is a clock on every setup measured here; the pen's own is added when
+  // the recording has both, and stands alone when it does not.
+  function reportRate() {
+    const rate = (clock) => {
+      let gaps = 0;
+      let seconds = 0;
+
+      for (const stroke of strokes) {
+        const rows = stroke.readings;
+
+        if (rows.length < 2) continue;
+
+        gaps += rows.length - 1;
+        seconds += (rows[rows.length - 1][clock] - rows[0][clock]) / 1e6;
+      }
+
+      return seconds > 0 ? gaps / seconds : null;
+    };
+
+    const host = entry.columns.includes("arrived") ? rate("arrived") : null;
+    const pen = entry.columns.includes("at") ? rate("at") : null;
+
+    if (host !== null) {
+      return `${host.toFixed(1)} <span class="sub">&mdash; in contact, host clock${pen !== null ? `; pen clock ${pen.toFixed(1)}` : ""}</span>`;
+    }
+
+    return pen !== null ? `${pen.toFixed(1)} <span class="sub">&mdash; in contact, pen clock</span>` : "&mdash;";
+  }
+
   const facts = [
     ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
     ["tablet", esc(entry.device.tablet)],
@@ -137,6 +169,7 @@ await run(async () => {
     ["ended by", esc(entry.endedBy) || "—"],
     ["seconds, host clock", entry.seconds.host ?? "not in this recording"],
     ["seconds, pen clock", entry.seconds.pen ?? "—"],
+    ["reports per second", reportRate()],
   ];
 
   document.getElementById("facts").innerHTML = facts
