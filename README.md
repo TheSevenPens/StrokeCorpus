@@ -34,6 +34,7 @@ but is **set aside**: it is not in the catalogue or on the website. See [Set asi
 | approach readings | 4,398 |
 | readings aloft | 0 |
 | tablet | Wacom Intuos Pro Large (2025), driver 6.4.15-1 |
+| pen | ACP-700 |
 | backend | Wintab (digitizer), full-scale pressure 32767 |
 
 Each recording carries positions, pressure, tilt as a lean and an azimuth, barrel rotation, and —
