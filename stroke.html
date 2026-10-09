@@ -188,7 +188,8 @@ await run(async () => {
     ? r.reduce((sum, p, i) => (sum.push(i === 0 ? 0 : sum[i - 1] + gapMm(r[i - 1], p, scale)), sum), [])
     : null;
 
-  const speeds = r.map((_, i) => {
+  // The speed at each reading from a running total of distance: pixels, or millimetres when there is one.
+  const speedFrom = (total) => r.map((_, i) => {
     let lo = i;
     let hi = i;
 
@@ -197,8 +198,11 @@ await run(async () => {
 
     const dt = (times[hi] - times[lo]) / 1e6;
 
-    return dt > 0 ? (path[hi] - path[lo]) / dt : 0;
+    return dt > 0 ? (total[hi] - total[lo]) / dt : 0;
   });
+
+  const speeds = speedFrom(path);
+  const speedsMm = pathMm ? speedFrom(pathMm) : null;
 
   let at = 0;
   let playing = null;
@@ -343,6 +347,9 @@ await run(async () => {
         ? `${fmt(pathMm[at])} mm of ${fmt(pathMm[r.length - 1])} mm`
         : "not known &mdash; this recording does not say how big the tablet is"],
       ["avg speed", `${fmt(speeds[at])} ${unit}/s`],
+      ["avg speed, physical", speedsMm
+        ? `${fmt(speedsMm[at])} ${clock === "arrived" ? "mm/s" : "mm per counter-second"}`
+        : "not known &mdash; this recording does not say how big the tablet is"],
       ["lean", `${fmt(p.lean)}°`],
       ["azimuth", `${fmt(p.azimuth)}°`],
       ["twist", `${fmt(p.twist)}°`],
