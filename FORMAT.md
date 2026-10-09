@@ -70,6 +70,7 @@ made it, what firmware the tablet was running, and anything they wanted to add:
 | `username` | top level | who made the recording, as they chose to write it |
 | `notes` | top level | free text from the person who made it. May contain line breaks |
 | `firmware` | `device` | the tablet's firmware, as typed in |
+| `pen` | `device` | the pen, as typed in; optional in any version (see below) |
 
 All three are typed in by the person recording; nothing detects them, so treat them as
 claims rather than measurements, like `tablet` and `driver`.
@@ -79,6 +80,32 @@ fields: nobody was asked, so they are unrecorded. In a version-7 recording they 
 present, and an empty string means the person was asked and wrote nothing. A reader should
 not report an absent `firmware` as "no firmware" or an absent `username` as an anonymous
 user.
+
+## The pen
+
+A recording may say which pen it was made with, in **`device.pen`**, as the person who made it typed
+it:
+
+```json
+{
+  "device": {
+    "tablet": "Wacom Intuos Pro Large",
+    "pen": "ACP-700"
+  }
+}
+```
+
+- **Optional, and any version can have one.** A non-empty string. Absent means nobody said, which
+  is every recording made before the recorder asked. A reader should not report an absent `pen` as
+  "no pen".
+- **It is a claim, like `tablet` and `driver`.** Nothing detects it. The readings can hint at what
+  a pen can do, such as whether it reports a `twist`, but they cannot name the pen, and on the
+  setups measured here a non-zero twist did not separate two pens.
+- **Unlike the name, it is part of the evidence.** It is not covered by the exception that lets a
+  recording's `name` be added afterwards, so it cannot be added to a recording that is already
+  here. `tools/check_names_only.py` fails a pull request that tries.
+- **StrokeRecorder writes it** from the Save step, remembers the last one between launches, and
+  the catalogue and each recording's page show it.
 
 ## A name
 

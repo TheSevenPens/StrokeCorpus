@@ -18,6 +18,7 @@
     "v8-unknown-column.json": "tilt",
     "v8-unknown-space.json": "space",
     "v8-empty-name.json": "name",
+    "v8-empty-pen.json": "pen",
     "v8-desktop-scale-without-its-pair.json": "mmPerPixelY",
     "version-9-does-not-exist.json": "formatVersion",
     "v5-without-the-arrived-column.json": "columns: ",

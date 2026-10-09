@@ -128,6 +128,7 @@ await run(async () => {
     ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
     ["tablet", esc(entry.device.tablet)],
     ["driver", esc(entry.device.driver)],
+    ["pen", entry.device.pen ? esc(entry.device.pen) : "not recorded"],
     ["backend", esc(entry.device.api)],
     ["full-scale pressure", entry.device.fullScalePressure],
     ["format version", `${entry.formatVersion} — <a href="quality.html">what that carries</a>`],
