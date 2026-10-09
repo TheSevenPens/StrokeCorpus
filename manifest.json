@@ -917,19 +917,234 @@
       "hoverTrusted": true,
       "reRecord": [],
       "bytes": 401640
+    },
+    {
+      "file": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
+      "id": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
+      "name": "Smooth pressure change",
+      "recordedAt": "2026-10-08T21:04:56.6860535-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Strokes that vary from low to high pressure smoothly",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": "",
+        "pen": "ACP-500"
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 4,
+        "contact": 4434,
+        "approach": 293,
+        "departure": 301,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 19.92,
+        "host": 19.916
+      },
+      "updates": {
+        "pairs": 4430,
+        "changed": {
+          "position": 0.9824,
+          "pressure": 0.8194,
+          "tilt": 0.0777,
+          "height": 0.0,
+          "twist": 0.0
+        },
+        "pressureHolds": {
+          "1": 3051,
+          "2": 417,
+          "3": 120,
+          "4": 31,
+          "5": 6,
+          "6": 4,
+          "7": 1
+        },
+        "pressureHoldsInterior": {
+          "1": 3047,
+          "2": 417,
+          "3": 120,
+          "4": 31,
+          "5": 6,
+          "6": 4,
+          "7": 1
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 3626,
+        "pressureDistinct": 2505,
+        "pressureStep": 4,
+        "readingRateHz": 302.7,
+        "readingRateSeconds": 14.63,
+        "pressureUpdateHzIfPeriodic": 302.7
+      },
+      "counters": {
+        "fromTheDriver": 6503,
+        "delivered": 6503,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 371447
+    },
+    {
+      "file": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
+      "id": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
+      "name": "Smooth pressure change",
+      "recordedAt": "2026-10-08T21:06:45.9354922-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "multi-stroke",
+      "intent": "Strokes that vary from low to high pressure smoothly",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "IntuosProLarge_2025",
+        "driver": "",
+        "api": "WintabDigitizer",
+        "fullScalePressure": 32767,
+        "firmware": "",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "at",
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "status",
+        "lean",
+        "azimuth",
+        "twist"
+      ],
+      "coordinateSpace": "desktop",
+      "channels": {
+        "measured": [
+          "at",
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "status",
+          "lean",
+          "azimuth",
+          "twist"
+        ],
+        "absent": []
+      },
+      "counts": {
+        "strokes": 4,
+        "contact": 2486,
+        "approach": 193,
+        "departure": 204,
+        "aloft": 0
+      },
+      "seconds": {
+        "pen": 16.194,
+        "host": 16.179
+      },
+      "updates": {
+        "pairs": 2482,
+        "changed": {
+          "position": 0.9883,
+          "pressure": 0.8731,
+          "tilt": 0.141,
+          "height": 0.0,
+          "twist": 0.0
+        },
+        "pressureHolds": {
+          "1": 1960,
+          "2": 142,
+          "3": 43,
+          "4": 13,
+          "5": 5,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "11": 1
+        },
+        "pressureHoldsInterior": {
+          "1": 1956,
+          "2": 142,
+          "3": 43,
+          "4": 13,
+          "5": 5,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "11": 1
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 2163,
+        "pressureDistinct": 1756,
+        "pressureStep": 4,
+        "readingRateHz": 201.7,
+        "readingRateSeconds": 12.3,
+        "pressureUpdateHzIfPeriodic": 201.7
+      },
+      "counters": {
+        "fromTheDriver": 3702,
+        "delivered": 3702,
+        "outsideTheRegion": 0,
+        "agrees": true
+      },
+      "quality": "complete",
+      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 209759
     }
   ],
   "totals": {
-    "recordings": 9,
-    "strokes": 80,
-    "contact": 23192,
-    "approach": 4398,
+    "recordings": 11,
+    "strokes": 88,
+    "contact": 30112,
+    "approach": 4884,
     "aloft": 0,
     "byQuality": {
-      "complete": 9
+      "complete": 11
     },
     "byPressurePeriod": {
-      "2": 9
+      "2": 9,
+      "1": 2
     },
     "wantingReRecording": 0,
     "devices": [
