@@ -80,6 +80,31 @@ present, and an empty string means the person was asked and wrote nothing. A rea
 not report an absent `firmware` as "no firmware" or an absent `username` as an anonymous
 user.
 
+## A name
+
+A recording may carry a top-level **`name`**: what the person who made it calls it.
+
+```json
+{
+  "formatVersion": 8,
+  "id": "multi-stroke-intuosprolarge-2025-20261008-172252",
+  "name": "Quick taps"
+}
+```
+
+- **Optional, and any version can have one.** A non-empty string. Absent means nobody named the
+  recording, and the catalogue then works a name out from the file name, as it did before this
+  field existed.
+- **The catalogue shows it.** `manifest.json`'s `name` is this when the recording has one, and is the
+  name every page displays.
+- **It is the one thing that may be added or changed after a recording was made.** Everything else
+  in a recording is original evidence and is never rewritten. A name is a label and not a
+  measurement, so giving a recording one, or changing it, does not make the recording
+  `editedAfterRecording`. A change to anything but the `name` line is still an edit, and
+  `tools/check_names_only.py` fails a pull request that makes one.
+- **StrokeRecorder writes it** from the Save step, where it is typed in like the tablet and driver
+  names. Treat it as a claim, like those.
+
 ## What `x` and `y` are
 
 Before version 8 a recording did not say, and `x` and `y` were positions on the desktop in the

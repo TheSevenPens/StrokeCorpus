@@ -6,6 +6,10 @@ These instructions apply throughout this repository.
 
 - Treat `traces/*.json` as original evidence. Do not hand-correct, normalize or
   rewrite recordings. See [CONTRIBUTING.md](CONTRIBUTING.md) for new contributions.
+  **The one exception is a recording's top-level `name`**, a label and not a measurement: it may
+  be added to a recording or changed after the fact, as a single line and nothing else, and it
+  does not make a recording `editedAfterRecording`. `tools/check_names_only.py` enforces this on
+  every pull request.
 - Read [FORMAT.md](FORMAT.md) before changing a reader. Preserve source columns,
   values, list membership and order. Missing channels are unmeasured, not zero.
   `corpus.js` currently zero-fills absent slots for display; do not copy that
