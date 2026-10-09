@@ -63,10 +63,15 @@ Your recording is published under [CC BY 4.0](LICENSE) along with the rest, whic
 anyone can use it for anything as long as they say where it came from. By opening the pull
 request you are agreeing to that.
 
-**A trace records what a pen did on a tablet.** It carries positions on your desktop, the
-tablet and driver names, and the time you recorded it. It carries nothing you typed and
-nothing about your machine beyond that. Read one before you send it if you would like to see
-for yourself — they are plain JSON.
+**A trace records what a pen did on a tablet, and some text you typed.** It carries positions
+on your desktop, where the recorder's drawing area sat on it, the tablet's size where the driver
+could say, and the time you recorded it, with your time zone. It also carries **everything you
+typed when saving**: the tablet and driver names, the firmware, a username, notes, and the
+description of what you drew. The recorder cannot detect any of those, so each is exactly what
+you wrote, and all of it is published. Leave a field empty rather than put in anything you would
+not want public; a username can be anything you like. It carries nothing about your machine
+beyond that. Read one before you send it if you would like to see for yourself — they are plain
+JSON.
 
 ## If a recording is not perfect
 
