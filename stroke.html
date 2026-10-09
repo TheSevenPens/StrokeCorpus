@@ -57,7 +57,8 @@
 
       <p class="note">
         Arrow keys step (up and down: shift for ten), space plays, Home and End jump.
-        Scroll to zoom, drag to pan, double-click to fit.
+        Scroll to zoom about the cursor, + and &minus; to zoom on the current reading, drag to pan,
+        double-click to fit.
         Blue dots are readings made with the pen in the air before it touched down.
       </p>
     </section>
@@ -258,6 +259,32 @@ await run(async () => {
     setView(zoom, x - (mx - geo.width / 2) / next, y - (my - geo.height / 2) / next);
   }
 
+  // The buttons and the + and - keys zoom on the current reading. With nothing to say where to
+  // zoom they used to use the middle of the canvas, which on first load is the middle of the whole
+  // stroke and so nowhere in particular: someone pressing + wants more of the reading they are on.
+  //
+  // While following, the reading becomes the centre, the same place following would put it on the
+  // next step, so the first zoom and the ones after it agree. When not following, it stays where
+  // it is on the canvas and the picture grows around it. The wheel is separate: it zooms about the
+  // cursor, which is the point somebody has chosen.
+  function zoomOnReading(zoom) {
+    if (!geo) return;
+
+    const here = r[at];
+
+    if (follow.checked) {
+      setView(zoom, here.x, here.y);
+
+      return;
+    }
+
+    const now = geo.base * view.zoom;
+
+    zoomTo(zoom,
+      geo.width / 2 + (here.x - geo.cx) * now,
+      geo.height / 2 + (here.y - geo.cy) * now);
+  }
+
   // `recentre` is true only when the playhead has moved (or following was just switched on).
   // Panning and zooming repaint without it, so looking somewhere else holds until the next
   // reading, and then the view comes back to it. Re-centring on every paint made the picture
@@ -369,8 +396,8 @@ await run(async () => {
   document.getElementById("play").addEventListener("click", play);
   scrub.addEventListener("input", () => move(parseInt(scrub.value, 10)));
 
-  document.getElementById("zoomIn").addEventListener("click", () => zoomTo(view.zoom * 1.6));
-  document.getElementById("zoomOut").addEventListener("click", () => zoomTo(view.zoom / 1.6));
+  document.getElementById("zoomIn").addEventListener("click", () => zoomOnReading(view.zoom * 1.6));
+  document.getElementById("zoomOut").addEventListener("click", () => zoomOnReading(view.zoom / 1.6));
   document.getElementById("zoomFit").addEventListener("click", () => setView(1));
   follow.addEventListener("change", () => paint(true));
 
@@ -427,9 +454,9 @@ await run(async () => {
       Home: () => move(0),
       End: () => move(r.length - 1),
       " ": play,
-      "+": () => zoomTo(view.zoom * 1.6),
-      "=": () => zoomTo(view.zoom * 1.6),
-      "-": () => zoomTo(view.zoom / 1.6),
+      "+": () => zoomOnReading(view.zoom * 1.6),
+      "=": () => zoomOnReading(view.zoom * 1.6),
+      "-": () => zoomOnReading(view.zoom / 1.6),
       "0": () => setView(1),
     };
 
