@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Checks that no recording was changed except by giving it a name or saying which pen and driver it was made with.
+Checks that no recording was changed except by giving it a name or saying which pen, driver and firmware it was made with.
 
 Recordings are original evidence and are never rewritten (AGENTS.md, CONTRIBUTING.md). The exceptions
-are three labels, which are what a person typed about a recording rather than anything measured, and
-which may be added or changed after the fact: the top-level `name`, and `device.pen` and
-`device.driver`. This is what keeps those exceptions from becoming a loophole: it compares every
-recording in traces/ with the copy in a base revision, and fails if anything other than those three
+are four labels, which are what a person typed about a recording rather than anything measured, and
+which may be added or changed after the fact: the top-level `name`, and `device.pen`,
+`device.driver` and `device.firmware`. This is what keeps those exceptions from becoming a loophole: it compares every
+recording in traces/ with the copy in a base revision, and fails if anything other than those four
 lines differs.
 
     python tools/check_names_only.py origin/main
@@ -17,7 +17,7 @@ removing one is a change to the evidence too.
 
 The comparison is on lines, not on parsed JSON, on purpose. Parsed JSON would accept a file that had
 been reformatted, or had a number rewritten as another spelling of the same value, and "the same
-data" is a weaker claim than "the same file apart from those three lines".
+data" is a weaker claim than "the same file apart from those four lines".
 """
 
 import glob
@@ -33,10 +33,11 @@ TRACES = os.path.join(ROOT, "traces")
 # Nothing nested is called "name", and a name is a single line, so this and only this is the name.
 NAME_LINE = re.compile(r'^  "name": ')
 
-# And the properties of "device" at four. The pen and the driver are one string each on one line, and
-# nothing else at that depth is called either.
+# And the properties of "device" at four. The pen, the driver and the firmware are one string each on one
+# line, and nothing else at that depth is called any of them.
 PEN_LINE = re.compile(r'^    "pen": ')
 DRIVER_LINE = re.compile(r'^    "driver": ')
+FIRMWARE_LINE = re.compile(r'^    "firmware": ')
 
 
 def git(*args):
@@ -51,7 +52,8 @@ def in_base(base):
 
 
 def without_labels(text):
-    return [line for line in text.splitlines() if not (NAME_LINE.match(line) or PEN_LINE.match(line) or DRIVER_LINE.match(line))]
+    return [line for line in text.splitlines() if not (NAME_LINE.match(line) or PEN_LINE.match(line) or DRIVER_LINE.match(line)
+                or FIRMWARE_LINE.match(line))]
 
 
 def first_difference(before, after):
@@ -97,7 +99,7 @@ def main(argv):
 
         line, was, now = first_difference(before, after)
         problems.append(
-            f"{file}: changed by more than its name, pen or driver (first difference near line {line}"
+            f"{file}: changed by more than its name, pen, driver or firmware (first difference near line {line}"
             + (f": {was.strip()[:70]!r} became {now.strip()[:70]!r}" if was is not None else ": a different length")
             + ")."
         )
@@ -106,11 +108,11 @@ def main(argv):
         print("FAIL", problem)
 
     if problems:
-        print(f"{len(problems)} recording(s) changed in a way only a name, a pen or a driver may be.")
+        print(f"{len(problems)} recording(s) changed in a way only a name, a pen, a driver or a firmware may be.")
 
         return 1
 
-    print(f"recordings against {base}: none changed except by name, pen or driver ({labelled} labelled).")
+    print(f"recordings against {base}: none changed except by name, pen, driver or firmware ({labelled} labelled).")
 
     return 0
 

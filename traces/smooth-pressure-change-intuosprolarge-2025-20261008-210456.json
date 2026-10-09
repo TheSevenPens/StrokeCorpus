@@ -24,7 +24,7 @@
   "device": {
     "tablet": "IntuosProLarge_2025",
     "driver": "WACOM_6.4.15-1",
-    "firmware": "",
+    "firmware": "WACOM",
     "pen": "ACP-500",
     "api": "WintabDigitizer",
     "fullScalePressure": 32767,

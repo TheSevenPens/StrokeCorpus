@@ -18,7 +18,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -106,7 +106,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385480
+      "bytes": 385485
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
@@ -123,7 +123,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -209,7 +209,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447862
+      "bytes": 447867
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
@@ -226,7 +226,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -304,7 +304,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253812
+      "bytes": 253817
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
@@ -321,7 +321,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -399,7 +399,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118944
+      "bytes": 118949
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
@@ -416,7 +416,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -502,7 +502,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210211
+      "bytes": 210216
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
@@ -519,7 +519,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -603,7 +603,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155070
+      "bytes": 155075
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
@@ -620,7 +620,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -704,7 +704,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161981
+      "bytes": 161986
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
@@ -721,7 +721,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -813,7 +813,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310468
+      "bytes": 310473
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
@@ -830,7 +830,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-700"
       },
       "columns": [
@@ -916,7 +916,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401677
+      "bytes": 401682
     },
     {
       "file": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
@@ -933,7 +933,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "ACP-500"
       },
       "columns": [
@@ -1021,7 +1021,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 371461
+      "bytes": 371466
     },
     {
       "file": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
@@ -1038,7 +1038,7 @@
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
-        "firmware": "",
+        "firmware": "WACOM",
         "pen": "KP-504E"
       },
       "columns": [
@@ -1130,7 +1130,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 209773
+      "bytes": 209778
     }
   ],
   "totals": {
