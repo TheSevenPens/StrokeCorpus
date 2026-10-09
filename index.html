@@ -55,6 +55,7 @@
             <th>Name</th>
             <th>Device</th>
             <th>Firmware</th>
+            <th>Pen</th>
             <th>Recorded</th>
             <th class="n">Str</th>
             <th class="n">Sec</th>
@@ -92,10 +93,6 @@ import { loadManifest, run, esc } from "./corpus.js?v=4e397b84";
 await run(async () => {
 
   const say = (n) => n.toLocaleString();
-
-  // The tablet, then the pen if the recording says which. Neither is guessed, and a pen the
-  // recording does not name is left out and not shown as a blank.
-  const deviceOf = (device) => esc(device.tablet) + (device.pen ? `<br>pen ${esc(device.pen)}` : "");
 
   const manifest = await loadManifest();
   const recordings = manifest.recordings;
@@ -144,8 +141,9 @@ await run(async () => {
     rows.innerHTML = shown.map((recording) => `
       <tr>
         <td><a href="recording.html?recording=${encodeURIComponent(recording.file)}">${esc(recording.name)}</a></td>
-        <td style="font-size:12.5px">${deviceOf(recording.device)}</td>
+        <td style="font-size:12.5px">${esc(recording.device.tablet)}</td>
         <td style="font-size:12.5px">${recording.device.firmware ? esc(recording.device.firmware) : "&mdash;"}</td>
+        <td style="font-size:12.5px">${recording.device.pen ? esc(recording.device.pen) : "&mdash;"}</td>
         <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
         <td class="n">${recording.counts.strokes || "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>
