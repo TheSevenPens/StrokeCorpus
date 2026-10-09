@@ -57,9 +57,10 @@ You do not have to do all of these. Any one is useful.
 ## Say what you drew
 
 Put it in the pull request: **which tablet, which firmware, which driver version, which
-backend, the report-rate setting if it has one, which pen, and what you were doing with your
-hand.** The file records the device itself, but nothing in it can record
-that you were drawing left-handed, or standing, or that the pen has a worn nib.
+backend, the report-rate setting if it has one, and what you were doing with your
+hand.** The file records the device itself, and the recorder's Save step has a Pen box, so the pen
+goes in the file; say it here too if the recording was made before that box existed. Nothing in the
+file can record that you were drawing left-handed, or standing, or that the pen has a worn nib.
 
 ## What happens to it
 

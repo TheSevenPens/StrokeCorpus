@@ -454,6 +454,8 @@ def main():
                 # Absent before format version 7, and empty when the person was asked and wrote
                 # nothing. Those are different answers, so the absence is kept as null.
                 "firmware": device.get("firmware"),
+                # Optional in any version and absent when nobody said, which is null here.
+                "pen": device.get("pen"),
             },
             "columns": columns,
             "coordinateSpace": coordinate_space(recording),

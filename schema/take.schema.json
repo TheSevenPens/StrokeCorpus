@@ -75,7 +75,8 @@
         "driver": { "type": "string" },
         "api": { "type": "string" },
         "fullScalePressure": { "type": "integer", "minimum": 1 },
-        "conventions": { "type": "string" }
+        "conventions": { "type": "string" },
+        "pen": { "type": "string", "minLength": 1, "description": "Which pen was used, as the person who made the recording typed it. Optional in any version, and absent when nobody said: a pen is never an empty string. Unlike a recording's name it is part of the evidence, so it cannot be added to a recording afterwards." }
       }
     },
     "device": {
