@@ -17,9 +17,11 @@ There is very little real stylus data published, and almost none of it includes 
 The pen spends a good part of its life above the glass, the driver reports it the whole time,
 and what it does on the way down is a real and almost entirely undocumented signal.
 
-What is listed here is one hand, one tablet, one backend, recorded deliberately: strokes that
-rise smoothly from low to high pressure, low-pressure strokes, staccato strokes, quick taps,
-circles, loops, zigzags, and pairs of strokes drawn in opposite directions.
+What is listed here is one hand, two Wacom tablets and two backends. Eleven recordings were made
+deliberately on an Intuos Pro Large through Wintab: strokes that rise smoothly from low to high
+pressure, low-pressure strokes, staccato strokes, quick taps, circles, loops, zigzags, and pairs of
+strokes drawn in opposite directions. Six are freeform drawing on a Wacom PTH-660 through
+OpenTabletDriver, recorded by OpenTabletArtist, in the tablet's own counts and not desktop pixels.
 
 An earlier set of 33 recordings, from a Wacom Cintiq 24, is kept in `traces/` and still validated
 but is **set aside**: it is not in the catalogue or on the website. See [Set aside](#set-aside).
@@ -28,14 +30,15 @@ but is **set aside**: it is not in the catalogue or on the website. See [Set asi
 
 | | |
 |---|---|
-| recordings | 9 |
-| strokes | 80 |
-| readings in contact | 23,192 |
-| approach readings | 4,398 |
-| readings aloft | 0 |
-| tablet | Wacom Intuos Pro Large (2025), driver 6.4.15-1 |
-| pen | ACP-700 |
-| backend | Wintab (digitizer), full-scale pressure 32767 |
+| recordings | 17 |
+| strokes | 130 |
+| readings in contact | 35,183 |
+| approach readings | 6,899 |
+| readings aloft | 1,492 |
+| tablet | Wacom Intuos Pro Large (2025), 11 recordings; Wacom PTH-660, 6 |
+| pen | ACP-700 (9), KP-504E (7), ACP-500 (1) |
+| driver | WACOM_6.4.15-1 (the Intuos Pro Large); OpenTabletDriver 0.6.7 (the PTH-660) |
+| backend | Wintab (digitizer), full-scale pressure 32767; OpenTabletDriver device reports, 8191 |
 
 Each recording carries positions, pressure, tilt as a lean and an azimuth, barrel rotation, and —
 depending on its format version — height above the tablet, the raw status word, and a second

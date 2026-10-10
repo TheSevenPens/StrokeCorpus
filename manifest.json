@@ -4,6 +4,594 @@
   "formatVersion": 1,
   "recordings": [
     {
+      "file": "freeform-wacom-pth-660-20261010-140915.json",
+      "id": "freeform-wacom-pth-660-20261010-140915",
+      "name": "Draws on hover",
+      "recordedAt": "2026-10-10T14:09:15.3342712-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "freeform",
+      "intent": "Freeform drawing on OpenTabletArtist's Scribble page.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom PTH-660",
+        "driver": "OpenTabletDriver 0.6.7",
+        "api": "OpenTabletDriver DeviceReport",
+        "fullScalePressure": 8191,
+        "firmware": "WACOM",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth"
+      ],
+      "coordinateSpace": "tablet",
+      "channels": {
+        "measured": [
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth"
+        ],
+        "absent": [
+          "at",
+          "status",
+          "twist"
+        ]
+      },
+      "counts": {
+        "strokes": 1,
+        "contact": 969,
+        "approach": 12,
+        "departure": 12,
+        "aloft": 29
+      },
+      "seconds": {
+        "host": 4.816
+      },
+      "updates": {
+        "pairs": 968,
+        "changed": {
+          "position": 0.9969,
+          "pressure": 0.0486,
+          "tilt": 0.1085,
+          "height": 0.1291,
+          "twist": null
+        },
+        "pressureHolds": {
+          "1": 22,
+          "2": 1,
+          "3": 2,
+          "4": 4,
+          "5": 2,
+          "6": 1,
+          "9": 2,
+          "10": 2,
+          "11": 1,
+          "14": 1,
+          "15": 1,
+          "18": 1,
+          "46": 1,
+          "50": 1,
+          "62": 1,
+          "76": 1,
+          "89": 1,
+          "128": 1,
+          "184": 1
+        },
+        "pressureHoldsInterior": {
+          "1": 21,
+          "2": 1,
+          "3": 2,
+          "4": 4,
+          "5": 2,
+          "6": 1,
+          "9": 2,
+          "10": 2,
+          "11": 1,
+          "14": 1,
+          "15": 1,
+          "18": 1,
+          "46": 1,
+          "50": 1,
+          "62": 1,
+          "76": 1,
+          "89": 1,
+          "128": 1,
+          "184": 1
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 46,
+        "pressureDistinct": 6,
+        "pressureStep": 1,
+        "readingRateHz": 201.0,
+        "readingRateSeconds": 4.82,
+        "pressureUpdateHzIfPeriodic": 201.0
+      },
+      "counters": null,
+      "quality": "partial",
+      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 58394
+    },
+    {
+      "file": "freeform-wacom-pth-660-20261010-141102.json",
+      "id": "freeform-wacom-pth-660-20261010-141102",
+      "name": "Spiral",
+      "recordedAt": "2026-10-10T14:11:02.6555110-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "freeform",
+      "intent": "Freeform drawing on OpenTabletArtist's Scribble page.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom PTH-660",
+        "driver": "OpenTabletDriver 0.6.7",
+        "api": "OpenTabletDriver DeviceReport",
+        "fullScalePressure": 8191,
+        "firmware": "WACOM",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth"
+      ],
+      "coordinateSpace": "tablet",
+      "channels": {
+        "measured": [
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth"
+        ],
+        "absent": [
+          "at",
+          "status",
+          "twist"
+        ]
+      },
+      "counts": {
+        "strokes": 1,
+        "contact": 1441,
+        "approach": 50,
+        "departure": 43,
+        "aloft": 279
+      },
+      "seconds": {
+        "host": 7.162
+      },
+      "updates": {
+        "pairs": 1440,
+        "changed": {
+          "position": 0.9826,
+          "pressure": 0.7493,
+          "tilt": 0.0944,
+          "height": 0.3403,
+          "twist": null
+        },
+        "pressureHolds": {
+          "1": 827,
+          "2": 171,
+          "3": 60,
+          "4": 16,
+          "5": 3,
+          "6": 2
+        },
+        "pressureHoldsInterior": {
+          "1": 826,
+          "2": 171,
+          "3": 60,
+          "4": 16,
+          "5": 3,
+          "6": 2
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1078,
+        "pressureDistinct": 819,
+        "pressureStep": 1,
+        "readingRateHz": 201.1,
+        "readingRateSeconds": 7.16,
+        "pressureUpdateHzIfPeriodic": 201.1
+      },
+      "counters": null,
+      "quality": "partial",
+      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 102679
+    },
+    {
+      "file": "freeform-wacom-pth-660-20261010-141156.json",
+      "id": "freeform-wacom-pth-660-20261010-141156",
+      "name": "ZigZags",
+      "recordedAt": "2026-10-10T14:11:56.9032519-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "freeform",
+      "intent": "Freeform drawing on OpenTabletArtist's Scribble page.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom PTH-660",
+        "driver": "OpenTabletDriver 0.6.7",
+        "api": "OpenTabletDriver DeviceReport",
+        "fullScalePressure": 8191,
+        "firmware": "WACOM",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth"
+      ],
+      "coordinateSpace": "tablet",
+      "channels": {
+        "measured": [
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth"
+        ],
+        "absent": [
+          "at",
+          "status",
+          "twist"
+        ]
+      },
+      "counts": {
+        "strokes": 5,
+        "contact": 428,
+        "approach": 250,
+        "departure": 201,
+        "aloft": 1184
+      },
+      "seconds": {
+        "host": 7.518
+      },
+      "updates": {
+        "pairs": 423,
+        "changed": {
+          "position": 0.9953,
+          "pressure": 0.8842,
+          "tilt": 0.279,
+          "height": 0.409,
+          "twist": null
+        },
+        "pressureHolds": {
+          "1": 333,
+          "2": 35,
+          "3": 4,
+          "4": 2
+        },
+        "pressureHoldsInterior": {
+          "1": 328,
+          "2": 35,
+          "3": 4,
+          "4": 2
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 369,
+        "pressureDistinct": 334,
+        "pressureStep": 1,
+        "readingRateHz": 201.1,
+        "readingRateSeconds": 2.1,
+        "pressureUpdateHzIfPeriodic": 201.1
+      },
+      "counters": null,
+      "quality": "partial",
+      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 113956
+    },
+    {
+      "file": "freeform-wacom-pth-660-20261010-141242.json",
+      "id": "freeform-wacom-pth-660-20261010-141242",
+      "name": "Increasingly faster flicks",
+      "recordedAt": "2026-10-10T14:12:42.6564007-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "freeform",
+      "intent": "Freeform drawing on OpenTabletArtist's Scribble page.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom PTH-660",
+        "driver": "OpenTabletDriver 0.6.7",
+        "api": "OpenTabletDriver DeviceReport",
+        "fullScalePressure": 8191,
+        "firmware": "WACOM",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth"
+      ],
+      "coordinateSpace": "tablet",
+      "channels": {
+        "measured": [
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth"
+        ],
+        "absent": [
+          "at",
+          "status",
+          "twist"
+        ]
+      },
+      "counts": {
+        "strokes": 11,
+        "contact": 710,
+        "approach": 547,
+        "departure": 487,
+        "aloft": 0
+      },
+      "seconds": {
+        "host": 10.819
+      },
+      "updates": {
+        "pairs": 699,
+        "changed": {
+          "position": 0.9886,
+          "pressure": 0.9084,
+          "tilt": 0.1702,
+          "height": 0.3991,
+          "twist": null
+        },
+        "pressureHolds": {
+          "1": 580,
+          "2": 48,
+          "3": 5,
+          "4": 2
+        },
+        "pressureHoldsInterior": {
+          "1": 569,
+          "2": 48,
+          "3": 5,
+          "4": 2
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 624,
+        "pressureDistinct": 571,
+        "pressureStep": 1,
+        "readingRateHz": 202.1,
+        "readingRateSeconds": 3.46,
+        "pressureUpdateHzIfPeriodic": 202.1
+      },
+      "counters": null,
+      "quality": "partial",
+      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 98263
+    },
+    {
+      "file": "freeform-wacom-pth-660-20261010-141342.json",
+      "id": "freeform-wacom-pth-660-20261010-141342",
+      "name": "Taps",
+      "recordedAt": "2026-10-10T14:13:42.7566182-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "freeform",
+      "intent": "Freeform drawing on OpenTabletArtist's Scribble page.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom PTH-660",
+        "driver": "OpenTabletDriver 0.6.7",
+        "api": "OpenTabletDriver DeviceReport",
+        "fullScalePressure": 8191,
+        "firmware": "WACOM",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth"
+      ],
+      "coordinateSpace": "tablet",
+      "channels": {
+        "measured": [
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth"
+        ],
+        "absent": [
+          "at",
+          "status",
+          "twist"
+        ]
+      },
+      "counts": {
+        "strokes": 19,
+        "contact": 336,
+        "approach": 906,
+        "departure": 874,
+        "aloft": 0
+      },
+      "seconds": {
+        "host": 6.216
+      },
+      "updates": {
+        "pairs": 317,
+        "changed": {
+          "position": 0.8864,
+          "pressure": 0.8991,
+          "tilt": 0.0442,
+          "height": 0.3123,
+          "twist": null
+        },
+        "pressureHolds": {
+          "1": 255,
+          "2": 28,
+          "3": 2
+        },
+        "pressureHoldsInterior": {
+          "1": 237,
+          "2": 27,
+          "3": 2
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 266,
+        "pressureDistinct": 283,
+        "pressureStep": 1,
+        "readingRateHz": 201.7,
+        "readingRateSeconds": 1.57,
+        "pressureUpdateHzIfPeriodic": 201.7
+      },
+      "counters": null,
+      "quality": "partial",
+      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 121222
+    },
+    {
+      "file": "freeform-wacom-pth-660-20261010-141405.json",
+      "id": "freeform-wacom-pth-660-20261010-141405",
+      "name": "Press spots",
+      "recordedAt": "2026-10-10T14:14:05.6016365-07:00",
+      "formatVersion": 8,
+      "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
+      "gesture": "freeform",
+      "intent": "Freeform drawing on OpenTabletArtist's Scribble page.",
+      "endedBy": "the recording was stopped",
+      "device": {
+        "tablet": "Wacom PTH-660",
+        "driver": "OpenTabletDriver 0.6.7",
+        "api": "OpenTabletDriver DeviceReport",
+        "fullScalePressure": 8191,
+        "firmware": "WACOM",
+        "pen": "KP-504E"
+      },
+      "columns": [
+        "arrived",
+        "x",
+        "y",
+        "pressure",
+        "height",
+        "lean",
+        "azimuth"
+      ],
+      "coordinateSpace": "tablet",
+      "channels": {
+        "measured": [
+          "arrived",
+          "x",
+          "y",
+          "pressure",
+          "height",
+          "lean",
+          "azimuth"
+        ],
+        "absent": [
+          "at",
+          "status",
+          "twist"
+        ]
+      },
+      "counts": {
+        "strokes": 5,
+        "contact": 1187,
+        "approach": 250,
+        "departure": 244,
+        "aloft": 0
+      },
+      "seconds": {
+        "host": 9.381
+      },
+      "updates": {
+        "pairs": 1182,
+        "changed": {
+          "position": 0.6184,
+          "pressure": 0.9162,
+          "tilt": 0.0051,
+          "height": 0.1218,
+          "twist": null
+        },
+        "pressureHolds": {
+          "1": 1047,
+          "2": 21,
+          "3": 7,
+          "4": 1,
+          "5": 1,
+          "8": 2,
+          "9": 2,
+          "11": 1,
+          "18": 1
+        },
+        "pressureHoldsInterior": {
+          "1": 1042,
+          "2": 21,
+          "3": 7,
+          "4": 1,
+          "5": 1,
+          "8": 2,
+          "9": 2,
+          "11": 1,
+          "18": 1
+        },
+        "pressurePeriod": 1,
+        "pressurePeriodFit": 1.0,
+        "pressurePeriodSupport": 1078,
+        "pressureDistinct": 779,
+        "pressureStep": 1,
+        "readingRateHz": 201.0,
+        "readingRateSeconds": 5.88,
+        "pressureUpdateHzIfPeriodic": 201.0
+      },
+      "counters": null,
+      "quality": "partial",
+      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "hoverTrusted": true,
+      "reRecord": [],
+      "bytes": 98303
+    },
+    {
       "file": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
       "name": "Smooth pressure change",
@@ -1134,23 +1722,26 @@
     }
   ],
   "totals": {
-    "recordings": 11,
-    "strokes": 88,
-    "contact": 30112,
-    "approach": 4884,
-    "aloft": 0,
+    "recordings": 17,
+    "strokes": 130,
+    "contact": 35183,
+    "approach": 6899,
+    "aloft": 1492,
     "byQuality": {
+      "partial": 6,
       "complete": 11
     },
     "byPressurePeriod": {
-      "2": 9,
-      "1": 2
+      "1": 8,
+      "2": 9
     },
     "wantingReRecording": 0,
     "devices": [
-      "IntuosProLarge_2025"
+      "IntuosProLarge_2025",
+      "Wacom PTH-660"
     ],
     "backends": [
+      "OpenTabletDriver DeviceReport",
       "WintabDigitizer"
     ]
   }
