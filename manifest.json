@@ -602,7 +602,7 @@
       "intent": "Strokes that vary from low to high pressure smoothly",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -694,7 +694,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385485
+      "bytes": 385479
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
@@ -707,7 +707,7 @@
       "intent": "Strokes at low pressure",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -797,7 +797,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447867
+      "bytes": 447861
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
@@ -810,7 +810,7 @@
       "intent": "Sudden staccato strokes",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -892,7 +892,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253817
+      "bytes": 253811
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
@@ -905,7 +905,7 @@
       "intent": "Quick taps",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -987,7 +987,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118949
+      "bytes": 118943
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
@@ -1000,7 +1000,7 @@
       "intent": "Three circles",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1090,7 +1090,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210216
+      "bytes": 210210
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
@@ -1103,7 +1103,7 @@
       "intent": "Four loops",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1191,7 +1191,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155075
+      "bytes": 155069
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
@@ -1204,7 +1204,7 @@
       "intent": "Four back and forth zigzags",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1292,7 +1292,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161986
+      "bytes": 161980
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
@@ -1305,7 +1305,7 @@
       "intent": "four linear strokes going from low to high pressure",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1401,7 +1401,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310473
+      "bytes": 310467
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
@@ -1414,7 +1414,7 @@
       "intent": "4 pairs of strokes. Each pair has the pen pointing the west. One of the pair is moving west. One of the pair is moving east.",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1504,7 +1504,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401682
+      "bytes": 401676
     },
     {
       "file": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
@@ -1517,7 +1517,7 @@
       "intent": "Strokes that vary from low to high pressure smoothly",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1609,7 +1609,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 371466
+      "bytes": 371460
     },
     {
       "file": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
@@ -1622,7 +1622,7 @@
       "intent": "Strokes that vary from low to high pressure smoothly",
       "endedBy": "the recording was stopped",
       "device": {
-        "tablet": "IntuosProLarge_2025",
+        "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
@@ -1718,7 +1718,7 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 209778
+      "bytes": 209772
     }
   ],
   "totals": {
@@ -1737,8 +1737,8 @@
     },
     "wantingReRecording": 0,
     "devices": [
-      "IntuosProLarge_2025",
-      "Wacom PTH-660"
+      "Wacom PTH-660",
+      "Wacom PTK-870"
     ],
     "backends": [
       "OpenTabletDriver DeviceReport",
