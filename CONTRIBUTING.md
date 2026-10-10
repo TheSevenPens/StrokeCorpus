@@ -1,6 +1,7 @@
 # Contributing a recording
 
-Everything listed in this corpus is one hand, one Wacom Intuos Pro Large, one backend. (An earlier
+Everything listed in this corpus is one hand, two Wacom tablets (an Intuos Pro Large through Wintab and a
+PTH-660 through OpenTabletDriver). (An earlier
 set from a Wacom Cintiq 24 is kept but set aside; see [set-aside.json](set-aside.json).) That means nothing
 in it can yet tell a fact about **pens** from a fact about **this pen**. A second device, or
 a second hand, is worth more here than a hundred more recordings from the first.
@@ -25,10 +26,10 @@ already here fails its check.
 
 In rough order:
 
-1. **A tablet that is not a Wacom Intuos Pro Large or Cintiq 24.** Anything — a Huion, an XP-Pen, an iPad through
+1. **A tablet that is not a Wacom Intuos Pro Large, a Wacom PTH-660 or a Cintiq 24.** Anything — a Huion, an XP-Pen, an iPad through
    a Windows bridge, a Surface pen, a screenless tablet. Different drivers report different
    things and disagree in ways nobody has written down.
-2. **A backend that is not Wintab.** WM_POINTER and the plain framework pointer see the same
+2. **A backend that is neither Wintab nor OpenTabletDriver's device reports.** WM_POINTER and the plain framework pointer see the same
    hardware through different stacks and do not agree about the pressure range.
 3. **Hover.** Turn on keeping airborne readings. The approach to a landing is the least
    documented part of pen input and the reason this corpus exists.
