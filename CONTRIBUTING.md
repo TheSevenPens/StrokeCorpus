@@ -17,8 +17,9 @@ saves a round trip.
 
 Please **do not edit the file**. The recorder writes what the driver said; a hand-corrected
 trace is no longer evidence, and the counters in it stop reconciling. The only things that can be
-added or changed later are the recording's `name`, its `device.pen`, `device.driver` and `device.firmware`,
-labels and not measurements (see [FORMAT.md](FORMAT.md#a-name), [FORMAT.md](FORMAT.md#the-pen),
+added or changed later are the recording's `name`, its `device.tablet`, `device.pen`, `device.driver` and
+`device.firmware`, labels and not measurements (see [FORMAT.md](FORMAT.md#a-name),
+[FORMAT.md](FORMAT.md#the-tablets-name), [FORMAT.md](FORMAT.md#the-pen),
 [FORMAT.md](FORMAT.md#the-driver) and [FORMAT.md](FORMAT.md#the-firmware)); a pull request that changes anything else in a recording that is
 already here fails its check.
 
@@ -26,7 +27,7 @@ already here fails its check.
 
 In rough order:
 
-1. **A tablet that is not a Wacom Intuos Pro Large, a Wacom PTH-660 or a Cintiq 24.** Anything — a Huion, an XP-Pen, an iPad through
+1. **A tablet that is not a Wacom PTK-870 (Intuos Pro Large), a Wacom PTH-660 or a Cintiq 24.** Anything — a Huion, an XP-Pen, an iPad through
    a Windows bridge, a Surface pen, a screenless tablet. Different drivers report different
    things and disagree in ways nobody has written down.
 2. **A backend that is neither Wintab nor OpenTabletDriver's device reports.** WM_POINTER and the plain framework pointer see the same
@@ -64,8 +65,9 @@ hand.** The file records the device itself, and the recorder's Save step has a P
 goes in the file; say it here too if the recording was made before that box existed. Nothing in the
 file can record that you were drawing left-handed, or standing, or that the pen has a worn nib.
 
-If the recording's pen, driver or firmware box was left empty, it can be added to the file afterwards (one
-`device.pen`, `device.driver` or `device.firmware` line).
+If the recording's tablet, pen, driver or firmware box was left empty or wrong, it can be filled in or
+corrected in the file afterwards (one `device.tablet`, `device.pen`, `device.driver` or `device.firmware`
+line).
 
 ## What happens to it
 

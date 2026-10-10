@@ -35,7 +35,7 @@ but is **set aside**: it is not in the catalogue or on the website. See [Set asi
 | readings in contact | 35,183 |
 | approach readings | 6,899 |
 | readings aloft | 1,492 |
-| tablet | Wacom Intuos Pro Large (2025), 11 recordings; Wacom PTH-660, 6 |
+| tablet | Wacom PTK-870 (an Intuos Pro Large, 2025), 11 recordings; Wacom PTH-660, 6 |
 | pen | ACP-700 (9), KP-504E (7), ACP-500 (1) |
 | driver | WACOM_6.4.15-1 (the Intuos Pro Large); OpenTabletDriver 0.6.7 (the PTH-660) |
 | backend | Wintab (digitizer), full-scale pressure 32767; OpenTabletDriver device reports, 8191 |

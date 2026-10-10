@@ -22,7 +22,7 @@
     "pointsDelivered": 3179
   },
   "device": {
-    "tablet": "IntuosProLarge_2025",
+    "tablet": "Wacom PTK-870",
     "driver": "WACOM_6.4.15-1",
     "firmware": "WACOM",
     "pen": "ACP-700",

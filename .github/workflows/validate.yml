@@ -34,7 +34,7 @@ jobs:
         run: python tools/validate.py
 
       # Recordings are original evidence. A pull request may add recordings, and may name or rename
-      # one, or say which pen, driver and firmware it was made with, but may not change anything else in one that is already here.
-      - name: No recording changed except by name, pen, driver or firmware
+      # one, or say which tablet, pen, driver and firmware it was made with, but may not change anything else in one that is already here.
+      - name: No recording changed except by name, tablet, pen, driver or firmware
         if: github.event_name == 'pull_request'
         run: python tools/check_names_only.py "origin/${{ github.base_ref }}"

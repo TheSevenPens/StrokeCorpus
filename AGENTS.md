@@ -6,8 +6,8 @@ These instructions apply throughout this repository.
 
 - Treat `traces/*.json` as original evidence. Do not hand-correct, normalize or
   rewrite recordings. See [CONTRIBUTING.md](CONTRIBUTING.md) for new contributions.
-  **The exceptions are a recording's top-level `name` and its `device.pen`, `device.driver` and
-  `device.firmware`**, labels a person typed and not measurements: each may be added to a recording or
+  **The exceptions are a recording's top-level `name` and its `device.tablet`, `device.pen`,
+  `device.driver` and `device.firmware`**, labels a person typed and not measurements: each may be added to a recording or
   changed after the fact, as a single line and nothing else, and none makes a recording
   `editedAfterRecording`.
   `tools/check_names_only.py` enforces this on every pull request.

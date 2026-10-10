@@ -119,6 +119,18 @@ filled in or corrected after a recording was made without making the recording
 `editedAfterRecording`. Only the `device.driver` line may change; anything else is still an edit, and
 `tools/check_names_only.py` fails a pull request that makes one.
 
+## The tablet's name
+
+**`device.tablet`** is the name of the tablet, as the person who made the recording typed it, and it is
+a claim like the driver: nothing detects it. It may contain spaces (`Wacom PTK-870`); the recorder
+strips whitespace round it and keeps what is inside.
+
+Like [the name](#a-name), [the pen](#the-pen) and [the driver](#the-driver), it is a label and not a
+measurement, so it may be corrected after a recording was made without making the recording
+`editedAfterRecording`. Only the `device.tablet` line may change; anything else is still an edit, and
+`tools/check_names_only.py` fails a pull request that makes one. The file name a recording was saved
+under was made from the name it had then and is not renamed.
+
 ## The firmware
 
 **`device.firmware`** is the tablet's firmware, as the person who made the recording typed it, and it is
@@ -147,11 +159,12 @@ A recording may carry a top-level **`name`**: what the person who made it calls 
   field existed.
 - **The catalogue shows it.** `manifest.json`'s `name` is this when the recording has one, and is the
   name every page displays.
-- **With [the pen](#the-pen), [the driver](#the-driver) and [the firmware](#the-firmware), it is the
-  only thing that may be added or changed after a recording was made.** Everything else in a recording is original evidence and is
+- **With [the tablet's name](#the-tablets-name), [the pen](#the-pen), [the driver](#the-driver) and
+  [the firmware](#the-firmware), it is the only thing that may be added or changed after a recording
+  was made.** Everything else in a recording is original evidence and is
   never rewritten. A name is a label and not a measurement, so giving a recording one, or changing it,
   does not make the recording `editedAfterRecording`. A change to anything but the `name`,
-  `device.pen`, `device.driver` and `device.firmware` lines is still an edit, and `tools/check_names_only.py` fails a
+  `device.tablet`, `device.pen`, `device.driver` and `device.firmware` lines is still an edit, and `tools/check_names_only.py` fails a
   pull request that makes one.
 - **StrokeRecorder writes it** from the Save step, where it is typed in like the tablet and driver
   names. Treat it as a claim, like those.
