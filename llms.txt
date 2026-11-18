@@ -8,9 +8,9 @@ not an elapsed-time clock. Do not compute physical speed from it or apply a fixe
 correction factor across contact transitions. This is a measured property of this
 setup, not a universal rule for every device or backend.
 
-When present (format versions 5 and 6), `arrived` is the host's monotonic timestamp
-in microseconds for a drained batch. Multiple readings share it: it is not a
-per-packet acquisition time, and adjacent differences can be zero.
+When present, `arrived` is the host's monotonic timestamp in microseconds. It may
+be shared by readings drained in a batch. See [why keep at](FORMAT.md#why-keep-at)
+for what the optional backend timestamp adds.
 
 The manifest has a `recordings` array and aggregate `totals`. Each entry provides
 `file`, `formatVersion`, `columns`, counts, device details, and quality information.
@@ -41,9 +41,10 @@ and `channels` lists which columns the file carries. The pressure-hold period is
 of the readings, not a finding about the device. See FORMAT.md for what it does and does not
 establish.
 
-Quality tags describe format capabilities and known limitations: `complete` has
-both clocks and host-aged approach; `partial` is version 6 or later but does not carry every
-column; `hover-suspect` has both clocks but unreliable
+Quality tags describe format capabilities and known limitations. For version 6 or later,
+`complete` carries all required columns including `arrived`. The `at`, `status` and `twist`
+columns are optional. A `partial` recording lacks a required
+column. `hover-suspect` has both clocks but unreliable
 approach capture; `single-clock` lacks host timing; `early` has segmented strokes
 without later channels; `raw` is unsegmented. These tags are not independent
 validation of every measurement. See each entry's `qualityMeans` and `reRecord`.

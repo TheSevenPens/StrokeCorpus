@@ -162,15 +162,19 @@ A recording may carry a top-level **`name`**: what the person who made it calls 
   The catalogue's `strokeType` groups names that describe the same pattern, such as “Quick taps”
   and “Taps”. A name with no known variant supplies its own type. Both fields are catalogue labels
   derived from the name, and the recording's `file` remains the lookup key.
-- **With [the tablet's name](#the-tablets-name), [the pen](#the-pen), [the driver](#the-driver) and
-  [the firmware](#the-firmware), it is the only thing that may be added or changed after a recording
-  was made.** Everything else in a recording is original evidence and is
-  never rewritten. A name is a label and not a measurement, so giving a recording one, or changing it,
-  does not make the recording `editedAfterRecording`. A change to anything but the `name`,
-  `device.tablet`, `device.pen`, `device.driver` and `device.firmware` lines is still an edit, and `tools/check_names_only.py` fails a
-  pull request that makes one.
+- **It can be corrected after recording**, along with the tablet, pen, driver, firmware and host OS
+  labels. These edits do not set `editedAfterRecording`. The evidence checker allows changes only
+  to those metadata lines.
 - **StrokeRecorder writes it** from the Save step, where it is typed in like the tablet and driver
   names. Treat it as a claim, like those.
+
+## Host operating system
+
+Any format version may include a top-level `hostOS` object with a `name` and an optional
+`version`, for example `"hostOS": {"name": "Windows", "version": "11 24H2"}`. This
+identifies the machine that ran the recorder. Leave out `version` when it is unknown,
+and omit `hostOS` if the OS itself is unknown. The catalogue uses `null` for an unknown OS.
+The object may be added or corrected as a single metadata line after recording.
 
 ## What `x` and `y` are
 
@@ -270,8 +274,8 @@ thousands of them, and an object per reading would be mostly repeated key names.
 
 | column | what it is |
 |---|---|
-| `at` | the pen's own timestamp, microseconds. **Not a clock** — see below |
-| `arrived` | the host's monotonic clock, microseconds, stamped when the batch was drained |
+| `at` | source timestamp from the input backend, in microseconds, when available. Its meaning depends on the backend |
+| `arrived` | host monotonic timestamp, in microseconds, stamped when the recorder receives a report or drains a batch |
 | `x`, `y` | a position: on the desktop, in the units `placement` describes, or from version 8 whatever `coordinates` says |
 | `pressure` | a raw count. Meaningless without `device.fullScalePressure` |
 | `height` | Wintab's `pkZ`, height above the tablet. 0 to about 401 on the device measured here |
@@ -280,11 +284,24 @@ thousands of them, and an object per reading would be mostly repeated key names.
 | `azimuth` | the compass bearing the pen is leaning towards, degrees |
 | `twist` | barrel rotation, degrees |
 
-## `at` is a packet counter, not a clock
+## Why keep `at`?
 
-This is the single most important thing to know before using this data.
+Compare changes in `at` with changes in `arrived` to see how the backend's timestamps
+progress relative to delivery. For example, several reports may share one `arrived`
+timestamp after a batch drain while their `at` values still show how the backend
+stamped each report. The comparison can reveal batching, drift or resets. The source
+and behavior of `at` depend on the backend, so interpret it before using it to measure time.
 
-On the hardware measured here, `at` **advances a flat 4.166 ms per delivered packet
+OpenTabletArtist's OpenTabletDriver report stream supplies host arrival timing only.
+Those recordings omit `at` and keep `arrived`. The catalogue lists the columns each
+recording carries. The `complete` quality tag requires `arrived` for timing and treats
+`at`, `status` and `twist` as optional.
+
+<a id="at-is-a-packet-counter-not-a-clock"></a>
+
+### The Cintiq 24 / Wintab timing example
+
+On the Cintiq 24 / Wintab setup measured here, `at` **advances a flat 4.166 ms per delivered packet
 regardless of how much time actually passed**, runs at **0.673 of real time**, and
 resynchronises to real time at each contact transition. It implies a 240/s report rate; the
 real one is **161.6/s**, measured against the host clock and confirmed independently.
@@ -293,7 +310,7 @@ So:
 
 - **Do not compute speed from `at`** unless you mean speed per counter-second.
 - The gap in `at` before every landing is that resynchronisation, not a gap in the data.
-- Takes at `formatVersion` 5 and above carry `arrived`, which is a real clock. Use it.
+- Use `arrived` when available to estimate elapsed time on the host clock.
 
 Every reading drained in one batch **shares one `arrived` value**, deliberately. They
 genuinely did arrive together — they were sitting in the driver's queue and were handed over

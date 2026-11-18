@@ -55,11 +55,9 @@ def coordinate_space(recording):
 # Every column the format has ever declared, in the order the format lists them.
 KNOWN_COLUMNS = ["at", "arrived", "x", "y", "pressure", "height", "status", "lean", "azimuth", "twist"]
 
-# "Complete" says every channel, so it needs every channel the format has ever declared: both clocks,
-# position and pressure, the height and status words, and the pen's orientation. A recording from a
-# tablet that cannot sense twist is not a worse recording, and the tag it gets says plainly which
-# column it does not carry.
-COMPLETE_NEEDS = KNOWN_COLUMNS
+# Require host timing. The source timestamp, raw status and twist depend on
+# the backend or pen, and channel metadata reports their availability separately.
+COMPLETE_NEEDS = [column for column in KNOWN_COLUMNS if column not in {"at", "status", "twist"}]
 
 
 def channels(recording):
@@ -94,13 +92,11 @@ def quality(version, columns):
         missing = [c for c in COMPLETE_NEEDS if c not in has]
 
         if not missing:
-            return "complete", "Every channel, both clocks, and the approach measured on the host clock."
+            return "complete", "All required columns, including the host clock (arrived). At, status and twist are optional."
 
         return "partial", (
-            "The approach is aged on the host clock, as from format version 6. But this recording "
-            "does not carry " + ", ".join(missing) + ", so some of what the recordings that carry "
-            "every channel can say it cannot. Which columns a file carries says what was recorded, "
-            "not that what was recorded is right."
+            "This recording uses format version 6 or later and is missing required columns: "
+            + ", ".join(missing) + ". At, status and twist are optional."
         )
     if version == 5:
         return "hover-suspect", (
@@ -470,6 +466,7 @@ def main():
             "id": recording.get("id", ""),
             "name": name(recording, path),
             "recordedAt": recording.get("recordedAt", ""),
+            "hostOS": recording.get("hostOS"),
             "formatVersion": version,
             "formatAdded": VERSIONS.get(version, ""),
             "gesture": recording.get("gesture", ""),
