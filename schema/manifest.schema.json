@@ -25,7 +25,7 @@
     "recording": {
       "type": "object",
       "required": [
-        "file", "id", "name", "strokeType", "recordedAt", "formatVersion", "formatAdded", "gesture", "intent", "endedBy",
+        "file", "id", "name", "strokeType", "recordedAt", "hostOS", "formatVersion", "formatAdded", "gesture", "intent", "endedBy",
         "device", "columns", "coordinateSpace", "channels", "counts", "seconds", "updates", "counters",
         "quality", "qualityMeans", "hoverTrusted", "reRecord", "bytes"
       ],
@@ -35,6 +35,16 @@
         "name": { "type": "string", "description": "Display name, with a number when recordings share the same name." },
         "strokeType": { "type": "string", "minLength": 1, "description": "Catalogue category derived from the recording's name, shared by variations of the same pattern." },
         "recordedAt": { "type": "string" },
+        "hostOS": {
+          "description": "Recording host operating system. Null if unknown. The version may be omitted.",
+          "type": ["object", "null"],
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "version": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
         "formatVersion": { "type": "integer", "minimum": 1, "maximum": 8 },
         "formatAdded": { "type": "string" },
         "gesture": { "type": "string" },

@@ -53,7 +53,7 @@
     </select>
 
     <label for="find">Search</label>
-    <input type="search" id="find" placeholder="name, type, device" size="22">
+    <input type="search" id="find" placeholder="name, type, device, OS" size="22">
 
     <button type="button" id="clear">Clear</button>
   </div>
@@ -69,6 +69,8 @@
             <th>Firmware</th>
             <th data-sort="pen"><button type="button" class="sort">Pen</button></th>
             <th>Driver</th>
+            <th>OS</th>
+            <th>API</th>
             <th data-sort="recorded"><button type="button" class="sort">Recorded</button></th>
             <th class="n" data-sort="strokes"><button type="button" class="sort">Str</button></th>
             <th class="n">Sec</th>
@@ -110,6 +112,7 @@ import { loadManifest, run, esc } from "./corpus.js?v=f7807b7a";
 await run(async () => {
 
   const say = (n) => n.toLocaleString();
+  const apiLabel = (api) => api === "OpenTabletDriver DeviceReport" ? "OTDDeviceReport" : api;
 
   const manifest = await loadManifest();
   const recordings = manifest.recordings;
@@ -180,7 +183,7 @@ await run(async () => {
       if (wantHover === "some" && recording.counts.approach === 0) return false;
 
       if (text) {
-        const haystack = [recording.name, recording.strokeType, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.driver, recording.device.api, recording.file]
+        const haystack = [recording.name, recording.strokeType, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.driver, recording.device.api, apiLabel(recording.device.api), recording.hostOS?.name, recording.hostOS?.version, recording.file]
           .join(" ").toLowerCase();
 
         if (!haystack.includes(text)) return false;
@@ -201,6 +204,8 @@ await run(async () => {
         <td style="font-size:12.5px">${recording.device.firmware ? esc(recording.device.firmware) : "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.device.pen ? esc(recording.device.pen) : "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.device.driver ? esc(recording.device.driver) : "&mdash;"}</td>
+        <td>${esc([recording.hostOS?.name, recording.hostOS?.version].filter(Boolean).join(" ")) || "&mdash;"}</td>
+        <td>${esc(apiLabel(recording.device.api)) || "&mdash;"}</td>
         <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
         <td class="n">${recording.counts.strokes || "&mdash;"}</td>
         <td class="n">${recording.seconds.host ?? recording.seconds.pen ?? "&mdash;"}</td>

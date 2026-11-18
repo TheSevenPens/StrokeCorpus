@@ -8,6 +8,9 @@
       "id": "freeform-wacom-pth-660-20261010-140915",
       "name": "Draws on hover",
       "recordedAt": "2026-10-10T14:09:15.3342712-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "freeform",
@@ -118,11 +121,11 @@
         "pressureUpdateHzIfPeriodic": 201.0
       },
       "counters": null,
-      "quality": "partial",
-      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "quality": "complete",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 59477,
+      "bytes": 59511,
       "strokeType": "Draws on hover"
     },
     {
@@ -130,6 +133,9 @@
       "id": "freeform-wacom-pth-660-20261010-141102",
       "name": "Spiral",
       "recordedAt": "2026-10-10T14:11:02.6555110-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "freeform",
@@ -214,11 +220,11 @@
         "pressureUpdateHzIfPeriodic": 201.1
       },
       "counters": null,
-      "quality": "partial",
-      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "quality": "complete",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 104553,
+      "bytes": 104587,
       "strokeType": "Spiral"
     },
     {
@@ -226,6 +232,9 @@
       "id": "freeform-wacom-pth-660-20261010-141156",
       "name": "ZigZags",
       "recordedAt": "2026-10-10T14:11:56.9032519-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "freeform",
@@ -306,11 +315,11 @@
         "pressureUpdateHzIfPeriodic": 201.1
       },
       "counters": null,
-      "quality": "partial",
-      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "quality": "complete",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 116122,
+      "bytes": 116156,
       "strokeType": "Zigzags"
     },
     {
@@ -318,6 +327,9 @@
       "id": "freeform-wacom-pth-660-20261010-141242",
       "name": "Increasingly faster flicks",
       "recordedAt": "2026-10-10T14:12:42.6564007-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "freeform",
@@ -398,11 +410,11 @@
         "pressureUpdateHzIfPeriodic": 202.1
       },
       "counters": null,
-      "quality": "partial",
-      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "quality": "complete",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 100175,
+      "bytes": 100209,
       "strokeType": "Increasingly faster flicks"
     },
     {
@@ -410,6 +422,9 @@
       "id": "freeform-wacom-pth-660-20261010-141342",
       "name": "Taps",
       "recordedAt": "2026-10-10T14:13:42.7566182-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "freeform",
@@ -488,11 +503,11 @@
         "pressureUpdateHzIfPeriodic": 201.7
       },
       "counters": null,
-      "quality": "partial",
-      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "quality": "complete",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 123594,
+      "bytes": 123628,
       "strokeType": "Taps"
     },
     {
@@ -500,6 +515,9 @@
       "id": "freeform-wacom-pth-660-20261010-141405",
       "name": "Press spots",
       "recordedAt": "2026-10-10T14:14:05.6016365-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "freeform",
@@ -590,11 +608,11 @@
         "pressureUpdateHzIfPeriodic": 201.0
       },
       "counters": null,
-      "quality": "partial",
-      "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
+      "quality": "complete",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 100086,
+      "bytes": 100120,
       "strokeType": "Press spots"
     },
     {
@@ -602,6 +620,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
       "name": "Smooth pressure change 1",
       "recordedAt": "2026-10-08T17:19:43.2856744-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -697,10 +718,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385479,
+      "bytes": 385513,
       "strokeType": "Smooth pressure change"
     },
     {
@@ -708,6 +729,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
       "name": "Low pressure strokes",
       "recordedAt": "2026-10-08T17:20:50.1872202-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -801,10 +825,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447861,
+      "bytes": 447895,
       "strokeType": "Low pressure strokes"
     },
     {
@@ -812,6 +836,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
       "name": "Staccato strokes",
       "recordedAt": "2026-10-08T17:22:05.0638304-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -897,10 +924,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253811,
+      "bytes": 253845,
       "strokeType": "Staccato strokes"
     },
     {
@@ -908,6 +935,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
       "name": "Quick taps",
       "recordedAt": "2026-10-08T17:22:52.0131948-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -993,10 +1023,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118943,
+      "bytes": 118977,
       "strokeType": "Taps"
     },
     {
@@ -1004,6 +1034,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
       "name": "Three circles",
       "recordedAt": "2026-10-08T17:24:15.8143842-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1097,10 +1130,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210210,
+      "bytes": 210244,
       "strokeType": "Circles"
     },
     {
@@ -1108,6 +1141,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
       "name": "Four loops",
       "recordedAt": "2026-10-08T17:24:55.9867899-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1199,10 +1235,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155069,
+      "bytes": 155103,
       "strokeType": "Loops"
     },
     {
@@ -1210,6 +1246,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
       "name": "Four zigzags",
       "recordedAt": "2026-10-08T17:25:36.3084042-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1301,10 +1340,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161980,
+      "bytes": 162014,
       "strokeType": "Zigzags"
     },
     {
@@ -1312,6 +1351,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
       "name": "Four linear pressure ramps",
       "recordedAt": "2026-10-08T17:26:21.6413288-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1411,10 +1453,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310467,
+      "bytes": 310501,
       "strokeType": "Linear pressure ramps"
     },
     {
@@ -1422,6 +1464,9 @@
       "id": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
       "name": "Four pairs, west and east",
       "recordedAt": "2026-10-08T17:27:12.6187188-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1515,10 +1560,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401676,
+      "bytes": 401710,
       "strokeType": "Four pairs, west and east"
     },
     {
@@ -1526,6 +1571,9 @@
       "id": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
       "name": "Smooth pressure change 2",
       "recordedAt": "2026-10-08T21:04:56.6860535-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1621,10 +1669,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 371460,
+      "bytes": 371494,
       "strokeType": "Smooth pressure change"
     },
     {
@@ -1632,6 +1680,9 @@
       "id": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
       "name": "Smooth pressure change 3",
       "recordedAt": "2026-10-08T21:06:45.9354922-07:00",
+      "hostOS": {
+        "name": "Windows"
+      },
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
       "gesture": "multi-stroke",
@@ -1731,10 +1782,10 @@
         "agrees": true
       },
       "quality": "complete",
-      "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
+      "qualityMeans": "All required columns, including the host clock (arrived). At, status and twist are optional.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 212764,
+      "bytes": 212798,
       "strokeType": "Smooth pressure change"
     }
   ],
@@ -1745,8 +1796,7 @@
     "approach": 6899,
     "aloft": 1492,
     "byQuality": {
-      "partial": 6,
-      "complete": 11
+      "complete": 17
     },
     "byPressurePeriod": {
       "1": 8,

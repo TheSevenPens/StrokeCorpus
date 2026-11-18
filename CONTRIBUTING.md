@@ -17,8 +17,8 @@ saves a round trip.
 
 Please **do not edit the file**. The recorder writes what the driver said; a hand-corrected
 trace is no longer evidence, and the counters in it stop reconciling. The only things that can be
-added or changed later are the recording's `name`, its `device.tablet`, `device.pen`, `device.driver` and
-`device.firmware`, labels and not measurements (see [FORMAT.md](FORMAT.md#a-name),
+added or changed later are the recording's `name`, `hostOS`, `device.tablet`, `device.pen`, `device.driver` and
+`device.firmware`. These are metadata labels (see [FORMAT.md](FORMAT.md#a-name), [host OS](FORMAT.md#host-operating-system),
 [FORMAT.md](FORMAT.md#the-tablets-name), [FORMAT.md](FORMAT.md#the-pen),
 [FORMAT.md](FORMAT.md#the-driver) and [FORMAT.md](FORMAT.md#the-firmware)); a pull request that changes anything else in a recording that is
 already here fails its check.
@@ -60,7 +60,7 @@ You do not have to do all of these. Any one is useful.
 ## Say what you drew
 
 Put it in the pull request: **which tablet, which firmware, which driver version, which
-backend, the report-rate setting if it has one, and what you were doing with your
+backend, the report-rate setting if it has one, the host OS and version if known, and what you were doing with your
 hand.** The file records the device itself, and the recorder's Save step has a Pen box, so the pen
 goes in the file; say it here too if the recording was made before that box existed. Nothing in the
 file can record that you were drawing left-handed, or standing, or that the pen has a worn nib.

@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """
-Checks that no recording was changed except by giving it a name or saying which tablet, pen, driver and firmware it was made with.
+Checks that only a recording's name, host OS, tablet, pen, driver or firmware labels changed.
 
 Recordings are original evidence and are never rewritten (AGENTS.md, CONTRIBUTING.md). The exceptions
-are five labels, which are what a person typed about a recording rather than anything measured, and
-which may be added or changed after the fact: the top-level `name`, and `device.tablet`,
-`device.pen`, `device.driver` and `device.firmware`. This is what keeps those exceptions from becoming a loophole: it compares every
-recording in traces/ with the copy in a base revision, and fails if anything other than those five
-lines differs.
+are labels that may be added or changed after the fact: the top-level `name` and `hostOS`,
+and `device.tablet`, `device.pen`, `device.driver` and `device.firmware`. The checker compares
+every recording in traces/ with the copy in a base revision and fails if any other line differs.
 
     python tools/check_names_only.py origin/main
 
@@ -17,10 +15,11 @@ removing one is a change to the evidence too.
 
 The comparison is on lines, not on parsed JSON, on purpose. Parsed JSON would accept a file that had
 been reformatted, or had a number rewritten as another spelling of the same value, and "the same
-data" is a weaker claim than "the same file apart from those five lines".
+data" is a weaker claim than "the same file apart from those metadata lines".
 """
 
 import glob
+import json
 import os
 import re
 import subprocess
@@ -32,6 +31,7 @@ TRACES = os.path.join(ROOT, "traces")
 # The recorder writes a recording's top-level properties at two spaces of indent, one to a line.
 # Nothing nested is called "name", and a name is a single line, so this and only this is the name.
 NAME_LINE = re.compile(r'^  "name": ')
+HOST_OS_PREFIX = '  "hostOS": '
 
 # And the properties of "device" at four. The tablet, the pen, the driver and the firmware are one string
 # each on one line, and nothing else at that depth is called any of them.
@@ -52,9 +52,21 @@ def in_base(base):
     return sorted(os.path.basename(line) for line in listing.splitlines() if line.endswith(".json"))
 
 
+def host_os_line(line):
+    if not line.startswith(HOST_OS_PREFIX):
+        return False
+    field = line[len(HOST_OS_PREFIX):].strip().removesuffix(",")
+    try:
+        value = json.loads(field)
+    except json.JSONDecodeError:
+        return False
+    return isinstance(value, dict) and "name" in value and value.keys() <= {"name", "version"}
+
+
 def without_labels(text):
-    return [line for line in text.splitlines() if not (NAME_LINE.match(line) or PEN_LINE.match(line) or DRIVER_LINE.match(line)
-                or FIRMWARE_LINE.match(line) or TABLET_LINE.match(line))]
+    labels = (NAME_LINE, TABLET_LINE, PEN_LINE, DRIVER_LINE, FIRMWARE_LINE)
+    return [line for line in text.splitlines()
+            if not host_os_line(line) and not any(label.match(line) for label in labels)]
 
 
 def first_difference(before, after):
@@ -100,7 +112,7 @@ def main(argv):
 
         line, was, now = first_difference(before, after)
         problems.append(
-            f"{file}: changed by more than its name, tablet, pen, driver or firmware (first difference near line {line}"
+            f"{file}: changed outside the allowed metadata lines (first difference near line {line}"
             + (f": {was.strip()[:70]!r} became {now.strip()[:70]!r}" if was is not None else ": a different length")
             + ")."
         )
@@ -109,11 +121,11 @@ def main(argv):
         print("FAIL", problem)
 
     if problems:
-        print(f"{len(problems)} recording(s) changed in a way only a name, a tablet, a pen, a driver or a firmware may be.")
+        print(f"{len(problems)} recording(s) changed outside the allowed metadata lines.")
 
         return 1
 
-    print(f"recordings against {base}: none changed except by name, tablet, pen, driver or firmware ({labelled} labelled).")
+    print(f"recordings against {base}: only allowed metadata changed ({labelled} labelled).")
 
     return 0
 

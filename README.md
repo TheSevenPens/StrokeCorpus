@@ -50,14 +50,14 @@ clock belonging to the host rather than to the pen.
 
 | tag | recordings | what it means |
 |---|---|---|
-| `complete` | 9 | every channel, both clocks, and the approach measured on the host clock |
-| `partial` | 0 | version 6 or later, but the file does not carry every column, and the tag names which it lacks |
+| `complete` | 17 | version 6 or later with all required columns, including `arrived`. The `at`, `status`, and `twist` columns are optional |
+| `partial` | 0 | version 6 or later with one or more required columns missing. The catalogue names the missing columns |
 | `hover-suspect` | 0 | both clocks, but the approach was aged on the pen's packet counter, so hover is incomplete |
 | `single-clock` | 0 | height and status, but only the pen's own timestamp |
 | `early` | 0 | strokes, and none of the later channels |
 | `raw` | 0 | a flat list of readings with no stroke segmentation at all |
 
-None of the nine is tagged **wants re-recording**. (Thirty-one of the 33 set-aside recordings
+None of the listed recordings is tagged **wants re-recording**. (Thirty-one of the 33 set-aside recordings
 were, and the tag is a list of recordings worth drawing again, not a warning about the data that
 is there.)
 
@@ -72,12 +72,11 @@ is not in `traces/`, so the list cannot go stale without somebody noticing.
 
 ## The one thing to know before you compute anything
 
-**The pen's own timestamp is a packet counter, not a clock.** It advances a flat 4.166 ms per
-delivered packet whatever the elapsed time, runs at 0.673 of real time, and resynchronises at
-each contact transition. It implies 240 readings a second; the real rate is **161.6**.
-
-Takes at format version 5 and above carry a second timestamp taken from the host's monotonic
-clock. Use that one. [FORMAT.md](FORMAT.md) has the rest.
+Use the host timestamp, `arrived`, to estimate elapsed time. The optional backend timestamp,
+`at`, helps diagnose report timing when you compare its progression with host arrivals.
+On the Cintiq 24 / Wintab setup tested here, `at` advanced like a packet counter and implied
+240 readings per second, compared with **161.6** measured on the host clock.
+[FORMAT.md](FORMAT.md#why-keep-at) explains what each timestamp can tell you.
 
 ## A reading is not always a new measurement
 
