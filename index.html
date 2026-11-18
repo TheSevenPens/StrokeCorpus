@@ -21,6 +21,11 @@
 <header class="top">
   <div class="wrap">
     <h1><a href="index.html">Stroke Corpus</a></h1>
+    <p>
+      <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
+      <a href="FORMAT.md">Trace format and interpretation</a> &middot;
+      <a href="https://github.com/TheSevenPens/StrokeCorpus">Repository</a>
+    </p>
   </div>
 </header>
 
@@ -44,6 +49,18 @@
     <select id="quality">
       <option value="">any</option>
     </select>
+
+    <label for="pen">Pen</label>
+    <select id="pen"><option value="">any</option></select>
+
+    <label for="driver">Driver</label>
+    <select id="driver"><option value="">any</option></select>
+
+    <label for="os">OS</label>
+    <select id="os"><option value="">any</option></select>
+
+    <label for="api">API</label>
+    <select id="api"><option value="">any</option></select>
 
     <label for="hover">Hover</label>
     <select id="hover">
@@ -69,11 +86,12 @@
             <th>Firmware</th>
             <th data-sort="pen"><button type="button" class="sort">Pen</button></th>
             <th>Driver</th>
+            <th>Driver version</th>
             <th>OS</th>
             <th>API</th>
             <th data-sort="recorded"><button type="button" class="sort">Recorded</button></th>
             <th class="n" data-sort="strokes"><button type="button" class="sort">Str</button></th>
-            <th class="n">Sec</th>
+            <th class="n">DURATION</th>
             <th>Quality</th>
           </tr>
         </thead>
@@ -93,19 +111,6 @@
 
 </main>
 
-<footer class="wrap">
-  <p>
-    <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
-    <a href="FORMAT.md">Trace format and interpretation</a>
-  </p>
-  <p>
-    One hand, two Wacom tablets (a PTK-870 and a PTH-660), two backends so far. An earlier set from a Wacom Cintiq 24
-    is kept in the repository but is not listed here.
-    <a href="https://github.com/TheSevenPens/StrokeCorpus">The repository</a> holds the raw
-    JSON, the format, and how to contribute a recording of your own.
-  </p>
-</footer>
-
 <script type="module">
 import { loadManifest, run, esc } from "./corpus.js?v=f7807b7a";
 
@@ -113,6 +118,7 @@ await run(async () => {
 
   const say = (n) => n.toLocaleString();
   const apiLabel = (api) => api === "OpenTabletDriver DeviceReport" ? "OTDDeviceReport" : api;
+  const driverName = ({ device }) => device.driverName === undefined ? device.driver : device.driverName;
 
   const manifest = await loadManifest();
   const recordings = manifest.recordings;
@@ -137,11 +143,21 @@ await run(async () => {
   const count = document.getElementById("count");
   const hover = document.getElementById("hover");
   const find = document.getElementById("find");
-  const strokeType = document.getElementById("stroke-type");
-  const types = [...new Set(recordings.map((recording) => recording.strokeType).filter(Boolean))];
-  for (const type of types.sort((a, b) => a.localeCompare(b))) {
-    strokeType.add(new Option(type, type));
-  }
+  const filters = [
+    ["stroke-type", (recording) => recording.strokeType],
+    ["pen", (recording) => recording.device.pen],
+    ["driver", driverName],
+    ["os", (recording) => recording.hostOS?.name],
+    ["api", (recording) => apiLabel(recording.device.api)],
+  ].map(([id, field]) => {
+    const select = document.getElementById(id);
+    const values = [...new Set(recordings.map(field).filter(Boolean))];
+    for (const value of values.sort((a, b) => a.localeCompare(b))) {
+      select.add(new Option(value, value));
+    }
+    return { select, field };
+  });
+  const controls = [...filters.map(({ select }) => select), quality, hover, find];
 
   // The list is in the order it was recorded until a heading says otherwise. A recording with no pen
   // sorts after every one that has one, whichever way the pen column is turned.
@@ -178,13 +194,17 @@ await run(async () => {
 
     const shown = arrange(recordings.filter((recording) => {
       if (wantQuality && recording.quality !== wantQuality) return false;
-      if (strokeType.value && recording.strokeType !== strokeType.value) return false;
+      if (filters.some(({ select, field }) => select.value && field(recording) !== select.value)) return false;
       if (wantHover === "trusted" && !(recording.hoverTrusted ?? recording.quality === "complete")) return false;
       if (wantHover === "some" && recording.counts.approach === 0) return false;
 
       if (text) {
-        const haystack = [recording.name, recording.strokeType, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.driver, recording.device.api, apiLabel(recording.device.api), recording.hostOS?.name, recording.hostOS?.version, recording.file]
-          .join(" ").toLowerCase();
+        const { device, hostOS } = recording;
+        const haystack = [
+          recording.name, recording.strokeType, recording.gesture, device.tablet, device.pen, device.firmware,
+          device.driver, driverName(recording), device.driverVersion, device.api, apiLabel(device.api),
+          hostOS?.name, hostOS?.version, recording.file,
+        ].join(" ").toLowerCase();
 
         if (!haystack.includes(text)) return false;
       }
@@ -203,7 +223,8 @@ await run(async () => {
         <td style="font-size:12.5px">${esc(recording.device.tablet)}</td>
         <td style="font-size:12.5px">${recording.device.firmware ? esc(recording.device.firmware) : "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.device.pen ? esc(recording.device.pen) : "&mdash;"}</td>
-        <td style="font-size:12.5px">${recording.device.driver ? esc(recording.device.driver) : "&mdash;"}</td>
+        <td>${esc(driverName(recording)) || "&mdash;"}</td>
+        <td>${esc(recording.device.driverVersion) || "&mdash;"}</td>
         <td>${esc([recording.hostOS?.name, recording.hostOS?.version].filter(Boolean).join(" ")) || "&mdash;"}</td>
         <td>${esc(apiLabel(recording.device.api)) || "&mdash;"}</td>
         <td class="num" style="font-size:12.5px">${recording.recordedAt.slice(0, 16).replace("T", " ")}</td>
@@ -221,7 +242,7 @@ await run(async () => {
       : `${shown.length} of ${recordings.length} recordings.`;
   }
 
-  for (const control of [strokeType, quality, hover, find]) {
+  for (const control of controls) {
     control.addEventListener("input", show);
   }
 
@@ -234,10 +255,7 @@ await run(async () => {
   }
 
   document.getElementById("clear").addEventListener("click", () => {
-    quality.value = "";
-    strokeType.value = "";
-    hover.value = "";
-    find.value = "";
+    for (const control of controls) control.value = "";
     show();
   });
 

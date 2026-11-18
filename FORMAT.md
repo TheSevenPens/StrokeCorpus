@@ -110,9 +110,14 @@ it:
 
 ## The driver
 
-**`device.driver`** is the driver version, as the person who made the recording typed it, and it is
+**`device.driver`** is the driver label, as the person who made the recording typed it, and it is
 a claim like the tablet's name: nothing detects it. The recorder's Save step asks for it, and an
 empty string means it was left blank.
+
+The catalogue preserves `device.driver` and derives separate `device.driverName` and
+`device.driverVersion` fields for display and filtering. For example, `WACOM_6.4.15-1`
+becomes `Wacom` and `6.4.15-1`. A label without a recognized version keeps its name
+and has a null version.
 
 Like [the name](#a-name) and [the pen](#the-pen), it is a label and not a measurement, so it may be
 filled in or corrected after a recording was made without making the recording
@@ -160,8 +165,8 @@ A recording may carry a top-level **`name`**: what the person who made it calls 
 - **The catalogue uses it for display.** The generated `manifest.json` adds numbers in recording
   order when names repeat, for example “Smooth pressure change 1” and “Smooth pressure change 2”.
   The catalogue's `strokeType` groups names that describe the same pattern, such as “Quick taps”
-  and “Taps”. A name with no known variant supplies its own type. Both fields are catalogue labels
-  derived from the name, and the recording's `file` remains the lookup key.
+  and “Taps”. Recordings with names outside the known patterns use **Other** and keep
+  their descriptive names. The recording's `file` remains the lookup key.
 - **It can be corrected after recording**, along with the tablet, pen, driver, firmware and host OS
   labels. These edits do not set `editedAfterRecording`. The evidence checker allows changes only
   to those metadata lines.

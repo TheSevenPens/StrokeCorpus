@@ -19,6 +19,8 @@
       "device": {
         "tablet": "Wacom PTH-660",
         "driver": "OpenTabletDriver 0.6.7",
+        "driverName": "OpenTabletDriver",
+        "driverVersion": "0.6.7",
         "api": "OpenTabletDriver DeviceReport",
         "fullScalePressure": 8191,
         "firmware": "WACOM",
@@ -144,6 +146,8 @@
       "device": {
         "tablet": "Wacom PTH-660",
         "driver": "OpenTabletDriver 0.6.7",
+        "driverName": "OpenTabletDriver",
+        "driverVersion": "0.6.7",
         "api": "OpenTabletDriver DeviceReport",
         "fullScalePressure": 8191,
         "firmware": "WACOM",
@@ -243,6 +247,8 @@
       "device": {
         "tablet": "Wacom PTH-660",
         "driver": "OpenTabletDriver 0.6.7",
+        "driverName": "OpenTabletDriver",
+        "driverVersion": "0.6.7",
         "api": "OpenTabletDriver DeviceReport",
         "fullScalePressure": 8191,
         "firmware": "WACOM",
@@ -338,6 +344,8 @@
       "device": {
         "tablet": "Wacom PTH-660",
         "driver": "OpenTabletDriver 0.6.7",
+        "driverName": "OpenTabletDriver",
+        "driverVersion": "0.6.7",
         "api": "OpenTabletDriver DeviceReport",
         "fullScalePressure": 8191,
         "firmware": "WACOM",
@@ -433,6 +441,8 @@
       "device": {
         "tablet": "Wacom PTH-660",
         "driver": "OpenTabletDriver 0.6.7",
+        "driverName": "OpenTabletDriver",
+        "driverVersion": "0.6.7",
         "api": "OpenTabletDriver DeviceReport",
         "fullScalePressure": 8191,
         "firmware": "WACOM",
@@ -526,6 +536,8 @@
       "device": {
         "tablet": "Wacom PTH-660",
         "driver": "OpenTabletDriver 0.6.7",
+        "driverName": "OpenTabletDriver",
+        "driverVersion": "0.6.7",
         "api": "OpenTabletDriver DeviceReport",
         "fullScalePressure": 8191,
         "firmware": "WACOM",
@@ -631,6 +643,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -740,6 +754,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -847,6 +863,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -946,6 +964,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1045,6 +1065,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1152,6 +1174,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1257,6 +1281,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1362,6 +1388,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1475,6 +1503,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1582,6 +1612,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
@@ -1691,6 +1723,8 @@
       "device": {
         "tablet": "Wacom PTK-870",
         "driver": "WACOM_6.4.15-1",
+        "driverName": "Wacom",
+        "driverVersion": "6.4.15-1",
         "api": "WintabDigitizer",
         "fullScalePressure": 32767,
         "firmware": "WACOM",
