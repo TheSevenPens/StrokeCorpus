@@ -25,14 +25,15 @@
     "recording": {
       "type": "object",
       "required": [
-        "file", "id", "name", "recordedAt", "formatVersion", "formatAdded", "gesture", "intent", "endedBy",
+        "file", "id", "name", "strokeType", "recordedAt", "formatVersion", "formatAdded", "gesture", "intent", "endedBy",
         "device", "columns", "coordinateSpace", "channels", "counts", "seconds", "updates", "counters",
         "quality", "qualityMeans", "hoverTrusted", "reRecord", "bytes"
       ],
       "properties": {
         "file": { "type": "string", "pattern": "\\.json$", "description": "The full filename including .json. The lookup key, and the path under traces/." },
         "id": { "type": "string", "description": "The recorder's own identifier, which can differ from the filename." },
-        "name": { "type": "string" },
+        "name": { "type": "string", "description": "Display name, with a number when recordings share the same name." },
+        "strokeType": { "type": "string", "minLength": 1, "description": "Catalogue category derived from the recording's name, shared by variations of the same pattern." },
         "recordedAt": { "type": "string" },
         "formatVersion": { "type": "integer", "minimum": 1, "maximum": 8 },
         "formatAdded": { "type": "string" },

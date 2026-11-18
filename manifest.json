@@ -122,7 +122,8 @@
       "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 58394
+      "bytes": 59477,
+      "strokeType": "Draws on hover"
     },
     {
       "file": "freeform-wacom-pth-660-20261010-141102.json",
@@ -217,7 +218,8 @@
       "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 102679
+      "bytes": 104553,
+      "strokeType": "Spiral"
     },
     {
       "file": "freeform-wacom-pth-660-20261010-141156.json",
@@ -308,7 +310,8 @@
       "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 113956
+      "bytes": 116122,
+      "strokeType": "Zigzags"
     },
     {
       "file": "freeform-wacom-pth-660-20261010-141242.json",
@@ -399,7 +402,8 @@
       "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 98263
+      "bytes": 100175,
+      "strokeType": "Increasingly faster flicks"
     },
     {
       "file": "freeform-wacom-pth-660-20261010-141342.json",
@@ -488,7 +492,8 @@
       "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 121222
+      "bytes": 123594,
+      "strokeType": "Taps"
     },
     {
       "file": "freeform-wacom-pth-660-20261010-141405.json",
@@ -589,12 +594,13 @@
       "qualityMeans": "The approach is aged on the host clock, as from format version 6. But this recording does not carry at, status, twist, so some of what the recordings that carry every channel can say it cannot. Which columns a file carries says what was recorded, not that what was recorded is right.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 98303
+      "bytes": 100086,
+      "strokeType": "Press spots"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
       "id": "multi-stroke-intuosprolarge-2025-20261008-171943.json",
-      "name": "Smooth pressure change",
+      "name": "Smooth pressure change 1",
       "recordedAt": "2026-10-08T17:19:43.2856744-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -694,7 +700,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 385479
+      "bytes": 385479,
+      "strokeType": "Smooth pressure change"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172050.json",
@@ -797,7 +804,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 447861
+      "bytes": 447861,
+      "strokeType": "Low pressure strokes"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172205.json",
@@ -892,7 +900,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 253811
+      "bytes": 253811,
+      "strokeType": "Staccato strokes"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172252.json",
@@ -987,7 +996,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 118943
+      "bytes": 118943,
+      "strokeType": "Taps"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172415.json",
@@ -1090,7 +1100,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 210210
+      "bytes": 210210,
+      "strokeType": "Circles"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172455.json",
@@ -1191,7 +1202,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 155069
+      "bytes": 155069,
+      "strokeType": "Loops"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172536.json",
@@ -1292,7 +1304,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 161980
+      "bytes": 161980,
+      "strokeType": "Zigzags"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172621.json",
@@ -1401,7 +1414,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 310467
+      "bytes": 310467,
+      "strokeType": "Linear pressure ramps"
     },
     {
       "file": "multi-stroke-intuosprolarge-2025-20261008-172712.json",
@@ -1504,12 +1518,13 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 401676
+      "bytes": 401676,
+      "strokeType": "Four pairs, west and east"
     },
     {
       "file": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
       "id": "smooth-pressure-change-intuosprolarge-2025-20261008-210456.json",
-      "name": "Smooth pressure change",
+      "name": "Smooth pressure change 2",
       "recordedAt": "2026-10-08T21:04:56.6860535-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -1609,12 +1624,13 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 371460
+      "bytes": 371460,
+      "strokeType": "Smooth pressure change"
     },
     {
       "file": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
       "id": "smooth-pressure-changeressure-smoothly-intuosprolarge-2025-20261008-210645.json",
-      "name": "Smooth pressure change",
+      "name": "Smooth pressure change 3",
       "recordedAt": "2026-10-08T21:06:45.9354922-07:00",
       "formatVersion": 8,
       "formatAdded": "what x and y are: desktop positions, or the device's own counts before any mapping",
@@ -1718,7 +1734,8 @@
       "qualityMeans": "Every channel, both clocks, and the approach measured on the host clock.",
       "hoverTrusted": true,
       "reRecord": [],
-      "bytes": 209772
+      "bytes": 212764,
+      "strokeType": "Smooth pressure change"
     }
   ],
   "totals": {
