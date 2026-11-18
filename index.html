@@ -29,14 +29,17 @@
   <noscript>
     <p class="note">
       The interactive catalogue and recording views require JavaScript.
-      You can still access the data through the <a href="manifest.json">recording catalogue (JSON)</a>
-      and read the <a href="FORMAT.md">trace format and interpretation</a>.
     </p>
   </noscript>
 
   <dl class="totals" id="totals"></dl>
 
   <div class="controls">
+    <label for="stroke-type">Stroke Type</label>
+    <select id="stroke-type">
+      <option value="">any</option>
+    </select>
+
     <label for="quality">Quality</label>
     <select id="quality">
       <option value="">any</option>
@@ -50,7 +53,7 @@
     </select>
 
     <label for="find">Search</label>
-    <input type="search" id="find" placeholder="name, gesture, device" size="22">
+    <input type="search" id="find" placeholder="name, type, device" size="22">
 
     <button type="button" id="clear">Clear</button>
   </div>
@@ -61,6 +64,7 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th>Stroke Type</th>
             <th>Device</th>
             <th>Firmware</th>
             <th data-sort="pen"><button type="button" class="sort">Pen</button></th>
@@ -88,6 +92,10 @@
 </main>
 
 <footer class="wrap">
+  <p>
+    <a href="manifest.json">Recording catalogue (JSON)</a> &middot;
+    <a href="FORMAT.md">Trace format and interpretation</a>
+  </p>
   <p>
     One hand, two Wacom tablets (a PTK-870 and a PTH-660), two backends so far. An earlier set from a Wacom Cintiq 24
     is kept in the repository but is not listed here.
@@ -126,6 +134,11 @@ await run(async () => {
   const count = document.getElementById("count");
   const hover = document.getElementById("hover");
   const find = document.getElementById("find");
+  const strokeType = document.getElementById("stroke-type");
+  const types = [...new Set(recordings.map((recording) => recording.strokeType).filter(Boolean))];
+  for (const type of types.sort((a, b) => a.localeCompare(b))) {
+    strokeType.add(new Option(type, type));
+  }
 
   // The list is in the order it was recorded until a heading says otherwise. A recording with no pen
   // sorts after every one that has one, whichever way the pen column is turned.
@@ -162,11 +175,12 @@ await run(async () => {
 
     const shown = arrange(recordings.filter((recording) => {
       if (wantQuality && recording.quality !== wantQuality) return false;
+      if (strokeType.value && recording.strokeType !== strokeType.value) return false;
       if (wantHover === "trusted" && !(recording.hoverTrusted ?? recording.quality === "complete")) return false;
       if (wantHover === "some" && recording.counts.approach === 0) return false;
 
       if (text) {
-        const haystack = [recording.name, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.driver, recording.device.api, recording.file]
+        const haystack = [recording.name, recording.strokeType, recording.gesture, recording.device.tablet, recording.device.pen, recording.device.firmware, recording.device.driver, recording.device.api, recording.file]
           .join(" ").toLowerCase();
 
         if (!haystack.includes(text)) return false;
@@ -182,6 +196,7 @@ await run(async () => {
     rows.innerHTML = shown.map((recording) => `
       <tr>
         <td><a href="recording.html?recording=${encodeURIComponent(recording.file)}">${esc(recording.name)}</a></td>
+        <td>${recording.strokeType ? esc(recording.strokeType) : "&mdash;"}</td>
         <td style="font-size:12.5px">${esc(recording.device.tablet)}</td>
         <td style="font-size:12.5px">${recording.device.firmware ? esc(recording.device.firmware) : "&mdash;"}</td>
         <td style="font-size:12.5px">${recording.device.pen ? esc(recording.device.pen) : "&mdash;"}</td>
@@ -201,7 +216,7 @@ await run(async () => {
       : `${shown.length} of ${recordings.length} recordings.`;
   }
 
-  for (const control of [quality, hover, find]) {
+  for (const control of [strokeType, quality, hover, find]) {
     control.addEventListener("input", show);
   }
 
@@ -215,6 +230,7 @@ await run(async () => {
 
   document.getElementById("clear").addEventListener("click", () => {
     quality.value = "";
+    strokeType.value = "";
     hover.value = "";
     find.value = "";
     show();

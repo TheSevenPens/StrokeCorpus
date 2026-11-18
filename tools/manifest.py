@@ -400,6 +400,35 @@ def name(recording, filename):
     return stem.replace("-", " ")
 
 
+# Map descriptive variants to a shared type. Other names define their own type.
+STROKE_TYPE_ALIASES = {
+    "four linear pressure ramps": "Linear pressure ramps",
+    "four loops": "Loops",
+    "four zigzags": "Zigzags",
+    "quick taps": "Taps",
+    "three circles": "Circles",
+    "zigzags": "Zigzags",
+}
+
+
+def label_recordings(recordings):
+    """Assign types and number duplicate display names without moving catalogue entries."""
+    name_counts = Counter(entry["name"].casefold() for entry in recordings)
+    name_numbers = Counter()
+    types = {}
+
+    for entry in sorted(recordings, key=lambda one: (one["recordedAt"], one["file"])):
+        title = entry["name"]
+        key = title.casefold()
+        label = STROKE_TYPE_ALIASES.get(key, title[:1].upper() + title[1:])
+        entry["strokeType"] = types.setdefault(label.casefold(), label)
+        if name_counts[key] > 1:
+            name_numbers[key] += 1
+            while f"{key} {name_numbers[key]}" in name_counts:
+                name_numbers[key] += 1
+            entry["name"] = f"{title} {name_numbers[key]}"
+
+
 def set_aside():
     """
     The recordings that stay in traces/ but are left out of the catalogue.
@@ -470,6 +499,8 @@ def main():
             "reRecord": rerecord(version, howMany["approach"], howMany["aloft"]),
             "bytes": os.path.getsize(path),
         })
+
+    label_recordings(recordings)
 
     manifest = {
         "$schema": MANIFEST_SCHEMA,

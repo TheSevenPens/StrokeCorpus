@@ -182,6 +182,7 @@ await run(async () => {
   }
 
   const facts = [
+    ["Stroke Type", entry.strokeType ? esc(entry.strokeType) : "—"],
     ["recorded", entry.recordedAt.replace("T", " ").slice(0, 19)],
     ["tablet", esc(entry.device.tablet)],
     ["driver", entry.device.driver ? esc(entry.device.driver) : "not recorded"],

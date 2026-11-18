@@ -157,8 +157,11 @@ A recording may carry a top-level **`name`**: what the person who made it calls 
 - **Optional, and any version can have one.** A non-empty string. Absent means nobody named the
   recording, and the catalogue then works a name out from the file name, as it did before this
   field existed.
-- **The catalogue shows it.** `manifest.json`'s `name` is this when the recording has one, and is the
-  name every page displays.
+- **The catalogue uses it for display.** The generated `manifest.json` adds numbers in recording
+  order when names repeat, for example “Smooth pressure change 1” and “Smooth pressure change 2”.
+  The catalogue's `strokeType` groups names that describe the same pattern, such as “Quick taps”
+  and “Taps”. A name with no known variant supplies its own type. Both fields are catalogue labels
+  derived from the name, and the recording's `file` remains the lookup key.
 - **With [the tablet's name](#the-tablets-name), [the pen](#the-pen), [the driver](#the-driver) and
   [the firmware](#the-firmware), it is the only thing that may be added or changed after a recording
   was made.** Everything else in a recording is original evidence and is
