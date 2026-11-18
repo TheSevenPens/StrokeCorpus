@@ -33,7 +33,7 @@
         "file": { "type": "string", "pattern": "\\.json$", "description": "The full filename including .json. The lookup key, and the path under traces/." },
         "id": { "type": "string", "description": "The recorder's own identifier, which can differ from the filename." },
         "name": { "type": "string", "description": "Display name, with a number when recordings share the same name." },
-        "strokeType": { "type": "string", "minLength": 1, "description": "Catalogue category derived from the recording's name, shared by variations of the same pattern." },
+        "strokeType": { "type": "string", "minLength": 1, "description": "Catalogue category derived from the recording's name. Other covers names that do not match a known category." },
         "recordedAt": { "type": "string" },
         "hostOS": {
           "description": "Recording host operating system. Null if unknown. The version may be omitted.",
@@ -52,10 +52,12 @@
         "endedBy": { "type": "string" },
         "device": {
           "type": "object",
-          "required": ["tablet", "driver", "api", "fullScalePressure", "firmware"],
+          "required": ["tablet", "driver", "driverName", "driverVersion", "api", "fullScalePressure", "firmware"],
           "properties": {
             "tablet": { "type": "string" },
             "driver": { "type": "string" },
+            "driverName": { "type": ["string", "null"], "description": "Driver name derived from the original driver label, or null if unknown." },
+            "driverVersion": { "type": ["string", "null"], "description": "Version extracted from the original driver label, or null if unknown." },
             "api": { "type": "string" },
             "fullScalePressure": { "$ref": "#/$defs/count" },
             "firmware": { "type": ["string", "null"], "description": "Null before format version 7, where nobody was asked. An empty string means the person was asked and wrote nothing." },

@@ -396,14 +396,29 @@ def name(recording, filename):
     return stem.replace("-", " ")
 
 
-# Map descriptive variants to a shared type. Other names define their own type.
+# Recognize catalogue types and their naming variants. Unmatched names use Other.
+STROKE_TYPES = (
+    "Circles",
+    "Draws on hover",
+    "Four pairs, west and east",
+    "Increasingly faster flicks",
+    "Linear pressure ramps",
+    "Loops",
+    "Low pressure strokes",
+    "Press spots",
+    "Smooth pressure change",
+    "Spiral",
+    "Staccato strokes",
+    "Taps",
+    "Zigzags",
+)
+STROKE_TYPES_BY_NAME = {label.casefold(): label for label in STROKE_TYPES}
 STROKE_TYPE_ALIASES = {
     "four linear pressure ramps": "Linear pressure ramps",
     "four loops": "Loops",
     "four zigzags": "Zigzags",
     "quick taps": "Taps",
     "three circles": "Circles",
-    "zigzags": "Zigzags",
 }
 
 
@@ -411,18 +426,26 @@ def label_recordings(recordings):
     """Assign types and number duplicate display names without moving catalogue entries."""
     name_counts = Counter(entry["name"].casefold() for entry in recordings)
     name_numbers = Counter()
-    types = {}
 
     for entry in sorted(recordings, key=lambda one: (one["recordedAt"], one["file"])):
         title = entry["name"]
         key = title.casefold()
-        label = STROKE_TYPE_ALIASES.get(key, title[:1].upper() + title[1:])
-        entry["strokeType"] = types.setdefault(label.casefold(), label)
+        entry["strokeType"] = STROKE_TYPE_ALIASES.get(key) or STROKE_TYPES_BY_NAME.get(key, "Other")
         if name_counts[key] > 1:
             name_numbers[key] += 1
             while f"{key} {name_numbers[key]}" in name_counts:
                 name_numbers[key] += 1
             entry["name"] = f"{title} {name_numbers[key]}"
+
+
+def driver_details(label):
+    """Split a dotted version suffix from the driver label without changing the source."""
+    label = label.strip()
+    match = re.fullmatch(r"(?:(.+?)[ _]+)?[vV]?(\d+(?:\.\d+)+(?:[-+][0-9A-Za-z][0-9A-Za-z.+-]*)?)", label)
+    driver, version = match.groups() if match else (label, None)
+    if driver and driver.casefold() in {"wacom", "wacom driver"}:
+        driver = "Wacom"
+    return driver or None, version
 
 
 def set_aside():
@@ -459,6 +482,8 @@ def main():
         columns = recording.get("columns", [])
         tag, meaning = quality(version, columns)
         device = recording.get("device", {})
+        driver = device.get("driver", "")
+        driver_name, driver_version = driver_details(driver)
         full_scale = device.get("fullScalePressure", 0)
 
         recordings.append({
@@ -474,7 +499,9 @@ def main():
             "endedBy": recording.get("endedBy", ""),
             "device": {
                 "tablet": device.get("tablet", ""),
-                "driver": device.get("driver", ""),
+                "driver": driver,
+                "driverName": driver_name,
+                "driverVersion": driver_version,
                 "api": device.get("api", ""),
                 "fullScalePressure": full_scale,
                 # Absent before format version 7, and empty when the person was asked and wrote
